@@ -1,67 +1,99 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: unnecessary_this, use_key_in_widget_constructors, unused_field, prefer_final_fields, prefer_const_constructors, use_build_context_synchronously, deprecated_member_use, prefer_const_literals_to_create_immutables, unused_import, must_be_immutable, unused_local_variable, duplicate_import, unused_element, unnecessary_import, no_leading_underscores_for_local_identifiers
 
-void main() {
-  runApp(const MyApp());
+import 'dart:async';
+import 'dart:math';
+import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import "package:flutter/services.dart";
+import 'package:riise/screens/TabScreen.dart';
+
+import "./screens/TabScreen.dart";
+import './screens/Home/HomeScreen.dart';
+import "./screens/Faculty/FacultyScreen.dart";
+import "./screens/Schedules/ScheduleScreen.dart";
+import "./screens/Directions/DirectionScreen.dart";
+import "./screens/Appointments/AppointmentScreen.dart";
+
+import "./providers/EventsProvider.dart";
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+  await Firebase.initializeApp();
+
+  runApp(
+    MaterialApp(
+      home: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
+    late UserCredential userCred;
+    final _auth = FirebaseAuth.instance;
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(
+          value: EventProvider(),
         ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'RIISE',
+        theme: ThemeData(
+          primaryColor: const Color(0xFFfbfcff),
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          canvasColor: Color.fromRGBO(255, 254, 229, 0.9),
+          hoverColor: Colors.transparent,
+          fontFamily: 'Raleway',
+          textTheme: ThemeData.light().textTheme.copyWith(
+                bodyText1: const TextStyle(
+                  color: Color.fromRGBO(20, 51, 51, 1),
+                ),
+                bodyText2: const TextStyle(
+                  color: Color.fromRGBO(20, 51, 51, 1),
+                ),
+                headline6: const TextStyle(
+                  fontSize: 18,
+                  fontFamily: 'RobotoCondensed',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.blue,
+          ).copyWith(
+            secondary: Color.fromARGB(255, 84, 83, 77),
+          ),
+        ),
+        home: StreamBuilder(
+          stream: _auth.authStateChanges(),
+          builder: (ctx, userSnapShot) {
+            if (userSnapShot.hasData) {
+              return TabScreen();
+            } else {
+              return TabScreen();
+            }
+          },
+        ),
+        routes: {
+          TabScreen.routeName: (ctx) => TabScreen(),
+          HomeScreen.routeName: (ctx) => HomeScreen(),
+          FacultyScreen.routeName: (ctx) => FacultyScreen(),
+          DirectionScreen.routeName: (ctx) => DirectionScreen(),
+          AppointmentScreen.routeName: (ctx) => AppointmentScreen(),
+        },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

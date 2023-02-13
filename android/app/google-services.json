@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "972873247531",
+    "project_id": "riise-application",
+    "storage_bucket": "riise-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972873247531:android:d4e6b5fd36e0c2a5e3736e",
+        "android_client_info": {
+          "package_name": "com.example.riise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "972873247531-j3gsnklu7fm9fq1fiiavc10tdett2qhv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCQUfxLC-4U8cCjXpt5prvxAdm206I0jY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "972873247531-j3gsnklu7fm9fq1fiiavc10tdett2qhv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
