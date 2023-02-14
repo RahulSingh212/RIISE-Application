@@ -13,6 +13,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import "../../components/SideNavBar.dart";
+
 class HomeScreen extends StatefulWidget {
   static const routeName = '/rise-home-screen';
 
@@ -25,6 +27,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      drawer: SideNavBar(),
+      appBar: AppBar(
+        title: Text("Home"),
+      ),
+      body: Center(),
+    );
   }
 }

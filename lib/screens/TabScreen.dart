@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, unused_field, prefer_final_fields, unused_element, unused_local_variable, file_names, deprecated_member_use, unnecessary_string_interpolations, unnecessary_brace_in_string_interps
+// ignore_for_file: unused_import, unused_field, prefer_final_fields, unused_element, unused_local_variable, file_names, deprecated_member_use, unnecessary_string_interpolations, unnecessary_brace_in_string_interps, avoid_unnecessary_containers
 
 import 'dart:async';
 import 'dart:math';
@@ -210,6 +210,71 @@ class _TabScreenState extends State<TabScreen> {
       ),
     );
   }
+
+  // Widget sideMenuBar(BuildContext context) {
+  //   return Padding(
+  //     padding: const EdgeInsets.only(
+  //       left: 10,
+  //     ),
+  //     child: Align(
+  //       alignment: Alignment.centerLeft,
+  //       child: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: const [
+  //           Text(
+  //             "Home",
+  //             style: TextStyle(
+  //               color: Colors.white,
+  //               fontSize: 20,
+  //             ),
+  //           ),
+  //           SizedBox(
+  //             height: 10,
+  //           ),
+  //           Text(
+  //             "Faculty",
+  //             style: TextStyle(
+  //               color: Colors.white,
+  //               fontSize: 20,
+  //             ),
+  //           ),
+  //           SizedBox(
+  //             height: 10,
+  //           ),
+  //           Text(
+  //             "Schedule",
+  //             style: TextStyle(
+  //               color: Colors.white,
+  //               fontSize: 20,
+  //             ),
+  //           ),
+  //           SizedBox(
+  //             height: 10,
+  //           ),
+  //           Text(
+  //             "Locations",
+  //             style: TextStyle(
+  //               color: Colors.white,
+  //               fontSize: 20,
+  //             ),
+  //           ),
+  //           SizedBox(
+  //             height: 10,
+  //           ),
+  //           Text(
+  //             "Appointments",
+  //             style: TextStyle(
+  //               color: Colors.white,
+  //               fontSize: 20,
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Future<void> _checkForError(
       BuildContext context, String titleText, String contextText,

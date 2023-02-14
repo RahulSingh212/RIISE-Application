@@ -90,6 +90,7 @@ class MyApp extends StatelessWidget {
           TabScreen.routeName: (ctx) => TabScreen(),
           HomeScreen.routeName: (ctx) => HomeScreen(),
           FacultyScreen.routeName: (ctx) => FacultyScreen(),
+          ScheduleScreen.routeName: (ctx) => ScheduleScreen(),
           DirectionScreen.routeName: (ctx) => DirectionScreen(),
           AppointmentScreen.routeName: (ctx) => AppointmentScreen(),
         },
