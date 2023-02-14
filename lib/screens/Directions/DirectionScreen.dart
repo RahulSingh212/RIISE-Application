@@ -13,6 +13,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../components/SideNavBar.dart';
+
 class DirectionScreen extends StatefulWidget {
   static const routeName = '/rise-direction-screen';
 
@@ -25,6 +27,39 @@ class DirectionScreen extends StatefulWidget {
 class _DirectionScreenState extends State<DirectionScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      extendBodyBehindAppBar: true,
+      drawer: SideNavBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          "Map",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 20,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.blue,
+          size: 30,
+        ),
+        // actions: [
+        //   Container(
+        //     child: IconButton(
+        //       onPressed: () {},
+        //       icon: Icon(
+        //         Icons.person,
+        //       ),
+        //     ),
+        //   ),
+        // ],
+      ),
+      body: Center(),
+    );
   }
 }

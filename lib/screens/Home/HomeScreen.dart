@@ -28,9 +28,37 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      extendBodyBehindAppBar: true,
       drawer: SideNavBar(),
       appBar: AppBar(
-        title: Text("Home"),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          "Home",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 20,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.blue,
+          size: 30,
+        ),
+        actions: [
+          Container(
+            padding: EdgeInsets.only(right: 5),
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.person,
+              ),
+            ),
+          ),
+        ],
       ),
       body: Center(),
     );

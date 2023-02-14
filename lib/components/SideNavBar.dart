@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_this, use_key_in_widget_constructors, unused_field, prefer_final_fields, prefer_const_constructors, use_build_context_synchronously, deprecated_member_use, prefer_const_literals_to_create_immutables, unused_import, must_be_immutable, unused_local_variable, duplicate_import, unused_element, unnecessary_import, no_leading_underscores_for_local_identifiers, file_names, sized_box_for_whitespace
+// ignore_for_file: unnecessary_this, use_key_in_widget_constructors, unused_field, prefer_final_fields, prefer_const_constructors, use_build_context_synchronously, deprecated_member_use, prefer_const_literals_to_create_immutables, unused_import, must_be_immutable, unused_local_variable, duplicate_import, unused_element, unnecessary_import, no_leading_underscores_for_local_identifiers, file_names, sized_box_for_whitespace, avoid_unnecessary_containers
 
 import 'dart:async';
 import 'dart:math';
@@ -79,9 +79,18 @@ class _SideNavBarState extends State<SideNavBar> {
             height: 10,
           ),
           Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.green.shade200,
+            ),
             padding: EdgeInsets.only(
-              top: 5,
-              bottom: 15,
+              top: 12.5,
+              bottom: 12.5,
+            ),
+            margin: EdgeInsets.only(
+              bottom: 30,
+              left: 40,
+              right: 40,
             ),
             child: Text(
               "My Profile",
@@ -98,29 +107,35 @@ class _SideNavBarState extends State<SideNavBar> {
           sideBarTile(
             context,
             "Home",
+            Icons.home_filled,
           ),
           sideBarTile(
             context,
             "Faculties",
+            Icons.person_rounded,
           ),
           sideBarTile(
             context,
             "Schedule",
+            Icons.schedule,
           ),
           sideBarTile(
             context,
             "Directions",
+            Icons.map_rounded,
           ),
           sideBarTile(
             context,
             "Appointments",
+            Icons.meeting_room_rounded,
           ),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 10,
             ),
             margin: EdgeInsets.only(
-              bottom: 2.5,
+              top: 12.5,
+              bottom: 17.5,
             ),
             child: Divider(
               color: Colors.green.shade500,
@@ -129,23 +144,74 @@ class _SideNavBarState extends State<SideNavBar> {
           sideBarTile(
             context,
             "About RIISE",
+            Icons.star_outlined,
           ),
           sideBarTile(
             context,
             "Themes",
+            Icons.event_note_rounded,
           ),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 10,
             ),
             margin: EdgeInsets.only(
-              bottom: 2.5,
+              top: 12.5,
+              bottom: 17.5,
             ),
             child: Divider(
               color: Colors.green.shade500,
             ),
           ),
-
+          sideBarTile(
+            context,
+            "Keynote Speaker",
+            Icons.person_pin_rounded,
+          ),
+          sideBarTile(
+            context,
+            "Speaker Tracks",
+            Icons.multitrack_audio_rounded,
+          ),
+          sideBarTile(
+            context,
+            "Poster Tracks",
+            Icons.podcasts_rounded,
+          ),
+          sideBarTile(
+            context,
+            "Panel Discussion",
+            Icons.people_alt_rounded,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            margin: EdgeInsets.only(
+              top: 12.5,
+              bottom: 47.5,
+            ),
+            child: Divider(
+              color: Colors.green.shade500,
+            ),
+          ),
+          sideBarTile(
+            context,
+            "Logout",
+            Icons.logout,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            margin: EdgeInsets.only(
+              top: 12.5,
+              bottom: 7.5,
+            ),
+            // child: Divider(
+            //   color: Colors.green.shade500,
+            // ),
+          ),
         ],
       ),
     );
@@ -154,6 +220,7 @@ class _SideNavBarState extends State<SideNavBar> {
   Widget sideBarTile(
     BuildContext context,
     String tileText,
+    IconData tileIconData,
   ) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
@@ -167,18 +234,32 @@ class _SideNavBarState extends State<SideNavBar> {
         right: 5,
         bottom: 2.5,
       ),
-      padding: EdgeInsets.all(17.5),
+      padding: EdgeInsets.all(18.5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.green.shade100,
       ),
-      child: Text(
-        tileText,
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontStyle: FontStyle.italic,
-          fontSize: 15,
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            padding: EdgeInsets.only(
+              right: 20,
+            ),
+            child: Icon(tileIconData),
+          ),
+          Container(
+            child: Text(
+              tileText,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                fontSize: 15,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
