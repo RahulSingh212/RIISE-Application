@@ -18,6 +18,7 @@ import "./screens/Directions/DirectionScreen.dart";
 import "./screens/Appointments/AppointmentScreen.dart";
 
 import "./providers/EventsProvider.dart";
+import './providers/ScreenControllerProvider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +44,9 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(
+          value: ScreenControllerProvider(),
+        ),
         ChangeNotifierProvider.value(
           value: EventProvider(),
         ),

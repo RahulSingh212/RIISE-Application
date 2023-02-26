@@ -6,6 +6,8 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:riise/providers/ScreenControllerProvider.dart';
 
 import "./Home/HomeScreen.dart";
 import "./Faculty/FacultyScreen.dart";
@@ -24,7 +26,6 @@ class TabScreen extends StatefulWidget {
 
 class _TabScreenState extends State<TabScreen> {
   late List<Map<String, Object>> _pages;
-  int _selectedPageIndex = 0;
 
   final _appScreens = [
     const HomeScreen(),
@@ -63,7 +64,7 @@ class _TabScreenState extends State<TabScreen> {
 
   void _selectPage(int index) {
     setState(() {
-      _selectedPageIndex = index;
+      Provider.of<ScreenControllerProvider>(context, listen: false).selectedPageIndex = index;
     });
   }
 
@@ -134,7 +135,7 @@ class _TabScreenState extends State<TabScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: IndexedStack(
-        index: _selectedPageIndex,
+        index: Provider.of<ScreenControllerProvider>(context, listen: false).selectedPageIndex,
         children: _appScreens,
       ),
       bottomNavigationBar: Theme(
@@ -148,7 +149,7 @@ class _TabScreenState extends State<TabScreen> {
           color: Colors.greenAccent,
           // buttonBackgroundColor: Theme.of(context).primaryColor,
           buttonBackgroundColor: Colors.blueGrey,
-          index: 0,
+          index: Provider.of<ScreenControllerProvider>(context, listen: false).selectedPageIndex,
           height: screenHeight * 0.070,
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(milliseconds: 300),

@@ -8,7 +8,22 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import "package:flutter/services.dart";
-import 'package:riise/screens/TabScreen.dart';
+import 'package:riise/providers/ScreenControllerProvider.dart';
+
+import '../screens/TabScreen.dart';
+import '../screens/Home/HomeScreen.dart';
+import '../screens/Faculty/FacultyScreen.dart';
+import '../screens/Schedules/ScheduleScreen.dart';
+import '../screens/Directions/DirectionScreen.dart';
+import '../screens/Appointments/AppointmentScreen.dart';
+
+import '../screens/About/AboutScreen.dart';
+import '../screens/Themes/ThemesScreen.dart';
+
+import '../screens/Keynote/KeynoteSpeakersScreen.dart';
+import '../screens/SpeakerTracks/SpeakerTracksScreen.dart';
+import '../screens/Posters/PosterTracks.dart';
+import '../screens/Pannel/PannelDiscussionScreen.dart';
 
 class SideNavBar extends StatefulWidget {
   static const routeName = '/rise-side-nav-screen';
@@ -20,6 +35,21 @@ class SideNavBar extends StatefulWidget {
 }
 
 class _SideNavBarState extends State<SideNavBar> {
+  Map<String, dynamic> screenMapping = {
+    "tab": TabScreen(),
+    "home": HomeScreen(),
+    "faculty": FacultyScreen(),
+    "schedule": ScheduleScreen(),
+    "direction": DirectionScreen(),
+    "appointment": AppointmentScreen(),
+    "about": AboutScreen(),
+    "theme": ThemesScreen(),
+    "keynote-speakers": KeynoteSpeakersScreen(),
+    "speaker-tracks": SpeakerTracksScreen(),
+    "poster-tracks": PosterTracksScreen(),
+    "pannel-discussion": PannelDiscussionScreen(),
+  };
+
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -104,31 +134,55 @@ class _SideNavBarState extends State<SideNavBar> {
           SizedBox(
             height: 10,
           ),
-          sideBarTile(
+          sideTabBarTile(
             context,
             "Home",
             Icons.home_filled,
+            "tab",
+            0,
           ),
-          sideBarTile(
+          sideTabBarTile(
             context,
             "Faculties",
             Icons.person_rounded,
+            "tab",
+            1,
           ),
-          sideBarTile(
+          sideTabBarTile(
             context,
             "Schedule",
             Icons.schedule,
+            "tab",
+            2,
           ),
-          sideBarTile(
+          sideTabBarTile(
             context,
             "Directions",
             Icons.map_rounded,
+            "tab",
+            3,
           ),
-          sideBarTile(
+          sideTabBarTile(
             context,
             "Appointments",
             Icons.meeting_room_rounded,
+            "tab",
+            4,
           ),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            margin: EdgeInsets.only(
+              top: 12.5,
+              bottom: 17.5,
+            ),
+            child: Divider(
+              color: Colors.green.shade500,
+            ),
+          ),
+          sideBarTile(context, "About RIISE", Icons.star_outlined, "about"),
+          sideBarTile(context, "Themes", Icons.event_note_rounded, "theme"),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 10,
@@ -143,63 +197,45 @@ class _SideNavBarState extends State<SideNavBar> {
           ),
           sideBarTile(
             context,
-            "About RIISE",
-            Icons.star_outlined,
-          ),
-          sideBarTile(
-            context,
-            "Themes",
-            Icons.event_note_rounded,
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10,
-            ),
-            margin: EdgeInsets.only(
-              top: 12.5,
-              bottom: 17.5,
-            ),
-            child: Divider(
-              color: Colors.green.shade500,
-            ),
-          ),
-          sideBarTile(
-            context,
-            "Keynote Speaker",
+            "Keynote Speakers",
             Icons.person_pin_rounded,
+            "keynote-speakers",
           ),
           sideBarTile(
             context,
             "Speaker Tracks",
             Icons.multitrack_audio_rounded,
+            "speaker-tracks",
           ),
           sideBarTile(
             context,
             "Poster Tracks",
             Icons.podcasts_rounded,
+            "poster-tracks",
           ),
           sideBarTile(
             context,
             "Panel Discussion",
             Icons.people_alt_rounded,
+            "pannel-discussion",
           ),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10,
-            ),
-            margin: EdgeInsets.only(
-              top: 12.5,
-              bottom: 47.5,
-            ),
-            child: Divider(
-              color: Colors.green.shade500,
-            ),
-          ),
-          sideBarTile(
-            context,
-            "Logout",
-            Icons.logout,
-          ),
+          // Container(
+          //   padding: EdgeInsets.symmetric(
+          //     horizontal: 10,
+          //   ),
+          //   margin: EdgeInsets.only(
+          //     top: 12.5,
+          //     bottom: 47.5,
+          //   ),
+          //   child: Divider(
+          //     color: Colors.green.shade500,
+          //   ),
+          // ),
+          // sideBarTile(
+          //   context,
+          //   "Logout",
+          //   Icons.logout,
+          // ),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 10,
@@ -221,6 +257,7 @@ class _SideNavBarState extends State<SideNavBar> {
     BuildContext context,
     String tileText,
     IconData tileIconData,
+    String screenPushName,
   ) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
@@ -228,38 +265,106 @@ class _SideNavBarState extends State<SideNavBar> {
     var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
     var useableHeight = screenHeight - topInsets - bottomInsets;
 
-    return Container(
-      margin: EdgeInsets.only(
-        left: 5,
-        right: 5,
-        bottom: 2.5,
-      ),
-      padding: EdgeInsets.all(18.5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.green.shade100,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            padding: EdgeInsets.only(
-              right: 20,
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => screenMapping[screenPushName],
             ),
-            child: Icon(tileIconData),
-          ),
-          Container(
-            child: Text(
-              tileText,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
-                fontSize: 15,
+            (route) => false);
+      },
+      child: Container(
+        margin: EdgeInsets.only(
+          left: 5,
+          right: 5,
+          bottom: 2.5,
+        ),
+        padding: EdgeInsets.all(18.5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.green.shade100,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              padding: EdgeInsets.only(
+                right: 20,
+              ),
+              child: Icon(tileIconData),
+            ),
+            Container(
+              child: Text(
+                tileText,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 15,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget sideTabBarTile(
+    BuildContext context,
+    String tileText,
+    IconData tileIconData,
+    String screenPushName,
+    int pageIndex,
+  ) {
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
+    var topInsets = MediaQuery.of(context).viewInsets.top;
+    var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
+    var useableHeight = screenHeight - topInsets - bottomInsets;
+
+    return InkWell(
+      onTap: () {
+        Provider.of<ScreenControllerProvider>(context, listen: false).selectedPageIndex = pageIndex;
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => screenMapping[screenPushName],
+            ),
+            (route) => false);
+      },
+      child: Container(
+        margin: EdgeInsets.only(
+          left: 5,
+          right: 5,
+          bottom: 2.5,
+        ),
+        padding: EdgeInsets.all(18.5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.green.shade100,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              padding: EdgeInsets.only(
+                right: 20,
+              ),
+              child: Icon(tileIconData),
+            ),
+            Container(
+              child: Text(
+                tileText,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
