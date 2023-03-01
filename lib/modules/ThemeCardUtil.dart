@@ -4,9 +4,6 @@ class ThemeCardUtil{
   late String about;
   late String iconImage;
 
-  //TODO - add List of schedule(Timing + Location)
-  //TODO - add List of Speakers
-
   ThemeCardUtil(this.name,this.about,this.iconImage);
 
   String getName() => name;

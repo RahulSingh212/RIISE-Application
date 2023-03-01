@@ -8,7 +8,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import "package:flutter/services.dart";
-import 'package:riise/screens/TabScreen.dart';
 
 import "./screens/TabScreen.dart";
 import './screens/Home/HomeScreen.dart';
@@ -19,6 +18,8 @@ import "./screens/Appointments/AppointmentScreen.dart";
 
 import "./providers/EventsProvider.dart";
 import './providers/ScreenControllerProvider.dart';
+import './providers/AddSectionsProvider.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,6 +50,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: EventProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: AddSectionsProvider(),
         ),
       ],
       child: MaterialApp(

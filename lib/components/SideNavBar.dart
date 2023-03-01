@@ -181,8 +181,20 @@ class _SideNavBarState extends State<SideNavBar> {
               color: Colors.green.shade500,
             ),
           ),
-          sideBarTile(context, "About RIISE", Icons.star_outlined, "about"),
-          sideBarTile(context, "Themes", Icons.event_note_rounded, "theme"),
+          sideBarTile(
+            context,
+            "About RIISE",
+            Icons.star_outlined,
+            "about",
+            5,
+          ),
+          sideBarTile(
+            context,
+            "Themes",
+            Icons.event_note_rounded,
+            "theme",
+            6,
+          ),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 10,
@@ -200,24 +212,28 @@ class _SideNavBarState extends State<SideNavBar> {
             "Keynote Speakers",
             Icons.person_pin_rounded,
             "keynote-speakers",
+            7,
           ),
           sideBarTile(
             context,
             "Speaker Tracks",
             Icons.multitrack_audio_rounded,
             "speaker-tracks",
+            8,
           ),
           sideBarTile(
             context,
             "Poster Tracks",
             Icons.podcasts_rounded,
             "poster-tracks",
+            9,
           ),
           sideBarTile(
             context,
             "Panel Discussion",
             Icons.people_alt_rounded,
             "pannel-discussion",
+            10,
           ),
           // Container(
           //   padding: EdgeInsets.symmetric(
@@ -258,6 +274,7 @@ class _SideNavBarState extends State<SideNavBar> {
     String tileText,
     IconData tileIconData,
     String screenPushName,
+    int pageIndex,
   ) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
@@ -267,6 +284,8 @@ class _SideNavBarState extends State<SideNavBar> {
 
     return InkWell(
       onTap: () {
+        Provider.of<ScreenControllerProvider>(context, listen: false)
+            .selectedPageIndex = pageIndex;
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
               builder: (context) => screenMapping[screenPushName],
@@ -282,7 +301,11 @@ class _SideNavBarState extends State<SideNavBar> {
         padding: EdgeInsets.all(18.5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.green.shade100,
+          color: Provider.of<ScreenControllerProvider>(context, listen: false)
+                      .selectedPageIndex ==
+                  pageIndex
+              ? Colors.green.shade300
+              : Colors.green.shade100,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -325,7 +348,8 @@ class _SideNavBarState extends State<SideNavBar> {
 
     return InkWell(
       onTap: () {
-        Provider.of<ScreenControllerProvider>(context, listen: false).selectedPageIndex = pageIndex;
+        Provider.of<ScreenControllerProvider>(context, listen: false)
+            .selectedPageIndex = pageIndex;
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
               builder: (context) => screenMapping[screenPushName],
@@ -341,7 +365,11 @@ class _SideNavBarState extends State<SideNavBar> {
         padding: EdgeInsets.all(18.5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.green.shade100,
+          color: Provider.of<ScreenControllerProvider>(context, listen: false)
+                      .selectedPageIndex ==
+                  pageIndex
+              ? Colors.green.shade300
+              : Colors.green.shade100,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

@@ -93,7 +93,7 @@ class _TabScreenState extends State<TabScreen> {
         size: 30,
       ),
       const Icon(
-        Icons.location_on_outlined,
+        Icons.map_outlined,
         color: Colors.green,
         size: 30,
       ),
@@ -107,27 +107,27 @@ class _TabScreenState extends State<TabScreen> {
     final iconItemsActive = <Widget>[
       const Icon(
         Icons.home_rounded,
-        color: Color(0xff42ccc3),
+        color: Colors.green,
         size: 30,
       ),
       const Icon(
         Icons.person_search_rounded,
-        color: Color(0xff42ccc3),
+        color: Colors.green,
         size: 30,
       ),
       const Icon(
         Icons.access_time,
-        color: Color(0xff42ccc3),
+        color: Colors.green,
         size: 30,
       ),
       const Icon(
-        Icons.location_pin,
-        color: Color(0xff42ccc3),
+        Icons.map_rounded,
+        color: Colors.green,
         size: 30,
       ),
       const Icon(
         Icons.meeting_room_rounded,
-        color: Color(0xff42ccc3),
+        color: Colors.green,
         size: 30,
       ),
     ];
@@ -153,7 +153,7 @@ class _TabScreenState extends State<TabScreen> {
           height: screenHeight * 0.070,
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(milliseconds: 300),
-          items: iconItemsInActive,
+          items: iconItemsActive,
         ),
       ),
     );
