@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, unused_import, unnecessary_import, duplicate_import, unused_local_variable, deprecated_member_use, file_names, unnecessary_new
+// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, unused_import, unnecessary_import, duplicate_import, unused_local_variable, deprecated_member_use, file_names, unnecessary_new, unnecessary_this
 
 import 'dart:async';
 import 'dart:math';
@@ -15,6 +15,9 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../models/SpeakerInfo.dart';
+import './AddNewSpeakerForEventScreen.dart';
+
 class AddnewEventScreen extends StatefulWidget {
   const AddnewEventScreen({super.key});
   static const routeName = '/rise-add-new-event-section-screen';
@@ -27,14 +30,25 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
   File _profilePicture = new File("");
   bool _isProfilePicTaken = false;
   bool _isDateSelected = false;
+  bool _isSaveButtonPressed = false;
+
+  List<SpeakerLocalInformation> speakerList = [];
 
   Map<String, dynamic> profileInfoMapping = {
-    "Theme_Name": new TextEditingController(),
-    "Theme_Info": new TextEditingController(),
-    "Theme_Date": new DateTime.now(),
-    "Theme_Start_Time": new TimeOfDay.now(),
-    "Theme_End_Time": new TimeOfDay.now(),
-    "Theme_Image_Url": new TextEditingController(),
+    "Theme_Name": TextEditingController(),
+    "Theme_Info": TextEditingController(),
+    "Theme_Date": DateTime.now(),
+    "Theme_Start_Time": TimeOfDay.now(),
+    "Theme_End_Time": TimeOfDay.now(),
+  };
+
+  Map<String, bool> profileInfoCheckMapping = {
+    "Theme_Image_File": false,
+    "Theme_Start_Time": false,
+    "Theme_End_Time": false,
+    "Theme_Date": false,
+    "Theme_Name": false,
+    "Theme_Info": false,
   };
 
   @override
@@ -72,6 +86,74 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
           textAlign: TextAlign.center,
         ),
         backgroundColor: Colors.white,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.save,
+              color: Colors.black,
+              size: 30,
+            ),
+            onPressed: () {
+              if (profileInfoCheckMapping["Theme_Image_File"] == false) {
+                String titleText = "Invalid event image";
+                String contextText = "Select an event's image";
+                _checkForError(
+                  context,
+                  titleText,
+                  contextText,
+                );
+              } else if (profileInfoCheckMapping["Theme_Start_Time"] == false) {
+                String titleText = "Invalid start time";
+                String contextText = "Select the start time of the event";
+                _checkForError(
+                  context,
+                  titleText,
+                  contextText,
+                );
+              } else if (profileInfoCheckMapping["Theme_End_Time"] == false) {
+                String titleText = "Invalid end time";
+                String contextText = "Select the end time of the event";
+                _checkForError(
+                  context,
+                  titleText,
+                  contextText,
+                );
+              } else if (profileInfoCheckMapping["Theme_Date"] == false) {
+                String titleText = "Invalid date";
+                String contextText = "Select the date the event";
+                _checkForError(
+                  context,
+                  titleText,
+                  contextText,
+                );
+              } else if (profileInfoCheckMapping["Theme_Name"] == false) {
+                String titleText = "Invalid name";
+                String contextText = "Enter the name of the event";
+                _checkForError(
+                  context,
+                  titleText,
+                  contextText,
+                );
+              } else if (profileInfoCheckMapping["Theme_Info"] == false) {
+                String titleText = "Invalid Info";
+                String contextText = "Enter the info of the event";
+                _checkForError(
+                  context,
+                  titleText,
+                  contextText,
+                );
+              } else if (speakerList.isEmpty) {
+                String titleText = "No speaker available";
+                String contextText = "Select atleast one speaker for the event";
+                _checkForError(
+                  context,
+                  titleText,
+                  contextText,
+                );
+              } else {}
+            },
+          )
+        ],
       ),
       body: ListView(
         children: [
@@ -80,7 +162,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
               padding: EdgeInsets.symmetric(
                 vertical: 15,
               ),
-              height: maxDimension * 0.225,
+              height: minDimension * 0.4,
               width: minDimension * 0.35,
               // decoration: BoxDecoration(
               //   color: Colors.yellow,
@@ -89,7 +171,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
                 backgroundColor: Colors.transparent,
                 radius: screenWidth,
                 child: CircleAvatar(
-                  radius: screenWidth * 0.6,
+                  radius: screenWidth,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(
                       screenWidth * 0.2,
@@ -133,6 +215,11 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
           Align(
             child: InkWell(
               onTap: () async {
+                FocusScopeNode currentFocus = FocusScope.of(context);
+                if (!currentFocus.hasPrimaryFocus) {
+                  currentFocus.unfocus();
+                }
+
                 final picker = ImagePicker();
                 final imageFile = await picker.getImage(
                   source: ImageSource.gallery,
@@ -148,6 +235,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
                 setState(() {
                   _profilePicture = File(imageFile.path);
                   _isProfilePicTaken = true;
+                  profileInfoCheckMapping["Theme_Image_File"] = true;
                 });
               },
               child: Container(
@@ -385,14 +473,14 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
               ),
               child: TextField(
                 onTap: () {
-                  FocusScopeNode currentFocus = FocusScope.of(context);
-
-                  if (!currentFocus.hasPrimaryFocus) {
-                    currentFocus.unfocus();
-                  }
+                  // FocusScopeNode currentFocus = FocusScope.of(context);
+                  // if (!currentFocus.hasPrimaryFocus) {
+                  //   currentFocus.unfocus();
+                  // }
                 },
                 onChanged: ((value) {
-                  profileInfoMapping["Theme_Name"] = value;
+                  profileInfoMapping["Theme_Name"].text = value;
+                  profileInfoCheckMapping["Theme_Name"] = true;
                 }),
                 decoration: InputDecoration(
                   hintText: 'theme name',
@@ -435,14 +523,14 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
               ),
               child: TextField(
                 onTap: () {
-                  FocusScopeNode currentFocus = FocusScope.of(context);
-
-                  if (!currentFocus.hasPrimaryFocus) {
-                    currentFocus.unfocus();
-                  }
+                  // FocusScopeNode currentFocus = FocusScope.of(context);
+                  // if (!currentFocus.hasPrimaryFocus) {
+                  //   currentFocus.unfocus();
+                  // }
                 },
                 onChanged: ((value) {
-                  profileInfoMapping["Theme_Info"] = value;
+                  profileInfoMapping["Theme_Info"].text = value;
+                  profileInfoCheckMapping["Theme_Info"] = true;
                 }),
                 decoration: InputDecoration(
                   hintText: 'theme info',
@@ -455,7 +543,210 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
             ),
           ),
           SizedBox(
-            height: screenHeight * 0.05,
+            height: screenHeight * 0.025,
+          ),
+          Align(
+            child: Container(
+              child: Row(
+                children: [],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: screenHeight * 0.005,
+          ),
+          speakerList.isEmpty
+              ? SizedBox(
+                  height: 0,
+                )
+              : Align(
+                  child: Container(
+                    width: screenWidth * 0.9,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "List of Speakers: ",
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+          SizedBox(
+            height: screenHeight * 0.005,
+          ),
+          speakerList.isEmpty
+              ? Align(
+                  child: Container(
+                    child: Text(
+                      "No speaker added",
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                )
+              : Align(
+                  child: Container(
+                    width: screenWidth * 0.9,
+                    height: maxDimension * 0.19,
+                    alignment: Alignment.centerLeft,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      itemCount: speakerList.length,
+                      itemBuilder: (ctx, index) {
+                        return InkWell(
+                          onTap: () {
+                            print("pressed");
+                            setState(() {});
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 5,
+                            ),
+                            margin: EdgeInsets.only(
+                              right: 5,
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 5,
+                                  ),
+                                  height: minDimension * 0.3,
+                                  width: minDimension * 0.25,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    radius: screenWidth,
+                                    child: CircleAvatar(
+                                      radius: screenWidth * 0.6,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                          screenWidth * 0.2,
+                                        ),
+                                        child: ClipOval(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                            ),
+                                            child: Image.file(
+                                              speakerList[index]
+                                                  .speaker_Image_File,
+                                              fit: BoxFit.cover,
+                                              width: double.infinity,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                FittedBox(
+                                  fit: BoxFit.fill,
+                                  child: Container(
+                                    child: Text(
+                                      speakerList[index]
+                                          .speaker_Name
+                                          .toString(),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+          SizedBox(
+            height: screenHeight * 0.025,
+          ),
+          Align(
+            child: InkWell(
+              onTap: () {
+                if (profileInfoCheckMapping["Theme_Image_File"] == false) {
+                  String titleText = "Invalid Event Icon";
+                  String contextText = "Please select the event icon";
+                  _checkForError(
+                    context,
+                    titleText,
+                    contextText,
+                  );
+                }
+                else if (profileInfoCheckMapping["Theme_Start_Time"] == false) {
+                  String titleText = "Invalid start event time";
+                  String contextText = "Please select the event start time";
+                  _checkForError(
+                    context,
+                    titleText,
+                    contextText,
+                  );
+                }
+                else if (profileInfoCheckMapping["Theme_End_Time"] == false) {
+                  String titleText = "Invalid end event time";
+                  String contextText = "Please select the event end time";
+                  _checkForError(
+                    context,
+                    titleText,
+                    contextText,
+                  );
+                }
+                else if (profileInfoCheckMapping["Theme_Date"] == false) {
+                  String titleText = "Invalid event date";
+                  String contextText = "Please select the event date";
+                  _checkForError(
+                    context,
+                    titleText,
+                    contextText,
+                  );
+                }
+                else {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          AddNewSpeakerForEventScreen(this.speakerList),
+                    ),
+                  );
+                }
+
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (context) => AddNewSpeakerForEventScreen(
+                //       this.speakerList,
+                //     ),
+                //   ),
+                // );
+              },
+              child: Container(
+                width: screenWidth * 0.9,
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Colors.greenAccent,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  "Add Speaker",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17.5,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: screenHeight * 0.025,
           ),
         ],
       ),
@@ -468,6 +759,11 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
     var topInsets = MediaQuery.of(context).viewInsets.top;
     var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
     var useableHeight = screenHeight - topInsets - bottomInsets;
+
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
 
     DateTime lastPickingDate = DateTime.now().add(new Duration(days: 14));
 
@@ -482,6 +778,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
       } else {
         setState(() {
           profileInfoMapping["Theme_Date"] = pickedDate;
+          profileInfoCheckMapping["Theme_Date"] = true;
           _isDateSelected = true;
         });
       }
@@ -497,6 +794,11 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
     var topInsets = MediaQuery.of(context).viewInsets.top;
     var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
     var useableHeight = screenHeight - topInsets - bottomInsets;
+
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
 
     TimeOfDay timechosen = TimeOfDay.now();
     TimeOfDay? time = await showTimePicker(
@@ -523,6 +825,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
         if (bitVal == 0) {
           profileInfoMapping["Theme_Start_Time"] = timechosen;
           profileInfoMapping["Theme_End_Time"] = timechosen;
+          profileInfoCheckMapping["Theme_Start_Time"] = true;
         } else if (bitVal == 1) {
           int t1 = profileInfoMapping["Theme_Start_Time"].hour * 60 +
               profileInfoMapping["Theme_Start_Time"].minute;
@@ -530,6 +833,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
 
           if (t1 <= t2) {
             profileInfoMapping["Theme_End_Time"] = timechosen;
+            profileInfoCheckMapping["Theme_End_Time"] = true;
           } else {
             String titleText = "In-Valid Time Interval!";
             String contextText =
@@ -790,6 +1094,11 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
   Future<void> _checkForError(
       BuildContext context, String titleText, String contextText,
       {bool popVal = false}) async {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
+
     return showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
