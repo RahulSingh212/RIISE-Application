@@ -16,6 +16,7 @@ import "./screens/Schedules/ScheduleScreen.dart";
 import "./screens/Directions/DirectionScreen.dart";
 import "./screens/Appointments/AppointmentScreen.dart";
 
+import "./providers/FirebaseProvider.dart";
 import "./providers/EventsProvider.dart";
 import './providers/ScreenControllerProvider.dart';
 import './providers/AddSectionsProvider.dart';
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(
+          value: FirebaseProvider(),
+        ),
         ChangeNotifierProvider.value(
           value: ScreenControllerProvider(),
         ),

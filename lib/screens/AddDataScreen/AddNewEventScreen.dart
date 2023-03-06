@@ -15,6 +15,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import "../../providers/AddSectionsProvider.dart";
 import '../../models/SpeakerInfo.dart';
 import './AddNewSpeakerForEventScreen.dart';
 
@@ -27,7 +28,7 @@ class AddnewEventScreen extends StatefulWidget {
 }
 
 class _AddnewEventScreenState extends State<AddnewEventScreen> {
-  File _profilePicture = new File("");
+  // File _profilePicture = new File("");
   bool _isProfilePicTaken = false;
   bool _isDateSelected = false;
   bool _isSaveButtonPressed = false;
@@ -35,6 +36,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
   List<SpeakerLocalInformation> speakerList = [];
 
   Map<String, dynamic> profileInfoMapping = {
+    "Theme_Image_File": File(""),
     "Theme_Name": TextEditingController(),
     "Theme_Info": TextEditingController(),
     "Theme_Date": DateTime.now(),
@@ -150,7 +152,16 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
                   titleText,
                   contextText,
                 );
-              } else {}
+              } else {
+                Provider.of<AddSectionsProvider>(
+                  context,
+                  listen: false,
+                ).addNewEventForTheme(
+                  context,
+                  profileInfoMapping,
+                  speakerList,
+                );
+              }
             },
           )
         ],
@@ -186,7 +197,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
                                 "assets/images/icons/event.png",
                               )
                             : Image.file(
-                                _profilePicture,
+                                profileInfoMapping["Theme_Image_File"],
                                 fit: BoxFit.cover,
                                 width: double.infinity,
                               ),
@@ -232,11 +243,14 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
                   return;
                 }
 
-                setState(() {
-                  _profilePicture = File(imageFile.path);
-                  _isProfilePicTaken = true;
-                  profileInfoCheckMapping["Theme_Image_File"] = true;
-                });
+                setState(
+                  () {
+                    profileInfoMapping["Theme_Image_File"] =
+                        File(imageFile.path);
+                    _isProfilePicTaken = true;
+                    profileInfoCheckMapping["Theme_Image_File"] = true;
+                  },
+                );
               },
               child: Container(
                 alignment: Alignment.center,
@@ -674,6 +688,10 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
           Align(
             child: InkWell(
               onTap: () {
+                FocusScopeNode currentFocus = FocusScope.of(context);
+                if (!currentFocus.hasPrimaryFocus) {
+                  currentFocus.unfocus();
+                }
                 if (profileInfoCheckMapping["Theme_Image_File"] == false) {
                   String titleText = "Invalid Event Icon";
                   String contextText = "Please select the event icon";
@@ -682,8 +700,8 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
                     titleText,
                     contextText,
                   );
-                }
-                else if (profileInfoCheckMapping["Theme_Start_Time"] == false) {
+                } else if (profileInfoCheckMapping["Theme_Start_Time"] ==
+                    false) {
                   String titleText = "Invalid start event time";
                   String contextText = "Please select the event start time";
                   _checkForError(
@@ -691,8 +709,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
                     titleText,
                     contextText,
                   );
-                }
-                else if (profileInfoCheckMapping["Theme_End_Time"] == false) {
+                } else if (profileInfoCheckMapping["Theme_End_Time"] == false) {
                   String titleText = "Invalid end event time";
                   String contextText = "Please select the event end time";
                   _checkForError(
@@ -700,8 +717,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
                     titleText,
                     contextText,
                   );
-                }
-                else if (profileInfoCheckMapping["Theme_Date"] == false) {
+                } else if (profileInfoCheckMapping["Theme_Date"] == false) {
                   String titleText = "Invalid event date";
                   String contextText = "Please select the event date";
                   _checkForError(
@@ -709,8 +725,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
                     titleText,
                     contextText,
                   );
-                }
-                else {
+                } else {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) =>
@@ -765,7 +780,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
       currentFocus.unfocus();
     }
 
-    DateTime lastPickingDate = DateTime.now().add(new Duration(days: 14));
+    DateTime lastPickingDate = DateTime.now().add(new Duration(days: 365));
 
     showDatePicker(
       context: context,
@@ -987,7 +1002,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
               }
 
               setState(() {
-                _profilePicture = File(imageFile.path);
+                profileInfoMapping["Theme_Image_File"] = File(imageFile.path);
                 _isProfilePicTaken = true;
               });
               Navigator.pop(ctx);
@@ -1045,7 +1060,7 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
                 return;
               }
               setState(() {
-                _profilePicture = File(imageFile.path);
+                profileInfoMapping["Theme_Image_File"] = File(imageFile.path);
                 _isProfilePicTaken = true;
                 // Navigator.of(context).pop(false);
               });
