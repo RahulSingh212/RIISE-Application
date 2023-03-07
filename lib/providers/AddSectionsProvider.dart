@@ -19,7 +19,7 @@ import '../models/SpeakerInfo.dart';
 class AddSectionsProvider with ChangeNotifier {
   List<SpeakerLocalInformation> speakerListForEvents = [];
 
-  Future<void> addNewEventForTheme(
+  void addNewEventForTheme(
     BuildContext context,
     Map<String, dynamic> profileInfoMapping,
     List<SpeakerLocalInformation> speakerList,
@@ -41,7 +41,7 @@ class AddSectionsProvider with ChangeNotifier {
           "Theme_Image_Url": "",
         },
       ).then(
-        (value) {
+        (value) async {
           themesRef.doc(value.id).update({"Theme_Unique_Id": value.id});
           themeId = value.id;
           // value.get().then(((DocumentSnapshot ds) {
@@ -60,7 +60,67 @@ class AddSectionsProvider with ChangeNotifier {
             profileInfoMapping["Theme_Image_File"],
           );
 
-          
+          for (var speaker in speakerList) {
+            addSpeakerInformation(
+              context,
+              value.id,
+              speaker,
+            );
+          }
+        },
+      );
+
+      notifyListeners();
+    } catch (errorVal) {
+      print(errorVal);
+    }
+  }
+
+  void addSpeakerInformation(
+    BuildContext context,
+    String themeId,
+    SpeakerLocalInformation speakerDetails,
+  ) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    CollectionReference speakersRef = db.collection("Themes").doc(themeId).collection("Speakers");
+
+
+    String speakerId = "";
+
+    try {
+      var eventResponse1 = await speakersRef.add(
+        {
+          "speaker_Unique_Id": "",
+          "speaker_Name": speakerDetails.speaker_Name,
+          "speaker_Position": speakerDetails.speaker_Position,
+          "speaker_Talk_Title": speakerDetails.speaker_Talk_Title,
+          "speaker_Abstract": speakerDetails.speaker_Abstract,
+          "speaker_Bio": speakerDetails.speaker_Bio,
+          "speaker_End_Time": speakerDetails.speaker_End_Time.toString(),
+          "speaker_Start_Time": speakerDetails.speaker_Start_Time.toString(),
+          "speaker_Image_Url": "",
+          "speaker_LinkedIn_Url": speakerDetails.speaker_LinkedIn_Url,
+          "speaker_Website_Url": speakerDetails.speaker_Website_Url,
+        },
+      ).then(
+        (value) async {
+          speakersRef.doc(value.id).update({"speaker_Unique_Id": value.id});
+          speakerId = value.id;
+          // value.get().then(((DocumentSnapshot ds) {
+          //   print(ds.data());
+          // }));
+
+          String imagePath = "${value.id}/Images";
+
+          final themeImgResponse = uploadImage(
+            context,
+            "Themes/$themeId/Speakers",
+            value.id,
+            imagePath,
+            "profileImage",
+            "speaker_Image_Url",
+            speakerDetails.speaker_Image_File,
+          );
         },
       );
 
