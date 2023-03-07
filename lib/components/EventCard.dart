@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import '../modules/EventCardUtil.dart';
+import '../modules/EventUtil.dart';
+import '../modules/EventUtil.dart';
 
 //ignore: must_be_immutable
 class EventCard extends StatefulWidget {
@@ -14,7 +15,7 @@ class EventCard extends StatefulWidget {
 }
 
 class _EventCardState extends State<EventCard> {
-  EventCardListUtil events = EventCardListUtil();
+  EventListUtil events = EventListUtil();
   @override
   Widget build(BuildContext context) {
     var padding = MediaQuery.of(context).padding;
@@ -28,12 +29,12 @@ class _EventCardState extends State<EventCard> {
     return Container(
       // margin: EdgeInsets.only(right: 0.008 * width),
       child: Card(
-        elevation: 1,
+        elevation: 8,
         // color: Colors.red,
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(events.getThemesList()[widget.position].iconImage,),
+                  image: AssetImage(events.getEventsList()[widget.position].iconImage,),
                   fit: BoxFit.cover
               )
           ),
@@ -49,11 +50,11 @@ class _EventCardState extends State<EventCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      events.getThemesList()[widget.position].name,
+                      events.getEventsList()[widget.position].name,
                       style: TextStyle(fontSize: 15),
                     ),
                     Text(
-                      events.getThemesList()[widget.position].time,
+                      events.getEventsList()[widget.position].time,
                       style: TextStyle(fontSize: 15),
                     )
                   ],
@@ -61,7 +62,7 @@ class _EventCardState extends State<EventCard> {
                 Container(
                   padding: EdgeInsets.only(top: height*0.025),
                   child: Text(
-                    "Location: ${events.getThemesList()[widget.position].location}",
+                    "Location: ${events.getEventsList()[widget.position].location}",
                     style: TextStyle(fontSize: 15),
                   ),
                 ),
@@ -72,17 +73,5 @@ class _EventCardState extends State<EventCard> {
       ),
     );
 
-    // return Card(
-    //   margin: EdgeInsets.only(right: 0.07*width),
-    //   child: Container(
-    //     alignment: Alignment.center,
-    //     // padding: const EdgeInsets.all(15.0),
-    //     color: Colors.yellow,
-    //     width: 0.3*width,
-    //     child: Text(
-    //         "Hello ${themes.getThemesList()[widget.position].name}"
-    //     ),
-    //   ),
-    // );
   }
 }

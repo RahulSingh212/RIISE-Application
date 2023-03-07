@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:riise/modules/ThemeCardUtil.dart';
+import 'package:riise/modules/ThemeUtil.dart';
 
 //ignore: must_be_immutable
 class ThemeCard extends StatefulWidget {
@@ -15,7 +15,7 @@ class ThemeCard extends StatefulWidget {
 }
 
 class _ThemeCardState extends State<ThemeCard> {
-  ThemeCardListUtil themes = ThemeCardListUtil();
+  ThemeListUtil themes = ThemeListUtil();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class _ThemeCardState extends State<ThemeCard> {
     return Container(
       margin: EdgeInsets.only(right: 0.08 * width),
       child: Card(
-        elevation: 1,
+        elevation: 8,
         // color: Colors.red,
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 0.025 * width,vertical: 0.01 * height),
