@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/SideNavBar.dart';
+import '../../providers/EventsProvider.dart';
 
 class ThemesScreen extends StatefulWidget {
   static const routeName = '/rise-themes-screen';
@@ -25,6 +26,14 @@ class ThemesScreen extends StatefulWidget {
 }
 
 class _ThemesScreenState extends State<ThemesScreen> {
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+
+    Provider.of<EventProvider>(context, listen: false).fetchThemes(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

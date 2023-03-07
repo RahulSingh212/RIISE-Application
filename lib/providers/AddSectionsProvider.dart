@@ -3,7 +3,6 @@ import 'package:eosdart/eosdart.dart' as eos;
 // import 'package:flutter/material.dart' hide Action;
 
 import 'dart:convert';
-// import 'dart:html';
 import 'dart:io';
 import 'dart:io' as ui;
 

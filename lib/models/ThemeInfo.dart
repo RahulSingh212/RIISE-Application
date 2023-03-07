@@ -1,7 +1,4 @@
 // ignore_for_file: non_constant_identifier_names, file_names
-
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import "./SpeakerInfo.dart";

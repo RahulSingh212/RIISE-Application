@@ -17,10 +17,10 @@ import "./screens/Directions/DirectionScreen.dart";
 import "./screens/Appointments/AppointmentScreen.dart";
 
 import "./providers/FirebaseProvider.dart";
+import "./providers/FacultiesProvider.dart";
 import "./providers/EventsProvider.dart";
 import './providers/ScreenControllerProvider.dart';
 import './providers/AddSectionsProvider.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,6 +51,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: ScreenControllerProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: FacultiesProvider(),
         ),
         ChangeNotifierProvider.value(
           value: EventProvider(),

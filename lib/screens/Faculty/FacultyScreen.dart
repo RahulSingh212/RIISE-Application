@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/SideNavBar.dart';
+import '../../providers/FacultiesProvider.dart';
 
 class FacultyScreen extends StatefulWidget {
   static const routeName = '/rise-faculty-screen';
@@ -25,6 +26,15 @@ class FacultyScreen extends StatefulWidget {
 }
 
 class _FacultyScreenState extends State<FacultyScreen> {
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+
+    Provider.of<FacultiesProvider>(context, listen: false).fetchCollegeFaculties(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

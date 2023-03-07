@@ -18,6 +18,7 @@ import '../../components/EventCard.dart';
 import "../../components/SideNavBar.dart";
 import '../../modules/ThemeCardUtil.dart';
 
+import '../../providers/EventsProvider.dart';
 import "../AddDataScreen/AddSectionScreen.dart";
 
 class HomeScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String userName = "Henansh";
+  String userName = "Rahul Singh";
   late TextEditingController searchBarController = TextEditingController();
   ThemeCardListUtil themes = ThemeCardListUtil();
 
@@ -38,8 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var padding = MediaQuery.of(context).padding;
     double width = (MediaQuery.of(context).size.width);
-    double height =
-        (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
+    double height = (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
 
     return Scaffold(
       backgroundColor: Colors.white,
