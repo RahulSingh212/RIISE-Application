@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, unused_import, use_build_context_synchronously, unnecessary_brace_in_string_interps
+// ignore_for_file: file_names, unused_import, use_build_context_synchronously, unnecessary_brace_in_string_interps, avoid_print
 import 'package:eosdart/eosdart.dart' as eos;
 // import 'package:flutter/material.dart' hide Action;
 
@@ -28,7 +28,7 @@ class FacultiesProvider with ChangeNotifier {
     try {
       List<FacultyServerInformation> listOfFaculties = [];
 
-      facultiesRef.get().then(
+      await facultiesRef.get().then(
         (ds) async {
           ds.docs.forEach(
             (facultyDetails) async {

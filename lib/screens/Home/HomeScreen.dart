@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, unused_import, unnecessary_import, duplicate_import, unused_local_variable, deprecated_member_use, file_names
+// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, unused_import, unnecessary_import, duplicate_import, unused_local_variable, deprecated_member_use, file_names, avoid_print
 
 import 'dart:async';
 import 'dart:math';
@@ -34,6 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
   String userName = "Rahul Singh";
   late TextEditingController searchBarController = TextEditingController();
   ThemeCardListUtil themes = ThemeCardListUtil();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    Provider.of<EventProvider>(context, listen: false).fetchThemes(context);
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, unused_import, unnecessary_import, duplicate_import, unused_local_variable, deprecated_member_use, file_names, unnecessary_new, unnecessary_this
+// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, unused_import, unnecessary_import, duplicate_import, unused_local_variable, deprecated_member_use, file_names, unnecessary_new, unnecessary_this, unused_field, prefer_final_fields, sized_box_for_whitespace, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, avoid_print, unused_element
 
 import 'dart:async';
 import 'dart:math';
@@ -556,16 +556,16 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
               ),
             ),
           ),
-          SizedBox(
-            height: screenHeight * 0.025,
-          ),
-          Align(
-            child: Container(
-              child: Row(
-                children: [],
-              ),
-            ),
-          ),
+          // SizedBox(
+          //   height: screenHeight * 0.025,
+          // ),
+          // Align(
+          //   child: Container(
+          //     child: Row(
+          //       children: [],
+          //     ),
+          //   ),
+          // ),
           SizedBox(
             height: screenHeight * 0.005,
           ),
@@ -984,8 +984,8 @@ class _AddnewEventScreenState extends State<AddnewEventScreen> {
     return showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('${titleText}'),
-        content: Text('${contextText}'),
+        title: Text(titleText),
+        content: Text(contextText),
         actions: <Widget>[
           InkWell(
             onTap: () async {

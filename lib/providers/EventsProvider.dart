@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unnecessary_import, unused_import, non_constant_identifier_names, avoid_print
 
 import "dart:collection";
 
@@ -20,7 +20,7 @@ class EventProvider with ChangeNotifier {
 
     try {
       List<ThemeServerInformation> listOfThemese = [];
-      themesRef.get().then(
+      await themesRef.get().then(
         (ds) async {
           ds.docs.forEach(
             (themeDetails) async {
@@ -62,7 +62,6 @@ class EventProvider with ChangeNotifier {
       themesList = listOfThemese;
 
       notifyListeners();
-      print(themesList.length);
     } catch (errorVal) {
       print(errorVal);
     }
@@ -77,7 +76,7 @@ class EventProvider with ChangeNotifier {
 
     List<SpeakerServerInformation> speakerList = [];
     try {
-      speakersRef.get().then(
+      await speakersRef.get().then(
         (ds) async {
           ds.docs.forEach(
             (themeDetails) async {
@@ -117,7 +116,6 @@ class EventProvider with ChangeNotifier {
           );
         },
       );
-
     } catch (errorVal) {
       print(errorVal);
     }

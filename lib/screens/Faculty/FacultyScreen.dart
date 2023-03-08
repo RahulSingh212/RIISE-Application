@@ -29,7 +29,6 @@ class _FacultyScreenState extends State<FacultyScreen> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
 
     Provider.of<FacultiesProvider>(context, listen: false).fetchCollegeFaculties(context);

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, unused_import, unnecessary_import, duplicate_import, unused_local_variable, deprecated_member_use, file_names, unnecessary_new
+// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, unused_import, unnecessary_import, duplicate_import, unused_local_variable, deprecated_member_use, file_names, unnecessary_new, sized_box_for_whitespace, avoid_unnecessary_containers
 
 import 'dart:async';
 import 'dart:math';
@@ -32,19 +32,7 @@ class AddNewSpeakerForEventScreen extends StatefulWidget {
       _AddNewSpeakerForEventScreenState();
 }
 
-class _AddNewSpeakerForEventScreenState
-    extends State<AddNewSpeakerForEventScreen> {
-  // TextEditingController speaker_Name = new TextEditingController();
-  // TextEditingController speaker_Position = new TextEditingController();
-  // TextEditingController speaker_Talk_Title = new TextEditingController();
-  // TextEditingController speaker_Abstract = new TextEditingController();
-  // TextEditingController speaker_Bio = new TextEditingController();
-  // TextEditingController speaker_LinkedIn_Url = new TextEditingController();
-  // TextEditingController speaker_Website_Url = new TextEditingController();
-
-  // TimeOfDay speaker_Start_Time = new TimeOfDay.now();
-  // TimeOfDay speaker_End_Time = new TimeOfDay.now();
-  // File speaker_Image_File = new File("");
+class _AddNewSpeakerForEventScreenState extends State<AddNewSpeakerForEventScreen> {
 
   Map<String, dynamic> speakerProfileMapping = {
     "speaker_Unique_Id": "Unique_Id",

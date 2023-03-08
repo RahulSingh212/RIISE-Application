@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, unused_import, use_build_context_synchronously, unnecessary_brace_in_string_interps
+// ignore_for_file: file_names, unused_import, use_build_context_synchronously, unnecessary_brace_in_string_interps, unused_local_variable, avoid_print
 import 'package:eosdart/eosdart.dart' as eos;
 // import 'package:flutter/material.dart' hide Action;
 

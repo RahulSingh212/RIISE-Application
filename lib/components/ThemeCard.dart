@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_import, unused_local_variable, avoid_print, file_names
+
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -49,7 +51,7 @@ class _ThemeCardState extends State<ThemeCard> {
                 margin: EdgeInsets.only(top: 0.010 * height),
                 child:Text(
                     themes.getThemesList()[widget.position].name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15
                   ),
                 )

@@ -1,11 +1,11 @@
+// ignore_for_file: file_names
+
 class EventCardUtil{
 
   late String name;
   late String time;
   late String location;
   late String iconImage;
-
-  //TODO - add Description if required
 
 
   EventCardUtil(this.name,this.time,this.location,this.iconImage);
