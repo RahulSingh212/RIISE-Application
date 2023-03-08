@@ -15,6 +15,7 @@ import 'package:timelines/timelines.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/EventCard.dart';
+import '../../components/EventCard2.dart';
 import '../../components/SideNavBar.dart';
 import '../../components/ThemeCard.dart';
 import '../../modules/EventUtil.dart';
@@ -30,101 +31,108 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
-
   String userName = "Henansh";
   late TextEditingController searchBarController = TextEditingController();
   EventListUtil events = EventListUtil();
 
-
   @override
   Widget build(BuildContext context) {
-
     var padding = MediaQuery.of(context).padding;
     double width = (MediaQuery.of(context).size.width);
     double height =
         (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
 
+    print("Event List ");
+    print(events.getEventsList());
+
     return Scaffold(
-      backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
-      drawer: SideNavBar(),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          "Schedule",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontSize: 20,
+        backgroundColor: Colors.white,
+        extendBodyBehindAppBar: true,
+        drawer: SideNavBar(),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          title: Text(
+            "Schedule",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
+          iconTheme: IconThemeData(
+            color: Colors.blue,
+            size: 30,
+          ),
+          // actions: [
+          //   Container(
+          //     child: IconButton(
+          //       onPressed: () {},
+          //       icon: Icon(
+          //         Icons.person,
+          //       ),
+          //     ),
+          //   ),
+          // ],
         ),
-        iconTheme: IconThemeData(
-          color: Colors.blue,
-          size: 30,
-        ),
-        // actions: [
-        //   Container(
-        //     child: IconButton(
-        //       onPressed: () {},
-        //       icon: Icon(
-        //         Icons.person,
-        //       ),
-        //     ),
-        //   ),
-        // ],
-      ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.only(
-              top: height * 0.12),
+          padding: EdgeInsets.only(top: height * 0.12),
           child: FixedTimeline.tileBuilder(
-            // mainAxisSize: MainAxisSize.max,
+              // mainAxisSize: MainAxisSize.max,
               theme: TimelineTheme.of(context).copyWith(
                 nodePosition: 0.5, //5% from Left
               ),
               builder: TimelineTileBuilder.connected(
                 contentsAlign: ContentsAlign.alternating,
 
-                connectorBuilder: (context,index,lineConnector) => SizedBox(
+                connectorBuilder: (context, index, lineConnector) => SizedBox(
                   // height: 20.0,
-                  child: SolidLineConnector(
-                    thickness: 0.01*width,
-                    color: true?Colors.green:Colors.red,
+                  child: DecoratedLineConnector(
+                    thickness: 0.02 * width,
+                    decoration: BoxDecoration(
+
+                        color:  DateTime.now().compareTo(events.getEventsList()[index].time ) < 0? Colors.green:Colors.red,
+
+                      ),
+
                   ),
                 ),
                 indicatorBuilder: (context, index) => ContainerIndicator(
-
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 0.02*height),
-                      child: Icon(
-                        index % 2 != 0 ?Icons. arrow_back_ios:Icons.arrow_forward_ios,
-                        size: 30,
-                        color: Colors.grey,
-                      ),
-                    )
-                ),
+                  padding: EdgeInsets.symmetric(vertical: 0.02 * height),
+                  child: index %2 == 0?Icon(
+                    Icons.label_important_outline_rounded,
+                    size: 30,
+                    color: Colors.grey,
+                  ):Transform.rotate(angle: pi,child: Icon(
+                    Icons.label_important_outline_rounded,
+                    size: 30,
+                    color: Colors.grey,
+                  ),),
+                )),
 
                 // oppositeContentsBuilder: (context, index) => Text(appointments.getThemesList()[index].getTime()),
                 contentsBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.symmetric(vertical: 0.025*height, horizontal: 0.02*width),
-                  child: EventCard(position: index),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 0.025 * height, horizontal: 0.02 * width),
+                  child: EventCard2(position: index),
                 ),
                 oppositeContentsBuilder: (context, index) => Container(
-                  padding: EdgeInsets.symmetric(vertical: 0.025*height, horizontal: 0.02*width),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 0.07 * height, horizontal: 0.07 * width),
                   // decoration: ,
                   child: Card(
                     elevation: 16,
                     child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 0.02*height, horizontal: 0.03*width),
                       decoration: BoxDecoration(
                         border: Border(
                           left: index % 2 == 0 ? BorderSide(color: Colors.greenAccent, width: 5) : BorderSide(color: Colors.transparent),
                           right: index % 2 != 0 ? BorderSide(color: Colors.greenAccent, width: 5) : BorderSide(color: Colors.transparent),
-
                         ),
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 0.015*height, horizontal: 0.02*width),
                       child: Text(
                         events.getEventsList()[index].getTime(),
                             style: TextStyle(fontSize: 20),
@@ -135,9 +143,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 ),
                 itemCount: events.getEventsList().length,
                 // connectorStyle:
-              )
-          ),
-        )
-    );
+              )),
+        ));
   }
 }

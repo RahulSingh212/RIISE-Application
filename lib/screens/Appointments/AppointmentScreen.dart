@@ -43,7 +43,11 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     double width = (MediaQuery.of(context).size.width);
     double height =
         (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
-    return Scaffold(
+
+    print(DateTime.now().subtract(Duration(minutes: DateTime.now().minute)));
+    print(DateTime.now());
+    print(DateTime.now().compareTo(DateTime.now().subtract(Duration(minutes: DateTime.now().minute))));
+        return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       drawer: SideNavBar(),
@@ -118,11 +122,15 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
             builder: TimelineTileBuilder.connected(
               contentsAlign: ContentsAlign.basic,
 
-              connectorBuilder: (context,index,lineConnector) => SizedBox(
+              connectorBuilder: (context, index, lineConnector) => SizedBox(
                 // height: 20.0,
-                child: SolidLineConnector(
-                  thickness: 0.01*width,
-                  color: true?Colors.green:Colors.red,
+                child: DecoratedLineConnector(
+                  thickness: 0.02 * width,
+                  decoration: BoxDecoration(
+                    color:  DateTime.now().compareTo(appointments.getThemesList()[index].time) < 0? Colors.green:Colors.red,
+
+                  ),
+
                 ),
               ),
               indicatorBuilder: (context, index) => ContainerIndicator(

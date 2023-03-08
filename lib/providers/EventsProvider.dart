@@ -42,6 +42,8 @@ class EventProvider with ChangeNotifier {
                 Theme_Unique_Id,
               );
 
+              print(themeSpeakersList);
+
               ThemeServerInformation themeInfo = ThemeServerInformation(
                 Theme_Unique_Id: Theme_Unique_Id,
                 Theme_Name: Theme_Name,
@@ -54,7 +56,9 @@ class EventProvider with ChangeNotifier {
               );
 
               listOfThemese.add(themeInfo);
+              print(themeInfo.themeSpeakersList);
             },
+
           );
         },
       );

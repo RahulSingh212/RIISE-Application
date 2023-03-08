@@ -56,7 +56,7 @@ class _EventCardState extends State<EventCard> {
                       style: TextStyle(fontSize: 15),
                     ),
                     Text(
-                      events.getEventsList()[widget.position].time,
+                      events.getEventsList()[widget.position].getTime(),
                       style: TextStyle(fontSize: 15),
                     )
                   ],
