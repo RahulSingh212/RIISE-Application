@@ -36,13 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
   ThemeListUtil themes = ThemeListUtil();
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    Provider.of<EventProvider>(context, listen: false).fetchThemes(context);
-  }
-
-  @override
   Widget build(BuildContext context) {
     var padding = MediaQuery.of(context).padding;
     double width = (MediaQuery.of(context).size.width);

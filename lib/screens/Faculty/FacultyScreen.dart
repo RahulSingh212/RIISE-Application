@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:riise/providers/FacultiesProvider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/SideNavBar.dart';
@@ -56,6 +57,13 @@ class _FacultyScreenState extends State<FacultyScreen> {
     "15Henansh",
     "16Henansh",
   ];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    Provider.of<FacultiesProvider>(context, listen: false).fetchCollegeFaculties(context);
+  }
 
   @override
   Widget build(BuildContext context) {
