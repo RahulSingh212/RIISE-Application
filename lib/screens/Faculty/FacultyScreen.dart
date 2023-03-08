@@ -15,6 +15,7 @@ import 'package:riise/providers/FacultiesProvider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/SideNavBar.dart';
+import '../../models/FacultyInfo.dart';
 
 class FacultyScreen extends StatefulWidget {
   static const routeName = '/rise-faculty-screen';
@@ -39,6 +40,11 @@ class _FacultyScreenState extends State<FacultyScreen> {
   List<String> recentSearch = <String>[];
   late String dropdownValue = facultyList.first;
   late String filterValue = "";
+
+  // EventProvider temp;
+  // temp.list
+
+
   List<String> tempFacList = [
     "1Henansh",
     "2Henansh",
@@ -71,6 +77,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
     double width = (MediaQuery.of(context).size.width);
     double height =
         (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
+
 
     return Scaffold(
         backgroundColor: Colors.white,
