@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/components/ThemeCard.dart';
+import 'package:riise/modules/EventUtil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/EventCard.dart';
@@ -34,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String userName = "Henansh";
   late TextEditingController searchBarController = TextEditingController();
   ThemeListUtil themes = ThemeListUtil();
+  EventListUtil events = EventListUtil();
 
   @override
   Widget build(BuildContext context) {
@@ -170,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // ),
                 // height: height*1.5,
                 child: ListView.builder(
-                  itemCount: themes.getThemesList().length,
+                  itemCount: events.getEventsList().length,
                   // scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),

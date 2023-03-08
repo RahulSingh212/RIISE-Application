@@ -83,7 +83,7 @@ class _EventCard2State extends State<EventCard2> {
                       style: TextStyle(fontSize: 15,
                       ),
                       softWrap: true,
-                      textAlign: TextAlign.center,
+                      // textAlign: TextAlign.center,
                       // maxLines: 100,
                       // overflow: TextOverflow.ellipsis,
                     ),

@@ -44,7 +44,7 @@ class _ThemeCardState extends State<ThemeCard> {
                     print("${widget.position} clicked");
                   },
                   child: Image.asset(
-                      themes.getThemesList()[widget.position].iconImage,height: minDimension*0.2,),
+                      themes.getThemesList()[widget.position].iconImage,width: minDimension*0.2),
                 ),
               ),
               Container(

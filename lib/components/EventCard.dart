@@ -51,22 +51,42 @@ class _EventCardState extends State<EventCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      events.getEventsList()[widget.position].name,
-                      style: TextStyle(fontSize: 15),
+                    Flexible(
+                      child: Text(
+                        events.getEventsList()[widget.position].name,
+                        style: TextStyle(fontSize: 15),
+                        softWrap: true,
+                      ),
                     ),
-                    Text(
-                      events.getEventsList()[widget.position].getTime(),
-                      style: TextStyle(fontSize: 15),
+                    Flexible(
+                      child: Text(
+                        events.getEventsList()[widget.position].getTime(),
+                        style: TextStyle(fontSize: 15),
+                        softWrap: true,
+                      ),
                     )
                   ],
                 ),
-                Container(
-                  padding: EdgeInsets.only(top: height*0.025),
-                  child: Text(
-                    "Location: ${events.getEventsList()[widget.position].location}",
-                    style: TextStyle(fontSize: 15),
-                  ),
+                SizedBox(height: 0.02*height,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.location_on_outlined,
+                      // size: ,
+                    ),
+                    Flexible(
+                      child: Text(
+                        events.getEventsList()[widget.position].location,
+                        style: TextStyle(fontSize: 15,
+                        ),
+                        softWrap: true,
+                        // maxLines: 100,
+                        // overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
