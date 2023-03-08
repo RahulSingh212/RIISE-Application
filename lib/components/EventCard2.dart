@@ -3,6 +3,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../modules/EventUtil.dart';
 import '../modules/EventUtil.dart';
 
@@ -20,13 +21,13 @@ class _EventCard2State extends State<EventCard2> {
   EventListUtil events = EventListUtil();
   @override
   Widget build(BuildContext context) {
-    var padding = MediaQuery.of(context).padding;
-    double width = (MediaQuery.of(context).size.width);
-    double height =
-        (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
-
-    double minDimension = min(width, height);
-    double maxDimension = max(width, height);
+    // var padding = MediaQuery.of(context).padding;
+    // double width = (MediaQuery.of(context).size.width);
+    // double height =
+    //     (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
+    //
+    // double minDimension = min(width, height);
+    // double maxDimension = max(width, height);
 
     return Card(
       elevation: 16,
@@ -49,7 +50,7 @@ class _EventCard2State extends State<EventCard2> {
         ),
         child: Container(
           margin: EdgeInsets.symmetric(
-              horizontal: 0.05 * width, vertical: 0.01 * height),
+              horizontal: 54.w, vertical: 23.4.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +61,7 @@ class _EventCard2State extends State<EventCard2> {
                   Flexible(
                     child: Text(
                       events.getEventsList()[widget.position].name,
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 40.sp),
                       softWrap: true,
                       textAlign: TextAlign.center,
                       // maxLines: 100,
@@ -68,7 +69,7 @@ class _EventCard2State extends State<EventCard2> {
                   ),
                 ],
               ),
-              SizedBox(height: 0.02*height,),
+              SizedBox(height: 46.8.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 // crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +81,7 @@ class _EventCard2State extends State<EventCard2> {
                   Flexible(
                     child: Text(
                       events.getEventsList()[widget.position].location,
-                      style: TextStyle(fontSize: 15,
+                      style: TextStyle(fontSize: 40.sp,
                       ),
                       softWrap: true,
                       // textAlign: TextAlign.center,

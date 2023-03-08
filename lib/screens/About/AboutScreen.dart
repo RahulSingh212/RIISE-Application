@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,11 +28,11 @@ class AboutScreen extends StatefulWidget {
 class _AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
-    var screenHeight = MediaQuery.of(context).size.height;
-    var screenWidth = MediaQuery.of(context).size.width;
-    var topInsets = MediaQuery.of(context).viewInsets.top;
-    var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
-    var useableHeight = screenHeight - topInsets - bottomInsets;
+    // var screenHeight = MediaQuery.of(context).size.height;
+    // var screenWidth = MediaQuery.of(context).size.width;
+    // var topInsets = MediaQuery.of(context).viewInsets.top;
+    // var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
+    // var useableHeight = screenHeight - topInsets - bottomInsets;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -46,13 +47,13 @@ class _AboutScreenState extends State<AboutScreen> {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
-            fontSize: 20,
+            fontSize: 60.sp,
           ),
           textAlign: TextAlign.center,
         ),
         iconTheme: IconThemeData(
           color: Colors.blue,
-          size: 30,
+          size: 80.r,
         ),
         // actions: [
         //   Container(
@@ -73,10 +74,10 @@ class _AboutScreenState extends State<AboutScreen> {
           Align(
             child: Container(
               padding: EdgeInsets.symmetric(
-                horizontal: screenWidth * 0.05,
+                horizontal: 54.w,
               ),
-              width: screenWidth,
-              height: screenHeight * 0.9,
+              width: 1080.w,
+              height: 2106.h,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Colors.blue.shade400,
@@ -91,7 +92,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     )
                   ],
                   style: TextStyle(
-                    fontSize: 23.5,
+                    fontSize: 70.sp,
                     color: Colors.white,
                   ),
                 ),

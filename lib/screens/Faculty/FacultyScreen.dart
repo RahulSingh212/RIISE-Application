@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/components/FacultyCard.dart';
@@ -54,15 +55,17 @@ class _FacultyScreenState extends State<FacultyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var padding = MediaQuery.of(context).padding;
-    double width = (MediaQuery.of(context).size.width);
-    double height =
-        (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
+    // var padding = MediaQuery.of(context).padding;
+    // double width = (MediaQuery.of(context).size.width);
+    // double height =
+    //     (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
+    //
+    // print("Faculty List");
+    // print(facultyProider.facultiesList);
+    // print(facultyProider.facultiesList.first.faculty_Name);
+    // print(facultyProider.facultiesList.first.faculty_Unique_Id);
 
-    print("Faculty List");
-    print(facultyProider.facultiesList);
-    print(facultyProider.facultiesList.first.faculty_Name);
-    print(facultyProider.facultiesList.first.faculty_Unique_Id);
+
 
 
     return Scaffold(
@@ -78,13 +81,13 @@ class _FacultyScreenState extends State<FacultyScreen> {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
-              fontSize: 20,
+              fontSize: 60.sp,
             ),
             textAlign: TextAlign.center,
           ),
           iconTheme: IconThemeData(
             color: Colors.blue,
-            size: 30,
+            size: 80.r,
           ),
           // actions: [
           //   Container(
@@ -99,14 +102,14 @@ class _FacultyScreenState extends State<FacultyScreen> {
         ),
         body: Container(
           padding: EdgeInsets.only(
-              top: height * 0.12, left: width * 0.05, right: width * 0.05),
+              top: 280.h, left: 54.w, right: 54.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.only(top: height * 0.025),
-                height: height * 0.09,
+                padding: EdgeInsets.only(top: 58.5.h),
+                height: 210.6.h,
                 child: TextField(
                   controller: searchBarController,
                   onChanged: (value) => {
@@ -133,7 +136,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
                     hintStyle: TextStyle(
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w400,
-                      fontSize: 15,
+                      fontSize: 45.sp,
                       fontStyle: FontStyle.normal,
                       color: Color(0xff6c757d),
                     ),
@@ -153,7 +156,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
                 ),
               ),
               SizedBox(
-                height: 0.02 * height,
+                height: 46.8.h,
               ),
               InputDecorator(
                 decoration: InputDecoration(
@@ -168,10 +171,10 @@ class _FacultyScreenState extends State<FacultyScreen> {
                     // gapPadding: 0,
                   ),
                   contentPadding: EdgeInsets.symmetric(
-                      horizontal: 0.04 * width, vertical: 0.005 * height),
+                      horizontal: 43.2.w, vertical: 11.7.h),
                 ),
                 child: SizedBox(
-                  width: width,
+                  width: 1080.w,
                   child: DropdownButton(
                     alignment: Alignment.center,
                     enableFeedback: true,
@@ -184,7 +187,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
                       Icons.arrow_downward,
                       color: Colors.grey,
                     ),
-                    iconSize: 20,
+                    iconSize: 40.r,
                     isExpanded: true,
                     underline: Container(),
                     dropdownColor: Colors.white,
@@ -204,14 +207,14 @@ class _FacultyScreenState extends State<FacultyScreen> {
                 ),
               ),
               SizedBox(
-                height: 0.02 * height,
+                height: 46.8.h,
               ),
               Text(
                 "Faculties",
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(
-                height: 0.02 * height,
+                height: 46.8.h,
               ),
               Expanded(
                 // padding: EdgeInsets.zero,

@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/components/ThemeCard.dart';
@@ -34,15 +35,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String userName = "Henansh";
   late TextEditingController searchBarController = TextEditingController();
+
+  //TODO- Replace with Provider When ready
   ThemeListUtil themes = ThemeListUtil();
   EventListUtil events = EventListUtil();
 
   @override
   Widget build(BuildContext context) {
-    var padding = MediaQuery.of(context).padding;
-    double width = (MediaQuery.of(context).size.width);
-    double height =
-        (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
+    // var padding = MediaQuery.of(context).padding;
+    // double width = (MediaQuery.of(context).size.width);
+    // double height =
+    //     (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -57,13 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
-            fontSize: 20,
+            fontSize: 60.sp,
           ),
           textAlign: TextAlign.center,
         ),
         iconTheme: IconThemeData(
           color: Colors.blue,
-          size: 30,
+          size: 80.r,
         ),
         actions: [
           Container(
@@ -83,22 +86,22 @@ class _HomeScreenState extends State<HomeScreen> {
         physics: BouncingScrollPhysics(),
         child: Container(
           padding: EdgeInsets.only(
-              top: height * 0.12, left: width * 0.05, right: width * 0.05),
+              top: 280.h, left: 54.w, right: 54.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "Hello,",
-                style: TextStyle(fontSize: 20, color: Colors.black12),
+                style: TextStyle(fontSize: 70.sp, color: Colors.black12),
               ),
               Text(
                 userName,
-                style: TextStyle(fontSize: 30, color: Colors.black),
+                style: TextStyle(fontSize: 80.sp, color: Colors.black),
               ),
               Container(
-                padding: EdgeInsets.only(top: height * 0.025),
-                height: height * 0.09,
+                padding: EdgeInsets.only(top: 58.h),
+                height: 210.h,
                 child: TextField(
                   controller: searchBarController,
                   decoration: InputDecoration(
@@ -113,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     hintStyle: TextStyle(
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w400,
-                      fontSize: 15,
+                      fontSize: 45.sp,
                       fontStyle: FontStyle.normal,
                       color: Color(0xff6c757d),
                     ),
@@ -128,27 +131,27 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                 margin: EdgeInsets.only(
-                  top: height * 0.025,
+                  top: 58.h,
                 ),
                 child: Text(
                   "Themes",
-                  style: TextStyle(fontSize: 30, color: Colors.black),
+                  style: TextStyle(fontSize: 70.sp, color: Colors.black),
                 ),
               ),
               Container(
-                // padding: EdgeInsets.only(top: height * 0.025),
-                margin: EdgeInsets.only(top: height * 0.025),
+                // padding: EdgeInsets.only(top: 58.h),
+                margin: EdgeInsets.only(top: 25.h),
                 alignment: Alignment.center,
                 // decoration: BoxDecoration(
                 //   border: Border.all()
                 // ),
-                height: 0.18 * height,
+                height: 520.h,
                 child: ListView.builder(
                   itemCount: themes.getThemesList().length,
                   scrollDirection: Axis.horizontal,
                   physics: BouncingScrollPhysics(),
                   padding: EdgeInsets.symmetric(
-                      vertical: 0.01 * height, horizontal: 0.02 * width),
+                      vertical: 23.h , horizontal: 21.w),
                   itemBuilder: (context, position) {
                     return ThemeCard(position: position);
                   },
@@ -156,16 +159,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                 margin: EdgeInsets.only(
-                  top: height * 0.025,
+                  top: 58.h,
                 ),
                 child: Text(
                   "TimeLine",
-                  style: TextStyle(fontSize: 30, color: Colors.black),
+                  style: TextStyle(fontSize: 70.sp, color: Colors.black),
                 ),
               ),
               Container(
-                // padding: EdgeInsets.only(top: height * 0.025),
-                margin: EdgeInsets.only(top: height * 0.025),
+                // padding: EdgeInsets.only(top: 58.h),
+                margin: EdgeInsets.only(top: 58.h),
                 alignment: Alignment.topCenter,
                 // decoration: BoxDecoration(
                 //   border: Border.all()
@@ -176,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.only(top: 0.01 * height),
+                  padding: EdgeInsets.only(top: 23.h),
                   itemBuilder: (context, position) {
                     return EventCard(position: position);
                   },

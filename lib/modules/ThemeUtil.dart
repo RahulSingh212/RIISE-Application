@@ -21,7 +21,7 @@ class ThemeListUtil{
   }
 
   populateList(){
-    themes.add(ThemeUtil("AI1","Demo Text","assets/images/icons/analytics.png"));
+    themes.add(ThemeUtil("Lab to Market/ Start-ups","Demo Text","assets/images/icons/analytics.png"));
     themes.add(ThemeUtil("AI2","Demo Text","assets/images/icons/artificial-intelligence.png"));
     themes.add(ThemeUtil("AI3","Demo Text","assets/images/icons/cyber-security.png"));
     themes.add(ThemeUtil("AI4","Demo Text","assets/images/icons/data-management.png"));

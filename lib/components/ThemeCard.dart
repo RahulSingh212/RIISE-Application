@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:riise/modules/ThemeUtil.dart';
 
 //ignore: must_be_immutable
@@ -21,22 +22,24 @@ class _ThemeCardState extends State<ThemeCard> {
 
   @override
   Widget build(BuildContext context) {
-    var padding = MediaQuery.of(context).padding;
-    double width = (MediaQuery.of(context).size.width);
-    double height =
-        (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
-
-    double minDimension = min(width, height);
-    double maxDimension = max(width, height);
+    // var padding = MediaQuery.of(context).padding;
+    // double width = (MediaQuery.of(context).size.width);
+    // double height =
+    //     (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
+    //
+    // double minDimension = min(width, height);
+    // double maxDimension = max(width, height);
 
     return Container(
-      margin: EdgeInsets.only(right: 0.08 * width),
+      margin: EdgeInsets.only(right: 86.w),
       child: Card(
         elevation: 8,
-        // color: Colors.red,
+        // semanticContainer: false,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 0.025 * width,vertical: 0.01 * height),
+          margin: EdgeInsets.symmetric(horizontal: 27.w, vertical: 23.h),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ClipOval(
                 child: InkWell(
@@ -44,35 +47,35 @@ class _ThemeCardState extends State<ThemeCard> {
                     print("${widget.position} clicked");
                   },
                   child: Image.asset(
-                      themes.getThemesList()[widget.position].iconImage,width: minDimension*0.2),
+                    themes.getThemesList()[widget.position].iconImage,
+                    width: 200.r,
+                    height: 200.r,
+                  ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 0.010 * height),
-                child:Text(
-                    themes.getThemesList()[widget.position].name,
-                  style: const TextStyle(
-                    fontSize: 15
+              Flexible(
+                child: Container(
+                  margin: EdgeInsets.only(top: 23.h),
+                  width: 300.r,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          themes.getThemesList()[widget.position].name,
+                          style: TextStyle(fontSize: 35.sp),
+                          softWrap: true,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
                   ),
-                )
-                ,)
+                ),
+              )
             ],
           ),
         ),
       ),
     );
-
-    // return Card(
-    //   margin: EdgeInsets.only(right: 0.07*width),
-    //   child: Container(
-    //     alignment: Alignment.center,
-    //     // padding: const EdgeInsets.all(15.0),
-    //     color: Colors.yellow,
-    //     width: 0.3*width,
-    //     child: Text(
-    //         "Hello ${themes.getThemesList()[widget.position].name}"
-    //     ),
-    //   ),
-    // );
   }
 }

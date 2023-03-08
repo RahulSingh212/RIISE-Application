@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import "package:flutter/services.dart";
 
@@ -30,8 +31,12 @@ Future<void> main() async {
   await Firebase.initializeApp();
 
   runApp(
-    MaterialApp(
-      home: MyApp(),
+    ScreenUtilInit(
+      builder: (BuildContext context, Widget? child) =>
+        MaterialApp(
+          home: MyApp(),
+        ),
+      designSize: const Size(1080,2340),
     ),
   );
 }

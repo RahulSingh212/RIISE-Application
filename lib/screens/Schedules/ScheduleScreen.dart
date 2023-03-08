@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:timelines/timelines.dart';
@@ -37,13 +38,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var padding = MediaQuery.of(context).padding;
-    double width = (MediaQuery.of(context).size.width);
-    double height =
-        (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
-
-    print("Event List ");
-    print(events.getEventsList());
+    // var padding = MediaQuery.of(context).padding;
+    // double width = (MediaQuery.of(context).size.width);
+    // double height =
+    //     (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
+    //
+    // print("Event List ");
+    // print(events.getEventsList());
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -58,13 +59,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
-              fontSize: 20,
+              fontSize: 60.sp,
             ),
             textAlign: TextAlign.center,
           ),
           iconTheme: IconThemeData(
             color: Colors.blue,
-            size: 30,
+            size: 80.r,
           ),
           // actions: [
           //   Container(
@@ -78,7 +79,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           // ],
         ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.only(top: height * 0.12),
+          padding: EdgeInsets.only(top: 280.8.h),
           child: FixedTimeline.tileBuilder(
               // mainAxisSize: MainAxisSize.max,
               theme: TimelineTheme.of(context).copyWith(
@@ -90,7 +91,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 connectorBuilder: (context, index, lineConnector) => SizedBox(
                   // height: 20.0,
                   child: DecoratedLineConnector(
-                    thickness: 0.02 * width,
+                    thickness: 21.6.w,
                     decoration: BoxDecoration(
 
                         color:  DateTime.now().compareTo(events.getEventsList()[index].time ) < 0? Colors.green:Colors.red,
@@ -101,14 +102,14 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 ),
                 indicatorBuilder: (context, index) => ContainerIndicator(
                     child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 0.02 * height),
+                  padding: EdgeInsets.symmetric(vertical: 46.8.h),
                   child: index %2 == 0?Icon(
                     Icons.label_important_outline_rounded,
-                    size: 30,
+                    size: 100.r,
                     color: Colors.grey,
                   ):Transform.rotate(angle: pi,child: Icon(
                     Icons.label_important_outline_rounded,
-                    size: 30,
+                    size: 100.r,
                     color: Colors.grey,
                   ),),
                 )),
@@ -116,17 +117,17 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 // oppositeContentsBuilder: (context, index) => Text(appointments.getThemesList()[index].getTime()),
                 contentsBuilder: (context, index) => Padding(
                   padding: EdgeInsets.symmetric(
-                      vertical: 0.025 * height, horizontal: 0.02 * width),
+                      vertical: 58.5.h, horizontal: 21.6.w),
                   child: EventCard2(position: index),
                 ),
                 oppositeContentsBuilder: (context, index) => Container(
                   padding: EdgeInsets.symmetric(
-                      vertical: 0.07 * height, horizontal: 0.07 * width),
+                      vertical: 163.8.h, horizontal: 75.6.w),
                   // decoration: ,
                   child: Card(
                     elevation: 16,
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 0.02*height, horizontal: 0.03*width),
+                      padding: EdgeInsets.symmetric(vertical: 46.8.h, horizontal: 32.4),
                       decoration: BoxDecoration(
                         border: Border(
                           left: index % 2 == 0 ? BorderSide(color: Colors.greenAccent, width: 5) : BorderSide(color: Colors.transparent),
@@ -135,7 +136,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                       ),
                       child: Text(
                         events.getEventsList()[index].getTime(),
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 50.sp),
                       ),
                     ),
 

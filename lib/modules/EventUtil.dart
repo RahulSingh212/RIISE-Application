@@ -33,10 +33,10 @@ class EventListUtil{
     events.add(EventUtil("AI2",DateTime.now().subtract(const Duration(hours: 3)),"Temp","assets/images/background/artificial-intelligence.jpg"));
     events.add(EventUtil("AI4",DateTime.now().subtract(const Duration(hours: 2)),"Temp","assets/images/background/artificial-intelligence.jpg"));
     events.add(EventUtil("AI5",DateTime.now().subtract(const Duration(hours: 1)),"Temp","assets/images/background/artificial-intelligence.jpg"));
-    events.add(EventUtil("AI6",DateTime.now().add(const Duration(hours: 1)),"Temp","assets/images/background/artificial-intelligence.jpg"));
+    events.add(EventUtil("Lab to Market/ Start-upsLab to Market/ Start-upsLab to Market/ Start-ups",DateTime.now().add(const Duration(hours: 1)),"Temp","assets/images/background/artificial-intelligence.jpg"));
     events.add(EventUtil("AI7",DateTime.now().add(const Duration(hours: 2)),"Temp","assets/images/background/artificial-intelligence.jpg"));
     events.add(EventUtil("AI8",DateTime.now().add(const Duration(hours: 3)),"Temp","assets/images/background/artificial-intelligence.jpg"));
-    events.add(EventUtil("Lab to Market/ Start-upsLab to Market/ Start-ups",DateTime.now().add(const Duration(hours: 4)),"Ground Floor, Old Academic Building","assets/images/background/artificial-intelligence.jpg"));
+    events.add(EventUtil("Lab to Market/ Start-upsLab to Market/ Start-upsLab to Market/ Start-ups",DateTime.now().add(const Duration(hours: 4)),"Ground Floor, Old Academic Building","assets/images/background/artificial-intelligence.jpg"));
   }
 
   List<EventUtil> getEventsList() => events;

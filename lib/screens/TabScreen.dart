@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/providers/ScreenControllerProvider.dart';
 
@@ -64,78 +65,80 @@ class _TabScreenState extends State<TabScreen> {
 
   void _selectPage(int index) {
     setState(() {
-      Provider.of<ScreenControllerProvider>(context, listen: false).selectedPageIndex = index;
+      Provider.of<ScreenControllerProvider>(context, listen: false)
+          .selectedPageIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var screenHeight = MediaQuery.of(context).size.height;
-    var screenWidth = MediaQuery.of(context).size.width;
-    var topInsets = MediaQuery.of(context).viewInsets.top;
-    var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
-    var useableHeight = screenHeight - topInsets - bottomInsets;
+    // var screenHeight = MediaQuery.of(context).size.height;
+    // var screenWidth = MediaQuery.of(context).size.width;
+    // var topInsets = MediaQuery.of(context).viewInsets.top;
+    // var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
+    // var useableHeight = screenHeight - topInsets - bottomInsets;
 
     final iconItemsInActive = <Widget>[
-      const Icon(
+      Icon(
         Icons.home_outlined,
         color: Colors.green,
-        size: 30,
+        size: 80.r,
       ),
-      const Icon(
+      Icon(
         Icons.person_search_outlined,
         color: Colors.green,
-        size: 30,
+        size: 80.r,
       ),
-      const Icon(
+      Icon(
         Icons.access_time_outlined,
         color: Colors.green,
-        size: 30,
+        size: 80.r,
       ),
-      const Icon(
+      Icon(
         Icons.map_outlined,
         color: Colors.green,
-        size: 30,
+        size: 80.r,
       ),
-      const Icon(
+      Icon(
         Icons.meeting_room_outlined,
         color: Colors.green,
-        size: 30,
+        size: 80.r,
       ),
     ];
 
     final iconItemsActive = <Widget>[
-      const Icon(
+      Icon(
         Icons.home_rounded,
         color: Colors.green,
-        size: 30,
+        size: 80.r,
       ),
-      const Icon(
+      Icon(
         Icons.person_search_rounded,
         color: Colors.green,
-        size: 30,
+        size: 80.r,
       ),
-      const Icon(
+      Icon(
         Icons.access_time,
         color: Colors.green,
-        size: 30,
+        size: 80.r,
       ),
-      const Icon(
+      Icon(
         Icons.map_rounded,
         color: Colors.green,
-        size: 30,
+        size: 80.r,
       ),
-      const Icon(
+      Icon(
         Icons.meeting_room_rounded,
         color: Colors.green,
-        size: 30,
+        size: 80.r,
       ),
     ];
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: IndexedStack(
-        index: Provider.of<ScreenControllerProvider>(context, listen: false).selectedPageIndex,
+        index: Provider.of<ScreenControllerProvider>(context, listen: false)
+            .selectedPageIndex,
         children: _appScreens,
       ),
       bottomNavigationBar: Theme(
@@ -149,8 +152,9 @@ class _TabScreenState extends State<TabScreen> {
           color: Colors.greenAccent,
           // buttonBackgroundColor: Theme.of(context).primaryColor,
           buttonBackgroundColor: Colors.blueGrey,
-          index: Provider.of<ScreenControllerProvider>(context, listen: false).selectedPageIndex,
-          height: screenHeight * 0.070,
+          index: Provider.of<ScreenControllerProvider>(context, listen: false)
+              .selectedPageIndex,
+          height: 163.8.h,
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(milliseconds: 300),
           items: iconItemsActive,
@@ -162,11 +166,11 @@ class _TabScreenState extends State<TabScreen> {
   Future<void> _checkForLogout(
       BuildContext context, String titleText, String contextText,
       {bool popVal = false}) async {
-    var screenHeight = MediaQuery.of(context).size.height;
-    var screenWidth = MediaQuery.of(context).size.width;
-    var topInsets = MediaQuery.of(context).viewInsets.top;
-    var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
-    var useableHeight = screenHeight - topInsets - bottomInsets;
+    // var screenHeight = MediaQuery.of(context).size.height;
+    // var screenWidth = MediaQuery.of(context).size.width;
+    // var topInsets = MediaQuery.of(context).viewInsets.top;
+    // var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
+    // var useableHeight = screenHeight - topInsets - bottomInsets;
 
     return showDialog(
       context: context,
@@ -179,7 +183,7 @@ class _TabScreenState extends State<TabScreen> {
               Icons.dangerous_rounded,
               color: Color(0xff42ccc3),
             ),
-            iconSize: 50,
+            iconSize: 130.r,
             color: Colors.brown,
             onPressed: () {
               setState(() {
@@ -194,7 +198,7 @@ class _TabScreenState extends State<TabScreen> {
               Icons.check_circle_rounded,
               color: Color(0xff42ccc3),
             ),
-            iconSize: 50,
+            iconSize: 130.r,
             color: Colors.brown,
             onPressed: () {
               setState(() {
@@ -280,11 +284,11 @@ class _TabScreenState extends State<TabScreen> {
   Future<void> _checkForError(
       BuildContext context, String titleText, String contextText,
       {bool popVal = false}) async {
-    var screenHeight = MediaQuery.of(context).size.height;
-    var screenWidth = MediaQuery.of(context).size.width;
-    var topInsets = MediaQuery.of(context).viewInsets.top;
-    var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
-    var useableHeight = screenHeight - topInsets - bottomInsets;
+    // var screenHeight = MediaQuery.of(context).size.height;
+    // var screenWidth = MediaQuery.of(context).size.width;
+    // var topInsets = MediaQuery.of(context).viewInsets.top;
+    // var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
+    // var useableHeight = screenHeight - topInsets - bottomInsets;
 
     return showDialog(
       context: context,
@@ -297,7 +301,7 @@ class _TabScreenState extends State<TabScreen> {
               Icons.check_circle_rounded,
               color: Color(0xff42ccc3),
             ),
-            iconSize: 50,
+            iconSize: 130.r,
             color: Colors.brown,
             onPressed: () {
               setState(() {
