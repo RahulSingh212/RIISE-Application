@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, unused_import, unnecessary_import, duplicate_import, unused_local_variable, deprecated_member_use, file_names
 
 import 'dart:async';
+import 'dart:developer';
 import 'dart:math';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,9 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:riise/modules/AppointmentUtil.dart';
+import 'package:timelines/timelines.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../components/AppointmentCard.dart';
+import '../../components/EventCard.dart';
 import '../../components/SideNavBar.dart';
+import '../../modules/ThemeUtil.dart';
 
 class AppointmentScreen extends StatefulWidget {
   static const routeName = '/rise-appointment-screen';
@@ -25,8 +31,18 @@ class AppointmentScreen extends StatefulWidget {
 }
 
 class _AppointmentScreenState extends State<AppointmentScreen> {
+  String userName = "Henansh";
+  late TextEditingController searchBarController = TextEditingController();
+  AppointmentListUtil appointments = AppointmentListUtil();
+
+
   @override
   Widget build(BuildContext context) {
+
+    var padding = MediaQuery.of(context).padding;
+    double width = (MediaQuery.of(context).size.width);
+    double height =
+        (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
@@ -59,7 +75,75 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         //   ),
         // ],
       ),
-      body: Center(),
+      // body: SingleChildScrollView(
+      //   scrollDirection: Axis.vertical,
+      //   keyboardDismissBehavior : ScrollViewKeyboardDismissBehavior.onDrag,
+      //   physics: BouncingScrollPhysics(),
+      //   child: Container(
+      //     padding: EdgeInsets.only(top: height*0.12,left: width*0.05,right: width*0.05),
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.start,
+      //       crossAxisAlignment: CrossAxisAlignment.start,
+      //       children: [
+      //         Container(
+      //           // padding: EdgeInsets.only(top: height * 0.025),
+      //             margin:  EdgeInsets.only(top: height * 0.025),
+      //             alignment: Alignment.topCenter,
+      //             // decoration: BoxDecoration(
+      //             //   border: Border.all()
+      //             // ),
+      //             // height: height*1.5,
+      //             child: ListView.builder(
+      //                 itemCount: themes.getThemesList().length,
+      //                 // scrollDirection: Axis.horizontal,
+      //                 shrinkWrap: true,
+      //                 physics: NeverScrollableScrollPhysics(),
+      //                 padding: EdgeInsets.only(top: 0.01*height),
+      //                 itemBuilder: (context,position) {
+      //                   return AppointmentCard(position: position);
+      //                 })
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // )
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(
+            top: height * 0.12),
+        child: FixedTimeline.tileBuilder(
+          // mainAxisSize: MainAxisSize.max,
+            theme: TimelineTheme.of(context).copyWith(
+              nodePosition: 0.05, //5% from Left
+            ),
+            builder: TimelineTileBuilder.connected(
+              contentsAlign: ContentsAlign.basic,
+
+              connectorBuilder: (context,index,lineConnector) => SizedBox(
+                // height: 20.0,
+                child: SolidLineConnector(
+                  thickness: 0.01*width,
+                  color: true?Colors.green:Colors.red,
+                ),
+              ),
+              indicatorBuilder: (context, index) => ContainerIndicator(
+
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 0.02*height),
+                  child: Icon(
+                    Icons.schedule,
+                    size: 30,
+                    color: Colors.grey,
+                  ),
+                )
+              ),
+
+              // oppositeContentsBuilder: (context, index) => Text(appointments.getThemesList()[index].getTime()),
+              contentsBuilder: (context, index) => AppointmentCard(position: index),
+              itemCount: appointments.getThemesList().length,
+              // connectorStyle:
+            )
+        ),
+      )
     );
   }
 }

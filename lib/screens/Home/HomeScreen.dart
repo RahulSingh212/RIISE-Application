@@ -16,7 +16,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/EventCard.dart';
 import "../../components/SideNavBar.dart";
-import '../../modules/ThemeCardUtil.dart';
+import '../../modules/ThemeUtil.dart';
 
 import '../../providers/EventsProvider.dart';
 import "../AddDataScreen/AddSectionScreen.dart";
@@ -31,9 +31,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String userName = "Rahul Singh";
+  String userName = "Henansh";
   late TextEditingController searchBarController = TextEditingController();
-  ThemeCardListUtil themes = ThemeCardListUtil();
+  ThemeListUtil themes = ThemeListUtil();
 
   @override
   void didChangeDependencies() {
@@ -46,7 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var padding = MediaQuery.of(context).padding;
     double width = (MediaQuery.of(context).size.width);
-    double height = (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
+    double height =
+        (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -130,34 +131,34 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              // Container(
-              //   margin: EdgeInsets.only(
-              //     top: height * 0.025,
-              //   ),
-              //   child: Text(
-              //     "Themes",
-              //     style: TextStyle(fontSize: 30, color: Colors.black),
-              //   ),
-              // ),
-              // Container(
-              //   // padding: EdgeInsets.only(top: height * 0.025),
-              //   margin: EdgeInsets.only(top: height * 0.025),
-              //   alignment: Alignment.center,
-              //   // decoration: BoxDecoration(
-              //   //   border: Border.all()
-              //   // ),
-              //   height: 0.18 * height,
-              //   child: ListView.builder(
-              //     itemCount: themes.getThemesList().length,
-              //     scrollDirection: Axis.horizontal,
-              //     physics: BouncingScrollPhysics(),
-              //     padding: EdgeInsets.symmetric(
-              //         vertical: 0.01 * height, horizontal: 0.02 * width),
-              //     itemBuilder: (context, position) {
-              //       return ThemeCard(position: position);
-              //     },
-              //   ),
-              // ),
+              Container(
+                margin: EdgeInsets.only(
+                  top: height * 0.025,
+                ),
+                child: Text(
+                  "Themes",
+                  style: TextStyle(fontSize: 30, color: Colors.black),
+                ),
+              ),
+              Container(
+                // padding: EdgeInsets.only(top: height * 0.025),
+                margin: EdgeInsets.only(top: height * 0.025),
+                alignment: Alignment.center,
+                // decoration: BoxDecoration(
+                //   border: Border.all()
+                // ),
+                height: 0.18 * height,
+                child: ListView.builder(
+                  itemCount: themes.getThemesList().length,
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 0.01 * height, horizontal: 0.02 * width),
+                  itemBuilder: (context, position) {
+                    return ThemeCard(position: position);
+                  },
+                ),
+              ),
               Container(
                 margin: EdgeInsets.only(
                   top: height * 0.025,

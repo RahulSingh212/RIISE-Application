@@ -14,7 +14,6 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/SideNavBar.dart';
-import '../../providers/FacultiesProvider.dart';
 
 class FacultyScreen extends StatefulWidget {
   static const routeName = '/rise-faculty-screen';
@@ -26,49 +25,241 @@ class FacultyScreen extends StatefulWidget {
 }
 
 class _FacultyScreenState extends State<FacultyScreen> {
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    Provider.of<FacultiesProvider>(context, listen: false).fetchCollegeFaculties(context);
-  }
+  late TextEditingController searchBarController = TextEditingController();
+  List<String> facultyList = [
+    "All",
+    "Computational Biology (CB)",
+    "Electronics & Communications Engineering (ECE)",
+    "Computer Science and Engineering (CSE)",
+    "Human Centred Design (HCD)",
+    "Mathematics (Maths)",
+    "Social Sciences And Humanities (SSH)"
+  ];
+  List<String> recentSearch = <String>[];
+  late String dropdownValue = facultyList.first;
+  late String filterValue = "";
+  List<String> tempFacList = [
+    "1Henansh",
+    "2Henansh",
+    "3Henansh",
+    "4Henansh",
+    "5Henansh",
+    "6Henansh",
+    "7Henansh",
+    "8Henansh",
+    "9Henansh",
+    "10Henansh",
+    "11Henansh",
+    "12Henansh",
+    "13Henansh",
+    "14Henansh",
+    "15Henansh",
+    "16Henansh",
+  ];
 
   @override
   Widget build(BuildContext context) {
+    var padding = MediaQuery.of(context).padding;
+    double width = (MediaQuery.of(context).size.width);
+    double height =
+        (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
+
     return Scaffold(
-      backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
-      drawer: SideNavBar(),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          "Faculties",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontSize: 20,
+        backgroundColor: Colors.white,
+        extendBodyBehindAppBar: true,
+        drawer: SideNavBar(),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          title: Text(
+            "Faculties",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
+          iconTheme: IconThemeData(
+            color: Colors.blue,
+            size: 30,
+          ),
+          // actions: [
+          //   Container(
+          //     child: IconButton(
+          //       onPressed: () {},
+          //       icon: Icon(
+          //         Icons.person,
+          //       ),
+          //     ),
+          //   ),
+          // ],
         ),
-        iconTheme: IconThemeData(
-          color: Colors.blue,
-          size: 30,
-        ),
-        // actions: [
-        //   Container(
-        //     child: IconButton(
-        //       onPressed: () {},
-        //       icon: Icon(
-        //         Icons.person,
-        //       ),
-        //     ),
-        //   ),
-        // ],
-      ),
-      body: Center(),
-    );
+        body: Container(
+          padding: EdgeInsets.only(
+              top: height * 0.12, left: width * 0.05, right: width * 0.05),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: height * 0.025),
+                height: height * 0.09,
+                child: TextField(
+                  controller: searchBarController,
+                  onChanged: (value) => {
+                    setState(() {
+                      filterValue = value;
+                      print(filterValue);
+                    })
+                  },
+                  decoration: InputDecoration(
+                    hintText: "Search",
+                    border: OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xffebebeb),
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blue,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    hintStyle: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                      fontStyle: FontStyle.normal,
+                      color: Color(0xff6c757d),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () {
+                        setState(() {
+                          recentSearch.insert(0, searchBarController.text);
+                          if (recentSearch.length > 5) {
+                            recentSearch.removeLast();
+                          }
+                        });
+                        print("serchpressed");
+                      },
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 0.02 * height,
+              ),
+              InputDecorator(
+                decoration: InputDecoration(
+                  // label: Text("Select Department",style: TextStyle(fontSize: 10),),
+                  labelText: "Select Dept",
+                  enabledBorder: OutlineInputBorder(
+                    // Border.all(width: 1, color: Color(0xffebebeb)),
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Color(0xffebebeb),
+                    ),
+                    // gapPadding: 0,
+                  ),
+                  contentPadding: EdgeInsets.symmetric(
+                      horizontal: 0.04 * width, vertical: 0.005 * height),
+                ),
+                child: SizedBox(
+                  width: width,
+                  child: DropdownButton(
+                    alignment: Alignment.center,
+                    enableFeedback: true,
+                    hint: Text(
+                      "Select Department",
+                      style: TextStyle(fontSize: 10),
+                    ),
+                    value: dropdownValue,
+                    icon: Icon(
+                      Icons.arrow_downward,
+                      color: Colors.grey,
+                    ),
+                    iconSize: 20,
+                    isExpanded: true,
+                    underline: Container(),
+                    dropdownColor: Colors.white,
+                    onChanged: (String? value) {
+                      setState(() {
+                        dropdownValue = value!;
+                        print(dropdownValue);
+                      });
+                    },
+                    items: facultyList.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 0.02 * height,
+              ),
+              Text(
+                "Faculties",
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(
+                height: 0.02 * height,
+              ),
+              Expanded(
+                // padding: EdgeInsets.zero,
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  itemCount: tempFacList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    //TODO - Add Dept Filter and if Required Available also
+                    if (tempFacList[index]
+                        .toLowerCase()
+                        .contains(filterValue.toLowerCase())) {
+                      return ListTile(
+                        dense: true,
+                        contentPadding: EdgeInsets.zero,
+                        leading: Transform.rotate(
+                          angle: 45 * pi / 180,
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.add,
+                              color: Color(0xffc4c4c4),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                print("${tempFacList[index]}removed");
+                                tempFacList.remove(tempFacList[index]);
+                              });
+                            },
+                          ),
+                        ),
+                        title: Text(
+                          tempFacList[index],
+                          style: const TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15,
+                            fontStyle: FontStyle.normal,
+                            color: Color(0xffc4c4c4),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
