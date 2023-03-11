@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -40,13 +41,13 @@ class _PannelDiscussionScreenState extends State<PannelDiscussionScreen> {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
-            fontSize: 20,
+            fontSize: 60.sp,
           ),
           textAlign: TextAlign.center,
         ),
         iconTheme: IconThemeData(
           color: Colors.blue,
-          size: 30,
+          size: 80.r,
         ),
         // actions: [
         //   Container(

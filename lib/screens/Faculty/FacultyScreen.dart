@@ -9,12 +9,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:riise/components/FacultyCard.dart';
 import 'package:riise/providers/FacultiesProvider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/SideNavBar.dart';
+import '../../models/FacultyInfo.dart';
+import '../../providers/EventsProvider.dart';
 
 class FacultyScreen extends StatefulWidget {
   static const routeName = '/rise-faculty-screen';
@@ -27,7 +31,7 @@ class FacultyScreen extends StatefulWidget {
 
 class _FacultyScreenState extends State<FacultyScreen> {
   late TextEditingController searchBarController = TextEditingController();
-  List<String> facultyList = [
+  List<String> facultyDeptList = [
     "All",
     "Computational Biology (CB)",
     "Electronics & Communications Engineering (ECE)",
@@ -36,27 +40,11 @@ class _FacultyScreenState extends State<FacultyScreen> {
     "Mathematics (Maths)",
     "Social Sciences And Humanities (SSH)"
   ];
-  List<String> recentSearch = <String>[];
-  late String dropdownValue = facultyList.first;
+  // List<String> recentSearch = <String>[];
+  late String dropdownValue = facultyDeptList.first;
   late String filterValue = "";
-  List<String> tempFacList = [
-    "1Henansh",
-    "2Henansh",
-    "3Henansh",
-    "4Henansh",
-    "5Henansh",
-    "6Henansh",
-    "7Henansh",
-    "8Henansh",
-    "9Henansh",
-    "10Henansh",
-    "11Henansh",
-    "12Henansh",
-    "13Henansh",
-    "14Henansh",
-    "15Henansh",
-    "16Henansh",
-  ];
+
+  late  var facultyProider = Provider.of<FacultiesProvider>(context, listen:false);
 
   @override
   void didChangeDependencies() {
@@ -67,10 +55,18 @@ class _FacultyScreenState extends State<FacultyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var padding = MediaQuery.of(context).padding;
-    double width = (MediaQuery.of(context).size.width);
-    double height =
-        (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
+    // var padding = MediaQuery.of(context).padding;
+    // double width = (MediaQuery.of(context).size.width);
+    // double height =
+    //     (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
+    //
+    // print("Faculty List");
+    // print(facultyProider.facultiesList);
+    // print(facultyProider.facultiesList.first.faculty_Name);
+    // print(facultyProider.facultiesList.first.faculty_Unique_Id);
+
+
+
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -85,13 +81,13 @@ class _FacultyScreenState extends State<FacultyScreen> {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
-              fontSize: 20,
+              fontSize: 60.sp,
             ),
             textAlign: TextAlign.center,
           ),
           iconTheme: IconThemeData(
             color: Colors.blue,
-            size: 30,
+            size: 80.r,
           ),
           // actions: [
           //   Container(
@@ -106,14 +102,14 @@ class _FacultyScreenState extends State<FacultyScreen> {
         ),
         body: Container(
           padding: EdgeInsets.only(
-              top: height * 0.12, left: width * 0.05, right: width * 0.05),
+              top: 280.h, left: 54.w, right: 54.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.only(top: height * 0.025),
-                height: height * 0.09,
+                padding: EdgeInsets.only(top: 58.5.h),
+                height: 210.6.h,
                 child: TextField(
                   controller: searchBarController,
                   onChanged: (value) => {
@@ -140,19 +136,19 @@ class _FacultyScreenState extends State<FacultyScreen> {
                     hintStyle: TextStyle(
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w400,
-                      fontSize: 15,
+                      fontSize: 45.sp,
                       fontStyle: FontStyle.normal,
                       color: Color(0xff6c757d),
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(Icons.search),
                       onPressed: () {
-                        setState(() {
-                          recentSearch.insert(0, searchBarController.text);
-                          if (recentSearch.length > 5) {
-                            recentSearch.removeLast();
-                          }
-                        });
+                        // setState(() {
+                        //   recentSearch.insert(0, searchBarController.text);
+                        //   if (recentSearch.length > 5) {
+                        //     recentSearch.removeLast();
+                        //   }
+                        // });
                         print("serchpressed");
                       },
                     ),
@@ -160,7 +156,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
                 ),
               ),
               SizedBox(
-                height: 0.02 * height,
+                height: 46.8.h,
               ),
               InputDecorator(
                 decoration: InputDecoration(
@@ -175,10 +171,10 @@ class _FacultyScreenState extends State<FacultyScreen> {
                     // gapPadding: 0,
                   ),
                   contentPadding: EdgeInsets.symmetric(
-                      horizontal: 0.04 * width, vertical: 0.005 * height),
+                      horizontal: 43.2.w, vertical: 11.7.h),
                 ),
                 child: SizedBox(
-                  width: width,
+                  width: 1080.w,
                   child: DropdownButton(
                     alignment: Alignment.center,
                     enableFeedback: true,
@@ -191,7 +187,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
                       Icons.arrow_downward,
                       color: Colors.grey,
                     ),
-                    iconSize: 20,
+                    iconSize: 40.r,
                     isExpanded: true,
                     underline: Container(),
                     dropdownColor: Colors.white,
@@ -201,7 +197,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
                         print(dropdownValue);
                       });
                     },
-                    items: facultyList.map((String value) {
+                    items: facultyDeptList.map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -211,55 +207,26 @@ class _FacultyScreenState extends State<FacultyScreen> {
                 ),
               ),
               SizedBox(
-                height: 0.02 * height,
+                height: 46.8.h,
               ),
               Text(
                 "Faculties",
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(
-                height: 0.02 * height,
+                height: 46.8.h,
               ),
               Expanded(
                 // padding: EdgeInsets.zero,
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
-                  itemCount: tempFacList.length,
+                  itemCount: facultyProider.facultiesList.length,
                   itemBuilder: (BuildContext context, int index) {
                     //TODO - Add Dept Filter and if Required Available also
-                    if (tempFacList[index]
-                        .toLowerCase()
-                        .contains(filterValue.toLowerCase())) {
-                      return ListTile(
-                        dense: true,
-                        contentPadding: EdgeInsets.zero,
-                        leading: Transform.rotate(
-                          angle: 45 * pi / 180,
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.add,
-                              color: Color(0xffc4c4c4),
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                print("${tempFacList[index]}removed");
-                                tempFacList.remove(tempFacList[index]);
-                              });
-                            },
-                          ),
-                        ),
-                        title: Text(
-                          tempFacList[index],
-                          style: const TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15,
-                            fontStyle: FontStyle.normal,
-                            color: Color(0xffc4c4c4),
-                          ),
-                        ),
-                      );
+                    //TODO - Sorting if required -  very optional
+                    if (isvalidFaculty(filterValue,index,dropdownValue)) {
+                      return FacultyCard(position: index);
                     } else {
                       return Container();
                     }
@@ -269,5 +236,20 @@ class _FacultyScreenState extends State<FacultyScreen> {
             ],
           ),
         ));
+  }
+
+
+  bool isvalidFaculty(filterValue,index,dropdownvalue){
+
+    //TODO - use this when Dept is ready
+    // return facultyProider.facultiesList[index].faculty_Name
+    //     .toLowerCase()
+    //      .contains(filterValue.toLowerCase()) && (facultyProider.facultiesList[index].faculty_Name
+    //     .toLowerCase().compareTo(dropdownValue.toString()) == 0 || facultyProider.facultiesList[index].faculty_Name
+    //     .toLowerCase().compareTo("ALL") == 0);
+
+    return facultyProider.facultiesList[index].faculty_Name
+        .toLowerCase()
+         .contains(filterValue.toLowerCase());
   }
 }

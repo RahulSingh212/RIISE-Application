@@ -17,7 +17,18 @@ import '../models/SpeakerInfo.dart';
 import "../models/FacultyInfo.dart";
 
 class FacultiesProvider with ChangeNotifier {
-  List<FacultyServerInformation> facultiesList = [];
+  List<FacultyServerInformation> facultiesList = [
+    FacultyServerInformation(faculty_Unique_Id: "1",faculty_Name: "Henansh",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
+    FacultyServerInformation(faculty_Unique_Id: "2",faculty_Name: "Rahul",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
+    FacultyServerInformation(faculty_Unique_Id: "3",faculty_Name: "Kunal",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
+    FacultyServerInformation(faculty_Unique_Id: "4",faculty_Name: "Harsh",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
+    FacultyServerInformation(faculty_Unique_Id: "5",faculty_Name: "Ramu",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
+    FacultyServerInformation(faculty_Unique_Id: "6",faculty_Name: "James",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
+    FacultyServerInformation(faculty_Unique_Id: "7",faculty_Name: "Dash",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
+    FacultyServerInformation(faculty_Unique_Id: "8",faculty_Name: "None",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
+    FacultyServerInformation(faculty_Unique_Id: "9",faculty_Name: "Harry",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
+    FacultyServerInformation(faculty_Unique_Id: "10",faculty_Name: "Poter",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
+  ];
 
   void fetchCollegeFaculties(
     BuildContext context,
@@ -55,7 +66,9 @@ class FacultiesProvider with ChangeNotifier {
         },
       );
 
-      facultiesList = listOfFaculties;
+      //Un Commented to fetch server information
+      // Commented for working now
+      // facultiesList = listOfFaculties;
 
       notifyListeners();
     } catch (errorVal) {

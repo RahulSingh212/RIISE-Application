@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
 import '../modules/EventUtil.dart';
 
@@ -22,31 +23,26 @@ class _AppointmentCardState extends State<AppointmentCard> {
   String facName = "Henansh";
   String facImage = "assets/images/icons/profile.png";
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
-    var padding = MediaQuery.of(context).padding;
-    double width = (MediaQuery.of(context).size.width);
-    double height =
-        (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
-
-    double minDimension = min(width, height);
-    double maxDimension = max(width, height);
+    // var padding = MediaQuery.of(context).padding;
+    // double width = (MediaQuery.of(context).size.width);
+    // double height =
+    //     (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
+    //
+    // double minDimension = min(width, height);
+    // double maxDimension = max(width, height);
 
     return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: 0.05 * width, vertical: 0.02* height),
+      padding: EdgeInsets.symmetric(horizontal: 54.w, vertical: 46.8.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "${appointments.getThemesList()[widget.position].getTime()}, ${appointments.getThemesList()[widget.position].getDate()}",
-            style: TextStyle(fontSize: 15),
+            style: TextStyle(fontSize: 40.sp),
           ),
-          SizedBox(height: 0.010*height,),
+          SizedBox(height: 23.4.h),
           Card(
             elevation: 16,
             // color: Colors.red,
@@ -54,14 +50,14 @@ class _AppointmentCardState extends State<AppointmentCard> {
               //BackGround Image
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage(appointments.getThemesList()[widget.position].iconImage,),
-                      fit: BoxFit.cover
-                  )
-              ),
+                      image: AssetImage(
+                        appointments.getThemesList()[widget.position].iconImage,
+                      ),
+                      fit: BoxFit.cover)),
 
               child: Container(
                 margin: EdgeInsets.symmetric(
-                    horizontal: 0.04 * width, vertical: 0.013 * height),
+                    horizontal: 43.2.sp, vertical: 30.42.h),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,39 +67,37 @@ class _AppointmentCardState extends State<AppointmentCard> {
                       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          height: 0.11*height,
-                          width: 0.2*width,
+                          height: 250.r,
+                          width: 250.r,
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage(facImage),
-                                  fit: BoxFit.cover
-                              ),
-                            border: Border.all(
-                              width: 2
-                            ),
-                            borderRadius: BorderRadius.circular(12)
-                          ),
+                                  fit: BoxFit.cover),
+                              border: Border.all(width: 2),
+                              borderRadius: BorderRadius.circular(12)),
                         ),
-                        SizedBox(width: 0.05*width),
+                        SizedBox(width: 54.w),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
                               facName,
-                              style: TextStyle(fontSize: 15),
+                              style: TextStyle(fontSize: 40.sp),
                             ),
-                            SizedBox(height: 0.022*height,),
+                            SizedBox(height: 51.48.h),
                             Row(
                               children: [
                                 Icon(
                                   Icons.topic_outlined,
                                   // size: ,
                                 ),
-                                SizedBox(width: 0.02*width),
+                                SizedBox(width: 21.6.w),
                                 Text(
-                                  appointments.getThemesList()[widget.position].title,
-                                  style: TextStyle(fontSize: 15),
+                                  appointments
+                                      .getThemesList()[widget.position]
+                                      .title,
+                                  style: TextStyle(fontSize: 40.sp),
                                 ),
                               ],
                             ),
@@ -114,10 +108,12 @@ class _AppointmentCardState extends State<AppointmentCard> {
                                   Icons.location_on_outlined,
                                   // size: ,
                                 ),
-                                SizedBox(width: 0.02*width),
+                                SizedBox(width: 21.6.w),
                                 Text(
-                                  appointments.getThemesList()[widget.position].location,
-                                  style: TextStyle(fontSize: 15),
+                                  appointments
+                                      .getThemesList()[widget.position]
+                                      .location,
+                                  style: TextStyle(fontSize: 40.sp),
                                 ),
                               ],
                             ),
@@ -135,10 +131,10 @@ class _AppointmentCardState extends State<AppointmentCard> {
                         ),
                       ],
                     ),
-                    SizedBox(width: 0.05*width),
+                    SizedBox(width: 54.w),
                     Icon(
                       CupertinoIcons.right_chevron,
-                      size: 30,
+                      size: 80.r,
                     ),
                   ],
                 ),
@@ -148,6 +144,5 @@ class _AppointmentCardState extends State<AppointmentCard> {
         ],
       ),
     );
-
   }
 }
