@@ -12,13 +12,15 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/providers/FirebaseProvider.dart';
+import 'package:riise/screens/TabScreen.dart';
 
 import '../models/SpeakerInfo.dart';
+import '../screens/Home/HomeScreen.dart';
 
 class AddSectionsProvider with ChangeNotifier {
   List<SpeakerLocalInformation> speakerListForEvents = [];
 
-  void addNewEventForTheme(
+  void addNewTheme(
     BuildContext context,
     Map<String, dynamic> profileInfoMapping,
     List<SpeakerLocalInformation> speakerList,
@@ -63,6 +65,7 @@ class AddSectionsProvider with ChangeNotifier {
             addSpeakerInformation(
               context,
               value.id,
+              "Themes",
               speaker,
             );
           }
@@ -70,6 +73,132 @@ class AddSectionsProvider with ChangeNotifier {
       );
 
       notifyListeners();
+      Navigator.pushNamedAndRemoveUntil(
+          context, TabScreen.routeName, (route) => false);
+    } catch (errorVal) {
+      print(errorVal);
+    }
+  }
+
+  void addNewEvent(
+    BuildContext context,
+    Map<String, dynamic> profileInfoMapping,
+    List<SpeakerLocalInformation> speakerList,
+  ) async {
+    String eventType = profileInfoMapping["Event_Type"];
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    CollectionReference eventsRef = db.collection(eventType);
+
+    String eventId = "";
+
+    try {
+      var eventResponse1 = await eventsRef.add(
+        {
+          "Event_Name": profileInfoMapping["Event_Name"].text.toString(),
+          "Event_Info": profileInfoMapping["Event_Info"].text.toString(),
+          "Event_Address": profileInfoMapping["Event_Address"].text.toString(),
+          "Event_Longitude":
+              profileInfoMapping["Event_Longitude"].text.toString(),
+          "Event_Latitude":
+              profileInfoMapping["Event_Latitude"].text.toString(),
+          "Event_Date": profileInfoMapping["Event_Date"].toString(),
+          "Event_Start_Time": profileInfoMapping["Event_Start_Time"].toString(),
+          "Event_End_Time": profileInfoMapping["Event_End_Time"].toString(),
+          "Event_Unique_Id": "",
+          "Event_Image_Url": "",
+        },
+      ).then(
+        (value) async {
+          eventsRef.doc(value.id).update({"Event_Unique_Id": value.id});
+          eventId = value.id;
+          // value.get().then(((DocumentSnapshot ds) {
+          //   print(ds.data());
+          // }));
+
+          String imagePath = "${value.id}/Icons";
+
+          final eventImgResponse = uploadImage(
+            context,
+            eventType,
+            value.id,
+            imagePath,
+            "eventIcon",
+            "Event_Image_Url",
+            profileInfoMapping["Event_Image_File"],
+          );
+
+          for (var speaker in speakerList) {
+            addSpeakerInformation(
+              context,
+              value.id,
+              eventType,
+              speaker,
+            );
+          }
+        },
+      );
+
+      notifyListeners();
+      Navigator.pushNamedAndRemoveUntil(
+          context, TabScreen.routeName, (route) => false);
+    } catch (errorVal) {
+      print(errorVal);
+    }
+  }
+
+  void AddNewKeyNoteSpeaker(
+    BuildContext context,
+    Map<String, dynamic> profileInfoMapping,
+  ) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    CollectionReference themesRef = db.collection("KeynoteSpeakers");
+
+    String speakerId = "";
+
+    try {
+      await themesRef.add(
+        {
+          "Speaker_Name": profileInfoMapping["Speaker_Name"].text.toString(),
+          "Speaker_Position": profileInfoMapping["Speaker_Position"].text.toString(),
+          "Speaker_Talk_Title": profileInfoMapping["Speaker_Talk_Title"].text.toString(),
+          "Speaker_Abstract": profileInfoMapping["Speaker_Abstract"].text.toString(),
+          "Speaker_Bio": profileInfoMapping["Speaker_Bio"].text.toString(),
+          "Speaker_LinkedIn_Url": profileInfoMapping["Speaker_LinkedIn_Url"].text.toString(),
+          "Speaker_Website_Url": profileInfoMapping["Speaker_Website_Url"].text.toString(),
+          "Speaker_Start_Time": profileInfoMapping["Speaker_Start_Time"].toString(),
+          "Speaker_End_Time": profileInfoMapping["Speaker_End_Time"].toString(),
+          "Speaker_Date": profileInfoMapping["Speaker_Date"].toString(),
+          "Speaker_Unique_Id": "",
+          "Speaker_Image_Url": "",
+        },
+      ).then(
+        (value) async {
+          themesRef.doc(value.id).update({"Speaker_Unique_Id": value.id});
+          speakerId = value.id;
+          // value.get().then(((DocumentSnapshot ds) {
+          //   print(ds.data());
+          // }));
+
+          String imagePath = "${value.id}/Icons";
+
+          uploadImage(
+            context,
+            "KeynoteSpeakers",
+            value.id,
+            imagePath,
+            "keynoteSpeakerIcon",
+            "Speaker_Image_Url",
+            profileInfoMapping["Speaker_Image_File"],
+          );
+        },
+      );
+
+      notifyListeners();
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        TabScreen.routeName,
+        (route) => false,
+      );
     } catch (errorVal) {
       print(errorVal);
     }
@@ -77,12 +206,13 @@ class AddSectionsProvider with ChangeNotifier {
 
   void addSpeakerInformation(
     BuildContext context,
-    String themeId,
+    String infoId,
+    String CollectionName,
     SpeakerLocalInformation speakerDetails,
   ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference speakersRef = db.collection("Themes").doc(themeId).collection("Speakers");
-
+    CollectionReference speakersRef =
+        db.collection(CollectionName).doc(infoId).collection("Speakers");
 
     String speakerId = "";
 
@@ -113,7 +243,7 @@ class AddSectionsProvider with ChangeNotifier {
 
           final themeImgResponse = uploadImage(
             context,
-            "Themes/$themeId/Speakers",
+            "$CollectionName/$infoId/Speakers",
             value.id,
             imagePath,
             "profileImage",

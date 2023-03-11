@@ -124,34 +124,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(
-                  top: height * 0.025,
-                ),
-                child: Text(
-                  "Themes",
-                  style: TextStyle(fontSize: 30, color: Colors.black),
-                ),
-              ),
-              Container(
-                // padding: EdgeInsets.only(top: height * 0.025),
-                margin: EdgeInsets.only(top: height * 0.025),
-                alignment: Alignment.center,
-                // decoration: BoxDecoration(
-                //   border: Border.all()
-                // ),
-                height: 0.18 * height,
-                child: ListView.builder(
-                  itemCount: themes.getThemesList().length,
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                      vertical: 0.01 * height, horizontal: 0.02 * width),
-                  itemBuilder: (context, position) {
-                    return ThemeCard(position: position);
-                  },
-                ),
-              ),
+              // Container(
+              //   margin: EdgeInsets.only(
+              //     top: height * 0.025,
+              //   ),
+              //   child: Text(
+              //     "Themes",
+              //     style: TextStyle(fontSize: 30, color: Colors.black),
+              //   ),
+              // ),
+              // Container(
+              //   // padding: EdgeInsets.only(top: height * 0.025),
+              //   margin: EdgeInsets.only(top: height * 0.025),
+              //   alignment: Alignment.center,
+              //   // decoration: BoxDecoration(
+              //   //   border: Border.all()
+              //   // ),
+              //   height: 0.18 * height,
+              //   child: ListView.builder(
+              //     itemCount: themes.getThemesList().length,
+              //     scrollDirection: Axis.horizontal,
+              //     physics: BouncingScrollPhysics(),
+              //     padding: EdgeInsets.symmetric(
+              //       vertical: 0.01 * height,
+              //       horizontal: 0.02 * width,
+              //     ),
+              //     itemBuilder: (context, position) {
+              //       return ThemeCard(position: position);
+              //     },
+              //   ),
+              // ),
               Container(
                 margin: EdgeInsets.only(
                   top: height * 0.025,

@@ -11,8 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:riise/screens/AddDataScreen/AddNewEventScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../AddDataScreen/AddNewThemeScreen.dart';
+import '../AddDataScreen/AddNewEventScreen.dart';
+import '../AddDataScreen/AddNewKeyNoteSpeaker.dart';
 
 class AddSectionScreen extends StatefulWidget {
   static const routeName = '/rise-add-section-screen';
@@ -23,7 +26,9 @@ class AddSectionScreen extends StatefulWidget {
 
 class _AddSectionScreenState extends State<AddSectionScreen> {
   Map<String, dynamic> screenMapping = {
-    "add-new-event": AddnewEventScreen(),
+    "add-new-theme": AddNewThemeScreen(),
+    "add-new-event": AddNewEventScreen(),
+    "add-new-keynote-speaker": AddNewKeyNoteSpeakerScreen(),
   };
 
   @override
@@ -58,8 +63,18 @@ class _AddSectionScreenState extends State<AddSectionScreen> {
         children: [
           TabButton(
             context,
-            "Add Event",
+            "Add New Theme",
+            "add-new-theme",
+          ),
+          TabButton(
+            context,
+            "Add New Event",
             "add-new-event",
+          ),
+          TabButton(
+            context,
+            "Add New Keynote Speaker",
+            "add-new-keynote-speaker",
           ),
         ],
       ),
@@ -88,7 +103,7 @@ class _AddSectionScreenState extends State<AddSectionScreen> {
         },
         child: Container(
           margin: EdgeInsets.only(
-            top: 20,
+            top: 15,
           ),
           padding: EdgeInsets.all(15),
           width: screenWidth * 0.95,

@@ -37,7 +37,7 @@ class EventProvider with ChangeNotifier {
               TimeOfDay Theme_Start_Time = convertStringToTimeOfDay(themeMap["Theme_Start_Time"].toString());
               TimeOfDay Theme_End_Time = convertStringToTimeOfDay(themeMap["Theme_End_Time"].toString());
 
-              List<SpeakerServerInformation> themeSpeakersList = await fetchSpeakersOfTheme(
+              List<SpeakerServerInformation> themeSpeakersList = await fetchSpeakers(
                 context,
                 Theme_Unique_Id,
               );
@@ -67,7 +67,7 @@ class EventProvider with ChangeNotifier {
     }
   }
 
-  Future<List<SpeakerServerInformation>> fetchSpeakersOfTheme(
+  Future<List<SpeakerServerInformation>> fetchSpeakers(
     BuildContext context,
     String Theme_Unique_Id,
   ) async {

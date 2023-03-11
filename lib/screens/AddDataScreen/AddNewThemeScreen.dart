@@ -10,8 +10,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -21,57 +19,38 @@ import "../../providers/AddSectionsProvider.dart";
 import '../../models/SpeakerInfo.dart';
 import './AddNewSpeakerForEventScreen.dart';
 
-class AddNewEventScreen extends StatefulWidget {
-  const AddNewEventScreen({super.key});
-  static const routeName = '/rise-add-new-event-section-screen';
+class AddNewThemeScreen extends StatefulWidget {
+  const AddNewThemeScreen({super.key});
+  static const routeName = '/rise-add-new-theme-section-screen';
 
   @override
-  State<AddNewEventScreen> createState() => _AddNewEventScreenState();
+  State<AddNewThemeScreen> createState() => _AddNewThemeScreenState();
 }
 
-class _AddNewEventScreenState extends State<AddNewEventScreen> {
+class _AddNewThemeScreenState extends State<AddNewThemeScreen> {
   // File _profilePicture = new File("");
   bool _isProfilePicTaken = false;
   bool _isDateSelected = false;
   bool _isSaveButtonPressed = false;
-  bool _isFetchLocationButtonPressed = false;
-
-  List<DropdownMenuItem<String>> eventTypeList = [
-    DropdownMenuItem(
-      child: Text("Speaker Track"),
-      value: "SpeakerTracks",
-    ),
-    DropdownMenuItem(
-      child: Text("Poster Track"),
-      value: "PosterTracks",
-    ),
-  ];
 
   List<SpeakerLocalInformation> speakerList = [];
 
   Map<String, dynamic> profileInfoMapping = {
-    "Event_Image_File": File(""),
-    "Event_Type": "SpeakerTracks",
-    "Event_Name": TextEditingController(),
-    "Event_Info": TextEditingController(),
-    "Event_Address": TextEditingController(),
-    "Event_Longitude": TextEditingController(),
-    "Event_Latitude": TextEditingController(),
-    "Event_Date": DateTime.now(),
-    "Event_Start_Time": TimeOfDay.now(),
-    "Event_End_Time": TimeOfDay.now(),
+    "Theme_Image_File": File(""),
+    "Theme_Name": TextEditingController(),
+    "Theme_Info": TextEditingController(),
+    "Theme_Date": DateTime.now(),
+    "Theme_Start_Time": TimeOfDay.now(),
+    "Theme_End_Time": TimeOfDay.now(),
   };
 
   Map<String, bool> profileInfoCheckMapping = {
-    "Event_Image_File": false,
-    "Event_Date": false,
-    "Event_Start_Time": false,
-    "Event_End_Time": false,
-    "Event_Name": false,
-    "Event_Info": false,
-    "Event_Address": false,
-    "Event_Longitude": false,
-    "Event_Latitude": false,
+    "Theme_Image_File": false,
+    "Theme_Start_Time": false,
+    "Theme_End_Time": false,
+    "Theme_Date": false,
+    "Theme_Name": false,
+    "Theme_Info": false,
   };
 
   @override
@@ -119,7 +98,7 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
             onPressed: _isSaveButtonPressed
                 ? null
                 : () {
-                    if (profileInfoCheckMapping["Event_Image_File"] == false) {
+                    if (profileInfoCheckMapping["Theme_Image_File"] == false) {
                       String titleText = "Invalid event image";
                       String contextText = "Select an event's image";
                       _checkForError(
@@ -127,33 +106,35 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                         titleText,
                         contextText,
                       );
-                    } else if (profileInfoCheckMapping["Event_Start_Time"] ==
-                        false) {
-                      String titleText = "Invalid start time";
-                      String contextText = "Select the start time of the event";
-                      _checkForError(
-                        context,
-                        titleText,
-                        contextText,
-                      );
-                    } else if (profileInfoCheckMapping["Event_End_Time"] ==
-                        false) {
-                      String titleText = "Invalid end time";
-                      String contextText = "Select the end time of the event";
-                      _checkForError(
-                        context,
-                        titleText,
-                        contextText,
-                      );
-                    } else if (profileInfoCheckMapping["Event_Date"] == false) {
-                      String titleText = "Invalid date";
-                      String contextText = "Select the date the event";
-                      _checkForError(
-                        context,
-                        titleText,
-                        contextText,
-                      );
-                    } else if (profileInfoCheckMapping["Event_Name"] == false) {
+                    }
+                    // else if (profileInfoCheckMapping["Theme_Start_Time"] == false) {
+                    //   String titleText = "Invalid start time";
+                    //   String contextText = "Select the start time of the event";
+                    //   _checkForError(
+                    //     context,
+                    //     titleText,
+                    //     contextText,
+                    //   );
+                    // }
+                    // else if (profileInfoCheckMapping["Theme_End_Time"] == false) {
+                    //   String titleText = "Invalid end time";
+                    //   String contextText = "Select the end time of the event";
+                    //   _checkForError(
+                    //     context,
+                    //     titleText,
+                    //     contextText,
+                    //   );
+                    // }
+                    // else if (profileInfoCheckMapping["Theme_Date"] == false) {
+                    //   String titleText = "Invalid date";
+                    //   String contextText = "Select the date the event";
+                    //   _checkForError(
+                    //     context,
+                    //     titleText,
+                    //     contextText,
+                    //   );
+                    // }
+                    else if (profileInfoCheckMapping["Theme_Name"] == false) {
                       String titleText = "Invalid name";
                       String contextText = "Enter the name of the event";
                       _checkForError(
@@ -161,18 +142,9 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                         titleText,
                         contextText,
                       );
-                    } else if (profileInfoCheckMapping["Event_Info"] == false) {
+                    } else if (profileInfoCheckMapping["Theme_Info"] == false) {
                       String titleText = "Invalid Info";
                       String contextText = "Enter the info of the event";
-                      _checkForError(
-                        context,
-                        titleText,
-                        contextText,
-                      );
-                    } else if (profileInfoCheckMapping["Event_Address"] ==
-                        false) {
-                      String titleText = "Invalid Address";
-                      String contextText = "Enter the address of the event";
                       _checkForError(
                         context,
                         titleText,
@@ -195,7 +167,7 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                       Provider.of<AddSectionsProvider>(
                         context,
                         listen: false,
-                      ).addNewEvent(
+                      ).addNewTheme(
                         context,
                         profileInfoMapping,
                         speakerList,
@@ -212,8 +184,8 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                   height: 20,
                 ),
                 Container(
-                  width: screenWidth * 0.35,
-                  height: screenWidth * 0.35,
+                  width: screenWidth * 0.4,
+                  height: screenWidth * 0.4,
                   child: CircularProgressIndicator(),
                 ),
                 SizedBox(
@@ -222,7 +194,7 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                 Container(
                   alignment: Alignment.center,
                   child: Text(
-                    "Creation of event in progress.\nPlease wait for a while...",
+                    "Creation of theme in progress.\nPlease wait for a while...",
                     textAlign: TextAlign.center,
                   ),
                 )
@@ -259,7 +231,7 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                                       "assets/images/icons/event.png",
                                     )
                                   : Image.file(
-                                      profileInfoMapping["Event_Image_File"],
+                                      profileInfoMapping["Theme_Image_File"],
                                       fit: BoxFit.cover,
                                       width: double.infinity,
                                     ),
@@ -307,10 +279,10 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
 
                       setState(
                         () {
-                          profileInfoMapping["Event_Image_File"] =
+                          profileInfoMapping["Theme_Image_File"] =
                               File(imageFile.path);
                           _isProfilePicTaken = true;
-                          profileInfoCheckMapping["Event_Image_File"] = true;
+                          profileInfoCheckMapping["Theme_Image_File"] = true;
                         },
                       );
                     },
@@ -334,256 +306,192 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: screenHeight * 0.025,
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    child: Text(
-                      "Select Event Type:",
-                      style: TextStyle(
-                        fontWeight: ui.FontWeight.bold,
-                        fontSize: screenWidth * 0.05,
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 5,
-                    ),
-                    child: DropdownButtonFormField(
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.green.shade600,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.green.shade600,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        filled: true,
-                        fillColor: Colors.green.shade200,
-                      ),
-                      items: eventTypeList,
-                      dropdownColor: Colors.green.shade200,
-                      value: eventTypeList[0].value,
-                      onChanged: (String? value) {
-                        setState(() {
-                          profileInfoMapping["Event_Type"] = value.toString();
-                        });
-                      },
-                    ),
-                    // DropdownButton(
-                    //   // value: selectedEventType,
-                    //   dropdownColor: Colors.green,
-                    //   items: eventTypeList,
-                    //   onChanged: (String? value) {
-                    //     setState(() {
-                    //       profileInfoMapping["Event_Type"].text = value.toString();
-                    //       print(profileInfoMapping["Event_Type"].text);
-                    //       selectedEventType = value.toString();
-                    //     });
-                    //   },
-                    // ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.025,
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    child: Text(
-                      "Set Event Time Interval:",
-                      style: TextStyle(
-                        fontWeight: ui.FontWeight.bold,
-                        fontSize: screenWidth * 0.05,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: screenWidth * 0.05,
-                    vertical: screenHeight * 0.0125,
-                  ),
-                  height: screenHeight * 0.125,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        height: screenHeight * 0.1,
-                        child: Column(
-                          children: <Widget>[
-                            GestureDetector(
-                              onTap: () {
-                                _presentTimePicker(context, 0);
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: screenWidth * 0.325,
-                                height: screenHeight * 0.06,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                    width: 2,
-                                    color: Color(0xffCDCDCD),
-                                  ),
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  vertical: screenWidth * 0.025,
-                                  horizontal: screenWidth * 0.05,
-                                ),
-                                child: Text(
-                                  "${profileInfoMapping["Event_Start_Time"].format(context)}",
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: screenHeight * 0.004,
-                            ),
-                            Container(
-                              child: Text("Start"),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 1,
-                        width: 20,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Color(0xffCDCDCD),
-                            width: 1.5,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: screenHeight * 0.1,
-                        child: Column(
-                          children: <Widget>[
-                            GestureDetector(
-                              onTap: () {
-                                _presentTimePicker(context, 1);
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: screenWidth * 0.325,
-                                height: screenHeight * 0.06,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                    width: 2,
-                                    color: Color(0xffCDCDCD),
-                                  ),
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  vertical: screenWidth * 0.025,
-                                  horizontal: screenWidth * 0.05,
-                                ),
-                                child: Text(
-                                  "${profileInfoMapping["Event_End_Time"].format(context)}",
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: screenHeight * 0.004,
-                            ),
-                            Container(
-                              child: Text("End"),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.01,
-                ),
-                Align(
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          !_isDateSelected
-                              ? "Select event date: "
-                              : "Change event date: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17.5,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            _presentDatePicker(context);
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              vertical: screenHeight * 0.0025,
-                            ),
-                            height: screenHeight * 0.04,
-                            width: screenHeight * 0.04,
-                            decoration: BoxDecoration(
-                                // color: Color.fromRGBO(66, 204, 195, 1),
-                                ),
-                            child: Image(
-                              fit: BoxFit.fill,
-                              image: AssetImage(
-                                "assets/images/icons/Calendar.png",
-                              ),
-                              // color: Color.fromRGBO(66, 204, 195, 1),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.01,
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    child: Text.rich(
-                      TextSpan(
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: 'Selected Date: ',
-                            style: TextStyle(
-                              color: Color.fromRGBO(108, 117, 125, 1),
-                            ),
-                          ),
-                          TextSpan(
-                            text: _isDateSelected
-                                ? '${DateFormat.yMMMMd('en_US').format(profileInfoMapping["Event_Date"] as DateTime)}'
-                                : "No Date Selected",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromRGBO(108, 117, 125, 1),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // SizedBox(
+                //   height: screenHeight * 0.025,
+                // ),
+                // Align(
+                //   alignment: Alignment.center,
+                //   child: Container(
+                //     width: screenWidth * 0.9,
+                //     child: Text(
+                //       "Set Event Time Interval:",
+                //       style: TextStyle(
+                //         fontWeight: ui.FontWeight.bold,
+                //         fontSize: screenWidth * 0.05,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // Container(
+                //   padding: EdgeInsets.symmetric(
+                //     horizontal: screenWidth * 0.05,
+                //     vertical: screenHeight * 0.0125,
+                //   ),
+                //   height: screenHeight * 0.125,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Container(
+                //         height: screenHeight * 0.1,
+                //         child: Column(
+                //           children: <Widget>[
+                //             GestureDetector(
+                //               onTap: () {
+                //                 _presentTimePicker(context, 0);
+                //               },
+                //               child: Container(
+                //                 alignment: Alignment.center,
+                //                 width: screenWidth * 0.325,
+                //                 height: screenHeight * 0.06,
+                //                 decoration: BoxDecoration(
+                //                   borderRadius: BorderRadius.circular(5),
+                //                   border: Border.all(
+                //                     width: 2,
+                //                     color: Color(0xffCDCDCD),
+                //                   ),
+                //                 ),
+                //                 padding: EdgeInsets.symmetric(
+                //                   vertical: screenWidth * 0.025,
+                //                   horizontal: screenWidth * 0.05,
+                //                 ),
+                //                 child: Text(
+                //                   "${profileInfoMapping["Theme_Start_Time"].format(context)}",
+                //                 ),
+                //               ),
+                //             ),
+                //             SizedBox(
+                //               height: screenHeight * 0.004,
+                //             ),
+                //             Container(
+                //               child: Text("Start"),
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //       Container(
+                //         height: 1,
+                //         width: 20,
+                //         decoration: BoxDecoration(
+                //           border: Border.all(
+                //             color: Color(0xffCDCDCD),
+                //             width: 1.5,
+                //           ),
+                //         ),
+                //       ),
+                //       Container(
+                //         height: screenHeight * 0.1,
+                //         child: Column(
+                //           children: <Widget>[
+                //             GestureDetector(
+                //               onTap: () {
+                //                 _presentTimePicker(context, 1);
+                //               },
+                //               child: Container(
+                //                 alignment: Alignment.center,
+                //                 width: screenWidth * 0.325,
+                //                 height: screenHeight * 0.06,
+                //                 decoration: BoxDecoration(
+                //                   borderRadius: BorderRadius.circular(5),
+                //                   border: Border.all(
+                //                     width: 2,
+                //                     color: Color(0xffCDCDCD),
+                //                   ),
+                //                 ),
+                //                 padding: EdgeInsets.symmetric(
+                //                   vertical: screenWidth * 0.025,
+                //                   horizontal: screenWidth * 0.05,
+                //                 ),
+                //                 child: Text(
+                //                   "${profileInfoMapping["Theme_End_Time"].format(context)}",
+                //                 ),
+                //               ),
+                //             ),
+                //             SizedBox(
+                //               height: screenHeight * 0.004,
+                //             ),
+                //             Container(
+                //               child: Text("End"),
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: screenHeight * 0.01,
+                // ),
+                // Align(
+                //   child: Container(
+                //     width: screenWidth * 0.9,
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+                //         Text(
+                //           !_isDateSelected
+                //               ? "Select event date: "
+                //               : "Change event date: ",
+                //           style: TextStyle(
+                //             fontWeight: FontWeight.bold,
+                //             fontSize: 17.5,
+                //           ),
+                //         ),
+                //         InkWell(
+                //           onTap: () {
+                //             _presentDatePicker(context);
+                //           },
+                //           child: Container(
+                //             padding: EdgeInsets.symmetric(
+                //               vertical: screenHeight * 0.0025,
+                //             ),
+                //             height: screenHeight * 0.04,
+                //             width: screenHeight * 0.04,
+                //             decoration: BoxDecoration(
+                //                 // color: Color.fromRGBO(66, 204, 195, 1),
+                //                 ),
+                //             child: Image(
+                //               fit: BoxFit.fill,
+                //               image: AssetImage(
+                //                 "assets/images/icons/Calendar.png",
+                //               ),
+                //               // color: Color.fromRGBO(66, 204, 195, 1),
+                //             ),
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: screenHeight * 0.01,
+                // ),
+                // Align(
+                //   alignment: Alignment.center,
+                //   child: Container(
+                //     width: screenWidth * 0.9,
+                //     child: Text.rich(
+                //       TextSpan(
+                //         children: <TextSpan>[
+                //           TextSpan(
+                //             text: 'Selected Date: ',
+                //             style: TextStyle(
+                //               color: Color.fromRGBO(108, 117, 125, 1),
+                //             ),
+                //           ),
+                //           TextSpan(
+                //             text: _isDateSelected
+                //                 ? '${DateFormat.yMMMMd('en_US').format(profileInfoMapping["Theme_Date"] as DateTime)}'
+                //                 : "No Date Selected",
+                //             style: TextStyle(
+                //               fontWeight: FontWeight.bold,
+                //               color: Color.fromRGBO(108, 117, 125, 1),
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
                   height: screenHeight * 0.025,
                 ),
@@ -621,20 +529,20 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                         // }
                       },
                       onChanged: ((value) {
-                        profileInfoMapping["Event_Name"].text = value;
+                        profileInfoMapping["Theme_Name"].text = value;
 
                         setState(
                           () {
                             if (value.length >= 5) {
-                              profileInfoCheckMapping["Event_Name"] = true;
+                              profileInfoCheckMapping["Theme_Name"] = true;
                             } else {
-                              profileInfoCheckMapping["Event_Name"] = false;
+                              profileInfoCheckMapping["Theme_Name"] = false;
                             }
                           },
                         );
                       }),
                       decoration: InputDecoration(
-                        hintText: 'Event name',
+                        hintText: 'theme name',
                         focusedBorder: InputBorder.none,
                       ),
                       autocorrect: true,
@@ -680,261 +588,20 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                         // }
                       },
                       onChanged: ((value) {
-                        profileInfoMapping["Event_Info"].text = value;
+                        profileInfoMapping["Theme_Info"].text = value;
                         if (value.length >= 5) {
-                          profileInfoCheckMapping["Event_Info"] = true;
+                          profileInfoCheckMapping["Theme_Info"] = true;
                         } else {
-                          profileInfoCheckMapping["Event_Info"] = false;
+                          profileInfoCheckMapping["Theme_Info"] = false;
                         }
                       }),
                       decoration: InputDecoration(
-                        hintText: 'Event info',
+                        hintText: 'theme info',
                         focusedBorder: InputBorder.none,
                       ),
                       autocorrect: true,
                       minLines: 3,
                       maxLines: 5,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.025,
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: Text(
-                            _isFetchLocationButtonPressed
-                                ? "Fetching location..."
-                                : "Fetch Current Location 👉🏻 ",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          child: IconButton(
-                            onPressed: () async {
-                              setState(() {
-                                _isFetchLocationButtonPressed = true;
-                              });
-                              Position currPosition =
-                                  await _determinePosition();
-                              Placemark currAddress = await getCurrentAddress(
-                                currPosition.longitude,
-                                currPosition.latitude,
-                              );
-
-                              setState(() {
-                                _isFetchLocationButtonPressed = false;
-                                profileInfoMapping["Event_Address"].text =
-                                    "Name: ${currAddress.name},\nStreet: ${currAddress.street},\nPostal Code: ${currAddress.postalCode},\nAdm Area: ${currAddress.administrativeArea},\nSub-Adm Area: ${currAddress.subAdministrativeArea}.";
-                                profileInfoMapping["Event_Longitude"].text =
-                                    currPosition.longitude.toString();
-                                profileInfoMapping["Event_Latitude"].text =
-                                    currPosition.latitude.toString();
-
-                                profileInfoCheckMapping["Event_Address"] = true;
-                                profileInfoCheckMapping["Event_Longitude"] =
-                                    true;
-                                profileInfoCheckMapping["Event_Latitude"] =
-                                    true;
-                              });
-                            },
-                            icon: Icon(
-                              Icons.my_location,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.025,
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    child: Text(
-                      "Enter the Event Address:",
-                      style: TextStyle(
-                        fontWeight: ui.FontWeight.bold,
-                        fontSize: screenWidth * 0.05,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.005,
-                ),
-                Align(
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        width: 2,
-                        color: Color.fromRGBO(205, 205, 205, 1),
-                      ),
-                    ),
-                    child: TextField(
-                      onTap: () {
-                        // FocusScopeNode currentFocus = FocusScope.of(context);
-                        // if (!currentFocus.hasPrimaryFocus) {
-                        //   currentFocus.unfocus();
-                        // }
-                      },
-                      onChanged: ((value) {
-                        profileInfoMapping["Event_Address"].selection =
-                            TextSelection.collapsed(
-                          offset:
-                              profileInfoMapping["Event_Address"].text.length,
-                        );
-                        profileInfoMapping["Event_Address"].text = value;
-                        profileInfoCheckMapping["Event_Address"] = true;
-                        profileInfoMapping["Event_Address"].selection =
-                            TextSelection.collapsed(
-                          offset:
-                              profileInfoMapping["Event_Address"].text.length,
-                        );
-                      }),
-                      controller: profileInfoMapping["Event_Address"],
-                      decoration: InputDecoration(
-                        hintText: 'Event Address',
-                        focusedBorder: InputBorder.none,
-                      ),
-                      autocorrect: true,
-                      minLines: 3,
-                      maxLines: 5,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.025,
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    child: Text(
-                      "Enter Location Longitude:",
-                      style: TextStyle(
-                        fontWeight: ui.FontWeight.bold,
-                        fontSize: screenWidth * 0.05,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.005,
-                ),
-                Align(
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        width: 2,
-                        color: Color.fromRGBO(205, 205, 205, 1),
-                      ),
-                    ),
-                    child: TextField(
-                      onTap: () {
-                        // FocusScopeNode currentFocus = FocusScope.of(context);
-                        // if (!currentFocus.hasPrimaryFocus) {
-                        //   currentFocus.unfocus();
-                        // }
-                      },
-                      onChanged: ((value) {
-                        profileInfoMapping["Event_Longitude"].selection =
-                            TextSelection.collapsed(
-                          offset:
-                              profileInfoMapping["Event_Longitude"].text.length,
-                        );
-                        profileInfoMapping["Event_Longitude"].text = value;
-                        profileInfoCheckMapping["Event_Longitude"] = true;
-                        profileInfoMapping["Event_Longitude"].selection =
-                            TextSelection.collapsed(
-                          offset:
-                              profileInfoMapping["Event_Longitude"].text.length,
-                        );
-                      }),
-                      controller: profileInfoMapping["Event_Longitude"],
-                      decoration: InputDecoration(
-                        hintText: 'Event longitude',
-                        focusedBorder: InputBorder.none,
-                      ),
-                      autocorrect: true,
-                      minLines: 1,
-                      maxLines: 1,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.025,
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    child: Text(
-                      "Enter Location Latitude:",
-                      style: TextStyle(
-                        fontWeight: ui.FontWeight.bold,
-                        fontSize: screenWidth * 0.05,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.005,
-                ),
-                Align(
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        width: 2,
-                        color: Color.fromRGBO(205, 205, 205, 1),
-                      ),
-                    ),
-                    child: TextField(
-                      onTap: () {
-                        // FocusScopeNode currentFocus = FocusScope.of(context);
-                        // if (!currentFocus.hasPrimaryFocus) {
-                        //   currentFocus.unfocus();
-                        // }
-                      },
-                      onChanged: ((value) {
-                        profileInfoMapping["Event_Latitude"].selection =
-                            TextSelection.collapsed(
-                          offset:
-                              profileInfoMapping["Event_Latitude"].text.length,
-                        );
-                        profileInfoMapping["Event_Latitude"].text = value;
-                        profileInfoCheckMapping["Event_Latitude"] = true;
-                        profileInfoMapping["Event_Latitude"].selection =
-                            TextSelection.collapsed(
-                          offset:
-                              profileInfoMapping["Event_Latitude"].text.length,
-                        );
-                      }),
-                      controller: profileInfoMapping["Event_Latitude"],
-                      decoration: InputDecoration(
-                        hintText: 'Event latitude',
-                        focusedBorder: InputBorder.none,
-                      ),
-                      autocorrect: true,
-                      minLines: 1,
-                      maxLines: 1,
                     ),
                   ),
                 ),
@@ -970,7 +637,7 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                         ),
                       ),
                 SizedBox(
-                  height: screenHeight * 0.01,
+                  height: screenHeight * 0.005,
                 ),
                 speakerList.isEmpty
                     ? Align(
@@ -1034,8 +701,7 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                      100,
-                                                    ),
+                                                            100),
                                                   ),
                                                   child: Image.file(
                                                     speakerList[index]
@@ -1077,7 +743,7 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                       if (!currentFocus.hasPrimaryFocus) {
                         currentFocus.unfocus();
                       }
-                      if (profileInfoCheckMapping["Event_Image_File"] ==
+                      if (profileInfoCheckMapping["Theme_Image_File"] ==
                           false) {
                         String titleText = "Invalid Event Icon";
                         String contextText = "Please select the event icon";
@@ -1086,49 +752,49 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                           titleText,
                           contextText,
                         );
-                      } else if (profileInfoCheckMapping["Event_Start_Time"] ==
-                          false) {
-                        String titleText = "Invalid start event time";
+                      }
+                      // else if (profileInfoCheckMapping["Theme_Start_Time"] ==
+                      //     false) {
+                      //   String titleText = "Invalid start event time";
+                      //   String contextText = "Please select the event start time";
+                      //   _checkForError(
+                      //     context,
+                      //     titleText,
+                      //     contextText,
+                      //   );
+                      // }
+                      // else if (profileInfoCheckMapping["Theme_End_Time"] == false) {
+                      //   String titleText = "Invalid end event time";
+                      //   String contextText = "Please select the event end time";
+                      //   _checkForError(
+                      //     context,
+                      //     titleText,
+                      //     contextText,
+                      //   );
+                      // }
+                      // else if (profileInfoCheckMapping["Theme_Date"] == false) {
+                      //   String titleText = "Invalid event date";
+                      //   String contextText = "Please select the event date";
+                      //   _checkForError(
+                      //     context,
+                      //     titleText,
+                      //     contextText,
+                      //   );
+                      // }
+                      else if (profileInfoCheckMapping["Theme_Name"] == false) {
+                        String titleText = "Invalid theme name";
                         String contextText =
-                            "Please select the event start time";
+                            "Length of theme name should be atleast of 5 characters";
                         _checkForError(
                           context,
                           titleText,
                           contextText,
                         );
-                      } else if (profileInfoCheckMapping["Event_End_Time"] ==
+                      } else if (profileInfoCheckMapping["Theme_Info"] ==
                           false) {
-                        String titleText = "Invalid end event time";
-                        String contextText = "Please select the event end time";
-                        _checkForError(
-                          context,
-                          titleText,
-                          contextText,
-                        );
-                      } else if (profileInfoCheckMapping["Event_Date"] ==
-                          false) {
-                        String titleText = "Invalid event date";
-                        String contextText = "Please select the event date";
-                        _checkForError(
-                          context,
-                          titleText,
-                          contextText,
-                        );
-                      } else if (profileInfoCheckMapping["Event_Name"] ==
-                          false) {
-                        String titleText = "Invalid Event name";
+                        String titleText = "Invalid theme info";
                         String contextText =
-                            "Length of Event name should be atleast of 5 characters";
-                        _checkForError(
-                          context,
-                          titleText,
-                          contextText,
-                        );
-                      } else if (profileInfoCheckMapping["Event_Info"] ==
-                          false) {
-                        String titleText = "Invalid Event info";
-                        String contextText =
-                            "Length of Event info should be atleast of 10 characters";
+                            "Length of theme info should be atleast of 10 characters";
                         _checkForError(
                           context,
                           titleText,
@@ -1139,7 +805,7 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                           MaterialPageRoute(
                             builder: (context) => AddNewSpeakerForEventScreen(
                               this.speakerList,
-                              1,
+                              0,
                             ),
                           ),
                         );
@@ -1203,8 +869,8 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
         return;
       } else {
         setState(() {
-          profileInfoMapping["Event_Date"] = pickedDate;
-          profileInfoCheckMapping["Event_Date"] = true;
+          profileInfoMapping["Theme_Date"] = pickedDate;
+          profileInfoCheckMapping["Theme_Date"] = true;
           _isDateSelected = true;
         });
       }
@@ -1249,17 +915,17 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
       setState(() {
         timechosen = time;
         if (bitVal == 0) {
-          profileInfoMapping["Event_Start_Time"] = timechosen;
-          profileInfoMapping["Event_End_Time"] = timechosen;
-          profileInfoCheckMapping["Event_Start_Time"] = true;
+          profileInfoMapping["Theme_Start_Time"] = timechosen;
+          profileInfoMapping["Theme_End_Time"] = timechosen;
+          profileInfoCheckMapping["Theme_Start_Time"] = true;
         } else if (bitVal == 1) {
-          int t1 = profileInfoMapping["Event_Start_Time"].hour * 60 +
-              profileInfoMapping["Event_Start_Time"].minute;
+          int t1 = profileInfoMapping["Theme_Start_Time"].hour * 60 +
+              profileInfoMapping["Theme_Start_Time"].minute;
           int t2 = timechosen.hour * 60 + timechosen.minute;
 
           if (t1 <= t2) {
-            profileInfoMapping["Event_End_Time"] = timechosen;
-            profileInfoCheckMapping["Event_End_Time"] = true;
+            profileInfoMapping["Theme_End_Time"] = timechosen;
+            profileInfoCheckMapping["Theme_End_Time"] = true;
           } else {
             String titleText = "In-Valid Time Interval!";
             String contextText =
@@ -1413,7 +1079,7 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
               }
 
               setState(() {
-                profileInfoMapping["Event_Image_File"] = File(imageFile.path);
+                profileInfoMapping["Theme_Image_File"] = File(imageFile.path);
                 _isProfilePicTaken = true;
               });
               Navigator.pop(ctx);
@@ -1471,7 +1137,7 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                 return;
               }
               setState(() {
-                profileInfoMapping["Event_Image_File"] = File(imageFile.path);
+                profileInfoMapping["Theme_Image_File"] = File(imageFile.path);
                 _isProfilePicTaken = true;
                 // Navigator.of(context).pop(false);
               });
@@ -1549,54 +1215,5 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
         ],
       ),
     );
-  }
-
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition();
-  }
-
-  Future<Placemark> getCurrentAddress(
-    double longitude,
-    double latitude,
-  ) async {
-    List<Placemark> placemarks = await placemarkFromCoordinates(
-      latitude,
-      longitude,
-    );
-
-    return placemarks[0];
   }
 }

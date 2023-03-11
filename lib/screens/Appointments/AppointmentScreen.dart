@@ -35,10 +35,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   late TextEditingController searchBarController = TextEditingController();
   AppointmentListUtil appointments = AppointmentListUtil();
 
-
   @override
   Widget build(BuildContext context) {
-
     var padding = MediaQuery.of(context).padding;
     double width = (MediaQuery.of(context).size.width);
     double height =
@@ -109,41 +107,41 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
       // )
       body: SingleChildScrollView(
         padding: EdgeInsets.only(
-            top: height * 0.12),
+          top: height * 0.12,
+        ),
         child: FixedTimeline.tileBuilder(
           // mainAxisSize: MainAxisSize.max,
-            theme: TimelineTheme.of(context).copyWith(
-              nodePosition: 0.05, //5% from Left
+          theme: TimelineTheme.of(context).copyWith(
+            nodePosition: 0.05, //5% from Left
+          ),
+          builder: TimelineTileBuilder.connected(
+            contentsAlign: ContentsAlign.basic,
+
+            connectorBuilder: (context, index, lineConnector) => SizedBox(
+              // height: 20.0,
+              child: SolidLineConnector(
+                thickness: 0.01 * width,
+                color: true ? Colors.green : Colors.red,
+              ),
             ),
-            builder: TimelineTileBuilder.connected(
-              contentsAlign: ContentsAlign.basic,
-
-              connectorBuilder: (context,index,lineConnector) => SizedBox(
-                // height: 20.0,
-                child: SolidLineConnector(
-                  thickness: 0.01*width,
-                  color: true?Colors.green:Colors.red,
-                ),
-              ),
-              indicatorBuilder: (context, index) => ContainerIndicator(
-
+            indicatorBuilder: (context, index) => ContainerIndicator(
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 0.02*height),
-                  child: Icon(
-                    Icons.schedule,
-                    size: 30,
-                    color: Colors.grey,
-                  ),
-                )
+              padding: EdgeInsets.symmetric(vertical: 0.02 * height),
+              child: Icon(
+                Icons.schedule,
+                size: 30,
+                color: Colors.grey,
               ),
+            )),
 
-              // oppositeContentsBuilder: (context, index) => Text(appointments.getThemesList()[index].getTime()),
-              contentsBuilder: (context, index) => AppointmentCard(position: index),
-              itemCount: appointments.getThemesList().length,
-              // connectorStyle:
-            )
+            // oppositeContentsBuilder: (context, index) => Text(appointments.getThemesList()[index].getTime()),
+            contentsBuilder: (context, index) =>
+                AppointmentCard(position: index),
+            itemCount: appointments.getThemesList().length,
+            // connectorStyle:
+          ),
         ),
-      )
+      ),
     );
   }
 }
