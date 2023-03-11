@@ -2,6 +2,7 @@
 
 class FacultyServerInformation {
   String faculty_Unique_Id;
+  String faculty_Mobile_Messaging_Token_Id;
   String faculty_Name;
   String faculty_Position;
   String faculty_EmailId;
@@ -16,6 +17,7 @@ class FacultyServerInformation {
 
   FacultyServerInformation({
     required this.faculty_Unique_Id,
+    required this.faculty_Mobile_Messaging_Token_Id,
     required this.faculty_Name,
     required this.faculty_Position,
     required this.faculty_EmailId,

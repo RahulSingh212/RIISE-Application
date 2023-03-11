@@ -38,12 +38,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    var padding = MediaQuery.of(context).padding;
-    double width = (MediaQuery.of(context).size.width);
-    double height =
-        (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
-=======
     // var padding = MediaQuery.of(context).padding;
     // double width = (MediaQuery.of(context).size.width);
     // double height =
@@ -52,7 +46,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     // print(DateTime.now().subtract(Duration(minutes: DateTime.now().minute)));
     // print(DateTime.now());
     // print(DateTime.now().compareTo(DateTime.now().subtract(Duration(minutes: DateTime.now().minute))));
->>>>>>> 5f8cd56e13ff11d1c06108b854a9ad056c661d93
     return Scaffold(
         backgroundColor: Colors.white,
         extendBodyBehindAppBar: true,
@@ -116,80 +109,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         //       ],
         //     ),
         //   ),
-<<<<<<< HEAD
-        // ],
-      ),
-      // body: SingleChildScrollView(
-      //   scrollDirection: Axis.vertical,
-      //   keyboardDismissBehavior : ScrollViewKeyboardDismissBehavior.onDrag,
-      //   physics: BouncingScrollPhysics(),
-      //   child: Container(
-      //     padding: EdgeInsets.only(top: height*0.12,left: width*0.05,right: width*0.05),
-      //     child: Column(
-      //       mainAxisAlignment: MainAxisAlignment.start,
-      //       crossAxisAlignment: CrossAxisAlignment.start,
-      //       children: [
-      //         Container(
-      //           // padding: EdgeInsets.only(top: height * 0.025),
-      //             margin:  EdgeInsets.only(top: height * 0.025),
-      //             alignment: Alignment.topCenter,
-      //             // decoration: BoxDecoration(
-      //             //   border: Border.all()
-      //             // ),
-      //             // height: height*1.5,
-      //             child: ListView.builder(
-      //                 itemCount: themes.getThemesList().length,
-      //                 // scrollDirection: Axis.horizontal,
-      //                 shrinkWrap: true,
-      //                 physics: NeverScrollableScrollPhysics(),
-      //                 padding: EdgeInsets.only(top: 0.01*height),
-      //                 itemBuilder: (context,position) {
-      //                   return AppointmentCard(position: position);
-      //                 })
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // )
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(
-          top: height * 0.12,
-        ),
-        child: FixedTimeline.tileBuilder(
-          // mainAxisSize: MainAxisSize.max,
-          theme: TimelineTheme.of(context).copyWith(
-            nodePosition: 0.05, //5% from Left
-          ),
-          builder: TimelineTileBuilder.connected(
-            contentsAlign: ContentsAlign.basic,
-
-            connectorBuilder: (context, index, lineConnector) => SizedBox(
-              // height: 20.0,
-              child: SolidLineConnector(
-                thickness: 0.01 * width,
-                color: true ? Colors.green : Colors.red,
-              ),
-            ),
-            indicatorBuilder: (context, index) => ContainerIndicator(
-                child: Container(
-              padding: EdgeInsets.symmetric(vertical: 0.02 * height),
-              child: Icon(
-                Icons.schedule,
-                size: 30,
-                color: Colors.grey,
-              ),
-            )),
-
-            // oppositeContentsBuilder: (context, index) => Text(appointments.getThemesList()[index].getTime()),
-            contentsBuilder: (context, index) =>
-                AppointmentCard(position: index),
-            itemCount: appointments.getThemesList().length,
-            // connectorStyle:
-          ),
-        ),
-      ),
-    );
-=======
         // )
         body: SingleChildScrollView(
           padding: EdgeInsets.only(top: 280.8.h),
@@ -231,6 +150,5 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                 // connectorStyle:
               )),
         ));
->>>>>>> 5f8cd56e13ff11d1c06108b854a9ad056c661d93
   }
 }
