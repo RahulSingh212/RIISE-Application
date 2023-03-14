@@ -69,8 +69,8 @@ class UserDetailsProvider with ChangeNotifier {
       await usersRef.doc(loggedInUserUniqueId).set({
         "guest_Unique_Id": loggedInUserUniqueId,
         "guest_Mobile_Messaging_Token_Id": "",
-        "guest_Name": "",
-        "guest_EmailId": "",
+        "guest_Name": userEmailId,
+        "guest_EmailId": userEmailId,
         "guest_Mobile_Number": "",
         "guest_Gender": "",
         "guest_LinkedIn_Url": "",
