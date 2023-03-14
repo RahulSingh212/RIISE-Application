@@ -44,13 +44,15 @@ class _FacultyScreenState extends State<FacultyScreen> {
   late String dropdownValue = facultyDeptList.first;
   late String filterValue = "";
 
-  late  var facultyProider = Provider.of<FacultiesProvider>(context, listen:false);
+  late var facultyProider =
+      Provider.of<FacultiesProvider>(context, listen: false);
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    Provider.of<FacultiesProvider>(context, listen: false).fetchCollegeFaculties(context);
+    Provider.of<FacultiesProvider>(context, listen: false)
+        .fetchCollegeFaculties(context);
   }
 
   @override
@@ -64,9 +66,6 @@ class _FacultyScreenState extends State<FacultyScreen> {
     // print(facultyProider.facultiesList);
     // print(facultyProider.facultiesList.first.faculty_Name);
     // print(facultyProider.facultiesList.first.faculty_Unique_Id);
-
-
-
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -101,8 +100,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
           // ],
         ),
         body: Container(
-          padding: EdgeInsets.only(
-              top: 280.h, left: 54.w, right: 54.w),
+          padding: EdgeInsets.only(top: 280.h, left: 54.w, right: 54.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,7 +169,9 @@ class _FacultyScreenState extends State<FacultyScreen> {
                     // gapPadding: 0,
                   ),
                   contentPadding: EdgeInsets.symmetric(
-                      horizontal: 43.2.w, vertical: 11.7.h),
+                    horizontal: 43.2.w,
+                    vertical: 11.7.h,
+                  ),
                 ),
                 child: SizedBox(
                   width: 1080.w,
@@ -221,12 +221,13 @@ class _FacultyScreenState extends State<FacultyScreen> {
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
-                  itemCount: facultyProider.facultiesList.length,
+                  itemCount: Provider.of<FacultiesProvider>(context, listen: false).facultiesList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    //TODO - Add Dept Filter and if Required Available also
-                    //TODO - Sorting if required -  very optional
-                    if (isvalidFaculty(filterValue,index,dropdownValue)) {
-                      return FacultyCard(position: index);
+                    if (isvalidFaculty(filterValue, index, dropdownValue)) {
+                      return FacultyCard(
+                        position: index,
+                        facultyDetails: Provider.of<FacultiesProvider>(context, listen: false).facultiesList[index],
+                      );
                     } else {
                       return Container();
                     }
@@ -238,9 +239,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
         ));
   }
 
-
-  bool isvalidFaculty(filterValue,index,dropdownvalue){
-
+  bool isvalidFaculty(filterValue, index, dropdownvalue) {
     //TODO - use this when Dept is ready
     // return facultyProider.facultiesList[index].faculty_Name
     //     .toLowerCase()
@@ -250,6 +249,6 @@ class _FacultyScreenState extends State<FacultyScreen> {
 
     return facultyProider.facultiesList[index].faculty_Name
         .toLowerCase()
-         .contains(filterValue.toLowerCase());
+        .contains(filterValue.toLowerCase());
   }
 }

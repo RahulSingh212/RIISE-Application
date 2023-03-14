@@ -11,8 +11,14 @@ import 'package:http/http.dart' as http;
 class FirebaseProvider with ChangeNotifier {
   String firebaseUrlInUse = "riise-application-default-rtdb.firebaseio.com/";
 
+  String firebaseWebApiKey = "AIzaSyCCQUfxLC-4U8cCjXpt5prvxAdm206I0jY";
+
   String getFirebaseUrl() {
     return firebaseUrlInUse;
+  }
+
+  String getFirebaseWebApiKey() {
+    return firebaseWebApiKey;
   }
 
   Uri getFirebasePathUrl(String pathLocation) {

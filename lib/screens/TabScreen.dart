@@ -8,13 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:riise/providers/ScreenControllerProvider.dart';
+import 'package:riise/providers/UserLoginProvider.dart';
 
 import "./Home/HomeScreen.dart";
 import "./Faculty/FacultyScreen.dart";
 import "./Schedules/ScheduleScreen.dart";
 import "./Appointments/AppointmentScreen.dart";
 import "./Directions/DirectionScreen.dart";
+import "../providers/ScreenControllerProvider.dart";
 
 class TabScreen extends StatefulWidget {
   static const routeName = '/rise-tab-screen';
@@ -156,7 +157,9 @@ class _TabScreenState extends State<TabScreen> {
               .selectedPageIndex,
           height: 163.8.h,
           animationCurve: Curves.easeInOut,
-          animationDuration: const Duration(milliseconds: 300),
+          animationDuration: const Duration(
+            milliseconds: 300,
+          ),
           items: iconItemsActive,
         ),
       ),

@@ -16,12 +16,16 @@ import "./screens/Faculty/FacultyScreen.dart";
 import "./screens/Schedules/ScheduleScreen.dart";
 import "./screens/Directions/DirectionScreen.dart";
 import "./screens/Appointments/AppointmentScreen.dart";
+import './screens/SingInScreen/SignInTypeScreen.dart';
 
 import "./providers/FirebaseProvider.dart";
 import "./providers/FacultiesProvider.dart";
 import "./providers/EventsProvider.dart";
-import './providers/ScreenControllerProvider.dart';
+import './providers/UserDetailsProvider.dart';
+import './providers/UserLoginProvider.dart';
 import './providers/AddSectionsProvider.dart';
+import './providers/ScreenControllerProvider.dart';
+import 'screens/SingInScreen/LogInSignUpScreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,11 +36,10 @@ Future<void> main() async {
 
   runApp(
     ScreenUtilInit(
-      builder: (BuildContext context, Widget? child) =>
-        MaterialApp(
-          home: MyApp(),
-        ),
-      designSize: const Size(1080,2340),
+      builder: (BuildContext context, Widget? child) => MaterialApp(
+        home: MyApp(),
+      ),
+      designSize: const Size(1080, 2340),
     ),
   );
 }
@@ -52,10 +55,16 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(
+          value: ScreenControllerProvider(),
+        ),
+        ChangeNotifierProvider.value(
           value: FirebaseProvider(),
         ),
         ChangeNotifierProvider.value(
-          value: ScreenControllerProvider(),
+          value: UserLoginProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: UserDetailsProvider(),
         ),
         ChangeNotifierProvider.value(
           value: FacultiesProvider(),
@@ -102,7 +111,7 @@ class MyApp extends StatelessWidget {
             if (userSnapShot.hasData) {
               return TabScreen();
             } else {
-              return TabScreen();
+              return LogInSignUpScreen();
             }
           },
         ),

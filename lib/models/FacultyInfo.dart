@@ -5,6 +5,10 @@ class FacultyServerInformation {
   String faculty_Mobile_Messaging_Token_Id;
   String faculty_Name;
   String faculty_Position;
+  String faculty_College;
+  String faculty_Mobile_Number;
+  String faculty_Research_Interests;
+  String faculty_Affiliated_Centers_And_Labs;
   String faculty_EmailId;
   String faculty_Gender;
   String faculty_Bio;
@@ -20,6 +24,10 @@ class FacultyServerInformation {
     required this.faculty_Mobile_Messaging_Token_Id,
     required this.faculty_Name,
     required this.faculty_Position,
+    required this.faculty_College,
+    required this.faculty_Mobile_Number,
+    required this.faculty_Research_Interests,
+    required this.faculty_Affiliated_Centers_And_Labs,
     required this.faculty_EmailId,
     required this.faculty_Gender,
     required this.faculty_Bio,

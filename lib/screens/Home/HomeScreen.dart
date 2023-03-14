@@ -5,6 +5,7 @@ import 'dart:math';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -33,12 +34,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _auth = FirebaseAuth.instance;
   String userName = "Henansh";
   late TextEditingController searchBarController = TextEditingController();
 
-  //TODO- Replace with Provider When ready
   ThemeListUtil themes = ThemeListUtil();
   EventListUtil events = EventListUtil();
+
+  @override
+  void initState() {
+    super.initState();
+    // _auth.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             padding: EdgeInsets.only(right: 5),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                _auth.signOut();
+              },
               icon: Icon(
                 Icons.person,
               ),

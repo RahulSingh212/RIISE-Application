@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, unused_import, use_build_context_synchronously, unnecessary_brace_in_string_interps
+// ignore_for_file: file_names, unused_import, use_build_context_synchronously, unnecessary_brace_in_string_interps, avoid_print
 // import 'package:eosdart/eosdart.dart' as eos;
 // import 'package:flutter/material.dart' hide Action;
 
@@ -18,27 +18,36 @@ import "../models/FacultyInfo.dart";
 
 class FacultiesProvider with ChangeNotifier {
   List<FacultyServerInformation> facultiesList = [
-    FacultyServerInformation(faculty_Unique_Id: "1",faculty_Name: "Henansh",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
-    FacultyServerInformation(faculty_Unique_Id: "2",faculty_Name: "Rahul",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
-    FacultyServerInformation(faculty_Unique_Id: "3",faculty_Name: "Kunal",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
-    FacultyServerInformation(faculty_Unique_Id: "4",faculty_Name: "Harsh",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
-    FacultyServerInformation(faculty_Unique_Id: "5",faculty_Name: "Ramu",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
-    FacultyServerInformation(faculty_Unique_Id: "6",faculty_Name: "James",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
-    FacultyServerInformation(faculty_Unique_Id: "7",faculty_Name: "Dash",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
-    FacultyServerInformation(faculty_Unique_Id: "8",faculty_Name: "None",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
-    FacultyServerInformation(faculty_Unique_Id: "9",faculty_Name: "Harry",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
-    FacultyServerInformation(faculty_Unique_Id: "10",faculty_Name: "Poter",faculty_Position: "CEO",faculty_EmailId: "temp@gmail.com",faculty_Gender: "Male",faculty_Bio: "BIO",faculty_Image_Url: "assets/images/icons/profile.png",faculty_LinkedIn_Url: "assets/images/icons/profile.png",faculty_Website_Url: "assets/images/icons/profile.png",faculty_Office_Address: "addr",faculty_Office_Latitude: 12.5,faculty_Office_Longitude: 10.2),
+    // FacultyServerInformation(
+    //   faculty_Unique_Id: "1",
+    //   faculty_Name: "Henansh",
+    //   faculty_Position: "CEO",
+    //   faculty_EmailId: "temp@gmail.com",
+    //   faculty_Gender: "Male",
+    //   faculty_Bio: "BIO",
+    //   faculty_Image_Url: "assets/images/icons/profile.png",
+    //   faculty_LinkedIn_Url: "assets/images/icons/profile.png",
+    //   faculty_Website_Url: "assets/images/icons/profile.png",
+    //   faculty_Office_Address: "addr",
+    //   faculty_Office_Latitude: 12.5,
+    //   faculty_Office_Longitude: 10.2,
+    //   faculty_Mobile_Messaging_Token_Id: 'dsafasdfsa',
+    //   faculty_Affiliated_Centers_And_Labs:
+    //       'fasdf, dsfasd, fsdfsdf, dasfasd, fadsfsad',
+    //   faculty_College: 'IIIT Delhi',
+    //   faculty_Mobile_Number: '123456789',
+    //   faculty_Research_Interests: 'd d d d d d',
+    // ),
   ];
 
-  void fetchCollegeFaculties(
+  Future<void> fetchCollegeFaculties(
     BuildContext context,
   ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference facultiesRef = db.collection("Faculties");
+    CollectionReference facultiesRef = db.collection("FacultiesInformationList");
 
+    List<FacultyServerInformation> listOfFaculties = [];
     try {
-      List<FacultyServerInformation> listOfFaculties = [];
-
       await facultiesRef.get().then(
         (ds) async {
           ds.docs.forEach(
@@ -56,8 +65,18 @@ class FacultiesProvider with ChangeNotifier {
                 faculty_LinkedIn_Url: facultyMap["faculty_LinkedIn_Url"],
                 faculty_Website_Url: facultyMap["faculty_Website_Url"],
                 faculty_Office_Address: facultyMap["faculty_Office_Address"],
-                faculty_Office_Longitude: double.parse(facultyMap["faculty_Office_Longitude"]),
-                faculty_Office_Latitude: double.parse(facultyMap["faculty_Office_Latitude"]),
+                faculty_Office_Longitude:
+                    checkIfDouble(facultyMap["faculty_Office_Longitude"]),
+                faculty_Office_Latitude:
+                    checkIfDouble(facultyMap["faculty_Office_Latitude"]),
+                faculty_Mobile_Messaging_Token_Id:
+                    facultyMap['faculty_Mobile_Messaging_Token_Id'],
+                faculty_Affiliated_Centers_And_Labs:
+                    facultyMap['faculty_Affiliated_Centers_And_Labs'],
+                faculty_College: facultyMap['faculty_College'],
+                faculty_Mobile_Number: facultyMap['faculty_Mobile_Number'],
+                faculty_Research_Interests:
+                    facultyMap['faculty_Research_Interests'],
               );
 
               listOfFaculties.add(facultyInfo);
@@ -66,13 +85,25 @@ class FacultiesProvider with ChangeNotifier {
         },
       );
 
-      //Un Commented to fetch server information
-      // Commented for working now
-      // facultiesList = listOfFaculties;
-
+      facultiesList = listOfFaculties;
       notifyListeners();
     } catch (errorVal) {
       print(errorVal);
+    }
+    
+    // return listOfFaculties;
+  }
+
+  double checkIfDouble(String val) {
+    if (double.tryParse(val).toString() != 'null') {
+      return double.parse(val);
+    } else if (val == 'null' ||
+        val == '' ||
+        int.tryParse(val).toString() == 'null' ||
+        double.tryParse(val).toString() == 'null') {
+      return 0.0;
+    } else {
+      return double.parse(val);
     }
   }
 }
