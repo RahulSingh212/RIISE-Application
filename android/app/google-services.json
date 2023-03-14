@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "972873247531",
+    "firebase_url": "https://riise-application-default-rtdb.firebaseio.com",
     "project_id": "riise-application",
     "storage_bucket": "riise-application.appspot.com"
   },
@@ -14,7 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "972873247531-j3gsnklu7fm9fq1fiiavc10tdett2qhv.apps.googleusercontent.com",
+          "client_id": "972873247531-t75rgvgm5s6a32ui3k97mqf8p8e936hn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.riise",
+            "certificate_hash": "7881ad89c0332b5f048498d29505f628f39ee8e4"
+          }
+        },
+        {
+          "client_id": "972873247531-l1eghgqpgjse5dcp14pkatmij2uq4car.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

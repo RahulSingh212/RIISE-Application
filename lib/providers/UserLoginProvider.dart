@@ -86,6 +86,7 @@ class UserLoginProvider with ChangeNotifier {
   Future<UserCredential> signUpWithGoogle(
     BuildContext context,
   ) async {
+    await GoogleSignIn().signOut();
     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
     AuthCredential authCredential = GoogleAuthProvider.credential(

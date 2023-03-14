@@ -22,6 +22,7 @@ import "../../components/SideNavBar.dart";
 import '../../modules/ThemeUtil.dart';
 
 import '../../providers/EventsProvider.dart';
+import '../../providers/FacultiesProvider.dart';
 import "../AddDataScreen/AddSectionScreen.dart";
 
 class HomeScreen extends StatefulWidget {
@@ -45,6 +46,16 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // _auth.signOut();
+    Provider.of<FacultiesProvider>(context, listen: false)
+        .fetchCollegeFaculties(context);
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    Provider.of<FacultiesProvider>(context, listen: false)
+        .fetchCollegeFaculties(context);
   }
 
   @override

@@ -83,7 +83,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           child: FixedTimeline.tileBuilder(
               // mainAxisSize: MainAxisSize.max,
               theme: TimelineTheme.of(context).copyWith(
-                nodePosition: 0.5, //5% from Left
+                nodePosition: 0.5, //50% from Left
               ),
               builder: TimelineTileBuilder.connected(
                 contentsAlign: ContentsAlign.alternating,
@@ -93,25 +93,31 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   child: DecoratedLineConnector(
                     thickness: 21.6.w,
                     decoration: BoxDecoration(
-
-                        color:  DateTime.now().compareTo(events.getEventsList()[index].time ) < 0? Colors.green:Colors.red,
-
-                      ),
-
+                      color: DateTime.now().compareTo(
+                                  events.getEventsList()[index].time) <
+                              0
+                          ? Colors.green
+                          : Colors.red,
+                    ),
                   ),
                 ),
                 indicatorBuilder: (context, index) => ContainerIndicator(
                     child: Container(
                   padding: EdgeInsets.symmetric(vertical: 46.8.h),
-                  child: index %2 == 0?Icon(
-                    Icons.label_important_outline_rounded,
-                    size: 100.r,
-                    color: Colors.grey,
-                  ):Transform.rotate(angle: pi,child: Icon(
-                    Icons.label_important_outline_rounded,
-                    size: 100.r,
-                    color: Colors.grey,
-                  ),),
+                  child: index % 2 == 0
+                      ? Icon(
+                          Icons.label_important_outline_rounded,
+                          size: 100.r,
+                          color: Colors.grey,
+                        )
+                      : Transform.rotate(
+                          angle: pi,
+                          child: Icon(
+                            Icons.label_important_outline_rounded,
+                            size: 100.r,
+                            color: Colors.grey,
+                          ),
+                        ),
                 )),
 
                 // oppositeContentsBuilder: (context, index) => Text(appointments.getThemesList()[index].getTime()),
@@ -127,19 +133,23 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   child: Card(
                     elevation: 16,
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 46.8.h, horizontal: 32.4),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 46.8.h, horizontal: 32.4),
                       decoration: BoxDecoration(
                         border: Border(
-                          left: index % 2 == 0 ? BorderSide(color: Colors.greenAccent, width: 5) : BorderSide(color: Colors.transparent),
-                          right: index % 2 != 0 ? BorderSide(color: Colors.greenAccent, width: 5) : BorderSide(color: Colors.transparent),
+                          left: index % 2 == 0
+                              ? BorderSide(color: Colors.greenAccent, width: 5)
+                              : BorderSide(color: Colors.transparent),
+                          right: index % 2 != 0
+                              ? BorderSide(color: Colors.greenAccent, width: 5)
+                              : BorderSide(color: Colors.transparent),
                         ),
                       ),
                       child: Text(
                         events.getEventsList()[index].getTime(),
-                            style: TextStyle(fontSize: 50.sp),
+                        style: TextStyle(fontSize: 50.sp),
                       ),
                     ),
-
                   ),
                 ),
                 itemCount: events.getEventsList().length,

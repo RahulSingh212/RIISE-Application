@@ -12,9 +12,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:riise/components/ThemeCard.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/SideNavBar.dart';
+import '../../components/ThemeCard2.dart';
+import '../../modules/ThemeUtil.dart';
 import '../../providers/EventsProvider.dart';
 
 class ThemesScreen extends StatefulWidget {
@@ -27,6 +30,8 @@ class ThemesScreen extends StatefulWidget {
 }
 
 class _ThemesScreenState extends State<ThemesScreen> {
+  ThemeListUtil themes = ThemeListUtil();
+
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -38,38 +43,53 @@ class _ThemesScreenState extends State<ThemesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
-      drawer: SideNavBar(),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          "Themes",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontSize: 60.sp,
+        backgroundColor: Colors.white,
+        extendBodyBehindAppBar: true,
+        drawer: SideNavBar(),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          title: Text(
+            "Themes",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+              fontSize: 60.sp,
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
+          iconTheme: IconThemeData(
+            color: Colors.blue,
+            size: 80.r,
+          ),
+          // actions: [
+          //   Container(
+          //     child: IconButton(
+          //       onPressed: () {},
+          //       icon: Icon(
+          //         Icons.person,
+          //       ),
+          //     ),
+          //   ),
+          // ],
         ),
-        iconTheme: IconThemeData(
-          color: Colors.blue,
-          size: 80.r,
-        ),
-        // actions: [
-        //   Container(
-        //     child: IconButton(
-        //       onPressed: () {},
-        //       icon: Icon(
-        //         Icons.person,
-        //       ),
-        //     ),
-        //   ),
-        // ],
-      ),
-      body: Center(),
-    );
+        body: Padding(
+          padding: EdgeInsets.only(top: 220.h),
+          child: ListView.builder(
+            itemCount: themes.getThemesList().length,
+            scrollDirection: Axis.vertical,
+            shrinkWrap: false,
+            // physics: NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
+            itemBuilder: (context, position) {
+              return Container(
+                  height: 700.h,
+                  // color: Colors.redAccent,
+                  padding: EdgeInsets.only(left: 86.w,top: 80.h),
+                  child: ThemeCard2(position: position));
+            },
+          ),
+        ));
   }
 }

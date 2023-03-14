@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/providers/UserLoginProvider.dart';
 
+import '../providers/FacultiesProvider.dart';
 import "./Home/HomeScreen.dart";
 import "./Faculty/FacultyScreen.dart";
 import "./Schedules/ScheduleScreen.dart";
@@ -42,26 +43,31 @@ class _TabScreenState extends State<TabScreen> {
     super.initState();
     _pages = [
       {
-        'page': const HomeScreen(),
+        'page': HomeScreen(),
         'title': 'Home',
       },
       {
-        'page': const FacultyScreen(),
+        'page': FacultyScreen(),
         'title': 'Faculties',
       },
       {
-        'page': const ScheduleScreen(),
+        'page': ScheduleScreen(),
         'title': 'Schedules',
       },
       {
-        'page': const DirectionScreen(),
+        'page': DirectionScreen(),
         'title': 'Directions',
       },
       {
-        'page': const AppointmentScreen(),
+        'page': AppointmentScreen(),
         'title': 'Appointments',
       },
     ];
+
+    Provider.of<FacultiesProvider>(context, listen: false)
+        .fetchCollegeFaculties(context);
+
+
   }
 
   void _selectPage(int index) {
@@ -70,6 +76,8 @@ class _TabScreenState extends State<TabScreen> {
           .selectedPageIndex = index;
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {

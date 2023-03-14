@@ -14,7 +14,9 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../components/FacultyCard.dart';
 import '../../components/SideNavBar.dart';
+import '../../providers/FacultiesProvider.dart';
 
 class KeynoteSpeakersScreen extends StatefulWidget {
   static const routeName = '/rise-keynote-speakers-screen';
@@ -26,6 +28,23 @@ class KeynoteSpeakersScreen extends StatefulWidget {
 }
 
 class _KeynoteSpeakersScreenState extends State<KeynoteSpeakersScreen> {
+
+  late TextEditingController searchBarController = TextEditingController();
+  late String filterValue = "";
+
+  late var facultyProider =
+  Provider.of<FacultiesProvider>(context, listen: false);
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    Provider.of<FacultiesProvider>(context, listen: false)
+        .fetchCollegeFaculties(context);
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +79,108 @@ class _KeynoteSpeakersScreenState extends State<KeynoteSpeakersScreen> {
         //   ),
         // ],
       ),
-      body: Center(),
+        body: Container(
+          padding: EdgeInsets.only(top: 280.h, left: 54.w, right: 54.w),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: 58.5.h),
+                height: 210.6.h,
+                child: TextField(
+                  controller: searchBarController,
+                  onChanged: (value) => {
+                    setState(() {
+                      filterValue = value;
+                      print(filterValue);
+                    })
+                  },
+                  decoration: InputDecoration(
+                    hintText: "Search",
+                    border: OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xffebebeb),
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blue,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    hintStyle: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 45.sp,
+                      fontStyle: FontStyle.normal,
+                      color: Color(0xff6c757d),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () {
+                        // setState(() {
+                        //   recentSearch.insert(0, searchBarController.text);
+                        //   if (recentSearch.length > 5) {
+                        //     recentSearch.removeLast();
+                        //   }
+                        // });
+                        print("serchpressed");
+                      },
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 46.8.h,
+              ),
+              SizedBox(
+                height: 46.8.h,
+              ),
+              Text(
+                "Faculties",
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(
+                height: 46.8.h,
+              ),
+              Expanded(
+                // padding: EdgeInsets.zero,
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  itemCount: Provider.of<FacultiesProvider>(context, listen: false).facultiesList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    if (isvalidFaculty(filterValue, index)) {
+                      return FacultyCard(
+                        position: index,
+                        facultyDetails: Provider.of<FacultiesProvider>(context, listen: false).facultiesList[index],
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
+              )
+            ],
+          ),
+        )
     );
   }
+
+  bool isvalidFaculty(filterValue, index) {
+    //TODO - use this when Dept is ready
+    // return facultyProider.facultiesList[index].faculty_Name
+    //     .toLowerCase()
+    //      .contains(filterValue.toLowerCase()) && (facultyProider.facultiesList[index].faculty_Name
+    //     .toLowerCase().compareTo(dropdownValue.toString()) == 0 || facultyProider.facultiesList[index].faculty_Name
+    //     .toLowerCase().compareTo("ALL") == 0);
+
+    return facultyProider.facultiesList[index].faculty_Name
+        .toLowerCase()
+        .contains(filterValue.toLowerCase());
+  }
+
 }

@@ -8,16 +8,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:riise/modules/ThemeUtil.dart';
 
 //ignore: must_be_immutable
-class ThemeCard extends StatefulWidget {
-  ThemeCard({Key? key, required this.position}) : super(key: key);
+class ThemeCard2 extends StatefulWidget {
+  ThemeCard2({Key? key, required this.position}) : super(key: key);
 
   late int position;
 
   @override
-  State<ThemeCard> createState() => _ThemeCardState();
+  State<ThemeCard2> createState() => _ThemeCard2State();
 }
 
-class _ThemeCardState extends State<ThemeCard> {
+class _ThemeCard2State extends State<ThemeCard2> {
   ThemeListUtil themes = ThemeListUtil();
 
   @override
@@ -47,22 +47,23 @@ class _ThemeCardState extends State<ThemeCard> {
                 },
                 child: Image.asset(
                   themes.getThemesList()[widget.position].iconImage,
-                  width: 200.r,
-                  height: 200.r,
+                  width: 300.r,
+                  height: 300.r,
+                  fit: BoxFit.cover,
                 ),
               ),
               Flexible(
                 child: Container(
                   padding: EdgeInsets.only(top: 23.h),
                   margin: EdgeInsets.only(top: 23.h),
-                  width: 300.r,
+                  width: 500.r,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Flexible(
                         child: Text(
                           themes.getThemesList()[widget.position].name,
-                          style: TextStyle(fontSize: 40.sp),
+                          style: TextStyle(fontSize:50.sp),
                           softWrap: true,
                           textAlign: TextAlign.center,
                         ),

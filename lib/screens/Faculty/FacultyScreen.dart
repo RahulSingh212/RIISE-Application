@@ -47,13 +47,21 @@ class _FacultyScreenState extends State<FacultyScreen> {
   late var facultyProider =
       Provider.of<FacultiesProvider>(context, listen: false);
 
+  void initState() {
+
+    super.initState();
+    // Provider.of<FacultiesProvider>(context, listen: false)
+    //     .fetchCollegeFaculties(context);
+  }
   @override
   void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-
     Provider.of<FacultiesProvider>(context, listen: false)
         .fetchCollegeFaculties(context);
   }
+
+
 
   @override
   Widget build(BuildContext context) {
