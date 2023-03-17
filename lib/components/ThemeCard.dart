@@ -7,11 +7,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:riise/modules/ThemeUtil.dart';
 
+import '../models/ThemeInfo.dart';
+import '../screens/Themes/ThemeDetailScreen.dart';
+
 //ignore: must_be_immutable
 class ThemeCard extends StatefulWidget {
-  ThemeCard({Key? key, required this.position}) : super(key: key);
+
+  ThemeCard({
+    Key? key,
+    required this.position,
+    required this.themeDetails,
+  }) : super(key: key);
 
   late int position;
+  late ThemeServerInformation themeDetails;
 
   @override
   State<ThemeCard> createState() => _ThemeCardState();
@@ -44,6 +53,14 @@ class _ThemeCardState extends State<ThemeCard> {
               InkWell(
                 onTap: () {
                   print("${widget.position} clicked");
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ThemeDetailScreen(
+                        position: widget.position,
+                        themeDetails: widget.themeDetails,
+                      ),
+                    ),
+                  );
                 },
                 child: Image.asset(
                   themes.getThemesList()[widget.position].iconImage,

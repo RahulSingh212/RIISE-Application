@@ -31,8 +31,7 @@ class _FacultyCardState extends State<FacultyCard> {
   //Temp Faculty details, need to changed with class
   String facName = "Henansh";
   String facImage = "assets/images/icons/profile.png";
-  late var facultyProider =
-      Provider.of<FacultiesProvider>(context, listen: false);
+  late var facultyProider = Provider.of<FacultiesProvider>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {

@@ -63,21 +63,13 @@ class _TabScreenState extends State<TabScreen> {
         'title': 'Appointments',
       },
     ];
-
-    Provider.of<FacultiesProvider>(context, listen: false)
-        .fetchCollegeFaculties(context);
-
-
   }
 
   void _selectPage(int index) {
     setState(() {
-      Provider.of<ScreenControllerProvider>(context, listen: false)
-          .selectedPageIndex = index;
+      Provider.of<ScreenControllerProvider>(context, listen: false).selectedPageIndex = index;
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {

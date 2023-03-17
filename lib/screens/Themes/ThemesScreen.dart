@@ -19,6 +19,7 @@ import '../../components/SideNavBar.dart';
 import '../../components/ThemeCard2.dart';
 import '../../modules/ThemeUtil.dart';
 import '../../providers/EventsProvider.dart';
+import 'ThemeDetailScreen.dart';
 
 class ThemesScreen extends StatefulWidget {
   static const routeName = '/rise-themes-screen';
@@ -83,11 +84,26 @@ class _ThemesScreenState extends State<ThemesScreen> {
             // physics: NeverScrollableScrollPhysics(),
             padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
             itemBuilder: (context, position) {
-              return Container(
+              return InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ThemeDetailScreen(
+                        position: position,
+                        themeDetails: Provider.of<EventProvider>(context, listen: false).themesList[position],
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
                   height: 700.h,
                   // color: Colors.redAccent,
-                  padding: EdgeInsets.only(left: 86.w,top: 80.h),
-                  child: ThemeCard2(position: position));
+                  padding: EdgeInsets.only(left: 86.w, top: 80.h),
+                  child: ThemeCard2(
+                    position: position,
+                  ),
+                ),
+              );
             },
           ),
         ));
