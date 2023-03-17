@@ -15,6 +15,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/components/ThemeCard.dart';
 import 'package:riise/modules/EventUtil.dart';
+import 'package:riise/screens/Profile/ProfileScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/EventCard.dart';
@@ -52,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     Provider.of<FacultiesProvider>(context, listen: false)
         .fetchCollegeFaculties(context);
@@ -91,7 +91,12 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.only(right: 5),
             child: IconButton(
               onPressed: () {
-                _auth.signOut();
+                // _auth.signOut();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ProfileScreen(),
+                  ),
+                );
               },
               icon: Icon(
                 Icons.person,
@@ -105,8 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         physics: BouncingScrollPhysics(),
         child: Container(
-          padding: EdgeInsets.only(
-              top: 280.h, left: 54.w, right: 54.w),
+          padding: EdgeInsets.only(top: 280.h, left: 54.w, right: 54.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,20 +164,30 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                 // padding: EdgeInsets.only(top: 58.h),
-                margin: EdgeInsets.only(top: 25.h),
+                margin: EdgeInsets.only(
+                  top: 25.h,
+                ),
                 alignment: Alignment.center,
                 // decoration: BoxDecoration(
                 //   border: Border.all()
                 // ),
                 height: 520.h,
                 child: ListView.builder(
+                  // itemCount: themes.getThemesList().length,
                   itemCount: themes.getThemesList().length,
                   scrollDirection: Axis.horizontal,
                   physics: BouncingScrollPhysics(),
                   padding: EdgeInsets.symmetric(
-                      vertical: 23.h , horizontal: 21.w),
+                    vertical: 23.h,
+                    horizontal: 21.w,
+                  ),
                   itemBuilder: (context, position) {
-                    return ThemeCard(position: position);
+                    return ThemeCard(
+                      position: position,
+                      // themeDetails:
+                      //     Provider.of<EventProvider>(context, listen: false)
+                      //         .themesList[position],
+                    );
                   },
                 ),
               ),

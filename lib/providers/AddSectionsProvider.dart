@@ -97,10 +97,8 @@ class AddSectionsProvider with ChangeNotifier {
           "Event_Name": profileInfoMapping["Event_Name"].text.toString(),
           "Event_Info": profileInfoMapping["Event_Info"].text.toString(),
           "Event_Address": profileInfoMapping["Event_Address"].text.toString(),
-          "Event_Longitude":
-              profileInfoMapping["Event_Longitude"].text.toString(),
-          "Event_Latitude":
-              profileInfoMapping["Event_Latitude"].text.toString(),
+          "Event_Longitude": profileInfoMapping["Event_Longitude"].text.toString(),
+          "Event_Latitude": profileInfoMapping["Event_Latitude"].text.toString(),
           "Event_Date": profileInfoMapping["Event_Date"].toString(),
           "Event_Start_Time": profileInfoMapping["Event_Start_Time"].toString(),
           "Event_End_Time": profileInfoMapping["Event_End_Time"].toString(),
@@ -146,7 +144,7 @@ class AddSectionsProvider with ChangeNotifier {
     }
   }
 
-  void AddNewKeyNoteSpeaker(
+  void addNewKeyNoteSpeaker(
     BuildContext context,
     Map<String, dynamic> profileInfoMapping,
   ) async {

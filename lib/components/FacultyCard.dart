@@ -31,8 +31,7 @@ class _FacultyCardState extends State<FacultyCard> {
   //Temp Faculty details, need to changed with class
   String facName = "Henansh";
   String facImage = "assets/images/icons/profile.png";
-  late var facultyProider =
-      Provider.of<FacultiesProvider>(context, listen: false);
+  late var facultyProider = Provider.of<FacultiesProvider>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +82,7 @@ class _FacultyCardState extends State<FacultyCard> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
                         height: 250.r,
@@ -90,7 +90,7 @@ class _FacultyCardState extends State<FacultyCard> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                            image: AssetImage(
+                            image: NetworkImage(
                               facultyProider.facultiesList[widget.position]
                                   .faculty_Image_Url,
                             ),
@@ -107,66 +107,95 @@ class _FacultyCardState extends State<FacultyCard> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
-                            facultyProider
-                                .facultiesList[widget.position].faculty_Name,
-                            style: TextStyle(fontSize: 40.sp),
+                          SizedBox(
+                            width: 600.w,
+                            child: Flexible(
+                              child: Text(
+                                facultyProider
+                                    .facultiesList[widget.position].faculty_Name,
+                                style: TextStyle(fontSize: 40.sp),
+                                softWrap: true,
+                                // overflow: TextOverflow.fade,
+                              ),
+                            ),
                           ),
                           SizedBox(
-                            height: 51.48.h,
+                            height: 50.h,
                           ),
                           Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Icon(
                                 Icons.work_outline,
                                 // size: ,
                               ),
-                              SizedBox(width: 21.6.w),
-                              Text(
-                                facultyProider.facultiesList[widget.position]
-                                    .faculty_Position,
-                                style: TextStyle(fontSize: 40.sp),
+                              SizedBox(width: 20.w),
+                              SizedBox(
+                                width: 500.w,
+                                child: Flexible(
+                                  child: Text(
+                                    facultyProider.facultiesList[widget.position]
+                                        .faculty_Position + " (CSE,ECE)",
+                                    style: TextStyle(fontSize: 40.sp),
+                                    softWrap: true,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
                           // SizedBox(height: 0.005*height,),
                           Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Icon(
                                 Icons.email_outlined,
                                 // size: ,
                               ),
-                              SizedBox(width: 21.6.w),
-                              Text(
-                                facultyProider.facultiesList[widget.position]
-                                    .faculty_EmailId,
-                                style: TextStyle(fontSize: 40.sp),
+                              SizedBox(width: 20.w),
+                              SizedBox(
+                                width: 500.w,
+                                child: Flexible(
+                                  child: Text(
+                                    facultyProider.facultiesList[widget.position]
+                                        .faculty_EmailId,
+                                    style: TextStyle(fontSize: 40.sp),
+                                    softWrap: true,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
                           Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Icon(
                                 Icons.location_on_outlined,
                                 // size: ,
                               ),
-                              SizedBox(width: 21.6.w),
-                              Text(
-                                facultyProider.facultiesList[widget.position]
-                                    .faculty_Office_Address,
-                                style: TextStyle(fontSize: 40.sp),
+                              SizedBox(width: 20.w),
+                              SizedBox(
+                                width: 500.w,
+                                child: Flexible(
+                                  child: Text(
+                                    facultyProider.facultiesList[widget.position]
+                                        .faculty_Office_Address,
+                                    style: TextStyle(fontSize: 40.sp),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
                         ],
                       ),
                     ],
-                  ),
-                  SizedBox(width: 54.w),
-                  Icon(
-                    CupertinoIcons.right_chevron,
-                    size: 60.r,
                   ),
                 ],
               ),

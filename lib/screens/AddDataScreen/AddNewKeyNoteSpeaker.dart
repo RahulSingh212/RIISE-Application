@@ -483,32 +483,33 @@ class _AddNewKeyNoteSpeakerScreenState
                     contextText,
                   );
                 }
-                else if (speakerProfileMapping["speaker_Talk_Title"]
-                        .text
-                        .length <
-                    5) {
-                  String titleText = "Invalid speaker talk title";
-                  String contextText =
-                      "Spaker's talk title must be at least 5 characters";
-                  _checkForError(
-                    context,
-                    titleText,
-                    contextText,
-                  );
-                }
-                else if (speakerProfileMapping["speaker_Abstract"]
-                        .text
-                        .length <
-                    5) {
-                  String titleText = "Invalid speaker abstract";
-                  String contextText =
-                      "Spaker's abstract must be at least 5 characters";
-                  _checkForError(
-                    context,
-                    titleText,
-                    contextText,
-                  );
-                } else if (speakerProfileMapping["speaker_Bio"].text.length <
+                // else if (speakerProfileMapping["speaker_Talk_Title"]
+                //         .text
+                //         .length <
+                //     5) {
+                //   String titleText = "Invalid speaker talk title";
+                //   String contextText =
+                //       "Spaker's talk title must be at least 5 characters";
+                //   _checkForError(
+                //     context,
+                //     titleText,
+                //     contextText,
+                //   );
+                // }
+                // else if (speakerProfileMapping["speaker_Abstract"]
+                //         .text
+                //         .length <
+                //     5) {
+                //   String titleText = "Invalid speaker abstract";
+                //   String contextText =
+                //       "Spaker's abstract must be at least 5 characters";
+                //   _checkForError(
+                //     context,
+                //     titleText,
+                //     contextText,
+                //   );
+                // } 
+                else if (speakerProfileMapping["speaker_Bio"].text.length <
                     5) {
                   String titleText = "Invalid speaker bio";
                   String contextText =
@@ -518,7 +519,8 @@ class _AddNewKeyNoteSpeakerScreenState
                     titleText,
                     contextText,
                   );
-                } else if (speakerInfoCheckMapping["speaker_Start_Time"] ==
+                } 
+                else if (speakerInfoCheckMapping["speaker_Start_Time"] ==
                     false) {
                   String titleText = "Invalid start time";
                   String contextText = "Select the start time";
@@ -527,7 +529,8 @@ class _AddNewKeyNoteSpeakerScreenState
                     titleText,
                     contextText,
                   );
-                } else if (speakerInfoCheckMapping["speaker_End_Time"] ==
+                } 
+                else if (speakerInfoCheckMapping["speaker_End_Time"] ==
                     false) {
                   String titleText = "Invalid end time";
                   String contextText = "Select the end time";
@@ -536,27 +539,30 @@ class _AddNewKeyNoteSpeakerScreenState
                     titleText,
                     contextText,
                   );
-                } else {
-                  SpeakerLocalInformation speakerDetails =
-                      new SpeakerLocalInformation(
+                } 
+                else if (speakerInfoCheckMapping["speaker_Date"] ==
+                    false) {
+                  String titleText = "Invalid Date";
+                  String contextText = "Select date for keynote speaker";
+                  _checkForError(
+                    context,
+                    titleText,
+                    contextText,
+                  );
+                } 
+                else {
+                  SpeakerLocalInformation speakerDetails = new SpeakerLocalInformation(
                     speaker_Unique_Id: "unique_id",
                     speaker_Name: speakerProfileMapping["speaker_Name"].text,
-                    speaker_Position:
-                        speakerProfileMapping["speaker_Position"].text,
-                    speaker_Talk_Title:
-                        speakerProfileMapping["speaker_Talk_Title"].text,
-                    speaker_Abstract:
-                        speakerProfileMapping["speaker_Abstract"].text,
+                    speaker_Position: speakerProfileMapping["speaker_Position"].text,
+                    speaker_Talk_Title: speakerProfileMapping["speaker_Talk_Title"].text,
+                    speaker_Abstract: speakerProfileMapping["speaker_Abstract"].text,
                     speaker_Bio: speakerProfileMapping["speaker_Bio"].text,
-                    speaker_Start_Time:
-                        speakerProfileMapping["speaker_Start_Time"],
+                    speaker_Start_Time: speakerProfileMapping["speaker_Start_Time"],
                     speaker_End_Time: speakerProfileMapping["speaker_End_Time"],
-                    speaker_Image_File:
-                        speakerProfileMapping["speaker_Image_File"],
-                    speaker_LinkedIn_Url:
-                        speakerProfileMapping["speaker_LinkedIn_Url"].text,
-                    speaker_Website_Url:
-                        speakerProfileMapping["speaker_Website_Url"].text,
+                    speaker_Image_File: speakerProfileMapping["speaker_Image_File"],
+                    speaker_LinkedIn_Url: speakerProfileMapping["speaker_LinkedIn_Url"].text,
+                    speaker_Website_Url: speakerProfileMapping["speaker_Website_Url"].text,
                   );
 
                   // setState(() {

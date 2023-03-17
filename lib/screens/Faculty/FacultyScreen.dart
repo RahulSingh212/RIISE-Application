@@ -50,8 +50,8 @@ class _FacultyScreenState extends State<FacultyScreen> {
   void initState() {
 
     super.initState();
-    // Provider.of<FacultiesProvider>(context, listen: false)
-    //     .fetchCollegeFaculties(context);
+    Provider.of<FacultiesProvider>(context, listen: false)
+        .fetchCollegeFaculties(context);
   }
   @override
   void didChangeDependencies() {

@@ -12,9 +12,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:timelines/timelines.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../components/EventCard2.dart';
+import '../../components/EventCard3.dart';
 import '../../components/SideNavBar.dart';
+import '../../modules/EventUtil.dart';
 
 class PosterTracksScreen extends StatefulWidget {
   static const routeName = '/rise-poster-tracks-screen';
@@ -26,6 +30,9 @@ class PosterTracksScreen extends StatefulWidget {
 }
 
 class _PosterTracksScreenState extends State<PosterTracksScreen> {
+
+  EventListUtil events = EventListUtil();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +67,26 @@ class _PosterTracksScreenState extends State<PosterTracksScreen> {
         //   ),
         // ],
       ),
-      body: Center(),
+      body: Padding(
+        padding: EdgeInsets.only(top: 220.h),
+        child: ListView.builder(
+          itemCount: events.getEventsList().length,
+          scrollDirection: Axis.vertical,
+          shrinkWrap: false,
+          // physics: NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
+          itemBuilder: (context, position) {
+            return Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: 50.5.h, horizontal: 60.w),
+              child: EventCard3(position: position),
+            );
+          },
+        ),
+      )
     );
   }
 }
+
+
+
