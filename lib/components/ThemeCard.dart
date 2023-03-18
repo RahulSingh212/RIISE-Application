@@ -15,19 +15,19 @@ class ThemeCard extends StatefulWidget {
 
   ThemeCard({
     Key? key,
-    required this.position,
-    // required this.themeDetails,
+    // required this.position,
+    required this.themeDetails,
   }) : super(key: key);
 
-  late int position;
-  // late ThemeServerInformation themeDetails;
+  // late int position;
+  late ThemeUtil themeDetails;
 
   @override
   State<ThemeCard> createState() => _ThemeCardState();
 }
 
 class _ThemeCardState extends State<ThemeCard> {
-  ThemeListUtil themes = ThemeListUtil();
+  // ThemeListUtil themes = ThemeListUtil();
 
   @override
   Widget build(BuildContext context) {
@@ -52,18 +52,18 @@ class _ThemeCardState extends State<ThemeCard> {
             children: [
               InkWell(
                 onTap: () {
-                  print("${widget.position} clicked");
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (context) => ThemeDetailScreen(
-                  //       position: widget.position,
-                  //       themeDetails: widget.themeDetails,
-                  //     ),
-                  //   ),
-                  // );
+                  // print("${widget.position} clicked");
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ThemeDetailScreen(
+                        // position: widget.position,
+                        themeDetails: widget.themeDetails,
+                      ),
+                    ),
+                  );
                 },
                 child: Image.asset(
-                  themes.getThemesList()[widget.position].iconImage,
+                  widget.themeDetails.iconImage,
                   width: 200.r,
                   height: 200.r,
                 ),
@@ -78,7 +78,7 @@ class _ThemeCardState extends State<ThemeCard> {
                     children: [
                       Flexible(
                         child: Text(
-                          themes.getThemesList()[widget.position].name,
+                          widget.themeDetails.name,
                           style: TextStyle(fontSize: 40.sp),
                           softWrap: true,
                           textAlign: TextAlign.center,

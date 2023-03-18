@@ -79,7 +79,7 @@ class _PosterTracksScreenState extends State<PosterTracksScreen> {
             return Padding(
               padding: EdgeInsets.symmetric(
                   vertical: 50.5.h, horizontal: 60.w),
-              child: EventCard3(position: position),
+              child: EventCard3(eventDetails: events.getEventsList()[position],),
             );
           },
         ),

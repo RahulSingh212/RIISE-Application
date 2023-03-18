@@ -155,7 +155,6 @@ class _KeynoteSpeakersScreenState extends State<KeynoteSpeakersScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     if (isvalidFaculty(filterValue, index)) {
                       return FacultyCard(
-                        position: index,
                         facultyDetails: Provider.of<FacultiesProvider>(context, listen: false).facultiesList[index],
                       );
                     } else {

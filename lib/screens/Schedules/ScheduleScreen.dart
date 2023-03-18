@@ -124,7 +124,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 contentsBuilder: (context, index) => Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: 58.5.h, horizontal: 21.6.w),
-                  child: EventCard2(position: index),
+                  child: EventCard2(position: index,eventDetails: events.getEventsList()[index],),
                 ),
                 oppositeContentsBuilder: (context, index) => Container(
                   padding: EdgeInsets.symmetric(

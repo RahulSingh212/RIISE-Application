@@ -87,21 +87,20 @@ class _ThemesScreenState extends State<ThemesScreen> {
             itemBuilder: (context, position) {
               return InkWell(
                 onTap: () {
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (context) => ThemeDetailScreen(
-                  //       position: position,
-                  //       themeDetails: Provider.of<EventProvider>(context, listen: false).themesList[position],
-                  //     ),
-                  //   ),
-                  // );
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ThemeDetailScreen(
+                        // position: position,
+                        themeDetails: themes.getThemesList()[position],
+                      ),
+                    ),
+                  );
                 },
                 child: Container(
                   height: 700.h,
-                  // color: Colors.redAccent,
                   padding: EdgeInsets.only(left: 86.w, top: 80.h),
                   child: ThemeCard2(
-                    position: position,
+                    themeDetails: themes.getThemesList()[position],
                   ),
                 ),
               );

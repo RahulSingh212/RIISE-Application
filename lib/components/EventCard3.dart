@@ -9,16 +9,17 @@ import '../modules/EventUtil.dart';
 
 //ignore: must_be_immutable
 class EventCard3 extends StatefulWidget {
-  EventCard3({Key? key, required this.position}) : super(key: key);
+  EventCard3({Key? key, required this.eventDetails}) : super(key: key);
 
-  late int position;
+  // late int position;
+  late EventUtil eventDetails;
 
   @override
   State<EventCard3> createState() => _EventCard3State();
 }
 
 class _EventCard3State extends State<EventCard3> {
-  EventListUtil events = EventListUtil();
+  // EventListUtil events = EventListUtil();
   @override
   Widget build(BuildContext context) {
 
@@ -38,7 +39,7 @@ class _EventCard3State extends State<EventCard3> {
           
             image: DecorationImage(
               //TODO - Change background image
-                image: AssetImage(events.getEventsList()[widget.position].iconImage,),
+                image: AssetImage(widget.eventDetails.iconImage,),
                 fit: BoxFit.cover
             ),
           borderRadius: BorderRadius.only(topLeft: Radius.circular(25),bottomRight: Radius.circular(25))
@@ -55,7 +56,7 @@ class _EventCard3State extends State<EventCard3> {
                 children: [
                   Flexible(
                     child: Text(
-                      events.getEventsList()[widget.position].name,
+                      widget.eventDetails.name,
                       style: TextStyle(fontSize: 40.sp),
                       softWrap: true,
                       textAlign: TextAlign.center,
@@ -75,7 +76,7 @@ class _EventCard3State extends State<EventCard3> {
                   ),
                   Flexible(
                     child: Text(
-                      events.getEventsList()[widget.position].location,
+                      widget.eventDetails.location,
                       style: TextStyle(fontSize: 40.sp,
                       ),
                       softWrap: true,
@@ -93,7 +94,7 @@ class _EventCard3State extends State<EventCard3> {
                   ),
                   Flexible(
                     child: Text(
-                      events.getEventsList()[widget.position].getTime(),
+                      widget.eventDetails.getTime(),
                       style: TextStyle(fontSize: 40.sp,
                       ),
                       softWrap: true,

@@ -9,9 +9,10 @@ import '../modules/EventUtil.dart';
 
 //ignore: must_be_immutable
 class EventCard extends StatefulWidget {
-  EventCard({Key? key, required this.position}) : super(key: key);
+  EventCard({Key? key, required this.eventDetails}) : super(key: key);
 
-  late int position;
+  // late int position;
+  late EventUtil eventDetails;
 
   @override
   State<EventCard> createState() => _EventCardState();
@@ -37,7 +38,7 @@ class _EventCardState extends State<EventCard> {
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(events.getEventsList()[widget.position].iconImage,),
+                  image: AssetImage(widget.eventDetails.iconImage,),
                   fit: BoxFit.cover
               )
           ),
@@ -54,14 +55,14 @@ class _EventCardState extends State<EventCard> {
                   children: [
                     Flexible(
                       child: Text(
-                        events.getEventsList()[widget.position].name,
+                        widget.eventDetails.name,
                         style: TextStyle(fontSize: 40.sp),
                         softWrap: true,
                       ),
                     ),
                     Flexible(
                       child: Text(
-                        events.getEventsList()[widget.position].getTime(),
+                        widget.eventDetails.getTime(),
                         style: TextStyle(fontSize: 40.sp),
                         softWrap: true,
                       ),
@@ -79,7 +80,7 @@ class _EventCardState extends State<EventCard> {
                     ),
                     Flexible(
                       child: Text(
-                        events.getEventsList()[widget.position].location,
+                        widget.eventDetails.location,
                         style: TextStyle(fontSize: 35.sp,
                         ),
                         softWrap: true,

@@ -16,11 +16,11 @@ import '../../modules/ThemeUtil.dart';
 class FacultyDetailScreen extends StatefulWidget {
   FacultyDetailScreen({
     Key? key,
-    required this.position,
+    // required this.position,
     required this.facultyDetails,
   }) : super(key: key);
 
-  late int position;
+  // late int position;
   late FacultyServerInformation facultyDetails;
 
   @override

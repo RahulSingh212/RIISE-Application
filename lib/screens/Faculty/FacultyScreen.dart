@@ -233,7 +233,6 @@ class _FacultyScreenState extends State<FacultyScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     if (isvalidFaculty(filterValue, index, dropdownValue)) {
                       return FacultyCard(
-                        position: index,
                         facultyDetails: Provider.of<FacultiesProvider>(context, listen: false).facultiesList[index],
                       );
                     } else {

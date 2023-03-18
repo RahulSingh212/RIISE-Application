@@ -14,19 +14,25 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/components/ThemeCard.dart';
 import 'package:riise/models/ThemeInfo.dart';
+import 'package:riise/modules/ThemeUtil.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../components/SideNavBar.dart';
+import '../../components/SpeakerCard.dart';
+import '../../modules/SpeakerUtil.dart';
 
 class ThemeDetailScreen extends StatefulWidget {
   static const routeName = '/rise-themes-detail-screen';
 
   ThemeDetailScreen({
     Key? key,
-    required this.position,
+    // required this.position,
     required this.themeDetails,
   }) : super(key: key);
 
-  late int position;
-  late ThemeServerInformation themeDetails;
+  // late int position;
+  //Change with provider
+  late ThemeUtil themeDetails;
 
   @override
   State<ThemeDetailScreen> createState() => _ThemeDetailScreenState();
@@ -35,6 +41,150 @@ class ThemeDetailScreen extends StatefulWidget {
 class _ThemeDetailScreenState extends State<ThemeDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Colors.white,
+
+      extendBodyBehindAppBar: true,
+      drawer: SideNavBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        //TODO - Make it flexible
+        title: Text(
+          "Theme",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 60.sp,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.blue,
+          size: 80.r,
+        ),
+        // actions: [
+        //   Container(
+        //     child: IconButton(
+        //       onPressed: () {},
+        //       icon: Icon(
+        //         Icons.person,
+        //       ),
+        //     ),
+        //   ),
+        // ],
+      ),
+      body: Container(
+        padding: EdgeInsets.only(top: 280.h, left: 20.w, right: 20.w),
+        margin: EdgeInsets.symmetric(horizontal: 30.w),
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
+                alignment: Alignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(
+                          widget.themeDetails.iconImage,
+                          width: 450.r,
+                          height: 450.r,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Flexible(
+                      child: Text(
+                        widget.themeDetails.name,
+                        style: TextStyle(fontSize: 70.sp),
+                        softWrap: true,
+                        textAlign: TextAlign.center,
+                        // maxLines: 100,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 60.h,
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "About",
+                    style: TextStyle(fontSize: 60.sp),
+                    softWrap: true,
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 40.h,
+                  ),
+                  Flexible(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 45.w),
+                      child: Text(
+                        widget.themeDetails.about,
+                        style: TextStyle(fontSize: 33.sp),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                        // maxLines: 100,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 60.h,
+              ),
+              Container(
+                alignment: Alignment.topCenter,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Speakers",
+                      style: TextStyle(fontSize: 60.sp),
+                      softWrap: true,
+                      textAlign: TextAlign.center,
+                    ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.symmetric(vertical: 40.h),
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, position) {
+                        SpeakerUtil val = widget.themeDetails.speakers[position];
+                        return SpeakerCard(speakerDetails: val,);
+                      },
+                      itemCount: widget.themeDetails.speakers.length,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+    );
   }
 }

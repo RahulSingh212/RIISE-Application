@@ -5,31 +5,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
+import 'package:riise/modules/SpeakerUtil.dart';
 import '../models/FacultyInfo.dart';
 import '../modules/EventUtil.dart';
 import '../providers/FacultiesProvider.dart';
 import '../screens/Faculty/FacultyDetailScreen.dart';
 
 //ignore: must_be_immutable
-class FacultyCard extends StatefulWidget {
-  FacultyCard({
+class SpeakerCard extends StatefulWidget {
+  SpeakerCard({
     Key? key,
-    required this.facultyDetails,
+    // required this.position,
+    required this.speakerDetails,
   }) : super(key: key);
-  
-  late FacultyServerInformation facultyDetails;
+
+  // late int position;
+  late SpeakerUtil speakerDetails;
 
   @override
-  State<FacultyCard> createState() => _FacultyCardState();
+  State<SpeakerCard> createState() => _SpeakerCardState();
 }
 
-class _FacultyCardState extends State<FacultyCard> {
+class _SpeakerCardState extends State<SpeakerCard> {
   // AppointmentListUtil appointments = AppointmentListUtil();
 
   //Temp Faculty details, need to changed with class
   // String facName = "Henansh";
-  String backImage = "assets/images/background/artificial-intelligence.jpg";
+  // String facImage = "assets/images/icons/profile.png";
   // late var facultyProider = Provider.of<FacultiesProvider>(context, listen: false);
+  String backImage = "assets/images/background/artificial-intelligence.jpg";
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +49,14 @@ class _FacultyCardState extends State<FacultyCard> {
 
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => FacultyDetailScreen(
-              // position: widget.position,
-              facultyDetails: widget.facultyDetails,
-            ),
-          ),
-        );
+        // Navigator.of(context).push(
+          // MaterialPageRoute(
+          //   builder: (context) => FacultyDetailScreen(
+          //     position: widget.position,
+          //     facultyDetails: widget.facultyDetails,
+          //   ),
+          // ),
+        // );
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 5.8.w, vertical: 11.7.h),
@@ -89,7 +95,7 @@ class _FacultyCardState extends State<FacultyCard> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             image: NetworkImage(
-                              widget.facultyDetails.faculty_Image_Url,
+                              widget.speakerDetails.image,
                             ),
                             fit: BoxFit.cover,
                             scale: 0.4,
@@ -110,7 +116,7 @@ class _FacultyCardState extends State<FacultyCard> {
                           children: [
                             Flexible(
                               child: Text(
-                                widget.facultyDetails.faculty_Name,
+                                widget.speakerDetails.name,
                                 style: TextStyle(fontSize: 40.sp),
                                 softWrap: true,
                                 // overflow: TextOverflow.fade,
@@ -127,14 +133,13 @@ class _FacultyCardState extends State<FacultyCard> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Icon(
-                                    Icons.work_outline,
+                                    Icons.access_time,
                                     // size: ,
                                   ),
                                   SizedBox(width: 20.w),
                                   Flexible(
                                     child: Text(
-                                      (widget.facultyDetails
-                                          .faculty_Position + " (CSE,ECE)"),
+                                      "${widget.speakerDetails.getStartTime()} - ${widget.speakerDetails.getEndTime()}",
                                       style: TextStyle(fontSize: 40.sp),
                                       softWrap: true,
                                     ),
@@ -149,35 +154,15 @@ class _FacultyCardState extends State<FacultyCard> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Icon(
-                                  Icons.email_outlined,
+                                  CupertinoIcons.speaker_1,
                                   // size: ,
                                 ),
                                 SizedBox(width: 20.w),
                                 Flexible(
                                   child: Text(
-                                    widget.facultyDetails
-                                        .faculty_EmailId,
+                                    widget.speakerDetails.talkTitle,
                                     style: TextStyle(fontSize: 40.sp),
                                     softWrap: true,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.location_on_outlined,
-                                  // size: ,
-                                ),
-                                SizedBox(width: 20.w),
-                                Flexible(
-                                  child: Text(
-                                    widget.facultyDetails
-                                        .faculty_Office_Address,
-                                    style: TextStyle(fontSize: 40.sp),
                                   ),
                                 ),
                               ],

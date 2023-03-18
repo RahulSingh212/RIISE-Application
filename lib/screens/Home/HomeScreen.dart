@@ -183,8 +183,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   itemBuilder: (context, position) {
                     return ThemeCard(
-                      position: position,
-                      // themeDetails:
+                      // position: position,
+                      themeDetails: themes.getThemesList()[position]
                       //     Provider.of<EventProvider>(context, listen: false)
                       //         .themesList[position],
                     );
@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.only(top: 23.h),
                   itemBuilder: (context, position) {
-                    return EventCard(position: position);
+                    return EventCard(eventDetails: events.getEventsList()[position],);
                   },
                 ),
               ),

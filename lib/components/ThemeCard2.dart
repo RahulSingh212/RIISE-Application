@@ -9,9 +9,10 @@ import 'package:riise/modules/ThemeUtil.dart';
 
 //ignore: must_be_immutable
 class ThemeCard2 extends StatefulWidget {
-  ThemeCard2({Key? key, required this.position}) : super(key: key);
+  ThemeCard2({Key? key, required this.themeDetails}) : super(key: key);
 
-  late int position;
+  // late int position;
+  late ThemeUtil themeDetails;
 
   @override
   State<ThemeCard2> createState() => _ThemeCard2State();
@@ -41,16 +42,11 @@ class _ThemeCard2State extends State<ThemeCard2> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              InkWell(
-                onTap: () {
-                  print("${widget.position} clicked");
-                },
-                child: Image.asset(
-                  themes.getThemesList()[widget.position].iconImage,
-                  width: 300.r,
-                  height: 300.r,
-                  fit: BoxFit.cover,
-                ),
+              Image.asset(
+                widget.themeDetails.iconImage,
+                width: 300.r,
+                height: 300.r,
+                fit: BoxFit.cover,
               ),
               Flexible(
                 child: Container(
@@ -62,7 +58,7 @@ class _ThemeCard2State extends State<ThemeCard2> {
                     children: [
                       Flexible(
                         child: Text(
-                          themes.getThemesList()[widget.position].name,
+                          widget.themeDetails.name,
                           style: TextStyle(fontSize:50.sp),
                           softWrap: true,
                           textAlign: TextAlign.center,
