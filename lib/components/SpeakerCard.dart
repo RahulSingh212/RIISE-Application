@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
 import 'package:riise/modules/SpeakerUtil.dart';
+import 'package:riise/screens/SpeakerDetailScreen.dart';
 import '../models/FacultyInfo.dart';
 import '../modules/EventUtil.dart';
 import '../providers/FacultiesProvider.dart';
@@ -49,14 +50,12 @@ class _SpeakerCardState extends State<SpeakerCard> {
 
     return InkWell(
       onTap: () {
-        // Navigator.of(context).push(
-          // MaterialPageRoute(
-          //   builder: (context) => FacultyDetailScreen(
-          //     position: widget.position,
-          //     facultyDetails: widget.facultyDetails,
-          //   ),
-          // ),
-        // );
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => SpeakerDetailScreen(speakerDetails: widget.speakerDetails,
+            ),
+          ),
+        );
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 5.8.w, vertical: 11.7.h),

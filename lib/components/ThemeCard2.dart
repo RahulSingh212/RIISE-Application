@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:riise/modules/ThemeUtil.dart';
 
+import '../screens/Themes/ThemeDetailScreen.dart';
+
 //ignore: must_be_immutable
 class ThemeCard2 extends StatefulWidget {
   ThemeCard2({Key? key, required this.themeDetails}) : super(key: key);
@@ -31,44 +33,56 @@ class _ThemeCard2State extends State<ThemeCard2> {
     // double minDimension = min(width, height);
     // double maxDimension = max(width, height);
 
-    return Container(
-      margin: EdgeInsets.only(right: 86.w),
-      child: Card(
-        elevation: 8,
-        // semanticContainer: false,
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 27.w, vertical: 23.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                widget.themeDetails.iconImage,
-                width: 300.r,
-                height: 300.r,
-                fit: BoxFit.cover,
-              ),
-              Flexible(
-                child: Container(
-                  padding: EdgeInsets.only(top: 23.h),
-                  margin: EdgeInsets.only(top: 23.h),
-                  width: 500.r,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          widget.themeDetails.name,
-                          style: TextStyle(fontSize:50.sp),
-                          softWrap: true,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
-                  ),
+    return InkWell(
+      onTap: (){
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ThemeDetailScreen(
+              // position: widget.position,
+              themeDetails: widget.themeDetails,
+            ),
+          ),
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 86.w),
+        child: Card(
+          elevation: 8,
+          // semanticContainer: false,
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 27.w, vertical: 23.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  widget.themeDetails.iconImage,
+                  width: 300.r,
+                  height: 300.r,
+                  fit: BoxFit.cover,
                 ),
-              )
-            ],
+                Flexible(
+                  child: Container(
+                    padding: EdgeInsets.only(top: 23.h),
+                    margin: EdgeInsets.only(top: 23.h),
+                    width: 500.r,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            widget.themeDetails.name,
+                            style: TextStyle(fontSize:50.sp),
+                            softWrap: true,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

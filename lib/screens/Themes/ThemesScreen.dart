@@ -85,23 +85,11 @@ class _ThemesScreenState extends State<ThemesScreen> {
             physics: BouncingScrollPhysics(),
             padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
             itemBuilder: (context, position) {
-              return InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ThemeDetailScreen(
-                        // position: position,
-                        themeDetails: themes.getThemesList()[position],
-                      ),
-                    ),
-                  );
-                },
-                child: Container(
-                  height: 700.h,
-                  padding: EdgeInsets.only(left: 86.w, top: 80.h),
-                  child: ThemeCard2(
-                    themeDetails: themes.getThemesList()[position],
-                  ),
+              return Container(
+                height: 700.h,
+                padding: EdgeInsets.only(left: 86.w, top: 80.h),
+                child: ThemeCard2(
+                  themeDetails: themes.getThemesList()[position],
                 ),
               );
             },
