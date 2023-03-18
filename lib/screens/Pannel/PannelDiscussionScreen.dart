@@ -16,6 +16,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/FacultyCard.dart';
 import '../../components/SideNavBar.dart';
+import '../../components/SpeakerCard.dart';
+import '../../modules/SpeakerUtil.dart';
 import '../../providers/FacultiesProvider.dart';
 
 class PannelDiscussionScreen extends StatefulWidget {
@@ -32,15 +34,24 @@ class _PannelDiscussionScreenState extends State<PannelDiscussionScreen> {
   late TextEditingController searchBarController = TextEditingController();
   late String filterValue = "";
 
-  late var facultyProider =
-  Provider.of<FacultiesProvider>(context, listen: false);
+  List<SpeakerUtil> speakerList = <SpeakerUtil>[
+    SpeakerUtil("Swati Tiwari", "Entrepreneurship is a common keyword but belief in your idea is strongest motivation to be called as an Entrepreneur. The interesting part of the journey has been leaving an established career to a new journey and finding the customer. The key mantra is for growth and strategy is continuous innovation.", "Swati has taken a lead in solving the real time Safety and security of workman and industrial assets using Artificial Intelligence and Deep Learning through her Startup Arcturus Business Solutions. A domain expert in India Power and Energy Sector she has held various leadership roles solving some real complex challenges. She is an Engineer and management postgraduate with formal flavour of Entrepreneurship education from Stanford Business School and University of California","https://iiitd.ac.in/riise2022/assets/img/swatitiwari235.jpg", "Entrepreneurship - Finding Customers and Continuous Innovation", DateTime.now(), DateTime.now()),
+    SpeakerUtil("Swati Tiwari", "Entrepreneurship is a common keyword but belief in your idea is strongest motivation to be called as an Entrepreneur. The interesting part of the journey has been leaving an established career to a new journey and finding the customer. The key mantra is for growth and strategy is continuous innovation.", "Swati has taken a lead in solving the real time Safety and security of workman and industrial assets using Artificial Intelligence and Deep Learning through her Startup Arcturus Business Solutions. A domain expert in India Power and Energy Sector she has held various leadership roles solving some real complex challenges. She is an Engineer and management postgraduate with formal flavour of Entrepreneurship education from Stanford Business School and University of California","https://iiitd.ac.in/riise2022/assets/img/swatitiwari235.jpg", "Entrepreneurship - Finding Customers and Continuous Innovation", DateTime.now(), DateTime.now()),
+    SpeakerUtil("Swati Tiwari", "Entrepreneurship is a common keyword but belief in your idea is strongest motivation to be called as an Entrepreneur. The interesting part of the journey has been leaving an established career to a new journey and finding the customer. The key mantra is for growth and strategy is continuous innovation.", "Swati has taken a lead in solving the real time Safety and security of workman and industrial assets using Artificial Intelligence and Deep Learning through her Startup Arcturus Business Solutions. A domain expert in India Power and Energy Sector she has held various leadership roles solving some real complex challenges. She is an Engineer and management postgraduate with formal flavour of Entrepreneurship education from Stanford Business School and University of California","https://iiitd.ac.in/riise2022/assets/img/swatitiwari235.jpg", "Entrepreneurship - Finding Customers and Continuous Innovation", DateTime.now(), DateTime.now()),
+    SpeakerUtil("Swati Tiwari", "Entrepreneurship is a common keyword but belief in your idea is strongest motivation to be called as an Entrepreneur. The interesting part of the journey has been leaving an established career to a new journey and finding the customer. The key mantra is for growth and strategy is continuous innovation.", "Swati has taken a lead in solving the real time Safety and security of workman and industrial assets using Artificial Intelligence and Deep Learning through her Startup Arcturus Business Solutions. A domain expert in India Power and Energy Sector she has held various leadership roles solving some real complex challenges. She is an Engineer and management postgraduate with formal flavour of Entrepreneurship education from Stanford Business School and University of California","https://iiitd.ac.in/riise2022/assets/img/swatitiwari235.jpg", "Entrepreneurship - Finding Customers and Continuous Innovation", DateTime.now(), DateTime.now()),
+    SpeakerUtil("Swati Tiwari", "Entrepreneurship is a common keyword but belief in your idea is strongest motivation to be called as an Entrepreneur. The interesting part of the journey has been leaving an established career to a new journey and finding the customer. The key mantra is for growth and strategy is continuous innovation.", "Swati has taken a lead in solving the real time Safety and security of workman and industrial assets using Artificial Intelligence and Deep Learning through her Startup Arcturus Business Solutions. A domain expert in India Power and Energy Sector she has held various leadership roles solving some real complex challenges. She is an Engineer and management postgraduate with formal flavour of Entrepreneurship education from Stanford Business School and University of California","https://iiitd.ac.in/riise2022/assets/img/swatitiwari235.jpg", "Entrepreneurship - Finding Customers and Continuous Innovation", DateTime.now(), DateTime.now()),
+    SpeakerUtil("Swati Tiwari", "Entrepreneurship is a common keyword but belief in your idea is strongest motivation to be called as an Entrepreneur. The interesting part of the journey has been leaving an established career to a new journey and finding the customer. The key mantra is for growth and strategy is continuous innovation.", "Swati has taken a lead in solving the real time Safety and security of workman and industrial assets using Artificial Intelligence and Deep Learning through her Startup Arcturus Business Solutions. A domain expert in India Power and Energy Sector she has held various leadership roles solving some real complex challenges. She is an Engineer and management postgraduate with formal flavour of Entrepreneurship education from Stanford Business School and University of California","https://iiitd.ac.in/riise2022/assets/img/swatitiwari235.jpg", "Entrepreneurship - Finding Customers and Continuous Innovation", DateTime.now(), DateTime.now()),
+    SpeakerUtil("Swati Tiwari", "Entrepreneurship is a common keyword but belief in your idea is strongest motivation to be called as an Entrepreneur. The interesting part of the journey has been leaving an established career to a new journey and finding the customer. The key mantra is for growth and strategy is continuous innovation.", "Swati has taken a lead in solving the real time Safety and security of workman and industrial assets using Artificial Intelligence and Deep Learning through her Startup Arcturus Business Solutions. A domain expert in India Power and Energy Sector she has held various leadership roles solving some real complex challenges. She is an Engineer and management postgraduate with formal flavour of Entrepreneurship education from Stanford Business School and University of California","https://iiitd.ac.in/riise2022/assets/img/swatitiwari235.jpg", "Entrepreneurship - Finding Customers and Continuous Innovation", DateTime.now(), DateTime.now()),
+    SpeakerUtil("Swati Tiwari", "Entrepreneurship is a common keyword but belief in your idea is strongest motivation to be called as an Entrepreneur. The interesting part of the journey has been leaving an established career to a new journey and finding the customer. The key mantra is for growth and strategy is continuous innovation.", "Swati has taken a lead in solving the real time Safety and security of workman and industrial assets using Artificial Intelligence and Deep Learning through her Startup Arcturus Business Solutions. A domain expert in India Power and Energy Sector she has held various leadership roles solving some real complex challenges. She is an Engineer and management postgraduate with formal flavour of Entrepreneurship education from Stanford Business School and University of California","https://iiitd.ac.in/riise2022/assets/img/swatitiwari235.jpg", "Entrepreneurship - Finding Customers and Continuous Innovation", DateTime.now(), DateTime.now()),
+    SpeakerUtil("Swati Tiwari", "Entrepreneurship is a common keyword but belief in your idea is strongest motivation to be called as an Entrepreneur. The interesting part of the journey has been leaving an established career to a new journey and finding the customer. The key mantra is for growth and strategy is continuous innovation.", "Swati has taken a lead in solving the real time Safety and security of workman and industrial assets using Artificial Intelligence and Deep Learning through her Startup Arcturus Business Solutions. A domain expert in India Power and Energy Sector she has held various leadership roles solving some real complex challenges. She is an Engineer and management postgraduate with formal flavour of Entrepreneurship education from Stanford Business School and University of California","https://iiitd.ac.in/riise2022/assets/img/swatitiwari235.jpg", "Entrepreneurship - Finding Customers and Continuous Innovation", DateTime.now(), DateTime.now()),
+  ];
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    Provider.of<FacultiesProvider>(context, listen: false)
-        .fetchCollegeFaculties(context);
+    // Provider.of<FacultiesProvider>(context, listen: false)
+    //     .fetchCollegeFaculties(context);
   }
 
 
@@ -139,7 +150,7 @@ class _PannelDiscussionScreenState extends State<PannelDiscussionScreen> {
               height: 46.8.h,
             ),
             Text(
-              "Faculties",
+              "KeyNote Speakers",
               style: TextStyle(fontSize: 20),
             ),
             SizedBox(
@@ -150,13 +161,10 @@ class _PannelDiscussionScreenState extends State<PannelDiscussionScreen> {
               child: ListView.builder(
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
-                itemCount: Provider.of<FacultiesProvider>(context, listen: false).facultiesList.length,
+                itemCount: speakerList.length,
                 itemBuilder: (BuildContext context, int index) {
                   if (isvalidFaculty(filterValue, index)) {
-                    return FacultyCard(
-
-                      facultyDetails: Provider.of<FacultiesProvider>(context, listen: false).facultiesList[index],
-                    );
+                    return SpeakerCard(speakerDetails: speakerList[index]);
                   } else {
                     return Container();
                   }
@@ -177,7 +185,7 @@ class _PannelDiscussionScreenState extends State<PannelDiscussionScreen> {
     //     .toLowerCase().compareTo(dropdownValue.toString()) == 0 || facultyProider.facultiesList[index].faculty_Name
     //     .toLowerCase().compareTo("ALL") == 0);
 
-    return facultyProider.facultiesList[index].faculty_Name
+    return speakerList[index].name
         .toLowerCase()
         .contains(filterValue.toLowerCase());
   }
