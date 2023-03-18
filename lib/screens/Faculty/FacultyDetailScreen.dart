@@ -89,11 +89,21 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Image.network(
-                        widget.facultyDetails.faculty_Image_Url,
-                        width: 450.r,
-                        height: 450.r,
-                        fit: BoxFit.fill,
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 3),
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.grey
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.network(
+                            widget.facultyDetails.faculty_Image_Url,
+                            width: 450.r,
+                            height: 450.r,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 20.h,
