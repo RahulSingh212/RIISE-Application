@@ -42,6 +42,7 @@ class UserDetailsProvider with ChangeNotifier {
           "faculty_Image_Url": "",
           "faculty_LinkedIn_Url": "",
           "faculty_Website_Url": "",
+          "faculty_Office_Navigation_Url": "",
           "faculty_Office_Address": "",
           "faculty_Office_Longitude": "",
           "faculty_Office_Latitude": "",

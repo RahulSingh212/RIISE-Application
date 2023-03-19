@@ -16,6 +16,7 @@ class FacultyServerInformation {
   String faculty_Image_Url;
   String faculty_LinkedIn_Url;
   String faculty_Website_Url;
+  String faculty_Office_Navigation_Url;
   String faculty_Office_Address;
   double faculty_Office_Longitude;
   double faculty_Office_Latitude;
@@ -36,6 +37,7 @@ class FacultyServerInformation {
     required this.faculty_Image_Url,
     required this.faculty_LinkedIn_Url,
     required this.faculty_Website_Url,
+    required this.faculty_Office_Navigation_Url,
     required this.faculty_Office_Address,
     required this.faculty_Office_Longitude,
     required this.faculty_Office_Latitude,

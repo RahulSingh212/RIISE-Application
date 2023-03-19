@@ -65,19 +65,15 @@ class FacultiesProvider with ChangeNotifier {
                 faculty_Image_Url: facultyMap["faculty_Image_Url"],
                 faculty_LinkedIn_Url: facultyMap["faculty_LinkedIn_Url"],
                 faculty_Website_Url: facultyMap["faculty_Website_Url"],
+                faculty_Office_Navigation_Url: facultyMap["faculty_Office_Navigation_Url"],
                 faculty_Office_Address: facultyMap["faculty_Office_Address"],
-                faculty_Office_Longitude:
-                    checkIfDouble(facultyMap["faculty_Office_Longitude"]),
-                faculty_Office_Latitude:
-                    checkIfDouble(facultyMap["faculty_Office_Latitude"]),
-                faculty_Mobile_Messaging_Token_Id:
-                    facultyMap['faculty_Mobile_Messaging_Token_Id'],
-                faculty_Affiliated_Centers_And_Labs:
-                    facultyMap['faculty_Affiliated_Centers_And_Labs'],
+                faculty_Office_Longitude: checkIfDouble(facultyMap["faculty_Office_Longitude"]),
+                faculty_Office_Latitude: checkIfDouble(facultyMap["faculty_Office_Latitude"]),
+                faculty_Mobile_Messaging_Token_Id: facultyMap['faculty_Mobile_Messaging_Token_Id'],
+                faculty_Affiliated_Centers_And_Labs: facultyMap['faculty_Affiliated_Centers_And_Labs'],
                 faculty_College: facultyMap['faculty_College'],
                 faculty_Mobile_Number: facultyMap['faculty_Mobile_Number'],
-                faculty_Research_Interests:
-                    facultyMap['faculty_Research_Interests'],
+                faculty_Research_Interests: facultyMap['faculty_Research_Interests'],
                 faculty_Department: facultyMap['faculty_Department'],
               );
 
