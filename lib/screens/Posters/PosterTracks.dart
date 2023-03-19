@@ -19,6 +19,7 @@ import '../../components/EventCard2.dart';
 import '../../components/EventCard3.dart';
 import '../../components/SideNavBar.dart';
 import '../../modules/EventUtil.dart';
+import '../../providers/EventsProvider.dart';
 
 class PosterTracksScreen extends StatefulWidget {
   static const routeName = '/rise-poster-tracks-screen';
@@ -32,6 +33,17 @@ class PosterTracksScreen extends StatefulWidget {
 class _PosterTracksScreenState extends State<PosterTracksScreen> {
 
   EventListUtil events = EventListUtil();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    
+
+    Provider.of<EventProvider>(context, listen: false).fetchEventTracks(
+      context,
+      "PosterTracks",
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

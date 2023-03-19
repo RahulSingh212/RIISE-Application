@@ -13,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/components/SpeakerCard.dart';
+import 'package:riise/providers/EventsProvider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/FacultyCard.dart';
@@ -52,6 +53,7 @@ class _KeynoteSpeakersScreenState extends State<KeynoteSpeakersScreen> {
 
     // Provider.of<FacultiesProvider>(context, listen: false)
     //     .fetchCollegeFaculties(context);
+    Provider.of<EventProvider>(context, listen: false).fetchKeynoteSpeaker(context);
   }
 
 

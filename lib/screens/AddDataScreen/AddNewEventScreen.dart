@@ -45,6 +45,10 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
       child: Text("Poster Track"),
       value: "PosterTracks",
     ),
+    DropdownMenuItem(
+      child: Text("Panel Discussion"),
+      value: "PanelDiscussion",
+    ),
   ];
 
   List<SpeakerLocalInformation> speakerList = [];

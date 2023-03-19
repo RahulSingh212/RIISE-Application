@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:riise/providers/EventsProvider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/EventCard3.dart';
@@ -28,9 +29,17 @@ class SpeakerTracksScreen extends StatefulWidget {
 }
 
 class _SpeakerTracksScreenState extends State<SpeakerTracksScreen> {
-
   EventListUtil events = EventListUtil();
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    Provider.of<EventProvider>(context, listen: false).fetchEventTracks(
+      context,
+      "SpeakerTracks",
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,9 +85,10 @@ class _SpeakerTracksScreenState extends State<SpeakerTracksScreen> {
           padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
           itemBuilder: (context, position) {
             return Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: 50.5.h, horizontal: 60.w),
-              child: EventCard3(eventDetails: events.getEventsList()[position],),
+              padding: EdgeInsets.symmetric(vertical: 50.5.h, horizontal: 60.w),
+              child: EventCard3(
+                eventDetails: events.getEventsList()[position],
+              ),
             );
           },
         ),

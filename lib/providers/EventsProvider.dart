@@ -6,64 +6,88 @@ import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 
+import "../models/EventInfo.dart";
 import "../models/SpeakerInfo.dart";
 import "../models/ThemeInfo.dart";
 
 class EventProvider with ChangeNotifier {
-  List<ThemeServerInformation> themesList = [];
+  List<EventServerInformation> speakerTracksList = [];
+  List<EventServerInformation> posterTracksList = [];
+  List<SpeakerServerInformation> keynoteSpeakersList = [];
+  List<EventServerInformation> panelDiscussionList = [];
 
-  void fetchThemes(
+  void fetchEventTracks(
     BuildContext context,
+    String collectionName,
   ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference themesRef = db.collection("Themes");
+    CollectionReference speakerTracksRef = db.collection(collectionName);
+
+    var cnt = 0;
+    if (collectionName == "SpeakerTracks") cnt += 1;
+    if (collectionName == "PosterTracks") cnt += 1;
+    if (collectionName == "PanelDiscussion") cnt += 1;
+
+    if (cnt < 1) return;
 
     try {
-      List<ThemeServerInformation> listOfThemese = [];
-      await themesRef.get().then(
+      List<EventServerInformation> listOfEventTracks = [];
+      await speakerTracksRef.get().then(
         (ds) async {
           ds.docs.forEach(
             (themeDetails) async {
               // var themeMap = HashMap.from(themeDetails.data());
               // print(themeDetails.data());
 
-              final themeMap = themeDetails.data() as Map<String, dynamic>;
+              final eventMap = themeDetails.data() as Map<String, dynamic>;
 
-              String Theme_Unique_Id = themeMap["Theme_Unique_Id"].toString();
-              String Theme_Name = themeMap["Theme_Name"].toString();
-              String Theme_Info = themeMap["Theme_Info"].toString();
-              String Theme_Image_Url = themeMap["Theme_Image_Url"].toString();
-              DateTime Theme_Date = DateTime.parse(themeMap["Theme_Date"].toString());
-              TimeOfDay Theme_Start_Time = convertStringToTimeOfDay(themeMap["Theme_Start_Time"].toString());
-              TimeOfDay Theme_End_Time = convertStringToTimeOfDay(themeMap["Theme_End_Time"].toString());
+              String Event_Unique_Id = eventMap["Event_Unique_Id"].toString();
+              String Event_Name = eventMap["Event_Name"].toString();
+              String Event_Info = eventMap["Event_Info"].toString();
+              String Event_Address = eventMap["Event_Address"].toString();
+              String Event_Image_Url = eventMap["Event_Image_Url"].toString();
+              String Event_Latitude = eventMap["Event_Latitude"].toString();
+              String Event_Longitude = eventMap["Event_Image_Url"].toString();
+              DateTime Event_Date = DateTime.parse(eventMap["Event_Date"].toString());
+              TimeOfDay Event_Start_Time = convertStringToTimeOfDay(eventMap["Event_Start_Time"].toString());
+              TimeOfDay Event_End_Time = convertStringToTimeOfDay(eventMap["Event_End_Time"].toString());
 
-              List<SpeakerServerInformation> themeSpeakersList = await fetchSpeakers(
+              List<SpeakerServerInformation> eventSpeakersList =
+                  await fetchSpeakers(
                 context,
-                Theme_Unique_Id,
+                collectionName,
+                Event_Unique_Id,
               );
 
-              print(themeSpeakersList);
-
-              ThemeServerInformation themeInfo = ThemeServerInformation(
-                Theme_Unique_Id: Theme_Unique_Id,
-                Theme_Name: Theme_Name,
-                Theme_Info: Theme_Info,
-                Theme_Image_Url: Theme_Image_Url,
-                Theme_Date: Theme_Date,
-                Theme_Start_Time: Theme_Start_Time,
-                Theme_End_Time: Theme_End_Time,
-                themeSpeakersList: themeSpeakersList,
+              EventServerInformation eventInfo = EventServerInformation(
+                Event_Unique_Id: Event_Unique_Id,
+                Event_Image_Url: Event_Image_Url,
+                Event_Name: Event_Name,
+                Event_Info: Event_Info,
+                Event_Address: Event_Address,
+                Event_Longitude: Event_Longitude,
+                Event_Latitude: Event_Latitude,
+                Event_Date: Event_Date,
+                Event_Start_Time: Event_Start_Time,
+                Event_End_Time: Event_End_Time,
+                EventSpeakersList: eventSpeakersList,
               );
 
-              listOfThemese.add(themeInfo);
-              print(themeInfo.themeSpeakersList);
+              listOfEventTracks.add(eventInfo);
             },
-
           );
         },
       );
 
-      themesList = listOfThemese;
+      if (collectionName == "SpeakerTracks") {
+        speakerTracksList = listOfEventTracks;
+      }
+      else if (collectionName == "PosterTracks") {
+        posterTracksList = listOfEventTracks;
+      }
+      else if (collectionName == "PanelDiscussion") {
+        panelDiscussionList = listOfEventTracks;
+      }
 
       notifyListeners();
     } catch (errorVal) {
@@ -71,23 +95,73 @@ class EventProvider with ChangeNotifier {
     }
   }
 
-  Future<List<SpeakerServerInformation>> fetchSpeakers(
+  Future<void> fetchKeynoteSpeaker(
     BuildContext context,
-    String Theme_Unique_Id,
   ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference speakersRef = db.collection("Themes/$Theme_Unique_Id/Speakers");
+    CollectionReference keynoteSpeakersRef = db.collection("KeynoteSpeakers");
+
+    List<SpeakerServerInformation> speakerList = [];
+    try {
+      await keynoteSpeakersRef.get().then(
+        (ds) async {
+          ds.docs.forEach(
+            (eventDetails) async {
+              final speakersMap = eventDetails.data() as Map<String, dynamic>;
+
+              String speaker_Unique_Id = speakersMap["speaker_Unique_Id"].toString();
+              String speaker_Name = speakersMap["speaker_Name"].toString();
+              String speaker_Position = speakersMap["speaker_Position"].toString();
+              String speaker_Talk_Title = speakersMap["speaker_Talk_Title"].toString();
+              String speaker_Bio = speakersMap["speaker_Bio"].toString();
+              String speaker_Abstract = speakersMap["speaker_Abstract"].toString();
+              String speaker_Image_Url = speakersMap["speaker_Image_Url"].toString();
+              String speaker_LinkedIn_Url = speakersMap["speaker_LinkedIn_Url"].toString();
+              String speaker_Website_Url = speakersMap["speaker_Website_Url"].toString();
+              TimeOfDay speaker_Start_Time = convertStringToTimeOfDay(speakersMap["speaker_Start_Time"].toString());
+              TimeOfDay speaker_End_Time = convertStringToTimeOfDay(speakersMap["speaker_End_Time"].toString());
+
+              SpeakerServerInformation speakerInfo = SpeakerServerInformation(
+                speaker_Unique_Id: speaker_Unique_Id,
+                speaker_Name: speaker_Name,
+                speaker_Position: speaker_Position,
+                speaker_Talk_Title: speaker_Talk_Title,
+                speaker_Abstract: speaker_Abstract,
+                speaker_Bio: speaker_Bio,
+                speaker_Start_Time: speaker_Start_Time,
+                speaker_End_Time: speaker_End_Time,
+                speaker_Image_Url: speaker_Image_Url,
+                speaker_LinkedIn_Url: speaker_LinkedIn_Url,
+                speaker_Website_Url: speaker_Website_Url,
+              );
+
+              speakerList.add(speakerInfo);
+            },
+          );
+        },
+      );
+    } catch (errorVal) {
+      print(errorVal);
+    }
+
+    keynoteSpeakersList = speakerList;
+  }
+
+  Future<List<SpeakerServerInformation>> fetchSpeakers(
+    BuildContext context,
+    String eventCollectionName,
+    String Event_Unique_Id,
+  ) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    CollectionReference speakersRef = db.collection("$eventCollectionName/$Event_Unique_Id/Speakers");
 
     List<SpeakerServerInformation> speakerList = [];
     try {
       await speakersRef.get().then(
         (ds) async {
           ds.docs.forEach(
-            (themeDetails) async {
-              // var themeMap = HashMap.from(themeDetails.data());
-              // print(themeDetails.data());
-
-              final speakersMap = themeDetails.data() as Map<String, dynamic>;
+            (eventDetails) async {
+              final speakersMap = eventDetails.data() as Map<String, dynamic>;
 
               String speaker_Unique_Id = speakersMap["speaker_Unique_Id"].toString();
               String speaker_Name = speakersMap["speaker_Name"].toString();
@@ -133,5 +207,18 @@ class EventProvider with ChangeNotifier {
     TimeOfDay time = TimeOfDay(hour: hrVal, minute: minVal);
 
     return time;
+  }
+
+  double checkIfDouble(String val) {
+    if (double.tryParse(val).toString() != 'null') {
+      return double.parse(val);
+    } else if (val == 'null' ||
+        val == '' ||
+        int.tryParse(val).toString() == 'null' ||
+        double.tryParse(val).toString() == 'null') {
+      return 0.0;
+    } else {
+      return double.parse(val);
+    }
   }
 }

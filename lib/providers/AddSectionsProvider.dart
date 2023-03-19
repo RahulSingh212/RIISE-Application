@@ -156,22 +156,22 @@ class AddSectionsProvider with ChangeNotifier {
     try {
       await themesRef.add(
         {
-          "Speaker_Name": profileInfoMapping["Speaker_Name"].text.toString(),
-          "Speaker_Position": profileInfoMapping["Speaker_Position"].text.toString(),
-          "Speaker_Talk_Title": profileInfoMapping["Speaker_Talk_Title"].text.toString(),
-          "Speaker_Abstract": profileInfoMapping["Speaker_Abstract"].text.toString(),
-          "Speaker_Bio": profileInfoMapping["Speaker_Bio"].text.toString(),
-          "Speaker_LinkedIn_Url": profileInfoMapping["Speaker_LinkedIn_Url"].text.toString(),
-          "Speaker_Website_Url": profileInfoMapping["Speaker_Website_Url"].text.toString(),
-          "Speaker_Start_Time": profileInfoMapping["Speaker_Start_Time"].toString(),
-          "Speaker_End_Time": profileInfoMapping["Speaker_End_Time"].toString(),
-          "Speaker_Date": profileInfoMapping["Speaker_Date"].toString(),
-          "Speaker_Unique_Id": "",
-          "Speaker_Image_Url": "",
+          "speaker_Name": profileInfoMapping["speaker_Name"].text.toString(),
+          "speaker_Position": profileInfoMapping["speaker_Position"].text.toString(),
+          "speaker_Talk_Title": profileInfoMapping["speaker_Talk_Title"].text.toString(),
+          "speaker_Abstract": profileInfoMapping["speaker_Abstract"].text.toString(),
+          "speaker_Bio": profileInfoMapping["speaker_Bio"].text.toString(),
+          "speaker_LinkedIn_Url": profileInfoMapping["speaker_LinkedIn_Url"].text.toString(),
+          "speaker_Website_Url": profileInfoMapping["speaker_Website_Url"].text.toString(),
+          "speaker_Start_Time": profileInfoMapping["speaker_Start_Time"].toString(),
+          "speaker_End_Time": profileInfoMapping["speaker_End_Time"].toString(),
+          "speaker_Date": profileInfoMapping["speaker_Date"].toString(),
+          "speaker_Unique_Id": "",
+          "speaker_Image_Url": "",
         },
       ).then(
         (value) async {
-          themesRef.doc(value.id).update({"Speaker_Unique_Id": value.id});
+          themesRef.doc(value.id).update({"speaker_Unique_Id": value.id});
           speakerId = value.id;
           // value.get().then(((DocumentSnapshot ds) {
           //   print(ds.data());
@@ -185,8 +185,8 @@ class AddSectionsProvider with ChangeNotifier {
             value.id,
             imagePath,
             "keynoteSpeakerIcon",
-            "Speaker_Image_Url",
-            profileInfoMapping["Speaker_Image_File"],
+            "speaker_Image_Url",
+            profileInfoMapping["speaker_Image_File"],
           );
         },
       );
@@ -209,8 +209,7 @@ class AddSectionsProvider with ChangeNotifier {
     SpeakerLocalInformation speakerDetails,
   ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference speakersRef =
-        db.collection(CollectionName).doc(infoId).collection("Speakers");
+    CollectionReference speakersRef = db.collection(CollectionName).doc(infoId).collection("Speakers");
 
     String speakerId = "";
 

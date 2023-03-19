@@ -565,6 +565,7 @@ class _AddNewKeyNoteSpeakerScreenState
                     speaker_Website_Url: speakerProfileMapping["speaker_Website_Url"].text,
                   );
 
+                  Provider.of<AddSectionsProvider>(context, listen: false).addNewKeyNoteSpeaker(context, speakerProfileMapping,);
                   // setState(() {
                   //   widget.speakerList.add(speakerDetails);
                   // });
@@ -579,7 +580,7 @@ class _AddNewKeyNoteSpeakerScreenState
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  "Add Speaker",
+                  "Add Keynote Speaker",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 17.5,
