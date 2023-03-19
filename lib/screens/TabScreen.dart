@@ -66,12 +66,12 @@ class _TabScreenState extends State<TabScreen> {
 
     // Provider.of<FacultiesProvider>(context, listen: false)
     //     .fetchCollegeFaculties(context);
-
   }
 
   void _selectPage(int index) {
     setState(() {
-      Provider.of<ScreenControllerProvider>(context, listen: false).selectedPageIndex = index;
+      Provider.of<ScreenControllerProvider>(context, listen: false)
+          .selectedPageIndex = index;
     });
   }
 
@@ -148,7 +148,9 @@ class _TabScreenState extends State<TabScreen> {
       ),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-          iconTheme: const IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
           backgroundColor: const Color(0xff42ccc3),
         ),
         child: CurvedNavigationBar(
@@ -157,8 +159,10 @@ class _TabScreenState extends State<TabScreen> {
           color: Colors.greenAccent,
           // buttonBackgroundColor: Theme.of(context).primaryColor,
           buttonBackgroundColor: Colors.blueGrey,
-          index: Provider.of<ScreenControllerProvider>(context, listen: false)
-              .selectedPageIndex,
+          index: Provider.of<ScreenControllerProvider>(
+            context,
+            listen: false,
+          ).selectedPageIndex,
           height: 163.8.h,
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(

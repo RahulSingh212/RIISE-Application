@@ -44,7 +44,8 @@ class FacultiesProvider with ChangeNotifier {
     BuildContext context,
   ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference facultiesRef = db.collection("FacultiesInformationList");
+    CollectionReference facultiesRef =
+        db.collection("FacultiesInformationList");
 
     List<FacultyServerInformation> listOfFaculties = [];
     try {
@@ -77,6 +78,7 @@ class FacultiesProvider with ChangeNotifier {
                 faculty_Mobile_Number: facultyMap['faculty_Mobile_Number'],
                 faculty_Research_Interests:
                     facultyMap['faculty_Research_Interests'],
+                faculty_Department: facultyMap['faculty_Department'],
               );
 
               listOfFaculties.add(facultyInfo);
@@ -90,7 +92,7 @@ class FacultiesProvider with ChangeNotifier {
     } catch (errorVal) {
       print(errorVal);
     }
-    
+
     // return listOfFaculties;
   }
 

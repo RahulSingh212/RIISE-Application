@@ -6,11 +6,13 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import "package:flutter/services.dart";
 import 'package:riise/providers/UserLoginProvider.dart';
 
 import '../providers/ScreenControllerProvider.dart';
+import '../screens/SingInScreen/LogInSignUpScreen.dart';
 import '../screens/TabScreen.dart';
 import '../screens/Home/HomeScreen.dart';
 import '../screens/Faculty/FacultyScreen.dart';
@@ -36,7 +38,6 @@ class SideNavBar extends StatefulWidget {
 }
 
 class _SideNavBarState extends State<SideNavBar> {
-
   final _auth = FirebaseAuth.instance;
 
   Map<String, dynamic> screenMapping = {
@@ -245,15 +246,20 @@ class _SideNavBarState extends State<SideNavBar> {
             ),
             margin: EdgeInsets.only(
               top: 12.5,
-              bottom: 47.5,
+              bottom: 24.5,
             ),
             child: Divider(
               color: Colors.green.shade500,
             ),
           ),
           InkWell(
-            onTap: (){
-              _auth.signOut();
+            onTap: () async {
+              await GoogleSignIn().signOut();
+              await _auth.signOut();
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                LogInSignUpScreen.routeName,
+                (route) => false,
+              );
             },
             child: Container(
               margin: EdgeInsets.only(
@@ -264,7 +270,7 @@ class _SideNavBarState extends State<SideNavBar> {
               padding: EdgeInsets.all(18.5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color:Colors.green.shade100,
+                color: Colors.green.shade100,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,

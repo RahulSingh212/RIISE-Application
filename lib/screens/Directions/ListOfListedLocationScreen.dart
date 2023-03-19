@@ -12,23 +12,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:riise/models/CoordinateInfo.dart';
+import 'package:riise/providers/LocationProvider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../components/SideNavBar.dart';
-import '../../models/CoordinateInfo.dart';
-import '../../providers/LocationProvider.dart';
-import './ListOfListedLocationScreen.dart';
+import "../../providers/LocationProvider.dart";
+import 'CoordinationDetailScreen.dart';
 
-class DirectionScreen extends StatefulWidget {
-  static const routeName = '/rise-direction-screen';
+class ListOfListedLocationScreen extends StatefulWidget {
+  static const routeName = '/rise-list-of-listed-location-screen';
 
-  const DirectionScreen({super.key});
+  const ListOfListedLocationScreen({super.key});
 
   @override
-  State<DirectionScreen> createState() => _DirectionScreenState();
+  State<ListOfListedLocationScreen> createState() =>
+      _ListOfListedLocationScreenState();
 }
 
-class _DirectionScreenState extends State<DirectionScreen> {
+class _ListOfListedLocationScreenState
+    extends State<ListOfListedLocationScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -43,13 +45,12 @@ class _DirectionScreenState extends State<DirectionScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
-      drawer: SideNavBar(),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
         title: Text(
-          "Map",
+          "Listed Locations",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -57,10 +58,10 @@ class _DirectionScreenState extends State<DirectionScreen> {
           ),
           textAlign: TextAlign.center,
         ),
-        iconTheme: IconThemeData(
-          color: Colors.blue,
-          size: 80.r,
-        ),
+        // iconTheme: IconThemeData(
+        //   color: Colors.blue,
+        //   size: 80.r,
+        // ),
         // actions: [
         //   Container(
         //     child: IconButton(
@@ -84,23 +85,6 @@ class _DirectionScreenState extends State<DirectionScreen> {
           );
         },
       ),
-
-      // floatingActionButton: SizedBox(
-      //   child: FloatingActionButton.extended(
-      //     onPressed: () {
-      //       Navigator.of(context).push(
-      //         MaterialPageRoute(
-      //           builder: (context) => ListOfListedLocationScreen(),
-      //         ),
-      //       );
-      //     },
-      //     icon: Icon(
-      //       Icons.directions,
-      //     ),
-      //     label: Text("Location List"),
-      //   ),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
@@ -141,8 +125,7 @@ class _DirectionScreenState extends State<DirectionScreen> {
             // ),
           ),
           child: Container(
-            width: screenWidth * 0.95,
-            height: maxDimension * 0.125,
+            height: maxDimension * 0.15,
             padding: EdgeInsets.symmetric(
               horizontal: minDimension * 0.0125,
               vertical: maxDimension * 0.00625,
@@ -192,10 +175,6 @@ class _DirectionScreenState extends State<DirectionScreen> {
                       Container(
                         child: Text(
                           coordinateDetails.coordinate_Name,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
                         ),
                       )
                     ],

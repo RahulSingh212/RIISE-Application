@@ -17,6 +17,7 @@ import "./screens/Schedules/ScheduleScreen.dart";
 import "./screens/Directions/DirectionScreen.dart";
 import "./screens/Appointments/AppointmentScreen.dart";
 import './screens/SingInScreen/SignInTypeScreen.dart';
+import './screens/SingInScreen/LogInSignUpScreen.dart';
 
 import "./providers/FirebaseProvider.dart";
 import "./providers/FacultiesProvider.dart";
@@ -25,10 +26,13 @@ import './providers/UserDetailsProvider.dart';
 import './providers/UserLoginProvider.dart';
 import './providers/AddSectionsProvider.dart';
 import './providers/ScreenControllerProvider.dart';
-import 'screens/SingInScreen/LogInSignUpScreen.dart';
+import './providers/LocationProvider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -74,6 +78,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: AddSectionsProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: LocationProvider(),
         ),
       ],
       child: MaterialApp(

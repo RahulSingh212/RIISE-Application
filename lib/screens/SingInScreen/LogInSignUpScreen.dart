@@ -12,7 +12,7 @@ import "package:flutter/services.dart";
 import 'package:riise/providers/UserLoginProvider.dart';
 
 class LogInSignUpScreen extends StatefulWidget {
-  static const routeName = '/rise-logIn-signUp-screen';
+  static const routeName = '/rise-logIn-signUp-single-screen';
   const LogInSignUpScreen({super.key});
 
   @override
