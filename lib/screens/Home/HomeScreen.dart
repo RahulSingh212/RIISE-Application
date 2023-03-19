@@ -14,13 +14,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/components/ThemeCard.dart';
-import 'package:riise/modules/EventUtil.dart';
+import 'package:riise/models/ThemeInfo.dart';
+
+import 'package:riise/providers/ThemeProvider.dart';
 import 'package:riise/screens/Profile/ProfileScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/EventCard.dart';
 import "../../components/SideNavBar.dart";
-import '../../modules/ThemeUtil.dart';
+import '../../models/EventInfo.dart';
+
 
 import '../../providers/EventsProvider.dart';
 import '../../providers/FacultiesProvider.dart';
@@ -40,22 +43,44 @@ class _HomeScreenState extends State<HomeScreen> {
   String userName = "Henansh";
   late TextEditingController searchBarController = TextEditingController();
 
-  ThemeListUtil themes = ThemeListUtil();
-  EventListUtil events = EventListUtil();
+  // ThemeListUtil themes = ThemeListUtil();
+  // EventListUtil events = EventListUtil();
+
+  late ThemeProvider themeUtil;
+  late EventProvider eventUtilTemp;
+  late List<EventServerInformation> eventUtil;
 
   @override
   void initState() {
     super.initState();
-    // _auth.signOut();
-    Provider.of<FacultiesProvider>(context, listen: false)
-        .fetchCollegeFaculties(context);
+    themeUtil = Provider.of<ThemeProvider>(context, listen: false);
+    eventUtilTemp = Provider.of<EventProvider>(context, listen: false);
+
+    themeUtil.fetchThemes(context);
+    eventUtilTemp.fetchEventTracks(context, "SpeakerTracks");
+    eventUtilTemp.fetchEventTracks(context, "PosterTracks");
+    eventUtilTemp.fetchEventTracks(context, "PanelDiscussion");
+    eventUtil = [
+      eventUtilTemp.posterTracksList,
+      eventUtilTemp.speakerTracksList,
+      eventUtilTemp.panelDiscussionList
+    ].expand((x) => x).toList();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Provider.of<FacultiesProvider>(context, listen: false)
-        .fetchCollegeFaculties(context);
+
+    themeUtil.fetchThemes(context);
+
+    eventUtilTemp.fetchEventTracks(context, "SpeakerTracks");
+    eventUtilTemp.fetchEventTracks(context, "PosterTracks");
+    eventUtilTemp.fetchEventTracks(context, "PanelDiscussion");
+    eventUtil = [
+      eventUtilTemp.posterTracksList,
+      eventUtilTemp.speakerTracksList,
+      eventUtilTemp.panelDiscussionList
+    ].expand((x) => x).toList();
   }
 
   @override
@@ -174,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 520.h,
                 child: ListView.builder(
                   // itemCount: themes.getThemesList().length,
-                  itemCount: themes.getThemesList().length,
+                  itemCount: themeUtil.themesList.length,
                   scrollDirection: Axis.horizontal,
                   physics: BouncingScrollPhysics(),
                   padding: EdgeInsets.symmetric(
@@ -183,11 +208,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   itemBuilder: (context, position) {
                     return ThemeCard(
-                      // position: position,
-                      themeDetails: themes.getThemesList()[position]
-                      //     Provider.of<EventProvider>(context, listen: false)
-                      //         .themesList[position],
-                    );
+                        // position: position,
+                        themeDetails: themeUtil.themesList[position]
+                        //     Provider.of<EventProvider>(context, listen: false)
+                        //         .themesList[position],
+                        );
                   },
                 ),
               ),
@@ -209,13 +234,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 // ),
                 // height: height*1.5,
                 child: ListView.builder(
-                  itemCount: events.getEventsList().length,
+                  itemCount: eventUtil.length,
                   // scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.only(top: 23.h),
                   itemBuilder: (context, position) {
-                    return EventCard(eventDetails: events.getEventsList()[position],);
+                    return EventCard(
+                      eventDetails: eventUtil[position],
+                    );
                   },
                 ),
               ),

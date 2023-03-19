@@ -5,7 +5,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:riise/modules/ThemeUtil.dart';
+
 
 import '../models/ThemeInfo.dart';
 import '../screens/Themes/ThemeDetailScreen.dart';
@@ -20,7 +20,7 @@ class ThemeCard extends StatefulWidget {
   }) : super(key: key);
 
   // late int position;
-  late ThemeUtil themeDetails;
+  late ThemeServerInformation themeDetails;
 
   @override
   State<ThemeCard> createState() => _ThemeCardState();
@@ -62,8 +62,8 @@ class _ThemeCardState extends State<ThemeCard> {
                     ),
                   );
                 },
-                child: Image.asset(
-                  widget.themeDetails.iconImage,
+                child: Image.network(
+                  widget.themeDetails.Theme_Image_Url,
                   width: 200.r,
                   height: 200.r,
                 ),
@@ -78,7 +78,7 @@ class _ThemeCardState extends State<ThemeCard> {
                     children: [
                       Flexible(
                         child: Text(
-                          widget.themeDetails.name,
+                          widget.themeDetails.Theme_Name,
                           style: TextStyle(fontSize: 40.sp),
                           softWrap: true,
                           textAlign: TextAlign.center,

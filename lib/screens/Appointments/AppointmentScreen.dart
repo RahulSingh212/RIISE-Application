@@ -20,7 +20,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../components/AppointmentCard.dart';
 import '../../components/EventCard.dart';
 import '../../components/SideNavBar.dart';
-import '../../modules/ThemeUtil.dart';
+
 
 class AppointmentScreen extends StatefulWidget {
   static const routeName = '/rise-appointment-screen';

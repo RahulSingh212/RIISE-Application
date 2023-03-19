@@ -40,6 +40,16 @@ class _FacultyScreenState extends State<FacultyScreen> {
     "Mathematics (Maths)",
     "Social Sciences And Humanities (SSH)"
   ];
+
+  Map<String, String> facultyDeptMap = {
+    "Computational Biology (CB)": "CB",
+    "Electronics & Communications Engineering (ECE)": "ECE",
+    "Computer Science and Engineering (CSE)": "CSE",
+    "Human Centred Design (HCD)": "HCD",
+    "Mathematics (Maths)": "Maths",
+    "Social Sciences And Humanities (SSH)": "SSH"
+  };
+
   // List<String> recentSearch = <String>[];
   late String dropdownValue = facultyDeptList.first;
   late String filterValue = "";
@@ -48,11 +58,11 @@ class _FacultyScreenState extends State<FacultyScreen> {
       Provider.of<FacultiesProvider>(context, listen: false);
 
   void initState() {
-
     super.initState();
     Provider.of<FacultiesProvider>(context, listen: false)
         .fetchCollegeFaculties(context);
   }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -198,7 +208,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
                     dropdownColor: Colors.white,
                     onChanged: (String? value) {
                       setState(() {
-                        dropdownValue = value!;
+                        dropdownValue = facultyDeptMap[value]!;
                         print(dropdownValue);
                       });
                     },
@@ -226,11 +236,16 @@ class _FacultyScreenState extends State<FacultyScreen> {
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
-                  itemCount: Provider.of<FacultiesProvider>(context, listen: false).facultiesList.length,
+                  itemCount:
+                      Provider.of<FacultiesProvider>(context, listen: false)
+                          .facultiesList
+                          .length,
                   itemBuilder: (BuildContext context, int index) {
                     if (isvalidFaculty(filterValue, index, dropdownValue)) {
                       return FacultyCard(
-                        facultyDetails: Provider.of<FacultiesProvider>(context, listen: false).facultiesList[index],
+                        facultyDetails: Provider.of<FacultiesProvider>(context,
+                                listen: false)
+                            .facultiesList[index],
                       );
                     } else {
                       return Container();
@@ -245,14 +260,23 @@ class _FacultyScreenState extends State<FacultyScreen> {
 
   bool isvalidFaculty(filterValue, index, dropdownvalue) {
     //TODO - use this when Dept is ready
+
+    // List<String> deptList = convertStrToList(
+    //     facultyProider.facultiesList[index].faculty_Department);
+
+    //TODO - Check if working
     // return facultyProider.facultiesList[index].faculty_Name
-    //     .toLowerCase()
-    //      .contains(filterValue.toLowerCase()) && (facultyProider.facultiesList[index].faculty_Name
-    //     .toLowerCase().compareTo(dropdownValue.toString()) == 0 || facultyProider.facultiesList[index].faculty_Name
-    //     .toLowerCase().compareTo("ALL") == 0);
+    //         .toLowerCase()
+    //         .contains(filterValue.toLowerCase()) &&
+    //     (deptList.contains(dropdownValue.toString()) ||
+    //         dropdownvalue.compareTo("ALL") == 0);
 
     return facultyProider.facultiesList[index].faculty_Name
         .toLowerCase()
-        .contains(filterValue.toLowerCase());
+        .contains(filterValue.toLowerCase())  ;
+  }
+
+  convertStrToList(String str) {
+    return str.split(',');
   }
 }

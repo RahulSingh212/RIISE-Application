@@ -17,7 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/EventCard3.dart';
 import '../../components/SideNavBar.dart';
-import '../../modules/EventUtil.dart';
+
 
 class SpeakerTracksScreen extends StatefulWidget {
   static const routeName = '/rise-speaker-tracks-screen';
@@ -29,16 +29,22 @@ class SpeakerTracksScreen extends StatefulWidget {
 }
 
 class _SpeakerTracksScreenState extends State<SpeakerTracksScreen> {
-  EventListUtil events = EventListUtil();
+  late EventProvider eventUtil;
+
+  @override
+  void initState() {
+    super.initState();
+    eventUtil = Provider.of<EventProvider>(context, listen: false);
+    eventUtil.fetchEventTracks(context, "PosterTracks");
+
+  }
 
   @override
   void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-
-    Provider.of<EventProvider>(context, listen: false).fetchEventTracks(
-      context,
-      "SpeakerTracks",
-    );
+    eventUtil = Provider.of<EventProvider>(context, listen: false);
+    eventUtil.fetchEventTracks(context, "PosterTracks");
   }
 
   @override
@@ -78,7 +84,7 @@ class _SpeakerTracksScreenState extends State<SpeakerTracksScreen> {
       body: Padding(
         padding: EdgeInsets.only(top: 220.h),
         child: ListView.builder(
-          itemCount: events.getEventsList().length,
+          itemCount: eventUtil.speakerTracksList.length,
           scrollDirection: Axis.vertical,
           shrinkWrap: false,
           // physics: NeverScrollableScrollPhysics(),
@@ -87,7 +93,7 @@ class _SpeakerTracksScreenState extends State<SpeakerTracksScreen> {
             return Padding(
               padding: EdgeInsets.symmetric(vertical: 50.5.h, horizontal: 60.w),
               child: EventCard3(
-                eventDetails: events.getEventsList()[position],
+                eventDetails: eventUtil.speakerTracksList[position],
               ),
             );
           },

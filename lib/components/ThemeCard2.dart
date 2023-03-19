@@ -5,8 +5,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:riise/modules/ThemeUtil.dart';
 
+import '../models/ThemeInfo.dart';
 import '../screens/Themes/ThemeDetailScreen.dart';
 
 //ignore: must_be_immutable
@@ -14,14 +14,14 @@ class ThemeCard2 extends StatefulWidget {
   ThemeCard2({Key? key, required this.themeDetails}) : super(key: key);
 
   // late int position;
-  late ThemeUtil themeDetails;
+  late ThemeServerInformation themeDetails;
 
   @override
   State<ThemeCard2> createState() => _ThemeCard2State();
 }
 
 class _ThemeCard2State extends State<ThemeCard2> {
-  ThemeListUtil themes = ThemeListUtil();
+  // ThemeListUtil themes = ThemeListUtil();
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +55,8 @@ class _ThemeCard2State extends State<ThemeCard2> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  widget.themeDetails.iconImage,
+                Image.network(
+                  widget.themeDetails.Theme_Image_Url,
                   width: 300.r,
                   height: 300.r,
                   fit: BoxFit.cover,
@@ -71,7 +71,7 @@ class _ThemeCard2State extends State<ThemeCard2> {
                       children: [
                         Flexible(
                           child: Text(
-                            widget.themeDetails.name,
+                            widget.themeDetails.Theme_Name,
                             style: TextStyle(fontSize:50.sp),
                             softWrap: true,
                             textAlign: TextAlign.center,

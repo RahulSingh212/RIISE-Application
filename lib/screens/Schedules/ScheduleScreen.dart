@@ -19,8 +19,9 @@ import '../../components/EventCard.dart';
 import '../../components/EventCard2.dart';
 import '../../components/SideNavBar.dart';
 import '../../components/ThemeCard.dart';
-import '../../modules/EventUtil.dart';
-import '../../modules/ThemeUtil.dart';
+import '../../models/EventInfo.dart';
+
+import '../../providers/EventsProvider.dart';
 
 class ScheduleScreen extends StatefulWidget {
   static const routeName = '/rise-schedule-screen';
@@ -31,10 +32,54 @@ class ScheduleScreen extends StatefulWidget {
   State<ScheduleScreen> createState() => _ScheduleScreenState();
 }
 
+extension TimeOfDayExtension on TimeOfDay {
+  int compareTo(TimeOfDay other) {
+    if (hour < other.hour) return -1;
+    if (hour > other.hour) return 1;
+    if (minute < other.minute) return -1;
+    if (minute > other.minute) return 1;
+    return 0;
+  }
+}
+
 class _ScheduleScreenState extends State<ScheduleScreen> {
   String userName = "Henansh";
   late TextEditingController searchBarController = TextEditingController();
-  EventListUtil events = EventListUtil();
+  late EventProvider eventUtilTemp;
+  late List<EventServerInformation> eventUtil;
+
+  @override
+  void initState() {
+    super.initState();
+
+    eventUtilTemp = Provider.of<EventProvider>(context, listen: false);
+
+    eventUtilTemp.fetchEventTracks(context, "SpeakerTracks");
+    eventUtilTemp.fetchEventTracks(context, "PosterTracks");
+    eventUtilTemp.fetchEventTracks(context, "PanelDiscussion");
+    eventUtil = [
+      eventUtilTemp.posterTracksList,
+      eventUtilTemp.speakerTracksList,
+      eventUtilTemp.panelDiscussionList
+    ].expand((x) => x).toList();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    eventUtilTemp = Provider.of<EventProvider>(context, listen: false);
+
+    eventUtilTemp.fetchEventTracks(context, "SpeakerTracks");
+    eventUtilTemp.fetchEventTracks(context, "PosterTracks");
+    eventUtilTemp.fetchEventTracks(context, "PanelDiscussion");
+    eventUtil = [
+      eventUtilTemp.posterTracksList,
+      eventUtilTemp.speakerTracksList,
+      eventUtilTemp.panelDiscussionList
+    ].expand((x) => x).toList();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -93,8 +138,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   child: DecoratedLineConnector(
                     thickness: 21.6.w,
                     decoration: BoxDecoration(
-                      color: DateTime.now().compareTo(
-                                  events.getEventsList()[index].time) <
+                      color: TimeOfDay.fromDateTime(DateTime.now()).compareTo(
+                                  eventUtil[index].Event_Start_Time) <
                               0
                           ? Colors.green
                           : Colors.red,
@@ -124,7 +169,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 contentsBuilder: (context, index) => Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: 58.5.h, horizontal: 21.6.w),
-                  child: EventCard2(position: index,eventDetails: events.getEventsList()[index],),
+                  child: EventCard2(position: index,eventDetails: eventUtil[index],),
                 ),
                 oppositeContentsBuilder: (context, index) => Container(
                   padding: EdgeInsets.symmetric(
@@ -146,13 +191,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         ),
                       ),
                       child: Text(
-                        events.getEventsList()[index].getTime(),
+                        "${eventUtil[index].Event_Start_Time.format(context)} - ${eventUtil[index].Event_End_Time.format(context)}",
                         style: TextStyle(fontSize: 50.sp),
                       ),
                     ),
                   ),
                 ),
-                itemCount: events.getEventsList().length,
+                itemCount: eventUtil.length,
                 // connectorStyle:
               )),
         ));

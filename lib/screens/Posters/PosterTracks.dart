@@ -18,7 +18,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../components/EventCard2.dart';
 import '../../components/EventCard3.dart';
 import '../../components/SideNavBar.dart';
-import '../../modules/EventUtil.dart';
+import '../../models/EventInfo.dart';
+
 import '../../providers/EventsProvider.dart';
 
 class PosterTracksScreen extends StatefulWidget {
@@ -32,17 +33,20 @@ class PosterTracksScreen extends StatefulWidget {
 
 class _PosterTracksScreenState extends State<PosterTracksScreen> {
 
-  EventListUtil events = EventListUtil();
+  late EventProvider eventUtil;
+
+  @override
+  void initState() {
+    super.initState();
+    eventUtil = Provider.of<EventProvider>(context, listen: false);
+    eventUtil.fetchEventTracks(context, "PosterTracks");
+
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    
-
-    Provider.of<EventProvider>(context, listen: false).fetchEventTracks(
-      context,
-      "PosterTracks",
-    );
+    eventUtil.fetchEventTracks(context, "PosterTracks");
   }
 
   @override
@@ -82,7 +86,7 @@ class _PosterTracksScreenState extends State<PosterTracksScreen> {
       body: Padding(
         padding: EdgeInsets.only(top: 220.h),
         child: ListView.builder(
-          itemCount: events.getEventsList().length,
+          itemCount: eventUtil.posterTracksList.length,
           scrollDirection: Axis.vertical,
           shrinkWrap: false,
           // physics: NeverScrollableScrollPhysics(),
@@ -91,7 +95,7 @@ class _PosterTracksScreenState extends State<PosterTracksScreen> {
             return Padding(
               padding: EdgeInsets.symmetric(
                   vertical: 50.5.h, horizontal: 60.w),
-              child: EventCard3(eventDetails: events.getEventsList()[position],),
+              child: EventCard3(eventDetails: eventUtil.posterTracksList[position],),
             );
           },
         ),

@@ -3,12 +3,14 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
-import 'package:riise/modules/SpeakerUtil.dart';
+
 import 'package:riise/screens/SpeakerDetailScreen.dart';
 import '../models/FacultyInfo.dart';
-import '../modules/EventUtil.dart';
+import '../models/SpeakerInfo.dart';
+
 import '../providers/FacultiesProvider.dart';
 import '../screens/Faculty/FacultyDetailScreen.dart';
 
@@ -21,7 +23,7 @@ class SpeakerCard extends StatefulWidget {
   }) : super(key: key);
 
   // late int position;
-  late SpeakerUtil speakerDetails;
+  late SpeakerServerInformation speakerDetails;
 
   @override
   State<SpeakerCard> createState() => _SpeakerCardState();
@@ -36,7 +38,7 @@ class _SpeakerCardState extends State<SpeakerCard> {
   // late var facultyProider = Provider.of<FacultiesProvider>(context, listen: false);
   String backImage = "assets/images/background/artificial-intelligence.jpg";
 
-
+  String formatTime(String time) => DateFormat('hh:mm a').format(DateTime.parse(time));
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +96,7 @@ class _SpeakerCardState extends State<SpeakerCard> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             image: NetworkImage(
-                              widget.speakerDetails.image,
+                              widget.speakerDetails.speaker_Image_Url,
                             ),
                             fit: BoxFit.cover,
                             scale: 0.4,
@@ -115,7 +117,7 @@ class _SpeakerCardState extends State<SpeakerCard> {
                           children: [
                             Flexible(
                               child: Text(
-                                widget.speakerDetails.name,
+                                widget.speakerDetails.speaker_Name,
                                 style: TextStyle(fontSize: 40.sp),
                                 softWrap: true,
                                 // overflow: TextOverflow.fade,
@@ -138,7 +140,7 @@ class _SpeakerCardState extends State<SpeakerCard> {
                                   SizedBox(width: 20.w),
                                   Flexible(
                                     child: Text(
-                                      "${widget.speakerDetails.getStartTime()} - ${widget.speakerDetails.getEndTime()}",
+                                      "${widget.speakerDetails.speaker_Start_Time.format(context)} - ${widget.speakerDetails.speaker_End_Time.format(context)}",
                                       style: TextStyle(fontSize: 40.sp),
                                       softWrap: true,
                                     ),
@@ -159,7 +161,7 @@ class _SpeakerCardState extends State<SpeakerCard> {
                                 SizedBox(width: 20.w),
                                 Flexible(
                                   child: Text(
-                                    widget.speakerDetails.talkTitle,
+                                    widget.speakerDetails.speaker_Talk_Title,
                                     style: TextStyle(fontSize: 40.sp),
                                     softWrap: true,
                                   ),

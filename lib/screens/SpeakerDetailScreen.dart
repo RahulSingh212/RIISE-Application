@@ -13,7 +13,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/models/SpeakerInfo.dart';
-import 'package:riise/modules/SpeakerUtil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../components/SideNavBar.dart';
@@ -28,7 +27,7 @@ class SpeakerDetailScreen extends StatefulWidget {
   }) : super(key: key);
 
   // late int position;
-  late SpeakerUtil speakerDetails;
+  late SpeakerServerInformation speakerDetails;
 
   @override
   State<SpeakerDetailScreen> createState() => _SpeakerDetailScreenState();
@@ -45,9 +44,8 @@ class _SpeakerDetailScreenState extends State<SpeakerDetailScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           centerTitle: true,
-          //TODO - Make it flexible
           title: Text(
-            "Faculty",
+            "Speaker",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
@@ -98,7 +96,7 @@ class _SpeakerDetailScreenState extends State<SpeakerDetailScreen> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.network(
-                            widget.speakerDetails.image,
+                            widget.speakerDetails.speaker_Image_Url,
                             width: 450.r,
                             height: 450.r,
                             fit: BoxFit.fill,
@@ -110,7 +108,7 @@ class _SpeakerDetailScreenState extends State<SpeakerDetailScreen> {
                       ),
                       Flexible(
                         child: Text(
-                          widget.speakerDetails.name,
+                          widget.speakerDetails.speaker_Name,
                           style: TextStyle(fontSize: 70.sp),
                           softWrap: true,
                           textAlign: TextAlign.center,
@@ -134,7 +132,7 @@ class _SpeakerDetailScreenState extends State<SpeakerDetailScreen> {
                          ),
                          Flexible(
                             child: Text(
-                              "${widget.speakerDetails.getStartTime()} - ${widget.speakerDetails.getEndTime()}",
+                              "${widget.speakerDetails.speaker_Start_Time.format(context)} - ${widget.speakerDetails.speaker_End_Time.format(context)}",
                               style: TextStyle(
                                   fontSize: 40.sp),
                               softWrap: true,
@@ -157,7 +155,7 @@ class _SpeakerDetailScreenState extends State<SpeakerDetailScreen> {
                           ),
                           Flexible(
                             child: Text(
-                              widget.speakerDetails.talkTitle,
+                              widget.speakerDetails.speaker_Talk_Title,
                               style: TextStyle(
                                   fontSize: 40.sp),
                               softWrap: true,
@@ -191,7 +189,7 @@ class _SpeakerDetailScreenState extends State<SpeakerDetailScreen> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 45.w),
                         child: Text(
-                          widget.speakerDetails.abstract,
+                          widget.speakerDetails.speaker_Abstract,
                           style: TextStyle(fontSize: 33.sp),
                           softWrap: true,
                           textAlign: TextAlign.justify,
@@ -222,7 +220,7 @@ class _SpeakerDetailScreenState extends State<SpeakerDetailScreen> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 45.w),
                         child: Text(
-                          widget.speakerDetails.bio,
+                          widget.speakerDetails.speaker_Bio,
                           style: TextStyle(fontSize: 33.sp),
                           softWrap: true,
                           textAlign: TextAlign.justify,

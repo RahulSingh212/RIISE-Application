@@ -18,6 +18,7 @@ import '../../components/SideNavBar.dart';
 import '../../models/CoordinateInfo.dart';
 import '../../providers/LocationProvider.dart';
 import './ListOfListedLocationScreen.dart';
+import 'CoordinationDetailScreen.dart';
 
 class DirectionScreen extends StatefulWidget {
   static const routeName = '/rise-direction-screen';
@@ -118,13 +119,13 @@ class _DirectionScreenState extends State<DirectionScreen> {
 
     return InkWell(
       onTap: () {
-        // Navigator.of(context).push(
-        //   MaterialPageRoute(
-        //     builder: (context) => CoordinationDetailScreen(
-        //       coordinateDetails: coordinateDetails,
-        //     ),
-        //   ),
-        // );
+      //   Navigator.of(context).push(
+      //     MaterialPageRoute(
+      //       builder: (context) => CoordinationDetailScreen(
+      //         coordinateDetails: coordinateDetails,
+      //       ),
+      //     ),
+      //   );
         _launchDirectionsUrl(
           coordinateDetails.coordinate_Latitude,
           coordinateDetails.coordinate_Longitude,
@@ -158,7 +159,8 @@ class _DirectionScreenState extends State<DirectionScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
-                  width: minDimension * 0.25,
+                  width: minDimension * 0.2,
+
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(

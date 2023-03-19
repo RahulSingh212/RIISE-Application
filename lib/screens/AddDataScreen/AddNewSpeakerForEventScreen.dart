@@ -394,7 +394,7 @@ class _AddNewSpeakerForEventScreenState
                     5) {
                   String titleText = "Invalid speaker name";
                   String contextText =
-                      "Spaker's name must be at least 5 characters";
+                      "Speaker's name must be at least 5 characters";
                   _checkForError(
                     context,
                     titleText,
@@ -406,7 +406,7 @@ class _AddNewSpeakerForEventScreenState
                     5) {
                   String titleText = "Invalid speaker talk title";
                   String contextText =
-                      "Spaker's talk title must be at least 5 characters";
+                      "Speaker's talk title must be at least 5 characters";
                   _checkForError(
                     context,
                     titleText,
@@ -418,7 +418,7 @@ class _AddNewSpeakerForEventScreenState
                     5) {
                   String titleText = "Invalid speaker abstract";
                   String contextText =
-                      "Spaker's abstract must be at least 5 characters";
+                      "Speaker's abstract must be at least 5 characters";
                   _checkForError(
                     context,
                     titleText,
@@ -428,15 +428,14 @@ class _AddNewSpeakerForEventScreenState
                     5) {
                   String titleText = "Invalid speaker bio";
                   String contextText =
-                      "Spaker's bio must be at least 5 characters";
+                      "Speaker's bio must be at least 5 characters";
                   _checkForError(
                     context,
                     titleText,
                     contextText,
                   );
                 } else if (widget.requestIndex != 0
-                    ? speakerInfoCheckMapping["speaker_Start_Time"] == false
-                    : true) {
+                    && speakerInfoCheckMapping["speaker_Start_Time"] == false) {
                   String titleText = "Invalid start time";
                   String contextText = "Select the start time";
                   _checkForError(
@@ -445,8 +444,7 @@ class _AddNewSpeakerForEventScreenState
                     contextText,
                   );
                 } else if (widget.requestIndex != 0
-                    ? speakerInfoCheckMapping["speaker_End_Time"] == false
-                    : true) {
+                    &&  speakerInfoCheckMapping["speaker_End_Time"] == false) {
                   String titleText = "Invalid end time";
                   String contextText = "Select the end time";
                   _checkForError(

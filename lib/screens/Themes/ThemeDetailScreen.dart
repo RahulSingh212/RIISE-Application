@@ -14,12 +14,13 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/components/ThemeCard.dart';
 import 'package:riise/models/ThemeInfo.dart';
-import 'package:riise/modules/ThemeUtil.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/SideNavBar.dart';
 import '../../components/SpeakerCard.dart';
-import '../../modules/SpeakerUtil.dart';
+import '../../models/SpeakerInfo.dart';
+
 
 class ThemeDetailScreen extends StatefulWidget {
   static const routeName = '/rise-themes-detail-screen';
@@ -32,7 +33,7 @@ class ThemeDetailScreen extends StatefulWidget {
 
   // late int position;
   //Change with provider
-  late ThemeUtil themeDetails;
+  late ThemeServerInformation themeDetails;
 
   @override
   State<ThemeDetailScreen> createState() => _ThemeDetailScreenState();
@@ -50,7 +51,7 @@ class _ThemeDetailScreenState extends State<ThemeDetailScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        //TODO - Make it flexible
+
         title: Text(
           "Theme",
           style: TextStyle(
@@ -98,8 +99,8 @@ class _ThemeDetailScreenState extends State<ThemeDetailScreen> {
                     Container(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
-                        child: Image.asset(
-                          widget.themeDetails.iconImage,
+                        child: Image.network(
+                          widget.themeDetails.Theme_Image_Url,
                           width: 450.r,
                           height: 450.r,
                           fit: BoxFit.fill,
@@ -111,7 +112,7 @@ class _ThemeDetailScreenState extends State<ThemeDetailScreen> {
                     ),
                     Flexible(
                       child: Text(
-                        widget.themeDetails.name,
+                        widget.themeDetails.Theme_Name,
                         style: TextStyle(fontSize: 70.sp),
                         softWrap: true,
                         textAlign: TextAlign.center,
@@ -142,7 +143,7 @@ class _ThemeDetailScreenState extends State<ThemeDetailScreen> {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 45.w),
                       child: Text(
-                        widget.themeDetails.about,
+                        widget.themeDetails.Theme_Info,
                         style: TextStyle(fontSize: 33.sp),
                         softWrap: true,
                         textAlign: TextAlign.justify,
@@ -173,10 +174,9 @@ class _ThemeDetailScreenState extends State<ThemeDetailScreen> {
                       padding: EdgeInsets.symmetric(vertical: 40.h),
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, position) {
-                        SpeakerUtil val = widget.themeDetails.speakers[position];
-                        return SpeakerCard(speakerDetails: val,);
+                        return SpeakerCard(speakerDetails: widget.themeDetails.themeSpeakersList[position],);
                       },
-                      itemCount: widget.themeDetails.speakers.length,
+                      itemCount: widget.themeDetails.themeSpeakersList.length,
                     ),
                   ],
                 ),

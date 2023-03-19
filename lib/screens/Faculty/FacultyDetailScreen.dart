@@ -7,11 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../components/SideNavBar.dart';
 import '../../models/FacultyInfo.dart';
-import '../../modules/ThemeUtil.dart';
+
 
 class FacultyDetailScreen extends StatefulWidget {
   FacultyDetailScreen({
@@ -122,7 +123,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                       ),
                       Flexible(
                         child: Text(
-                          widget.facultyDetails.faculty_Position + " (ECE,CSE)",
+                          "${widget.facultyDetails.faculty_Position} (${widget.facultyDetails.faculty_Department})",
                           style: TextStyle(fontSize: 40.sp),
                           softWrap: true,
                           textAlign: TextAlign.center,
@@ -245,12 +246,17 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                             // size: ,
                           ),
                           Flexible(
-                            child: Text(
-                              widget.facultyDetails.faculty_Office_Address,
-                              style: TextStyle(fontSize: 40.sp),
-                              softWrap: true,
-                              textAlign: TextAlign.center,
-                              // maxLines: 100,
+                            child: InkWell(
+                              onTap: (){
+                                _launchDirectionsUrl(widget.facultyDetails.faculty_Office_Latitude.toString(),widget.facultyDetails.faculty_Office_Longitude.toString());
+                              },
+                              child: Text(
+                                widget.facultyDetails.faculty_Office_Address,
+                                style: TextStyle(fontSize: 40.sp,color:  Colors.blueAccent),
+                                softWrap: true,
+                                textAlign: TextAlign.center,
+                                // maxLines: 100,
+                              ),
                             ),
                           ),
                         ],
@@ -410,4 +416,18 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
   convertStrToList(String str) {
     return str.split(',');
   }
+
+  Future<void> _launchDirectionsUrl(String coordinateLatitude, String coordinateLongitude) async {
+    Uri url = Uri.parse(
+        'https://www.google.com/maps/dir/?api=1&destination=$coordinateLatitude,$coordinateLongitude&travelmode=walking');
+
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+
 }

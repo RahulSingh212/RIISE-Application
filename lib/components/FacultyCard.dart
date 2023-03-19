@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
 import '../models/FacultyInfo.dart';
-import '../modules/EventUtil.dart';
 import '../providers/FacultiesProvider.dart';
 import '../screens/Faculty/FacultyDetailScreen.dart';
 
@@ -24,22 +23,12 @@ class FacultyCard extends StatefulWidget {
 }
 
 class _FacultyCardState extends State<FacultyCard> {
-  // AppointmentListUtil appointments = AppointmentListUtil();
 
-  //Temp Faculty details, need to changed with class
-  // String facName = "Henansh";
   String backImage = "assets/images/background/artificial-intelligence.jpg";
-  // late var facultyProider = Provider.of<FacultiesProvider>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {
-    // var padding = MediaQuery.of(context).padding;
-    // double width = (MediaQuery.of(context).size.width);
-    // double height =
-    //     (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
-    //
-    // double minDimension = min(width, height);
-    // double maxDimension = max(width, height);
+
 
     return InkWell(
       onTap: () {
@@ -133,8 +122,8 @@ class _FacultyCardState extends State<FacultyCard> {
                                   SizedBox(width: 20.w),
                                   Flexible(
                                     child: Text(
-                                      (widget.facultyDetails
-                                          .faculty_Position + " (CSE,ECE)"),
+                                      ("${widget.facultyDetails
+                                          .faculty_Position} (${widget.facultyDetails.faculty_Department})"),
                                       style: TextStyle(fontSize: 40.sp),
                                       softWrap: true,
                                     ),

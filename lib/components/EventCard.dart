@@ -4,22 +4,22 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../modules/EventUtil.dart';
-import '../modules/EventUtil.dart';
+import 'package:riise/models/EventInfo.dart';
+
 
 //ignore: must_be_immutable
 class EventCard extends StatefulWidget {
   EventCard({Key? key, required this.eventDetails}) : super(key: key);
 
   // late int position;
-  late EventUtil eventDetails;
+  late EventServerInformation eventDetails;
 
   @override
   State<EventCard> createState() => _EventCardState();
 }
 
 class _EventCardState extends State<EventCard> {
-  EventListUtil events = EventListUtil();
+
   @override
   Widget build(BuildContext context) {
     // var padding = MediaQuery.of(context).padding;
@@ -38,7 +38,7 @@ class _EventCardState extends State<EventCard> {
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(widget.eventDetails.iconImage,),
+                  image: NetworkImage(widget.eventDetails.Event_Image_Url,),
                   fit: BoxFit.cover
               )
           ),
@@ -55,14 +55,15 @@ class _EventCardState extends State<EventCard> {
                   children: [
                     Flexible(
                       child: Text(
-                        widget.eventDetails.name,
+                        widget.eventDetails.Event_Name,
                         style: TextStyle(fontSize: 40.sp),
                         softWrap: true,
                       ),
                     ),
                     Flexible(
                       child: Text(
-                        widget.eventDetails.getTime(),
+                        //TODO - Ask if endTime is required to Show
+                        widget.eventDetails.Event_Start_Time.format(context),
                         style: TextStyle(fontSize: 40.sp),
                         softWrap: true,
                       ),
@@ -80,7 +81,7 @@ class _EventCardState extends State<EventCard> {
                     ),
                     Flexible(
                       child: Text(
-                        widget.eventDetails.location,
+                        widget.eventDetails.Event_Address,
                         style: TextStyle(fontSize: 35.sp,
                         ),
                         softWrap: true,

@@ -4,15 +4,15 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../modules/EventUtil.dart';
-import '../modules/EventUtil.dart';
+import 'package:riise/models/EventInfo.dart';
+
 
 //ignore: must_be_immutable
 class EventCard3 extends StatefulWidget {
   EventCard3({Key? key, required this.eventDetails}) : super(key: key);
 
   // late int position;
-  late EventUtil eventDetails;
+  late EventServerInformation eventDetails;
 
   @override
   State<EventCard3> createState() => _EventCard3State();
@@ -39,7 +39,7 @@ class _EventCard3State extends State<EventCard3> {
           
             image: DecorationImage(
               //TODO - Change background image
-                image: AssetImage(widget.eventDetails.iconImage,),
+                image: NetworkImage(widget.eventDetails.Event_Image_Url,),
                 fit: BoxFit.cover
             ),
           borderRadius: BorderRadius.only(topLeft: Radius.circular(25),bottomRight: Radius.circular(25))
@@ -56,7 +56,7 @@ class _EventCard3State extends State<EventCard3> {
                 children: [
                   Flexible(
                     child: Text(
-                      widget.eventDetails.name,
+                      widget.eventDetails.Event_Name,
                       style: TextStyle(fontSize: 40.sp),
                       softWrap: true,
                       textAlign: TextAlign.center,
@@ -76,7 +76,7 @@ class _EventCard3State extends State<EventCard3> {
                   ),
                   Flexible(
                     child: Text(
-                      widget.eventDetails.location,
+                      widget.eventDetails.Event_Address,
                       style: TextStyle(fontSize: 40.sp,
                       ),
                       softWrap: true,
@@ -94,7 +94,7 @@ class _EventCard3State extends State<EventCard3> {
                   ),
                   Flexible(
                     child: Text(
-                      widget.eventDetails.getTime(),
+                      widget.eventDetails.Event_Start_Time.format(context),
                       style: TextStyle(fontSize: 40.sp,
                       ),
                       softWrap: true,

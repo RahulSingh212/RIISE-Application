@@ -17,7 +17,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/SideNavBar.dart';
 import '../../components/ThemeCard2.dart';
-import '../../modules/ThemeUtil.dart';
 import '../../providers/EventsProvider.dart';
 import '../../providers/ThemeProvider.dart';
 import 'ThemeDetailScreen.dart';
@@ -32,17 +31,27 @@ class ThemesScreen extends StatefulWidget {
 }
 
 class _ThemesScreenState extends State<ThemesScreen> {
-  ThemeListUtil themes = ThemeListUtil();
+  // ThemeListUtil themes = ThemeListUtil();
+
+  late ThemeProvider themeUtil;
+
+  @override
+  void initState() {
+
+    super.initState();
+    themeUtil = Provider.of<ThemeProvider>(context, listen: false);
+    themeUtil.fetchThemes(context);
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    Provider.of<ThemeProvider>(context, listen: false).fetchThemes(context);
+    themeUtil.fetchThemes(context);
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
@@ -78,7 +87,7 @@ class _ThemesScreenState extends State<ThemesScreen> {
       body: Padding(
         padding: EdgeInsets.only(top: 220.h),
         child: ListView.builder(
-          itemCount: themes.getThemesList().length,
+          itemCount: themeUtil.themesList.length,
           scrollDirection: Axis.vertical,
           shrinkWrap: false,
           // physics: NeverScrollableScrollPhysics(),
@@ -89,7 +98,7 @@ class _ThemesScreenState extends State<ThemesScreen> {
               height: 700.h,
               padding: EdgeInsets.only(left: 86.w, top: 80.h),
               child: ThemeCard2(
-                themeDetails: themes.getThemesList()[position],
+                themeDetails: themeUtil.themesList[position],
               ),
             );
           },
