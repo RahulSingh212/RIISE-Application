@@ -19,6 +19,7 @@ import '../../components/SideNavBar.dart';
 import '../../components/ThemeCard2.dart';
 import '../../modules/ThemeUtil.dart';
 import '../../providers/EventsProvider.dart';
+import '../../providers/ThemeProvider.dart';
 import 'ThemeDetailScreen.dart';
 
 class ThemesScreen extends StatefulWidget {
@@ -35,65 +36,65 @@ class _ThemesScreenState extends State<ThemesScreen> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
 
-    Provider.of<EventProvider>(context, listen: false).fetchThemes(context);
+    Provider.of<ThemeProvider>(context, listen: false).fetchThemes(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        extendBodyBehindAppBar: true,
-        drawer: SideNavBar(),
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          centerTitle: true,
-          title: Text(
-            "Themes",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: 60.sp,
-            ),
-            textAlign: TextAlign.center,
+      backgroundColor: Colors.white,
+      extendBodyBehindAppBar: true,
+      drawer: SideNavBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          "Themes",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 60.sp,
           ),
-          iconTheme: IconThemeData(
-            color: Colors.blue,
-            size: 80.r,
-          ),
-          // actions: [
-          //   Container(
-          //     child: IconButton(
-          //       onPressed: () {},
-          //       icon: Icon(
-          //         Icons.person,
-          //       ),
-          //     ),
-          //   ),
-          // ],
+          textAlign: TextAlign.center,
         ),
-        body: Padding(
-          padding: EdgeInsets.only(top: 220.h),
-          child: ListView.builder(
-            itemCount: themes.getThemesList().length,
-            scrollDirection: Axis.vertical,
-            shrinkWrap: false,
-            // physics: NeverScrollableScrollPhysics(),
-            physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
-            itemBuilder: (context, position) {
-              return Container(
-                height: 700.h,
-                padding: EdgeInsets.only(left: 86.w, top: 80.h),
-                child: ThemeCard2(
-                  themeDetails: themes.getThemesList()[position],
-                ),
-              );
-            },
-          ),
-        ));
+        iconTheme: IconThemeData(
+          color: Colors.blue,
+          size: 80.r,
+        ),
+        // actions: [
+        //   Container(
+        //     child: IconButton(
+        //       onPressed: () {},
+        //       icon: Icon(
+        //         Icons.person,
+        //       ),
+        //     ),
+        //   ),
+        // ],
+      ),
+      body: Padding(
+        padding: EdgeInsets.only(top: 220.h),
+        child: ListView.builder(
+          itemCount: themes.getThemesList().length,
+          scrollDirection: Axis.vertical,
+          shrinkWrap: false,
+          // physics: NeverScrollableScrollPhysics(),
+          physics: BouncingScrollPhysics(),
+          padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
+          itemBuilder: (context, position) {
+            return Container(
+              height: 700.h,
+              padding: EdgeInsets.only(left: 86.w, top: 80.h),
+              child: ThemeCard2(
+                themeDetails: themes.getThemesList()[position],
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 }

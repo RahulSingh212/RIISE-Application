@@ -27,6 +27,7 @@ import './providers/UserLoginProvider.dart';
 import './providers/AddSectionsProvider.dart';
 import './providers/ScreenControllerProvider.dart';
 import './providers/LocationProvider.dart';
+import 'providers/ThemeProvider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,6 +73,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: FacultiesProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: ThemeProvider(),
         ),
         ChangeNotifierProvider.value(
           value: EventProvider(),
