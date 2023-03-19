@@ -12,6 +12,7 @@ import "package:flutter/services.dart";
 import 'package:riise/providers/UserLoginProvider.dart';
 
 import '../providers/ScreenControllerProvider.dart';
+import '../screens/Profile/ProfileScreen.dart';
 import '../screens/SingInScreen/LogInSignUpScreen.dart';
 import '../screens/TabScreen.dart';
 import '../screens/Home/HomeScreen.dart';
@@ -113,27 +114,36 @@ class _SideNavBarState extends State<SideNavBar> {
           SizedBox(
             height: 10,
           ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Colors.green.shade200,
-            ),
-            padding: EdgeInsets.only(
-              top: 12.5,
-              bottom: 12.5,
-            ),
-            margin: EdgeInsets.only(
-              bottom: 30,
-              left: 40,
-              right: 40,
-            ),
-            child: Text(
-              "My Profile",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 17.5,
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ProfileScreen(),
+                ),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.green.shade200,
               ),
-              textAlign: TextAlign.center,
+              padding: EdgeInsets.only(
+                top: 12.5,
+                bottom: 12.5,
+              ),
+              margin: EdgeInsets.only(
+                bottom: 30,
+                left: 40,
+                right: 40,
+              ),
+              child: Text(
+                "My Profile",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17.5,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           SizedBox(

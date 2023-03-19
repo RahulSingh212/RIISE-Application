@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:riise/providers/UserLoginProvider.dart';
 
 import '../providers/FacultiesProvider.dart';
+import '../providers/LocationProvider.dart';
 import "./Home/HomeScreen.dart";
 import "./Faculty/FacultyScreen.dart";
 import "./Schedules/ScheduleScreen.dart";
@@ -39,8 +40,28 @@ class _TabScreenState extends State<TabScreen> {
   ];
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // print("tab screen");
+    // Provider.of<FacultiesProvider>(
+    //   context,
+    //   listen: false,
+    // ).fetchCollegeFaculties(
+    //   context,
+    // );
+    // Provider.of<LocationProvider>(
+    //   context,
+    //   listen: false,
+    // ).fetchLocationList(
+    //   context,
+    // );
+  }
+
+  @override
   void initState() {
     super.initState();
+
     _pages = [
       {
         'page': HomeScreen(),
@@ -49,6 +70,12 @@ class _TabScreenState extends State<TabScreen> {
       {
         'page': FacultyScreen(),
         'title': 'Faculties',
+        'fetch': Provider.of<FacultiesProvider>(
+          context,
+          listen: false,
+        ).fetchCollegeFaculties(
+          context,
+        ),
       },
       {
         'page': ScheduleScreen(),
@@ -57,18 +84,41 @@ class _TabScreenState extends State<TabScreen> {
       {
         'page': DirectionScreen(),
         'title': 'Directions',
+        'fetch': Provider.of<FacultiesProvider>(
+          context,
+          listen: false,
+        ).fetchCollegeFaculties(
+          context,
+        ),
       },
       {
         'page': AppointmentScreen(),
         'title': 'Appointments',
       },
     ];
-
-    // Provider.of<FacultiesProvider>(context, listen: false)
-    //     .fetchCollegeFaculties(context);
   }
 
   void _selectPage(int index) {
+    // setState(() {
+    //   if (index == 0) {
+    //   } else if (index == 1) {
+    //     Provider.of<FacultiesProvider>(
+    //       context,
+    //       listen: false,
+    //     ).fetchCollegeFaculties(
+    //       context,
+    //     );
+    //   } else if (index == 2) {
+    //   } else if (index == 3) {
+    //     Provider.of<LocationProvider>(
+    //       context,
+    //       listen: false,
+    //     ).fetchLocationList(
+    //       context,
+    //     );
+    //   } else if (index == 4) {}
+    // });
+
     setState(() {
       Provider.of<ScreenControllerProvider>(context, listen: false)
           .selectedPageIndex = index;

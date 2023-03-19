@@ -32,6 +32,7 @@ class UserDetailsProvider with ChangeNotifier {
           "faculty_Name": userName,
           "faculty_Position": "",
           "faculty_College": "",
+          "faculty_Department": "",
           "faculty_Mobile_Number": "",
           "faculty_Research_Interests": "",
           "faculty_Affiliated_Centers_And_Labs": "",
