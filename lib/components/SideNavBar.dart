@@ -36,6 +36,9 @@ class SideNavBar extends StatefulWidget {
 }
 
 class _SideNavBarState extends State<SideNavBar> {
+
+  final _auth = FirebaseAuth.instance;
+
   Map<String, dynamic> screenMapping = {
     "tab": TabScreen(),
     "home": HomeScreen(),
@@ -236,23 +239,57 @@ class _SideNavBarState extends State<SideNavBar> {
             "pannel-discussion",
             10,
           ),
-          // Container(
-          //   padding: EdgeInsets.symmetric(
-          //     horizontal: 10,
-          //   ),
-          //   margin: EdgeInsets.only(
-          //     top: 12.5,
-          //     bottom: 47.5,
-          //   ),
-          //   child: Divider(
-          //     color: Colors.green.shade500,
-          //   ),
-          // ),
-          // sideBarTile(
-          //   context,
-          //   "Logout",
-          //   Icons.logout,
-          // ),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            margin: EdgeInsets.only(
+              top: 12.5,
+              bottom: 47.5,
+            ),
+            child: Divider(
+              color: Colors.green.shade500,
+            ),
+          ),
+          InkWell(
+            onTap: (){
+              _auth.signOut();
+            },
+            child: Container(
+              margin: EdgeInsets.only(
+                left: 5,
+                right: 5,
+                bottom: 2.5,
+              ),
+              padding: EdgeInsets.all(18.5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color:Colors.green.shade100,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(
+                      right: 20,
+                    ),
+                    child: Icon(Icons.logout_rounded),
+                  ),
+                  Container(
+                    child: Text(
+                      "Logout",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 10,
