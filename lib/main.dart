@@ -16,7 +16,6 @@ import "./screens/Faculty/FacultyScreen.dart";
 import "./screens/Schedules/ScheduleScreen.dart";
 import "./screens/Directions/DirectionScreen.dart";
 import "./screens/Appointments/AppointmentScreen.dart";
-import './screens/SingInScreen/SignInTypeScreen.dart';
 import './screens/SingInScreen/LogInSignUpScreen.dart';
 
 import "./providers/FirebaseProvider.dart";
