@@ -727,8 +727,7 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                               setState(() {
                                 _isFetchLocationButtonPressed = true;
                               });
-                              Position currPosition =
-                                  await _determinePosition();
+                              Position currPosition = await _determinePosition();
                               Placemark currAddress = await getCurrentAddress(
                                 currPosition.longitude,
                                 currPosition.latitude,
@@ -736,8 +735,8 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
 
                               setState(() {
                                 _isFetchLocationButtonPressed = false;
-                                profileInfoMapping["Event_Address"].text =
-                                    "Name: ${currAddress.name},\nStreet: ${currAddress.street},\nPostal Code: ${currAddress.postalCode},\nAdm Area: ${currAddress.administrativeArea},\nSub-Adm Area: ${currAddress.subAdministrativeArea}.";
+                                // profileInfoMapping["Event_Address"].text = "Name: ${currAddress.name},\nStreet: ${currAddress.street},\nPostal Code: ${currAddress.postalCode},\nAdm Area: ${currAddress.administrativeArea},\nSub-Adm Area: ${currAddress.subAdministrativeArea}.";
+                                profileInfoMapping["Event_Address"].text = currAddress.name;
                                 profileInfoMapping["Event_Longitude"].text =
                                     currPosition.longitude.toString();
                                 profileInfoMapping["Event_Latitude"].text =
