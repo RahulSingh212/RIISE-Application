@@ -80,7 +80,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     ].expand((x) => x).toList();
   }
 
-
   @override
   Widget build(BuildContext context) {
     // var padding = MediaQuery.of(context).padding;
@@ -168,25 +167,40 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 // oppositeContentsBuilder: (context, index) => Text(appointments.getThemesList()[index].getTime()),
                 contentsBuilder: (context, index) => Padding(
                   padding: EdgeInsets.symmetric(
-                      vertical: 58.5.h, horizontal: 21.6.w),
-                  child: EventCard2(position: index,eventDetails: eventUtil[index],),
+                    vertical: 58.5.h,
+                    horizontal: 21.6.w,
+                  ),
+                  child: EventCard2(
+                    position: index,
+                    eventDetails: eventUtil[index],
+                  ),
                 ),
                 oppositeContentsBuilder: (context, index) => Container(
                   padding: EdgeInsets.symmetric(
-                      vertical: 163.8.h, horizontal: 75.6.w),
+                    vertical: 163.8.h,
+                    horizontal: 25.w,
+                  ),
                   // decoration: ,
                   child: Card(
                     elevation: 16,
                     child: Container(
                       padding: EdgeInsets.symmetric(
-                          vertical: 46.8.h, horizontal: 32.4),
+                        vertical: 46.8.h,
+                        horizontal: 32.4,
+                      ),
                       decoration: BoxDecoration(
                         border: Border(
                           left: index % 2 == 0
-                              ? BorderSide(color: Colors.greenAccent, width: 5)
+                              ? BorderSide(
+                                  color: Colors.greenAccent,
+                                  width: 5,
+                                )
                               : BorderSide(color: Colors.transparent),
                           right: index % 2 != 0
-                              ? BorderSide(color: Colors.greenAccent, width: 5)
+                              ? BorderSide(
+                                  color: Colors.greenAccent,
+                                  width: 5,
+                                )
                               : BorderSide(color: Colors.transparent),
                         ),
                       ),

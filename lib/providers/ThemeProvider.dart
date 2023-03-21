@@ -10,6 +10,7 @@ import "../models/SpeakerInfo.dart";
 import "../models/ThemeInfo.dart";
 
 class ThemeProvider with ChangeNotifier {
+  int cnt = 0;
   List<ThemeServerInformation> themesList = [];
 
   void fetchThemes(
@@ -19,7 +20,7 @@ class ThemeProvider with ChangeNotifier {
     CollectionReference themesRef = db.collection("Themes");
 
     try {
-      List<ThemeServerInformation> listOfThemese = [];
+      List<ThemeServerInformation> listOfThemes = [];
       await themesRef.get().then(
         (ds) async {
           ds.docs.forEach(
@@ -33,12 +34,9 @@ class ThemeProvider with ChangeNotifier {
               String Theme_Name = themeMap["Theme_Name"].toString();
               String Theme_Info = themeMap["Theme_Info"].toString();
               String Theme_Image_Url = themeMap["Theme_Image_Url"].toString();
-              DateTime Theme_Date =
-                  DateTime.parse(themeMap["Theme_Date"].toString());
-              TimeOfDay Theme_Start_Time = convertStringToTimeOfDay(
-                  themeMap["Theme_Start_Time"].toString());
-              TimeOfDay Theme_End_Time = convertStringToTimeOfDay(
-                  themeMap["Theme_End_Time"].toString());
+              DateTime Theme_Date = DateTime.parse(themeMap["Theme_Date"].toString());
+              TimeOfDay Theme_Start_Time = convertStringToTimeOfDay(themeMap["Theme_Start_Time"].toString());
+              TimeOfDay Theme_End_Time = convertStringToTimeOfDay(themeMap["Theme_End_Time"].toString());
 
               List<SpeakerServerInformation> themeSpeakersList =
                   await fetchSpeakers(
@@ -46,7 +44,7 @@ class ThemeProvider with ChangeNotifier {
                 Theme_Unique_Id,
               );
 
-              print(themeSpeakersList);
+              // print(themeSpeakersList);
 
               ThemeServerInformation themeInfo = ThemeServerInformation(
                 Theme_Unique_Id: Theme_Unique_Id,
@@ -59,14 +57,13 @@ class ThemeProvider with ChangeNotifier {
                 themeSpeakersList: themeSpeakersList,
               );
 
-              listOfThemese.add(themeInfo);
-              print(themeInfo.themeSpeakersList);
+              listOfThemes.add(themeInfo);
             },
           );
         },
       );
 
-      themesList = listOfThemese;
+      themesList = listOfThemes;
 
       notifyListeners();
     } catch (errorVal) {

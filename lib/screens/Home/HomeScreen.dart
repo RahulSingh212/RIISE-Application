@@ -24,7 +24,6 @@ import '../../components/EventCard.dart';
 import "../../components/SideNavBar.dart";
 import '../../models/EventInfo.dart';
 
-
 import '../../providers/EventsProvider.dart';
 import '../../providers/FacultiesProvider.dart';
 import "../AddDataScreen/AddSectionScreen.dart";
@@ -40,8 +39,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _auth = FirebaseAuth.instance;
-  String userName = "Henansh";
+  String userName = "Rahul Singh";
   late TextEditingController searchBarController = TextEditingController();
+  final ThemeProvider themeProviderModel = ThemeProvider();
 
   // ThemeListUtil themes = ThemeListUtil();
   // EventListUtil events = EventListUtil();
@@ -52,11 +52,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    // print("init state");
+    // Provider.of<ThemeProvider>(
+    //   context,
+    //   listen: false,
+    // ).fetchThemes(
+    //   context,
+    // );
     super.initState();
     themeUtil = Provider.of<ThemeProvider>(context, listen: false);
     eventUtilTemp = Provider.of<EventProvider>(context, listen: false);
 
-    themeUtil.fetchThemes(context);
+    // themeUtil.fetchThemes(context);
     eventUtilTemp.fetchEventTracks(context, "SpeakerTracks");
     eventUtilTemp.fetchEventTracks(context, "PosterTracks");
     eventUtilTemp.fetchEventTracks(context, "PanelDiscussion");
@@ -69,9 +76,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void didChangeDependencies() {
+    print("did change");
+    Provider.of<ThemeProvider>(
+      context,
+      listen: false,
+    ).fetchThemes(
+      context,
+    );
+
     super.didChangeDependencies();
 
-    themeUtil.fetchThemes(context);
+    // themeUtil.fetchThemes(context);
 
     eventUtilTemp.fetchEventTracks(context, "SpeakerTracks");
     eventUtilTemp.fetchEventTracks(context, "PosterTracks");
@@ -130,126 +145,275 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        physics: BouncingScrollPhysics(),
-        child: Container(
-          padding: EdgeInsets.only(top: 280.h, left: 54.w, right: 54.w),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Hello,",
-                style: TextStyle(fontSize: 70.sp, color: Colors.black12),
-              ),
-              Text(
-                userName,
-                style: TextStyle(fontSize: 80.sp, color: Colors.black),
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 58.h),
-                height: 210.h,
-                child: TextField(
-                  controller: searchBarController,
-                  decoration: InputDecoration(
-                    hintText: "Search",
-                    border: OutlineInputBorder(),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xffebebeb),
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintStyle: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 45.sp,
-                      fontStyle: FontStyle.normal,
-                      color: Color(0xff6c757d),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.search),
-                      onPressed: () {
-                        print("serchpressed");
-                      },
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  top: 58.h,
-                ),
-                child: Text(
-                  "Themes",
-                  style: TextStyle(fontSize: 70.sp, color: Colors.black),
-                ),
-              ),
-              Container(
-                // padding: EdgeInsets.only(top: 58.h),
-                margin: EdgeInsets.only(
-                  top: 25.h,
-                ),
-                alignment: Alignment.center,
-                // decoration: BoxDecoration(
-                //   border: Border.all()
-                // ),
-                height: 520.h,
-                child: ListView.builder(
-                  // itemCount: themes.getThemesList().length,
-                  itemCount: themeUtil.themesList.length,
-                  scrollDirection: Axis.horizontal,
+      body: ChangeNotifierProvider<ThemeProvider>(
+        create: (BuildContext ctx1) => themeProviderModel,
+        child: Consumer<ThemeProvider>(
+          builder: (ctx2, viewModel, _) {
+            // themeProviderModel.fetchThemes(context);
+            // print("Veiw model");
+            // print(themeProviderModel.themesList.isEmpty);
+            switch (Provider.of<ThemeProvider>(
+              context,
+              listen: false,
+            ).themesList.isEmpty) {
+              case true:
+                return Align(
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(),
+                );
+              case false:
+                return SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   physics: BouncingScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 23.h,
-                    horizontal: 21.w,
+                  child: Container(
+                    padding:
+                        EdgeInsets.only(top: 280.h, left: 54.w, right: 54.w),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Hello,",
+                          style:
+                              TextStyle(fontSize: 70.sp, color: Colors.black12),
+                        ),
+                        Text(
+                          userName,
+                          style:
+                              TextStyle(fontSize: 80.sp, color: Colors.black),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(top: 58.h),
+                          height: 210.h,
+                          child: TextField(
+                            controller: searchBarController,
+                            decoration: InputDecoration(
+                              hintText: "Search",
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xffebebeb),
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              hintStyle: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 45.sp,
+                                fontStyle: FontStyle.normal,
+                                color: Color(0xff6c757d),
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(Icons.search),
+                                onPressed: () {
+                                  print("serchpressed");
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                            top: 58.h,
+                          ),
+                          child: Text(
+                            "Themes",
+                            style:
+                                TextStyle(fontSize: 70.sp, color: Colors.black),
+                          ),
+                        ),
+                        Container(
+                          // padding: EdgeInsets.only(top: 58.h),
+                          margin: EdgeInsets.only(
+                            top: 25.h,
+                          ),
+                          alignment: Alignment.center,
+                          // decoration: BoxDecoration(
+                          //   border: Border.all()
+                          // ),
+                          height: 520.h,
+                          child: ListView.builder(
+                            // itemCount: themes.getThemesList().length,
+                            itemCount: themeUtil.themesList.length,
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
+                            padding: EdgeInsets.symmetric(
+                              vertical: 23.h,
+                              horizontal: 21.w,
+                            ),
+                            itemBuilder: (context, position) {
+                              return ThemeCard(
+                                  // position: position,
+                                  themeDetails: themeUtil.themesList[position]
+                                  //     Provider.of<EventProvider>(context, listen: false)
+                                  //         .themesList[position],
+                                  );
+                            },
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                            top: 58.h,
+                          ),
+                          child: Text(
+                            "TimeLine",
+                            style:
+                                TextStyle(fontSize: 70.sp, color: Colors.black),
+                          ),
+                        ),
+                        Container(
+                          // padding: EdgeInsets.only(top: 58.h),
+                          margin: EdgeInsets.only(top: 58.h),
+                          alignment: Alignment.topCenter,
+                          // decoration: BoxDecoration(
+                          //   border: Border.all()
+                          // ),
+                          // height: height*1.5,
+                          child: ListView.builder(
+                            itemCount: eventUtil.length,
+                            // scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.only(top: 23.h),
+                            itemBuilder: (context, position) {
+                              return EventCard(
+                                eventDetails: eventUtil[position],
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  itemBuilder: (context, position) {
-                    return ThemeCard(
-                        // position: position,
-                        themeDetails: themeUtil.themesList[position]
-                        //     Provider.of<EventProvider>(context, listen: false)
-                        //         .themesList[position],
-                        );
-                  },
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  top: 58.h,
-                ),
-                child: Text(
-                  "TimeLine",
-                  style: TextStyle(fontSize: 70.sp, color: Colors.black),
-                ),
-              ),
-              Container(
-                // padding: EdgeInsets.only(top: 58.h),
-                margin: EdgeInsets.only(top: 58.h),
-                alignment: Alignment.topCenter,
-                // decoration: BoxDecoration(
-                //   border: Border.all()
-                // ),
-                // height: height*1.5,
-                child: ListView.builder(
-                  itemCount: eventUtil.length,
-                  // scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.only(top: 23.h),
-                  itemBuilder: (context, position) {
-                    return EventCard(
-                      eventDetails: eventUtil[position],
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
+                );
+              default:
+                return Container();
+            }
+          },
         ),
       ),
+      // SingleChildScrollView(
+      //   scrollDirection: Axis.vertical,
+      //   keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      //   physics: BouncingScrollPhysics(),
+      //   child: Container(
+      //     padding: EdgeInsets.only(top: 280.h, left: 54.w, right: 54.w),
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.start,
+      //       crossAxisAlignment: CrossAxisAlignment.start,
+      //       children: [
+      //         Text(
+      //           "Hello,",
+      //           style: TextStyle(fontSize: 70.sp, color: Colors.black12),
+      //         ),
+      //         Text(
+      //           userName,
+      //           style: TextStyle(fontSize: 80.sp, color: Colors.black),
+      //         ),
+      //         Container(
+      //           padding: EdgeInsets.only(top: 58.h),
+      //           height: 210.h,
+      //           child: TextField(
+      //             controller: searchBarController,
+      //             decoration: InputDecoration(
+      //               hintText: "Search",
+      //               border: OutlineInputBorder(),
+      //               enabledBorder: OutlineInputBorder(
+      //                 borderSide: BorderSide(
+      //                   color: Color(0xffebebeb),
+      //                 ),
+      //                 borderRadius: BorderRadius.circular(12),
+      //               ),
+      //               hintStyle: TextStyle(
+      //                 fontFamily: 'Roboto',
+      //                 fontWeight: FontWeight.w400,
+      //                 fontSize: 45.sp,
+      //                 fontStyle: FontStyle.normal,
+      //                 color: Color(0xff6c757d),
+      //               ),
+      //               suffixIcon: IconButton(
+      //                 icon: Icon(Icons.search),
+      //                 onPressed: () {
+      //                   print("serchpressed");
+      //                 },
+      //               ),
+      //             ),
+      //           ),
+      //         ),
+      //         Container(
+      //           margin: EdgeInsets.only(
+      //             top: 58.h,
+      //           ),
+      //           child: Text(
+      //             "Themes",
+      //             style: TextStyle(fontSize: 70.sp, color: Colors.black),
+      //           ),
+      //         ),
+      //         Container(
+      //           // padding: EdgeInsets.only(top: 58.h),
+      //           margin: EdgeInsets.only(
+      //             top: 25.h,
+      //           ),
+      //           alignment: Alignment.center,
+      //           // decoration: BoxDecoration(
+      //           //   border: Border.all()
+      //           // ),
+      //           height: 520.h,
+      //           child: ListView.builder(
+      //             // itemCount: themes.getThemesList().length,
+      //             itemCount: themeUtil.themesList.length,
+      //             scrollDirection: Axis.horizontal,
+      //             physics: BouncingScrollPhysics(),
+      //             padding: EdgeInsets.symmetric(
+      //               vertical: 23.h,
+      //               horizontal: 21.w,
+      //             ),
+      //             itemBuilder: (context, position) {
+      //               return ThemeCard(
+      //                   // position: position,
+      //                   themeDetails: themeUtil.themesList[position]
+      //                   //     Provider.of<EventProvider>(context, listen: false)
+      //                   //         .themesList[position],
+      //                   );
+      //             },
+      //           ),
+      //         ),
+      //         Container(
+      //           margin: EdgeInsets.only(
+      //             top: 58.h,
+      //           ),
+      //           child: Text(
+      //             "TimeLine",
+      //             style: TextStyle(fontSize: 70.sp, color: Colors.black),
+      //           ),
+      //         ),
+      //         Container(
+      //           // padding: EdgeInsets.only(top: 58.h),
+      //           margin: EdgeInsets.only(top: 58.h),
+      //           alignment: Alignment.topCenter,
+      //           // decoration: BoxDecoration(
+      //           //   border: Border.all()
+      //           // ),
+      //           // height: height*1.5,
+      //           child: ListView.builder(
+      //             itemCount: eventUtil.length,
+      //             // scrollDirection: Axis.horizontal,
+      //             shrinkWrap: true,
+      //             physics: NeverScrollableScrollPhysics(),
+      //             padding: EdgeInsets.only(top: 23.h),
+      //             itemBuilder: (context, position) {
+      //               return EventCard(
+      //                 eventDetails: eventUtil[position],
+      //               );
+      //             },
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
       floatingActionButton: SizedBox(
         child: FloatingActionButton.extended(
           onPressed: () {
