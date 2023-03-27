@@ -206,7 +206,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                       ),
                       child: Text(
                         "${eventUtil[index].Event_Start_Time.format(context)} - ${eventUtil[index].Event_End_Time.format(context)}",
-                        style: TextStyle(fontSize: 50.sp),
+                        style: TextStyle(fontSize: 45.sp),
                       ),
                     ),
                   ),

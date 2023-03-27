@@ -29,14 +29,22 @@ class FacultyDetailScreen extends StatefulWidget {
 }
 
 class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
+
+  String defaultProfileImage =
+      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fdefault-profile-image.png?alt=media&token=b303ab47-2802-4000-bddc-2a024a6b2d24";
+
   @override
   Widget build(BuildContext context) {
     List<String> researchInterests =
         convertStrToList(widget.facultyDetails.faculty_Research_Interests);
     List<String> teachingInterests =
-        convertStrToList(widget.facultyDetails.faculty_Research_Interests);
+        convertStrToList(widget.facultyDetails.faculty_Teaching_Interests);
     List<String> centresLabs = convertStrToList(
         widget.facultyDetails.faculty_Affiliated_Centers_And_Labs);
+    // print("RESEARCH INTERESTS -> " +researchInterests.length.toString());
+    // print("TEACHING INTERESTS -> " +teachingInterests.length.toString());
+    // print("CENTRES LABS -> " +centresLabs.length.toString());
+
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -99,7 +107,9 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.network(
-                            widget.facultyDetails.faculty_Image_Url,
+                            widget.facultyDetails.faculty_Image_Url == ""
+                                ? defaultProfileImage
+                                : widget.facultyDetails.faculty_Image_Url,
                             width: 450.r,
                             height: 450.r,
                             fit: BoxFit.fill,
@@ -121,6 +131,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                       SizedBox(
                         height: 20.h,
                       ),
+                      widget.facultyDetails.faculty_Position ==""?Container():
                       Flexible(
                         child: Text(
                           "${widget.facultyDetails.faculty_Position} (${widget.facultyDetails.faculty_Department})",
@@ -133,6 +144,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                       SizedBox(
                         height: 80.h,
                       ),
+                      widget.facultyDetails.faculty_College ==""?Container():
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -159,6 +171,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                       SizedBox(
                         height: 20.h,
                       ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -187,6 +200,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                           SizedBox(
                             width: 120.w,
                           ),
+                          widget.facultyDetails.faculty_Mobile_Number ==""?Container():
                           Icon(
                             Icons.call,
                             // size: ,
@@ -194,6 +208,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                           SizedBox(
                             width: 20.w,
                           ),
+                          widget.facultyDetails.faculty_Mobile_Number ==""?Container():
                           Flexible(
                             child: InkWell(
                               onTap: (){
@@ -213,14 +228,17 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                       SizedBox(
                         height: 20.h,
                       ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          widget.facultyDetails.faculty_Website_Url ==""?Container():
                           Icon(
                             CupertinoIcons.globe,
                             // size: ,
                           ),
+                          widget.facultyDetails.faculty_Website_Url ==""?Container():
                           Flexible(
                             child: InkWell(
                               onTap: () {
@@ -241,10 +259,12 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                           SizedBox(
                             width: 120.w,
                           ),
+                          widget.facultyDetails.faculty_Office_Latitude == 0.0?Container():
                           Icon(
                             Icons.location_on_outlined,
                             // size: ,
                           ),
+                          widget.facultyDetails.faculty_Office_Latitude == 0.0?Container():
                           Flexible(
                             child: InkWell(
                               onTap: (){
@@ -272,6 +292,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    widget.facultyDetails.faculty_Bio ==""?Container():
                     Text(
                       "About",
                       style: TextStyle(fontSize: 60.sp),
@@ -281,6 +302,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                     SizedBox(
                       height: 40.h,
                     ),
+                    widget.facultyDetails.faculty_Bio ==""?Container():
                     Flexible(
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 45.w),
@@ -305,12 +327,14 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      researchInterests.length == 1?Container():
                       Text(
                         "Research Interests",
                         style: TextStyle(fontSize: 60.sp),
                         softWrap: true,
                         textAlign: TextAlign.center,
                       ),
+                      researchInterests.length == 1?Container():
                       ListView.builder(
                         shrinkWrap: true,
                         padding: EdgeInsets.symmetric(vertical: 40.h),
@@ -338,12 +362,14 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                         },
                         itemCount: researchInterests.length,
                       ),
+                      teachingInterests.length == 1?Container():
                       Text(
-                        "Research Interests",
+                        "Teaching Interests",
                         style: TextStyle(fontSize: 60.sp),
                         softWrap: true,
                         textAlign: TextAlign.center,
                       ),
+                      teachingInterests.length == 1?Container():
                       ListView.builder(
                         shrinkWrap: true,
                         padding: EdgeInsets.symmetric(vertical: 40.h),
@@ -371,12 +397,14 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                         },
                         itemCount: teachingInterests.length,
                       ),
+                      centresLabs.length == 1?Container():
                       Text(
-                        "Research Interests",
+                        "Affiliated Centres & Labs",
                         style: TextStyle(fontSize: 60.sp),
                         softWrap: true,
                         textAlign: TextAlign.center,
                       ),
+                      centresLabs.length == 1?Container():
                       ListView.builder(
                         shrinkWrap: true,
                         padding: EdgeInsets.symmetric(vertical: 40.h),

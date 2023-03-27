@@ -182,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Text(
-                          userName,
+                          _auth.currentUser?.displayName as String,
                           style: TextStyle(
                             fontSize: 80.sp,
                             color: Colors.black,

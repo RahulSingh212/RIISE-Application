@@ -36,8 +36,8 @@ class _SpeakerCardState extends State<SpeakerCard> {
   // String facName = "Henansh";
   // String facImage = "assets/images/icons/profile.png";
   // late var facultyProider = Provider.of<FacultiesProvider>(context, listen: false);
-  String backImage = "assets/images/background/artificial-intelligence.jpg";
-
+  // String backImage = "assets/images/background/artificial-intelligence.jpg";
+  String backImage = "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fbackground.jpg?alt=media&token=876903fd-25f4-40b8-9c9b-2ab4bddce3d2";
   String formatTime(String time) => DateFormat('hh:mm a').format(DateTime.parse(time));
 
   @override
@@ -67,12 +67,13 @@ class _SpeakerCardState extends State<SpeakerCard> {
           child: Container(
             //BackGround Image
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  backImage,
+
+                image: DecorationImage(
+                  //TODO - Change background image
+                    image: NetworkImage(backImage,),
+                    fit: BoxFit.cover
                 ),
-                fit: BoxFit.cover,
-              ),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(25),bottomRight: Radius.circular(25))
             ),
 
             child: Container(

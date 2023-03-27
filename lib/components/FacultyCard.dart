@@ -15,7 +15,7 @@ class FacultyCard extends StatefulWidget {
     Key? key,
     required this.facultyDetails,
   }) : super(key: key);
-  
+
   late FacultyServerInformation facultyDetails;
 
   @override
@@ -23,13 +23,12 @@ class FacultyCard extends StatefulWidget {
 }
 
 class _FacultyCardState extends State<FacultyCard> {
-
-  String backImage = "assets/images/background/artificial-intelligence.jpg";
+  String backImage = "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fbackground.jpg?alt=media&token=876903fd-25f4-40b8-9c9b-2ab4bddce3d2";
+  String defaultProfileImage =
+      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fdefault-profile-image.png?alt=media&token=b303ab47-2802-4000-bddc-2a024a6b2d24";
 
   @override
   Widget build(BuildContext context) {
-
-
     return InkWell(
       onTap: () {
         Navigator.of(context).push(
@@ -49,12 +48,13 @@ class _FacultyCardState extends State<FacultyCard> {
           child: Container(
             //BackGround Image
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  backImage,
+
+                image: DecorationImage(
+                  //TODO - Change background image
+                    image: NetworkImage(backImage,),
+                    fit: BoxFit.cover
                 ),
-                fit: BoxFit.cover,
-              ),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(25),bottomRight: Radius.circular(25))
             ),
 
             child: Container(
@@ -78,7 +78,9 @@ class _FacultyCardState extends State<FacultyCard> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             image: NetworkImage(
-                              widget.facultyDetails.faculty_Image_Url,
+                              widget.facultyDetails.faculty_Image_Url == ""
+                                  ? defaultProfileImage
+                                  : widget.facultyDetails.faculty_Image_Url,
                             ),
                             fit: BoxFit.cover,
                             scale: 0.4,
@@ -108,30 +110,32 @@ class _FacultyCardState extends State<FacultyCard> {
                             SizedBox(
                               height: 50.h,
                             ),
-                            SizedBox(
-                              width: 500.w,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.work_outline,
-                                    // size: ,
-                                  ),
-                                  SizedBox(width: 20.w),
-                                  Flexible(
-                                    child: Text(
-                                      ("${widget.facultyDetails
-                                          .faculty_Position} (${widget.facultyDetails.faculty_Department})"),
-                                      style: TextStyle(fontSize: 40.sp),
-                                      softWrap: true,
+                            widget.facultyDetails.faculty_Position != ""
+                                ? SizedBox(
+                                    width: 500.w,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.work_outline,
+                                          // size: ,
+                                        ),
+                                        SizedBox(width: 20.w),
+                                        Flexible(
+                                          child: Text(
+                                            ("${widget.facultyDetails.faculty_Position} (${widget.facultyDetails.faculty_Department})"),
+                                            style: TextStyle(fontSize: 40.sp),
+                                            softWrap: true,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            // SizedBox(height: 0.005*height,),
+                                  )
+                                : Container(),
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -144,33 +148,35 @@ class _FacultyCardState extends State<FacultyCard> {
                                 SizedBox(width: 20.w),
                                 Flexible(
                                   child: Text(
-                                    widget.facultyDetails
-                                        .faculty_EmailId,
+                                    widget.facultyDetails.faculty_EmailId,
                                     style: TextStyle(fontSize: 40.sp),
                                     softWrap: true,
                                   ),
                                 ),
                               ],
                             ),
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.location_on_outlined,
-                                  // size: ,
-                                ),
-                                SizedBox(width: 20.w),
-                                Flexible(
-                                  child: Text(
-                                    widget.facultyDetails
-                                        .faculty_Office_Address,
-                                    style: TextStyle(fontSize: 40.sp),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            widget.facultyDetails.faculty_Office_Address != ""
+                                ? Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.location_on_outlined,
+                                        // size: ,
+                                      ),
+                                      SizedBox(width: 20.w),
+                                      Flexible(
+                                        child: Text(
+                                          widget.facultyDetails
+                                              .faculty_Office_Address,
+                                          style: TextStyle(fontSize: 40.sp),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Container(),
                           ],
                         ),
                       ),

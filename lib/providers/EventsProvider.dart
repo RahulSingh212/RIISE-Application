@@ -47,7 +47,7 @@ class EventProvider with ChangeNotifier {
               String Event_Address = eventMap["Event_Address"].toString();
               String Event_Image_Url = eventMap["Event_Image_Url"].toString();
               String Event_Latitude = eventMap["Event_Latitude"].toString();
-              String Event_Longitude = eventMap["Event_Image_Url"].toString();
+              String Event_Longitude = eventMap["Event_Longitude"].toString();
               DateTime Event_Date = DateTime.parse(eventMap["Event_Date"].toString());
               TimeOfDay Event_Start_Time = convertStringToTimeOfDay(eventMap["Event_Start_Time"].toString());
               TimeOfDay Event_End_Time = convertStringToTimeOfDay(eventMap["Event_End_Time"].toString());
