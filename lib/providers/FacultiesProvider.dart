@@ -62,6 +62,8 @@ class FacultiesProvider with ChangeNotifier {
                 faculty_EmailId: facultyMap["faculty_EmailId"],
                 faculty_Gender: facultyMap["faculty_Gender"],
                 faculty_Bio: facultyMap["faculty_Bio"],
+                faculty_Teaching_Interests: facultyMap["faculty_Teaching_Interests"],
+                faculty_Authorization: facultyMap["faculty_Authorization"] == "true",
                 faculty_Image_Url: facultyMap["faculty_Image_Url"],
                 faculty_LinkedIn_Url: facultyMap["faculty_LinkedIn_Url"],
                 faculty_Website_Url: facultyMap["faculty_Website_Url"],

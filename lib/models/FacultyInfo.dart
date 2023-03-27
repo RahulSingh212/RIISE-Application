@@ -2,12 +2,14 @@
 
 class FacultyServerInformation {
   String faculty_Unique_Id;
+  bool faculty_Authorization;
   String faculty_Mobile_Messaging_Token_Id;
   String faculty_Name;
   String faculty_Position;
   String faculty_Department;
   String faculty_College;
   String faculty_Mobile_Number;
+  String faculty_Teaching_Interests;
   String faculty_Research_Interests;
   String faculty_Affiliated_Centers_And_Labs;
   String faculty_EmailId;
@@ -23,12 +25,14 @@ class FacultyServerInformation {
 
   FacultyServerInformation({
     required this.faculty_Unique_Id,
+    required this.faculty_Authorization,
     required this.faculty_Mobile_Messaging_Token_Id,
     required this.faculty_Name,
     required this.faculty_Position,
     required this.faculty_College,
     required this.faculty_Department,
     required this.faculty_Mobile_Number,
+    required this.faculty_Teaching_Interests,
     required this.faculty_Research_Interests,
     required this.faculty_Affiliated_Centers_And_Labs,
     required this.faculty_EmailId,

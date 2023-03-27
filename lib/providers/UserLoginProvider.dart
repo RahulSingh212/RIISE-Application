@@ -237,10 +237,12 @@ class UserLoginProvider with ChangeNotifier {
       await usersRef.doc(loggedInUserUniqueId).set(
         {
           "faculty_Unique_Id": loggedInUserUniqueId,
+          "faculty_Authorization": "true",
           "faculty_Mobile_Messaging_Token_Id": "",
           "faculty_Name": userName,
           "faculty_Position": "",
           "faculty_College": "",
+          "faculty_Teaching_Interests": "",
           "faculty_Department": "",
           "faculty_Mobile_Number": "",
           "faculty_Research_Interests": "",
