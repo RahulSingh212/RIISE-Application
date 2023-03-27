@@ -266,10 +266,10 @@ class _SideNavBarState extends State<SideNavBar> {
             onTap: () async {
               await GoogleSignIn().signOut();
               await _auth.signOut();
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                LogInSignUpScreen.routeName,
-                (route) => false,
-              );
+              // Navigator.of(context).pushNamedAndRemoveUntil(
+              //   LogInSignUpScreen.routeName,
+              //   (route) => false,
+              // );
             },
             child: Container(
               margin: EdgeInsets.only(

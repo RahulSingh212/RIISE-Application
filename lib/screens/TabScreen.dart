@@ -12,6 +12,7 @@ import 'package:riise/providers/UserLoginProvider.dart';
 
 import '../providers/FacultiesProvider.dart';
 import '../providers/LocationProvider.dart';
+import '../providers/ThemeProvider.dart';
 import "./Home/HomeScreen.dart";
 import "./Faculty/FacultyScreen.dart";
 import "./Schedules/ScheduleScreen.dart";
@@ -43,6 +44,13 @@ class _TabScreenState extends State<TabScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    // Provider.of<ThemeProvider>(
+    //   context,
+    //   listen: false,
+    // ).fetchThemes(
+    //   context,
+    // );
+
     // print("tab screen");
     // Provider.of<FacultiesProvider>(
     //   context,
@@ -61,6 +69,13 @@ class _TabScreenState extends State<TabScreen> {
   @override
   void initState() {
     super.initState();
+    print("initState");
+    Provider.of<ThemeProvider>(
+      context,
+      listen: false,
+    ).fetchThemes(
+      context,
+    );
 
     _pages = [
       {

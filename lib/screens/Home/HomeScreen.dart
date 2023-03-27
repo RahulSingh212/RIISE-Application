@@ -176,13 +176,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Text(
                           "Hello,",
-                          style:
-                              TextStyle(fontSize: 70.sp, color: Colors.black12),
+                          style: TextStyle(
+                            fontSize: 70.sp,
+                            color: Colors.black12,
+                          ),
                         ),
                         Text(
                           userName,
-                          style:
-                              TextStyle(fontSize: 80.sp, color: Colors.black),
+                          style: TextStyle(
+                            fontSize: 80.sp,
+                            color: Colors.black,
+                          ),
                         ),
                         Container(
                           padding: EdgeInsets.only(top: 58.h),

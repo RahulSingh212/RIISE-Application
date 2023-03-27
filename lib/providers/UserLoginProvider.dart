@@ -93,8 +93,7 @@ class UserLoginProvider with ChangeNotifier {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCredential(
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(
       authCredential,
     );
 
@@ -173,14 +172,14 @@ class UserLoginProvider with ChangeNotifier {
 
   Future<void> checkPointsWhenButtonIsPressed(BuildContext context) async {
     UserCredential userCredential = await signUpWithGoogle(context);
+    loggedInUserCredentials = userCredential;
 
     var currLoggedInUser = FirebaseAuth.instance.currentUser;
     var userUniqueId = currLoggedInUser?.uid as String;
 
     String? userEmailId = userCredential.user?.email;
     String? userName = userCredential.user?.displayName;
-    String collectionName =
-        userType == "Guest" ? "GuestsEmailingList" : "FacultiesEmailingList";
+    String collectionName = userType == "Guest" ? "GuestsEmailingList" : "FacultiesEmailingList";
     String givenUserType = userType == "Guest" ? guestType : facultyType;
 
     bool checkIfUserExists = await checkIfEmailIdExistsInDatabase(
@@ -194,10 +193,11 @@ class UserLoginProvider with ChangeNotifier {
     // print("Given User Name: $givenUserType");
 
     if (checkIfUserExists) {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        TabScreen.routeName,
-        (route) => false,
-      );
+      // Navigator.of(context).pushNamedAndRemoveUntil(
+      //   TabScreen.routeName,
+      //   (route) => false,
+      // );
+      // Navigator.of(context).pushNamedAndRemoveUntil(TabScreen.routeName, (route) => false);
     } else {
       await addUserEmailToExistingList(
         collectionName,
@@ -207,22 +207,94 @@ class UserLoginProvider with ChangeNotifier {
       );
 
       if (userType == "Guest") {
-        Provider.of<UserDetailsProvider>(context, listen: false)
-            .uploadInformationOfNewGuest(
+        uploadInformationOfNewGuest(
           context,
           userUniqueId,
           userName!,
           userEmailId,
         );
       } else {
-        Provider.of<UserDetailsProvider>(context, listen: false)
-            .uploadInformationOfNewFaculty(
+        uploadInformationOfNewFaculty(
           context,
           userUniqueId,
           userName!,
           userEmailId,
         );
       }
+    }
+  }
+
+  Future<void> uploadInformationOfNewFaculty(
+    BuildContext context,
+    String loggedInUserUniqueId,
+    String userName,
+    String userEmailId,
+  ) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    CollectionReference usersRef = db.collection("FacultiesInformationList");
+
+    try {
+      await usersRef.doc(loggedInUserUniqueId).set(
+        {
+          "faculty_Unique_Id": loggedInUserUniqueId,
+          "faculty_Mobile_Messaging_Token_Id": "",
+          "faculty_Name": userName,
+          "faculty_Position": "",
+          "faculty_College": "",
+          "faculty_Department": "",
+          "faculty_Mobile_Number": "",
+          "faculty_Research_Interests": "",
+          "faculty_Affiliated_Centers_And_Labs": "",
+          "faculty_EmailId": userEmailId,
+          "faculty_Gender": "",
+          "faculty_Bio": "",
+          "faculty_Image_Url": "",
+          "faculty_LinkedIn_Url": "",
+          "faculty_Website_Url": "",
+          "faculty_Office_Navigation_Url": "",
+          "faculty_Office_Address": "",
+          "faculty_Office_Longitude": "",
+          "faculty_Office_Latitude": "",
+        },
+      );
+
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        TabScreen.routeName,
+        (route) => false,
+      );
+    } catch (errorVal) {
+      print(errorVal);
+    }
+  }
+
+  Future<void> uploadInformationOfNewGuest(
+    BuildContext context,
+    String loggedInUserUniqueId,
+    String userName,
+    String userEmailId,
+  ) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    CollectionReference usersRef = db.collection("GuestsInformationList");
+
+    try {
+      await usersRef.doc(loggedInUserUniqueId).set({
+        "guest_Unique_Id": loggedInUserUniqueId,
+        "guest_Mobile_Messaging_Token_Id": "",
+        "guest_Name": userName,
+        "guest_EmailId": userEmailId,
+        "guest_Mobile_Number": "",
+        "guest_Gender": "",
+        "guest_LinkedIn_Url": "",
+        "guest_Bio": "",
+        "guest_Research_Interests": "",
+      });
+
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        TabScreen.routeName,
+        (route) => false,
+      );
+    } catch (errorVal) {
+      print(errorVal);
     }
   }
 }
