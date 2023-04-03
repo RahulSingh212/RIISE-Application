@@ -5,10 +5,14 @@ import 'dart:math';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import "package:flutter/services.dart";
+import 'package:riise/providers/DynamicLinkProvider.dart';
+import 'package:riise/screens/QrCode/QrCodeGenerator.dart';
 
 import "./screens/TabScreen.dart";
 import './screens/Home/HomeScreen.dart';
@@ -28,6 +32,8 @@ import './providers/ScreenControllerProvider.dart';
 import './providers/LocationProvider.dart';
 import 'providers/ThemeProvider.dart';
 
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -37,6 +43,16 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
   ]);
   await Firebase.initializeApp();
+
+  final PendingDynamicLinkData? initialLink =
+      await FirebaseDynamicLinks.instance.getInitialLink();
+  DynamicLinkProvider.initialLink = initialLink;
+
+  FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
+    navigatorKey.currentState?.push(MaterialPageRoute(builder: (context)=>QrCodeGenerator()));
+  }).onError((error) {
+    // Handle errors
+  });
 
   runApp(
     ScreenUtilInit(
@@ -49,7 +65,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +103,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'RIISE',
         theme: ThemeData(

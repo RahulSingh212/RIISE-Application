@@ -13,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:riise/screens/QrCode/QrCodeGenerator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../TabScreen.dart';
@@ -315,6 +316,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SizedBox(
             height: screenHeight * 0.05,
           ),
+          ElevatedButton(onPressed: (){
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => QrCodeGenerator(),
+              ),
+            );
+            print("Button Pressed");
+          }, child: Text("Qr Code"))
           // Container(
           //   child: TextButton(
           //     onPressed: !isSaveChangesBtnActive ? null : () {},

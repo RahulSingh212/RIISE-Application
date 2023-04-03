@@ -4,11 +4,15 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:riise/main.dart';
+import 'package:riise/providers/DynamicLinkProvider.dart';
 import 'package:riise/providers/UserLoginProvider.dart';
+import 'package:riise/screens/QrCode/QrCodeGenerator.dart';
 
 import '../providers/FacultiesProvider.dart';
 import '../providers/LocationProvider.dart';
@@ -69,7 +73,10 @@ class _TabScreenState extends State<TabScreen> {
   @override
   void initState() {
     super.initState();
-    print("initState");
+
+    // final initialLink = Provider.of<DynamicLinkProvider>(context,listen: false).initialLink;
+
+    print("initState TABSCREEN");
     Provider.of<ThemeProvider>(
       context,
       listen: false,
@@ -111,6 +118,21 @@ class _TabScreenState extends State<TabScreen> {
         'title': 'Appointments',
       },
     ];
+
+
+    Future.delayed(Duration.zero, (){
+      final initialLink = DynamicLinkProvider.initialLink;
+
+      print("Final Dynamic Link = $initialLink");
+
+      if (initialLink != null) {
+        final Uri deepLink = initialLink.link;
+        // Example of using the dynamic link to push the user to a different screen
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>QrCodeGenerator()));
+
+      }
+    });
+
   }
 
   void _selectPage(int index) {

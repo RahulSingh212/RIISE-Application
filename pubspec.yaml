@@ -59,6 +59,9 @@ dependencies:
   email_validator: ^2.1.17
   google_sign_in: ^5.4.4
   flutter_launcher_icons: ^0.12.0
+  qr_flutter: ^4.0.0
+  pretty_qr_code: ^2.0.2
+  firebase_dynamic_links: ^5.1.0
 
 dev_dependencies:
   flutter_test:
