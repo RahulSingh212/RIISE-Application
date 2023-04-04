@@ -16,7 +16,7 @@ import '../../models/FacultyInfo.dart';
 
 
 class FacultyDetailScreen extends StatefulWidget {
-  static const routeName = '/riise-faculty-detail-screen';
+  static const routeName = '/riise-faculty-server-detail-screen';
 
   FacultyDetailScreen({
     Key? key,
@@ -37,16 +37,11 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
 
   String defaultProfileImage = "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fdefault-profile-image.png?alt=media&token=b303ab47-2802-4000-bddc-2a024a6b2d24";
 
-  // @override
-  // void didChangeDependencies() async {
-  //   super.didChangeDependencies();
-  //   if (widget.qrIdentifier != null) {
-  //     widget.facultyDetails = await Provider.of<FacultiesProvider>(context, listen: false).getFacultDetails(widget.qrIdentifier.toString()).then((value) {
-  //       Navigator.of(context).pushNamedAndRemoveUntil(FacultyDetailScreen.routeName, (route) => false);
-  //       return widget.facultyDetails;
-  //     });
-  //   }
-  // }
+  @override
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+    Provider.of<FacultiesProvider>(context, listen: false).facultyQRCodeNavigator(context, widget.qrIdentifier.toString());
+  }
 
   @override
   Widget build(BuildContext context) {

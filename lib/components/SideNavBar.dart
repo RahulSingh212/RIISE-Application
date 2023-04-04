@@ -405,10 +405,11 @@ class _SideNavBarState extends State<SideNavBar> {
         Provider.of<ScreenControllerProvider>(context, listen: false)
             .selectedPageIndex = pageIndex;
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => screenMapping[screenPushName],
-            ),
-            (route) => false);
+          MaterialPageRoute(
+            builder: (context) => screenMapping[screenPushName],
+          ),
+          (route) => false,
+        );
       },
       child: Container(
         margin: EdgeInsets.only(
