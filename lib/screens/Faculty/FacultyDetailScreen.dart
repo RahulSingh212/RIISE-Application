@@ -35,6 +35,13 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
 
   String defaultProfileImage = "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fdefault-profile-image.png?alt=media&token=b303ab47-2802-4000-bddc-2a024a6b2d24";
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (widget.qrIdentifier != null) {
+      widget.facultyDetails = Provider.of<FacultiesProvider>(context, listen: false).getFacultDetails(widget.qrIdentifier.toString()) as FacultyServerInformation;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +51,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
 
     List<String> researchInterests = convertStrToList(widget.facultyDetails.faculty_Research_Interests);
     List<String> teachingInterests = convertStrToList(widget.facultyDetails.faculty_Teaching_Interests);
-    List<String> centresLabs = convertStrToList(
-        widget.facultyDetails.faculty_Affiliated_Centers_And_Labs);
+    List<String> centresLabs = convertStrToList(widget.facultyDetails.faculty_Affiliated_Centers_And_Labs);
     // print("RESEARCH INTERESTS -> " +researchInterests.length.toString());
     // print("TEACHING INTERESTS -> " +teachingInterests.length.toString());
     // print("CENTRES LABS -> " +centresLabs.length.toString());

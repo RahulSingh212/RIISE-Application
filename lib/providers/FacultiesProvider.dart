@@ -45,7 +45,8 @@ class FacultiesProvider with ChangeNotifier {
 
     await FirebaseFirestore.instance
         .collection('FacultiesInformationList')
-        .doc(facultyDatabaseUniqueId)
+        // .doc(facultyDatabaseUniqueId)
+        .doc(qrIdentifierMap[facultyDatabaseUniqueId])
         .get()
         .then((DocumentSnapshot ds) {
       facultyInfo = new FacultyServerInformation(
