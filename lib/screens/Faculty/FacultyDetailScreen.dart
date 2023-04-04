@@ -33,8 +33,7 @@ class FacultyDetailScreen extends StatefulWidget {
 
 class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
 
-  String defaultProfileImage =
-      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fdefault-profile-image.png?alt=media&token=b303ab47-2802-4000-bddc-2a024a6b2d24";
+  String defaultProfileImage = "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fdefault-profile-image.png?alt=media&token=b303ab47-2802-4000-bddc-2a024a6b2d24";
 
 
   @override
@@ -43,10 +42,8 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
     print("QR IDENTIFIER = ${widget.qrIdentifier}");
 
 
-    List<String> researchInterests =
-        convertStrToList(widget.facultyDetails.faculty_Research_Interests);
-    List<String> teachingInterests =
-        convertStrToList(widget.facultyDetails.faculty_Teaching_Interests);
+    List<String> researchInterests = convertStrToList(widget.facultyDetails.faculty_Research_Interests);
+    List<String> teachingInterests = convertStrToList(widget.facultyDetails.faculty_Teaching_Interests);
     List<String> centresLabs = convertStrToList(
         widget.facultyDetails.faculty_Affiliated_Centers_And_Labs);
     // print("RESEARCH INTERESTS -> " +researchInterests.length.toString());

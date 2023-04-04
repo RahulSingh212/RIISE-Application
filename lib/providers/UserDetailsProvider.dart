@@ -28,12 +28,14 @@ class UserDetailsProvider with ChangeNotifier {
       await usersRef.doc(loggedInUserUniqueId).set(
         {
           "faculty_Unique_Id": loggedInUserUniqueId,
+          "faculty_Authorization": "true",
           "faculty_Mobile_Messaging_Token_Id": "",
           "faculty_Name": userName,
           "faculty_Position": "",
           "faculty_College": "",
           "faculty_Department": "",
           "faculty_Mobile_Number": "",
+          "faculty_Teaching_Interests": "",
           "faculty_Research_Interests": "",
           "faculty_Affiliated_Centers_And_Labs": "",
           "faculty_EmailId": userEmailId,
