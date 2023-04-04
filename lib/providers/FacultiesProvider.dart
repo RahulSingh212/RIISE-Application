@@ -85,6 +85,7 @@ class FacultiesProvider with ChangeNotifier {
       );
     });
 
+    notifyListeners();
     return facultyInfo;
   }
 

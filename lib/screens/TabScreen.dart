@@ -123,7 +123,7 @@ class _TabScreenState extends State<TabScreen> {
     ];
 
 
-    Future.delayed(Duration.zero, (){
+    Future.delayed(Duration.zero, () async {
       final initialLink = DynamicLinkProvider.initialLink;
 
       print("Final Dynamic Link = $initialLink");
@@ -131,20 +131,11 @@ class _TabScreenState extends State<TabScreen> {
       if (initialLink != null) {
         final Uri deepLink = initialLink.link;
 
-        FacultyServerInformation faculty = FacultyServerInformation(faculty_Unique_Id: "null",
-            faculty_Authorization: false,
-            faculty_Mobile_Messaging_Token_Id: "null",
-            faculty_Name: "null",
-            faculty_Position: "null",
-            faculty_College: "null",
-            faculty_Department: "null",
-            faculty_Mobile_Number: "null",
-            faculty_Teaching_Interests: "null",
-            faculty_Research_Interests: "null",
-            faculty_Affiliated_Centers_And_Labs: "null",
-            faculty_EmailId: "null", faculty_Gender: "null", faculty_Bio: "null", faculty_Image_Url: "null", faculty_LinkedIn_Url: "null", faculty_Website_Url: "null", faculty_Office_Navigation_Url: "null", faculty_Office_Address: "null", faculty_Office_Longitude: 0, faculty_Office_Latitude: 0);
+        FacultyServerInformation faculty = await Provider.of<FacultiesProvider>(context,listen: false).getFacultDetails(deepLink.path);
         // Example of using the dynamic link to push the user to a different screen
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FacultyDetailScreen(facultyDetails: faculty,qrIdentifier: deepLink.path,)));
+        DynamicLinkProvider.initialLink =  null;
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FacultyDetailScreen(facultyDetails: faculty)));
+
       }
     });
 
