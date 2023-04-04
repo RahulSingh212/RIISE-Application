@@ -33,6 +33,7 @@ import './providers/ScreenControllerProvider.dart';
 import './providers/LocationProvider.dart';
 import 'models/FacultyInfo.dart';
 import 'providers/ThemeProvider.dart';
+import 'screens/Faculty/FacultyServerDetailScreen.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -64,7 +65,7 @@ Future<void> main() async {
         faculty_Affiliated_Centers_And_Labs: "null",
         faculty_EmailId: "null", faculty_Gender: "null", faculty_Bio: "null", faculty_Image_Url: "null", faculty_LinkedIn_Url: "null", faculty_Website_Url: "null", faculty_Office_Navigation_Url: "null", faculty_Office_Address: "null", faculty_Office_Longitude: 0, faculty_Office_Latitude: 0);
     // Example of using the dynamic link to push the user to a different screen
-    navigatorKey.currentState?.push(MaterialPageRoute(builder: (context)=>FacultyDetailScreen(facultyDetails: faculty,qrIdentifier: dynamicLinkData.link.path,)));
+    navigatorKey.currentState?.push(MaterialPageRoute(builder: (context)=>FacultyServerDetailScreen(facultyDetails: faculty,qrIdentifier: dynamicLinkData.link.path,)));
   }).onError((error) {
     // Handle errors
   });

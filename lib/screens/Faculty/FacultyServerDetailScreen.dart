@@ -15,10 +15,10 @@ import '../../components/SideNavBar.dart';
 import '../../models/FacultyInfo.dart';
 
 
-class FacultyDetailScreen extends StatefulWidget {
+class FacultyServerDetailScreen extends StatefulWidget {
   static const routeName = '/riise-faculty-server-detail-screen';
 
-  FacultyDetailScreen({
+  FacultyServerDetailScreen({
     Key? key,
     // required this.position,
     required this.facultyDetails,
@@ -30,10 +30,10 @@ class FacultyDetailScreen extends StatefulWidget {
   late String? qrIdentifier;
 
   @override
-  State<FacultyDetailScreen> createState() => _FacultyDetailScreenState();
+  State<FacultyServerDetailScreen> createState() => _FacultyServerDetailScreenState();
 }
 
-class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
+class _FacultyServerDetailScreenState extends State<FacultyServerDetailScreen> {
 
   String defaultProfileImage = "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fdefault-profile-image.png?alt=media&token=b303ab47-2802-4000-bddc-2a024a6b2d24";
 
