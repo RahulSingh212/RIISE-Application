@@ -201,6 +201,8 @@ class EventProvider with ChangeNotifier {
     return speakerList;
   }
 
+
+
   TimeOfDay convertStringToTimeOfDay(String givenTime) {
     int hrVal = int.parse(givenTime.split(":")[0].substring(10));
     int minVal = int.parse(givenTime.split(":")[1].substring(0, 2));

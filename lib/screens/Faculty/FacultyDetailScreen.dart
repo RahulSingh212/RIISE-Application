@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
+import 'package:riise/providers/FacultiesProvider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -19,10 +20,12 @@ class FacultyDetailScreen extends StatefulWidget {
     Key? key,
     // required this.position,
     required this.facultyDetails,
+    this.qrIdentifier
   }) : super(key: key);
 
   // late int position;
   late FacultyServerInformation facultyDetails;
+  late String? qrIdentifier;
 
   @override
   State<FacultyDetailScreen> createState() => _FacultyDetailScreenState();
@@ -33,8 +36,13 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
   String defaultProfileImage =
       "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fdefault-profile-image.png?alt=media&token=b303ab47-2802-4000-bddc-2a024a6b2d24";
 
+
   @override
   Widget build(BuildContext context) {
+
+    print("QR IDENTIFIER = ${widget.qrIdentifier}");
+
+
     List<String> researchInterests =
         convertStrToList(widget.facultyDetails.faculty_Research_Interests);
     List<String> teachingInterests =

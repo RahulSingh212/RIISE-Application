@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import, unused_field, prefer_final_fields, unused_element, unused_local_variable, file_names, deprecated_member_use, unnecessary_string_interpolations, unnecessary_brace_in_string_interps, avoid_unnecessary_containers
 
 import 'dart:async';
+
 import 'dart:math';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,8 +11,10 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/main.dart';
+import 'package:riise/models/FacultyInfo.dart';
 import 'package:riise/providers/DynamicLinkProvider.dart';
 import 'package:riise/providers/UserLoginProvider.dart';
+import 'package:riise/screens/Faculty/FacultyDetailScreen.dart';
 import 'package:riise/screens/QrCode/QrCodeGenerator.dart';
 
 import '../providers/FacultiesProvider.dart';
@@ -127,9 +130,21 @@ class _TabScreenState extends State<TabScreen> {
 
       if (initialLink != null) {
         final Uri deepLink = initialLink.link;
-        // Example of using the dynamic link to push the user to a different screen
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>QrCodeGenerator()));
 
+        FacultyServerInformation faculty = FacultyServerInformation(faculty_Unique_Id: "null",
+            faculty_Authorization: false,
+            faculty_Mobile_Messaging_Token_Id: "null",
+            faculty_Name: "null",
+            faculty_Position: "null",
+            faculty_College: "null",
+            faculty_Department: "null",
+            faculty_Mobile_Number: "null",
+            faculty_Teaching_Interests: "null",
+            faculty_Research_Interests: "null",
+            faculty_Affiliated_Centers_And_Labs: "null",
+            faculty_EmailId: "null", faculty_Gender: "null", faculty_Bio: "null", faculty_Image_Url: "null", faculty_LinkedIn_Url: "null", faculty_Website_Url: "null", faculty_Office_Navigation_Url: "null", faculty_Office_Address: "null", faculty_Office_Longitude: 0, faculty_Office_Latitude: 0);
+        // Example of using the dynamic link to push the user to a different screen
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FacultyDetailScreen(facultyDetails: faculty,qrIdentifier: deepLink.path,)));
       }
     });
 

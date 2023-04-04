@@ -40,6 +40,10 @@ class FacultiesProvider with ChangeNotifier {
     // ),
   ];
 
+  Map<String,String> qrIdentifierMap = {
+    "/subramanyam" : "AJy7XCMPL0ZTpCLKT7FVzNsRUli1",
+  };
+
   Future<void> fetchCollegeFaculties(
     BuildContext context,
   ) async {
@@ -93,6 +97,7 @@ class FacultiesProvider with ChangeNotifier {
 
     // return listOfFaculties;
   }
+
 
   double checkIfDouble(String val) {
     if (double.tryParse(val).toString() != 'null') {
