@@ -35,23 +35,27 @@ class _KeynoteSpeakersScreenState extends State<KeynoteSpeakersScreen> {
   late TextEditingController searchBarController = TextEditingController();
   late String filterValue = "";
 
-  late EventProvider eventUtil;
+  // late EventProvider eventUtil;
+
+  loadData() async {
+    await Provider.of<EventProvider>(context, listen: false).fetchKeynoteSpeaker(context).then((value) {setState(() {
+
+    });});
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    eventUtil = Provider.of<EventProvider>(context, listen: false);
-    eventUtil.fetchKeynoteSpeaker(context);
-
+    loadData();
   }
 
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    eventUtil.fetchKeynoteSpeaker(context);
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   eventUtil.fetchKeynoteSpeaker(context);
+  // }
 
 
 
@@ -161,10 +165,10 @@ class _KeynoteSpeakersScreenState extends State<KeynoteSpeakersScreen> {
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
-                  itemCount: eventUtil.keynoteSpeakersList.length,
+                  itemCount:  Provider.of<EventProvider>(context, listen: false).keynoteSpeakersList.length,
                   itemBuilder: (BuildContext context, int index) {
                     if (isvalidFaculty(filterValue, index)) {
-                      return SpeakerCard(speakerDetails: eventUtil.keynoteSpeakersList[index]);
+                      return SpeakerCard(speakerDetails:  Provider.of<EventProvider>(context, listen: false).keynoteSpeakersList[index]);
                     } else {
                       return Container();
                     }
@@ -185,7 +189,7 @@ class _KeynoteSpeakersScreenState extends State<KeynoteSpeakersScreen> {
     //     .toLowerCase().compareTo(dropdownValue.toString()) == 0 || facultyProider.facultiesList[index].faculty_Name
     //     .toLowerCase().compareTo("ALL") == 0);
 
-    return eventUtil.keynoteSpeakersList[index].speaker_Name
+    return  Provider.of<EventProvider>(context, listen: false).keynoteSpeakersList[index].speaker_Name
         .toLowerCase()
         .contains(filterValue.toLowerCase());
   }

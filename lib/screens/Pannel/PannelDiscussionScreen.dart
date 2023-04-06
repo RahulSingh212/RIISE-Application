@@ -34,27 +34,32 @@ class _PannelDiscussionScreenState extends State<PannelDiscussionScreen> {
   late TextEditingController searchBarController = TextEditingController();
   late String filterValue = "";
 
-  late EventProvider eventUtil;
+  loadData() async {
+    await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(
+      context,
+      "PanelDiscussion",
+    ).then((value) {setState(() {
+
+    });});
+  }
 
   @override
   void initState() {
     super.initState();
-    eventUtil = Provider.of<EventProvider>(context, listen: false);
-    eventUtil.fetchEventTracks(
-      context,
-      "PanelDiscussion",
-    );
+    // eventUtil = Provider.of<EventProvider>(context, listen: false);
+    loadData();
+
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    eventUtil.fetchEventTracks(
-      context,
-      "PanelDiscussion",
-    );
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //
+  //   // eventUtil.fetchEventTracks(
+  //   //   context,
+  //   //   "PanelDiscussion",
+  //   // );
+  // }
 
   @override
   Widget build(BuildContext context) {

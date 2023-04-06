@@ -33,20 +33,19 @@ class PosterTracksScreen extends StatefulWidget {
 
 class _PosterTracksScreenState extends State<PosterTracksScreen> {
 
-  late EventProvider eventUtil;
+  loadData() async {
+    await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "PosterTracks").then((value){
+      setState(() {
+      });
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    eventUtil = Provider.of<EventProvider>(context, listen: false);
-    eventUtil.fetchEventTracks(context, "PosterTracks");
+    // eventUtil = Provider.of<EventProvider>(context, listen: false);
+    loadData();
 
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    eventUtil.fetchEventTracks(context, "PosterTracks");
   }
 
   @override
@@ -86,7 +85,7 @@ class _PosterTracksScreenState extends State<PosterTracksScreen> {
       body: Padding(
         padding: EdgeInsets.only(top: 220.h),
         child: ListView.builder(
-          itemCount: eventUtil.posterTracksList.length,
+          itemCount: Provider.of<EventProvider>(context, listen: false).posterTracksList.length,
           scrollDirection: Axis.vertical,
           shrinkWrap: false,
           // physics: NeverScrollableScrollPhysics(),
@@ -95,7 +94,7 @@ class _PosterTracksScreenState extends State<PosterTracksScreen> {
             return Padding(
               padding: EdgeInsets.symmetric(
                   vertical: 50.5.h, horizontal: 60.w),
-              child: EventCard3(eventDetails: eventUtil.posterTracksList[position],),
+              child: EventCard3(eventDetails: Provider.of<EventProvider>(context, listen: false).posterTracksList[position],),
             );
           },
         ),
