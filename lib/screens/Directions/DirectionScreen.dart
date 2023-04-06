@@ -30,14 +30,32 @@ class DirectionScreen extends StatefulWidget {
 }
 
 class _DirectionScreenState extends State<DirectionScreen> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
 
-    Provider.of<LocationProvider>(context, listen: false).fetchLocationList(
+  loadData() async {
+    await Provider.of<LocationProvider>(context, listen: false)
+        .fetchLocationList(
       context,
-    );
+    )
+        .then((value) {
+      setState(() {});
+    });
   }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //
+  //   Provider.of<LocationProvider>(context, listen: false).fetchLocationList(
+  //     context,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +103,6 @@ class _DirectionScreenState extends State<DirectionScreen> {
           );
         },
       ),
-
       // floatingActionButton: SizedBox(
       //   child: FloatingActionButton.extended(
       //     onPressed: () {
@@ -119,13 +136,13 @@ class _DirectionScreenState extends State<DirectionScreen> {
 
     return InkWell(
       onTap: () {
-      //   Navigator.of(context).push(
-      //     MaterialPageRoute(
-      //       builder: (context) => CoordinationDetailScreen(
-      //         coordinateDetails: coordinateDetails,
-      //       ),
-      //     ),
-      //   );
+        //   Navigator.of(context).push(
+        //     MaterialPageRoute(
+        //       builder: (context) => CoordinationDetailScreen(
+        //         coordinateDetails: coordinateDetails,
+        //       ),
+        //     ),
+        //   );
         _launchDirectionsUrl(
           coordinateDetails.coordinate_Latitude,
           coordinateDetails.coordinate_Longitude,
@@ -160,7 +177,6 @@ class _DirectionScreenState extends State<DirectionScreen> {
               children: <Widget>[
                 Container(
                   width: minDimension * 0.2,
-
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(

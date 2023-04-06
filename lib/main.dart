@@ -51,7 +51,8 @@ Future<void> main() async {
   DynamicLinkProvider.initialLink = initialLink;
 
   FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
-    FacultyServerInformation faculty = FacultyServerInformation(faculty_Unique_Id: "null",
+    FacultyServerInformation faculty = FacultyServerInformation(
+        faculty_Unique_Id: "null",
         faculty_Authorization: false,
         faculty_Mobile_Messaging_Token_Id: "null",
         faculty_Name: "null",
@@ -62,9 +63,22 @@ Future<void> main() async {
         faculty_Teaching_Interests: "null",
         faculty_Research_Interests: "null",
         faculty_Affiliated_Centers_And_Labs: "null",
-        faculty_EmailId: "null", faculty_Gender: "null", faculty_Bio: "null", faculty_Image_Url: "null", faculty_LinkedIn_Url: "null", faculty_Website_Url: "null", faculty_Office_Navigation_Url: "null", faculty_Office_Address: "null", faculty_Office_Longitude: 0, faculty_Office_Latitude: 0);
+        faculty_EmailId: "null",
+        faculty_Gender: "null",
+        faculty_Bio: "null",
+        faculty_Image_Url: "null",
+        faculty_LinkedIn_Url: "null",
+        faculty_Website_Url: "null",
+        faculty_Office_Navigation_Url: "null",
+        faculty_Office_Address: "null",
+        faculty_Office_Longitude: 0,
+        faculty_Office_Latitude: 0);
     // Example of using the dynamic link to push the user to a different screen
-    navigatorKey.currentState?.push(MaterialPageRoute(builder: (context)=>FacultyDetailScreen(facultyDetails: faculty,qrIdentifier: dynamicLinkData.link.path,)));
+    navigatorKey.currentState?.push(MaterialPageRoute(
+        builder: (context) => FacultyDetailScreen(
+              facultyDetails: faculty,
+              qrIdentifier: dynamicLinkData.link.path,
+            )));
   }).onError((error) {
     // Handle errors
   });
@@ -89,9 +103,7 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(
-          value: ScreenControllerProvider(),
-        ),
+        ChangeNotifierProvider.value(value: ScreenControllerProvider()),
         ChangeNotifierProvider.value(
           value: FirebaseProvider(),
         ),
@@ -104,9 +116,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: FacultiesProvider(),
         ),
-        ChangeNotifierProvider.value(
-          value: ThemeProvider(),
-        ),
+        ChangeNotifierProvider.value(value: ThemeProvider()),
         ChangeNotifierProvider.value(
           value: EventProvider(),
         ),

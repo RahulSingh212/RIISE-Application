@@ -54,21 +54,29 @@ class _FacultyScreenState extends State<FacultyScreen> {
   late String dropdownValue = facultyDeptList.first;
   late String filterValue = "";
 
-  late var facultyProider =
-      Provider.of<FacultiesProvider>(context, listen: false);
+  // late var facultyProider =
+  //     Provider.of<FacultiesProvider>(context, listen: false);
+
+  void loadData() async {
+    await Provider.of<FacultiesProvider>(context, listen: false)
+        .fetchCollegeFaculties(context).then((value){
+          setState(() {
+
+          });
+    });
+  }
 
   void initState() {
     super.initState();
-    Provider.of<FacultiesProvider>(context, listen: false)
-        .fetchCollegeFaculties(context);
+    loadData();
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    Provider.of<FacultiesProvider>(context, listen: false)
-        .fetchCollegeFaculties(context);
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   Provider.of<FacultiesProvider>(context, listen: false)
+  //       .fetchCollegeFaculties(context);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -271,7 +279,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
     //     (deptList.contains(dropdownValue.toString()) ||
     //         dropdownvalue.compareTo("ALL") == 0);
 
-    return facultyProider.facultiesList[index].faculty_Name
+    return Provider.of<FacultiesProvider>(context, listen: false).facultiesList[index].faculty_Name
         .toLowerCase()
         .contains(filterValue.toLowerCase())  ;
   }

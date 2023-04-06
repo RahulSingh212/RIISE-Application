@@ -16,7 +16,7 @@ class EventProvider with ChangeNotifier {
   List<SpeakerServerInformation> keynoteSpeakersList = [];
   List<EventServerInformation> panelDiscussionList = [];
 
-  void fetchEventTracks(
+  Future<void> fetchEventTracks(
     BuildContext context,
     String collectionName,
   ) async {
