@@ -61,11 +61,11 @@ class _AddSectionScreenState extends State<AddSectionScreen> {
       ),
       body: ListView(
         children: [
-          TabButton(
-            context,
-            "Add New Theme",
-            "add-new-theme",
-          ),
+          // TabButton(
+          //   context,
+          //   "Add New Theme",
+          //   "add-new-theme",
+          // ),
           TabButton(
             context,
             "Add New Event",

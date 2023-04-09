@@ -44,8 +44,6 @@ class _SpeakerTracksScreenState extends State<SpeakerTracksScreen> {
     super.initState();
     // eventUtil = Provider.of<EventProvider>(context, listen: false);
     loadData();
-
-
   }
 
   // @override

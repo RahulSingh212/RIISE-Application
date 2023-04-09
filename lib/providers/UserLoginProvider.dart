@@ -179,8 +179,14 @@ class UserLoginProvider with ChangeNotifier {
 
     String? userEmailId = userCredential.user?.email;
     String? userName = userCredential.user?.displayName;
+    String? userRefreshToken = userCredential.user?.refreshToken;
+    String? userImageUrl = userCredential.user?.photoURL;
+    String? userPhoneNumber = userCredential.user?.phoneNumber;
     String collectionName = userType == "Guest" ? "GuestsEmailingList" : "FacultiesEmailingList";
     String givenUserType = userType == "Guest" ? guestType : facultyType;
+
+    print("Refresh Token: ");
+    print(userCredential.user?.refreshToken);
 
     bool checkIfUserExists = await checkIfEmailIdExistsInDatabase(
       collectionName,
@@ -212,6 +218,9 @@ class UserLoginProvider with ChangeNotifier {
           userUniqueId,
           userName!,
           userEmailId,
+          userRefreshToken.toString(),
+          userImageUrl.toString(),
+          userPhoneNumber.toString(),
         );
       } else {
         uploadInformationOfNewFaculty(
@@ -219,6 +228,9 @@ class UserLoginProvider with ChangeNotifier {
           userUniqueId,
           userName!,
           userEmailId,
+          userRefreshToken.toString(),
+          userImageUrl.toString(),
+          userPhoneNumber.toString(),
         );
       }
     }
@@ -229,16 +241,20 @@ class UserLoginProvider with ChangeNotifier {
     String loggedInUserUniqueId,
     String userName,
     String userEmailId,
+    String userRefreshToken,
+    String userImageUrl,
+    String userPhoneNumber,
   ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
     CollectionReference usersRef = db.collection("FacultiesInformationList");
 
     try {
-      await usersRef.doc(loggedInUserUniqueId).set(
+      await usersRef.doc(userEmailId).set(
         {
           "faculty_Unique_Id": loggedInUserUniqueId,
-          "faculty_Authorization": "true",
+          "faculty_Authorization": "false",
           "faculty_Mobile_Messaging_Token_Id": "",
+          "faculty_Google_Auth_Token_Id": userRefreshToken,
           "faculty_Name": userName,
           "faculty_Position": "",
           "faculty_College": "",
@@ -250,7 +266,7 @@ class UserLoginProvider with ChangeNotifier {
           "faculty_EmailId": userEmailId,
           "faculty_Gender": "",
           "faculty_Bio": "",
-          "faculty_Image_Url": "",
+          "faculty_Image_Url": userImageUrl,
           "faculty_LinkedIn_Url": "",
           "faculty_Website_Url": "",
           "faculty_Office_Navigation_Url": "",
@@ -274,19 +290,24 @@ class UserLoginProvider with ChangeNotifier {
     String loggedInUserUniqueId,
     String userName,
     String userEmailId,
+    String userRefreshToken,
+    String userImageUrl,
+    String userPhoneNumber,
   ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
     CollectionReference usersRef = db.collection("GuestsInformationList");
 
     try {
-      await usersRef.doc(loggedInUserUniqueId).set({
+      await usersRef.doc(userEmailId).set({
         "guest_Unique_Id": loggedInUserUniqueId,
-        "guest_Mobile_Messaging_Token_Id": "",
+        "guest_Mobile_Messaging_Token_Id": userRefreshToken,
+        "guest_Google_Auth_Token_Id": userRefreshToken,
         "guest_Name": userName,
         "guest_EmailId": userEmailId,
         "guest_Mobile_Number": "",
         "guest_Gender": "",
         "guest_LinkedIn_Url": "",
+        "guest_Image_Url": userImageUrl,
         "guest_Bio": "",
         "guest_Research_Interests": "",
       });

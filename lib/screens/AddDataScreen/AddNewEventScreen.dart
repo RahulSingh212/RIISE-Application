@@ -38,12 +38,28 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
 
   List<DropdownMenuItem<String>> eventTypeList = [
     DropdownMenuItem(
-      child: Text("Speaker Track"),
-      value: "SpeakerTracks",
+      child: Text("RnD Showcases & Demos"),
+      value: "RNDShowcasesAndDemos",
     ),
     DropdownMenuItem(
-      child: Text("Poster Track"),
-      value: "PosterTracks",
+      child: Text("Forward Looking Panels"),
+      value: "ForwardLookingPanels",
+    ),
+    DropdownMenuItem(
+      child: Text("Beyond College Panels"),
+      value: "BeyondCollegePanels",
+    ),
+    DropdownMenuItem(
+      child: Text("Start-Up Showcase"),
+      value: "StartUpShowcase",
+    ),
+    DropdownMenuItem(
+      child: Text("Demos & Research Highlights"),
+      value: "DemosAndResearchesHighlights",
+    ),
+    DropdownMenuItem(
+      child: Text("Research Showcases"),
+      value: "ResearchShowcases",
     ),
     DropdownMenuItem(
       child: Text("Panel Discussion"),

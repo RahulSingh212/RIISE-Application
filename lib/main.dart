@@ -31,8 +31,9 @@ import './providers/UserLoginProvider.dart';
 import './providers/AddSectionsProvider.dart';
 import './providers/ScreenControllerProvider.dart';
 import './providers/LocationProvider.dart';
+import './providers/PanelDiscussionProvider.dart';
+import './providers/ThemeProvider.dart';
 import 'models/FacultyInfo.dart';
-import 'providers/ThemeProvider.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -116,7 +117,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: FacultiesProvider(),
         ),
-        ChangeNotifierProvider.value(value: ThemeProvider()),
+        ChangeNotifierProvider.value(
+          value: ThemeProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: PanelDiscussionProvider(),
+        ),
         ChangeNotifierProvider.value(
           value: EventProvider(),
         ),

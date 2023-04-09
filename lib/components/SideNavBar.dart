@@ -27,6 +27,13 @@ import '../screens/Themes/ThemesScreen.dart';
 import '../screens/Keynote/KeynoteSpeakersScreen.dart';
 import '../screens/SpeakerTracks/SpeakerTracksScreen.dart';
 import '../screens/Posters/PosterTracks.dart';
+import '../screens/RNDShowcase/RnDShowcaseAndDemoScreen.dart';
+import '../screens/ForwardPannel/ForwardLookingPannelScreen.dart';
+import '../screens/BeyondPannel/BeyondCollegePannelScreen.dart';
+import '../screens/StartupShowcase/StartUpShowcase.dart';
+import '../screens/DemosAndResearchs/DemosAndResearchsHighLightScreen.dart';
+import '../screens/ResearchShowcase/ResearchShowcaseScreen.dart';
+import '../screens/GuestFacultyInteraction/GuestFacultyInteractionScreen.dart';
 import '../screens/Pannel/PannelDiscussionScreen.dart';
 
 class SideNavBar extends StatefulWidget {
@@ -53,7 +60,15 @@ class _SideNavBarState extends State<SideNavBar> {
     "keynote-speakers": KeynoteSpeakersScreen(),
     "speaker-tracks": SpeakerTracksScreen(),
     "poster-tracks": PosterTracksScreen(),
+    "rnd-showcase-and-demos": RNDShowcaseAndDemoScreen(),
+    "forward-looking-panels": ForwardLookingPannelScreen(),
+    "beyond-college-panels": BeyondCollegePannelScreen(),
+    "start-up-showcase": StartUpShowcaseScreen(),
+    "demos-n-research-highlights": DemosAndResearchHighlightScreen(),
+    "research-showcase": ResearchShowcaseScreen(),
+    "guest-faculty-interactions": GuestFacultyInteractionScreen(),
     "pannel-discussion": PannelDiscussionScreen(),
+
   };
 
   @override
@@ -231,25 +246,74 @@ class _SideNavBarState extends State<SideNavBar> {
           ),
           sideBarTile(
             context,
-            "Speaker Tracks",
-            Icons.multitrack_audio_rounded,
-            "speaker-tracks",
+            "RnD Showcases",
+            Icons.apartment_rounded,
+            "rnd-showcase-and-demos",
             8,
           ),
           sideBarTile(
             context,
-            "Poster Tracks",
-            Icons.podcasts_rounded,
-            "poster-tracks",
+            "Forward Panels",
+            Icons.people_alt_rounded,
+            "forward-looking-panels",
             9,
           ),
           sideBarTile(
             context,
-            "Panel Discussion",
-            Icons.people_alt_rounded,
-            "pannel-discussion",
+            "Beyond Panels",
+            Icons.people_rounded,
+            "beyond-college-panels",
             10,
           ),
+          sideBarTile(
+            context,
+            "Start-Up Showcases",
+            Icons.construction_rounded,
+            "start-up-showcase",
+            11,
+          ),
+          sideBarTile(
+            context,
+            "Demos & Reseaches",
+            Icons.find_in_page_rounded,
+            "demos-n-research-highlights",
+            12,
+          ),
+          sideBarTile(
+            context,
+            "Research Showcases",
+            Icons.find_replace_rounded,
+            "research-showcase",
+            13,
+          ),
+          sideBarTile(
+            context,
+            "Intereactions",
+            Icons.integration_instructions,
+            "guest-faculty-interactions",
+            14,
+          ),
+          // sideBarTile(
+          //   context,
+          //   "Speaker Tracks",
+          //   Icons.multitrack_audio_rounded,
+          //   "speaker-tracks",
+          //   8,
+          // ),
+          // sideBarTile(
+          //   context,
+          //   "Poster Tracks",
+          //   Icons.podcasts_rounded,
+          //   "poster-tracks",
+          //   9,
+          // ),
+          // sideBarTile(
+          //   context,
+          //   "Panel Discussion",
+          //   Icons.people_alt_rounded,
+          //   "pannel-discussion",
+          //   10,
+          // ),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 10,

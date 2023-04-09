@@ -13,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/providers/EventsProvider.dart';
+import 'package:riise/providers/PanelDiscussionProvider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/FacultyCard.dart';
@@ -35,12 +36,14 @@ class _PannelDiscussionScreenState extends State<PannelDiscussionScreen> {
   late String filterValue = "";
 
   loadData() async {
-    await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(
+    await Provider.of<EventProvider>(context, listen: false)
+        .fetchEventTracks(
       context,
       "PanelDiscussion",
-    ).then((value) {setState(() {
-
-    });});
+    )
+        .then((value) {
+      setState(() {});
+    });
   }
 
   @override
@@ -48,7 +51,6 @@ class _PannelDiscussionScreenState extends State<PannelDiscussionScreen> {
     super.initState();
     // eventUtil = Provider.of<EventProvider>(context, listen: false);
     loadData();
-
   }
 
   // @override
