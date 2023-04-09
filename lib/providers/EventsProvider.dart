@@ -42,7 +42,18 @@ class EventProvider with ChangeNotifier {
     FirebaseFirestore db = FirebaseFirestore.instance;
     CollectionReference eventsTracksRef = db.collection(collectionName);
 
-    if (!firebaseCollectionsList.contains(collectionName)) return;
+    int cnt = 0;
+
+    if (collectionName == "SpeakerTracks") cnt += 1; 
+    else if (collectionName == "RNDShowcasesAndDemos") cnt += 1; 
+    else if (collectionName == "ForwardLookingPanels") cnt += 1;
+    else if (collectionName == "BeyondCollegePanels") cnt += 1;
+    else if (collectionName == "StartUpShowcase") cnt += 1;
+    else if (collectionName == "DemosAndResearchesHighlights") cnt += 1;
+    else if (collectionName == "ResearchShowcases") cnt += 1;
+    else if (collectionName == "PanelDiscussion") cnt += 1;
+
+    if (cnt < 1) return;
 
     try {
       List<EventServerInformation> listOfEventTracks = [];
