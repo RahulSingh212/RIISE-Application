@@ -80,6 +80,7 @@ class _SideNavBarState extends State<SideNavBar> {
     var useableHeight = screenHeight - topInsets - bottomInsets;
 
     return Drawer(
+      // backgroundColor: Colors.black.withOpacity(0.75),
       child: ListView(
         children: [
           SizedBox(

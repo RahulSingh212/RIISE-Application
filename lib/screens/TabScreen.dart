@@ -86,38 +86,6 @@ class _TabScreenState extends State<TabScreen> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  initializeCalendar() async {
-    final googleSignIn = GoogleSignIn(scopes: ['https://www.googleapis.com/auth/calendar']);
-    final googleUser = await googleSignIn.signInSilently();
-    final googleAuth = await googleUser?.authentication;
-    final accessToken = await googleAuth?.accessToken;
-
-    print("ACCESS TOKEN ON TABSCREEN = $accessToken");
-
-    final httpClient = authenticatedClient(
-        Client(),
-        AccessCredentials(
-            AccessToken('Bearer', accessToken!,
-                DateTime.now().add(Duration(hours: 1)).toUtc()),
-            null,
-            []));
-    final calendar = cal.CalendarApi(httpClient);
-
-    final event = cal.Event()
-      ..summary = 'Test Event 2'
-      ..start = (cal.EventDateTime()..dateTime = DateTime.now().add(Duration(minutes: 10)).toUtc())
-      ..end = (cal.EventDateTime()
-        ..dateTime = DateTime.now().add(Duration(hours: 1,minutes: 30)).toUtc());
-
-    try {
-      print("Hello 1");
-      await calendar.events.insert(event, 'primary');
-      print("Hello 2");
-    } catch (e) {
-      print("Error -> $e");
-    };
-  }
-
   @override
   void initState() {
     super.initState();
