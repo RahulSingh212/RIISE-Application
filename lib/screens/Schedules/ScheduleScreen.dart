@@ -18,7 +18,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../components/EventCard.dart';
 import '../../components/EventCard2.dart';
 import '../../components/SideNavBar.dart';
-import '../../components/ThemeCard.dart';
+// import '../../components/CategoryEventCard.dart';
 
 import '../../models/EventInfo.dart';
 import '../../providers/EventsProvider.dart';
@@ -128,16 +128,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 color: Colors.blue,
                 size: 80.r,
               ),
-              // actions: [
-              //   Container(
-              //     child: IconButton(
-              //       onPressed: () {},
-              //       icon: Icon(
-              //         Icons.person,
-              //       ),
-              //     ),
-              //   ),
-              // ],
+              actions: [
+                Container(
+                    padding: EdgeInsets.only(top: 15.h,bottom: 25.h,right: 20.w),
+                    child: Center(child: Image.network("https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",fit: BoxFit.contain,))
+                ),
+              ],
             ),
             body: SingleChildScrollView(
               padding: EdgeInsets.only(top: 280.8.h),

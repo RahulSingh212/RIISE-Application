@@ -80,16 +80,12 @@ class _DirectionScreenState extends State<DirectionScreen> {
           color: Colors.blue,
           size: 80.r,
         ),
-        // actions: [
-        //   Container(
-        //     child: IconButton(
-        //       onPressed: () {},
-        //       icon: Icon(
-        //         Icons.person,
-        //       ),
-        //     ),
-        //   ),
-        // ],
+        actions: [
+          Container(
+              padding: EdgeInsets.only(top: 15.h,bottom: 25.h,right: 20.w),
+              child: Center(child: Image.network("https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",fit: BoxFit.contain,))
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: Provider.of<LocationProvider>(context, listen: false)

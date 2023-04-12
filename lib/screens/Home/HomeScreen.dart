@@ -13,7 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:riise/components/ThemeCard.dart';
+import 'package:riise/components/CategoryEventCard.dart';
 import 'package:riise/models/ThemeInfo.dart';
 
 import 'package:riise/providers/ThemeProvider.dart';
@@ -27,6 +27,14 @@ import '../../models/EventInfo.dart';
 import '../../providers/EventsProvider.dart';
 import '../../providers/FacultiesProvider.dart';
 import "../AddDataScreen/AddSectionScreen.dart";
+import '../BeyondPannel/BeyondCollegePannelScreen.dart';
+import '../DemosAndResearchs/DemosAndResearchsHighLightScreen.dart';
+import '../ForwardPannel/ForwardLookingPannelScreen.dart';
+import '../Keynote/KeynoteSpeakersScreen.dart';
+import '../RNDShowcase/RnDShowcaseAndDemoScreen.dart';
+import '../ResearchShowcase/ResearchShowcaseScreen.dart';
+import '../StartupShowcase/StartUpShowcase.dart';
+import '../TabScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/rise-home-screen';
@@ -75,6 +83,19 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     loadData();
   }
+
+  List<dynamic> categoryList = [
+    ["Keynote Address","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",KeynoteSpeakersScreen()],
+    ["RND Showcases","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",RNDShowcaseAndDemoScreen()],
+    ["Forward Panels","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",ForwardLookingPannelScreen()],
+    ["Beyond Panels","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",BeyondCollegePannelScreen()],
+    ["Start-UP Showcases","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",StartUpShowcaseScreen()],
+    ["Demos And Researches","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",DemosAndResearchHighlightScreen()],
+    ["Research Showcases","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",ResearchShowcaseScreen()],
+  ];
+
+
+
 
   // @override
   // void didChangeDependencies() {
@@ -130,6 +151,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           Container(
+            padding: EdgeInsets.only(top: 15.h,bottom: 25.h),
+            child: Center(child: Image.network("https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",fit: BoxFit.contain,))
+          ),
+          Container(
             padding: EdgeInsets.only(right: 5),
             child: IconButton(
               onPressed: () {
@@ -152,121 +177,153 @@ class _HomeScreenState extends State<HomeScreen> {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         physics: BouncingScrollPhysics(),
         child: Container(
-          padding: EdgeInsets.only(top: 280.h, left: 54.w, right: 54.w),
+
+          padding: EdgeInsets.only(top: 280.h,left: 54.w,right: 54.w),
+
+
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Hello,",
-                style: TextStyle(
-                  fontSize: 70.sp,
-                  color: Colors.black12,
-                ),
-              ),
-              Text(
-                _auth.currentUser?.displayName as String,
-                style: TextStyle(
-                  fontSize: 80.sp,
-                  color: Colors.black,
-                ),
-              ),
               Container(
-                padding: EdgeInsets.only(top: 58.h),
-                height: 210.h,
-                child: TextField(
-                  controller: searchBarController,
-                  decoration: InputDecoration(
-                    hintText: "Search",
-                    border: OutlineInputBorder(),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xffebebeb),
+                padding: EdgeInsets.only(top: 60.h,left: 40.w,right: 40.w),
+                width: double.infinity,
+                height: 380.h,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2FIllstration.png?alt=media&token=c2319412-6f5b-47fa-a12b-e70029f8fa2e"
+                    ),
+                    fit: BoxFit.fill
+                  )
+                  // color: Colors.red,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Hello,",
+                      style: TextStyle(
+                        fontSize: 70.sp,
+                        color: Colors.black12,
                       ),
-                      borderRadius: BorderRadius.circular(12),
                     ),
-                    hintStyle: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 45.sp,
-                      fontStyle: FontStyle.normal,
-                      color: Color(0xff6c757d),
+                    Text(
+                      _auth.currentUser?.displayName as String,
+                      style: TextStyle(
+                        fontSize: 80.sp,
+                        color: Colors.black,
+                      ),
                     ),
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.search),
-                      onPressed: () {
-                        print("serchpressed");
-                      },
+                  ],
+                ),
+              ),
+              // Container(
+              //   padding: EdgeInsets.only(top: 58.h),
+              //   height: 210.h,
+              //   child: TextField(
+              //     controller: searchBarController,
+              //     decoration: InputDecoration(
+              //       hintText: "Search",
+              //       border: OutlineInputBorder(),
+              //       enabledBorder: OutlineInputBorder(
+              //         borderSide: BorderSide(
+              //           color: Color(0xffebebeb),
+              //         ),
+              //         borderRadius: BorderRadius.circular(12),
+              //       ),
+              //       hintStyle: TextStyle(
+              //         fontFamily: 'Roboto',
+              //         fontWeight: FontWeight.w400,
+              //         fontSize: 45.sp,
+              //         fontStyle: FontStyle.normal,
+              //         color: Color(0xff6c757d),
+              //       ),
+              //       suffixIcon: IconButton(
+              //         icon: Icon(Icons.search),
+              //         onPressed: () {
+              //           print("serchpressed");
+              //         },
+              //       ),
+              //     ),
+              //   ),
+              // ),
+
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: 58.h,
+                      ),
+                      child: Text(
+                        "Categories",
+                        style: TextStyle(fontSize: 70.sp, color: Colors.black),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  top: 58.h,
-                ),
-                child: Text(
-                  "Themes",
-                  style: TextStyle(fontSize: 70.sp, color: Colors.black),
-                ),
-              ),
-              Container(
-                // padding: EdgeInsets.only(top: 58.h),
-                margin: EdgeInsets.only(
-                  top: 25.h,
-                ),
-                alignment: Alignment.center,
-                // decoration: BoxDecoration(
-                //   border: Border.all()
-                // ),
-                height: 520.h,
-                child: ListView.builder(
-                  // itemCount: themes.getThemesList().length,
-                  itemCount: Provider.of<ThemeProvider>(context, listen: false).themesList.length,
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 23.h,
-                    horizontal: 21.w,
-                  ),
-                  itemBuilder: (context, position) {
-                    return ThemeCard(
-                        // position: position,
-                        themeDetails: Provider.of<ThemeProvider>(context, listen: false).themesList[position]
-                        //     Provider.of<EventProvider>(context, listen: false)
-                        //         .themesList[position],
-                        );
-                  },
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  top: 58.h,
-                ),
-                child: Text(
-                  "TimeLine",
-                  style: TextStyle(fontSize: 70.sp, color: Colors.black),
-                ),
-              ),
-              Container(
-                // padding: EdgeInsets.only(top: 58.h),
-                margin: EdgeInsets.only(top: 58.h),
-                alignment: Alignment.topCenter,
-                // decoration: BoxDecoration(
-                //   border: Border.all()
-                // ),
-                // height: height*1.5,
-                child: ListView.builder(
-                  itemCount: eventUtil.length,
-                  // scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.only(top: 23.h),
-                  itemBuilder: (context, position) {
-                    return EventCard(
-                      eventDetails: eventUtil[position],
-                    );
-                  },
+                    Container(
+                      // padding: EdgeInsets.only(top: 58.h),
+                      margin: EdgeInsets.only(
+                        top: 25.h,
+                      ),
+                      alignment: Alignment.center,
+                      // decoration: BoxDecoration(
+                      //   border: Border.all()
+                      // ),
+                      height: 520.h,
+                      child: ListView.builder(
+                        // itemCount: themes.getThemesList().length,
+                        itemCount: categoryList.length,
+                        scrollDirection: Axis.horizontal,
+                        physics: BouncingScrollPhysics(),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 23.h,
+                          horizontal: 21.w,
+                        ),
+                        itemBuilder: (context, position) {
+                          return CategoryEventCard(
+                              // position: position,
+                              eventDetail: categoryList[position]
+                              //     Provider.of<EventProvider>(context, listen: false)
+                              //         .themesList[position],
+                              );
+                        },
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: 58.h,
+                      ),
+                      child: Text(
+                        "TimeLine",
+                        style: TextStyle(fontSize: 70.sp, color: Colors.black),
+                      ),
+                    ),
+                    Container(
+                      // padding: EdgeInsets.only(top: 58.h),
+                      margin: EdgeInsets.only(top: 58.h),
+                      alignment: Alignment.topCenter,
+                      // decoration: BoxDecoration(
+                      //   border: Border.all()
+                      // ),
+                      // height: height*1.5,
+                      child: ListView.builder(
+                        itemCount: eventUtil.length,
+                        // scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        padding: EdgeInsets.only(top: 23.h),
+                        itemBuilder: (context, position) {
+                          return EventCard(
+                            eventDetails: eventUtil[position],
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

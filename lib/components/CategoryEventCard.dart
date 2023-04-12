@@ -11,22 +11,22 @@ import '../models/ThemeInfo.dart';
 import '../screens/Themes/ThemeDetailScreen.dart';
 
 //ignore: must_be_immutable
-class ThemeCard extends StatefulWidget {
+class CategoryEventCard extends StatefulWidget {
 
-  ThemeCard({
+  CategoryEventCard({
     Key? key,
     // required this.position,
-    required this.themeDetails,
+    required this.eventDetail,
   }) : super(key: key);
 
   // late int position;
-  late ThemeServerInformation themeDetails;
+  late dynamic eventDetail;
 
   @override
-  State<ThemeCard> createState() => _ThemeCardState();
+  State<CategoryEventCard> createState() => _CategoryEventCardState();
 }
 
-class _ThemeCardState extends State<ThemeCard> {
+class _CategoryEventCardState extends State<CategoryEventCard> {
   // ThemeListUtil themes = ThemeListUtil();
 
   @override
@@ -55,15 +55,12 @@ class _ThemeCardState extends State<ThemeCard> {
                   // print("${widget.position} clicked");
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => ThemeDetailScreen(
-                        // position: widget.position,
-                        themeDetails: widget.themeDetails,
-                      ),
+                      builder: (context) => widget.eventDetail[2]
                     ),
                   );
                 },
                 child: Image.network(
-                  widget.themeDetails.Theme_Image_Url,
+                  widget.eventDetail[1],
                   width: 200.r,
                   height: 200.r,
                 ),
@@ -78,7 +75,7 @@ class _ThemeCardState extends State<ThemeCard> {
                     children: [
                       Flexible(
                         child: Text(
-                          widget.themeDetails.Theme_Name,
+                          widget.eventDetail[0],
                           style: TextStyle(fontSize: 40.sp),
                           softWrap: true,
                           textAlign: TextAlign.center,

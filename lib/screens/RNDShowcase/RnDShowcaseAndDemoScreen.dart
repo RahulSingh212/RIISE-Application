@@ -98,16 +98,12 @@ class _RNDShowcaseAndDemoScreenState extends State<RNDShowcaseAndDemoScreen> {
           color: Colors.blue,
           size: 80.r,
         ),
-        // actions: [
-        //   Container(
-        //     child: IconButton(
-        //       onPressed: () {},
-        //       icon: Icon(
-        //         Icons.person,
-        //       ),
-        //     ),
-        //   ),
-        // ],
+        actions: [
+          Container(
+              padding: EdgeInsets.only(top: 15.h,bottom: 25.h,right: 20.w),
+              child: Center(child: Image.network("https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",fit: BoxFit.contain,))
+          ),
+        ],
       ),
       body: FutureBuilder<List<EventServerInformation>>(
         future: Provider.of<EventProvider>(context).getEventList(context, "RNDShowcasesAndDemos"),
