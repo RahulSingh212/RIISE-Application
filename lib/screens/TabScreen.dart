@@ -4,11 +4,19 @@ import 'dart:async';
 
 import 'dart:math';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:googleapis/calendar/v3.dart';
+// import 'package:googleapis/calendar/v3.dart';
+// import 'package:googleapis/calendar/v3.dart';
+import 'package:googleapis_auth/auth.dart';
+import 'package:googleapis_auth/auth_io.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/main.dart';
 import 'package:riise/models/FacultyInfo.dart';
@@ -17,6 +25,7 @@ import 'package:riise/providers/UserLoginProvider.dart';
 import 'package:riise/screens/Faculty/FacultyDetailScreen.dart';
 import 'package:riise/screens/QrCode/QrCodeGenerator.dart';
 
+import '../providers/CalendarAPI.dart';
 import '../providers/FacultiesProvider.dart';
 import '../providers/LocationProvider.dart';
 import '../providers/ThemeProvider.dart';
@@ -26,6 +35,8 @@ import "./Schedules/ScheduleScreen.dart";
 import "./Appointments/AppointmentScreen.dart";
 import "./Directions/DirectionScreen.dart";
 import "../providers/ScreenControllerProvider.dart";
+import 'package:googleapis/calendar/v3.dart' as cal;
+import 'package:http/http.dart' as http;
 
 class TabScreen extends StatefulWidget {
   static const routeName = '/rise-tab-screen';
@@ -73,12 +84,47 @@ class _TabScreenState extends State<TabScreen> {
     // );
   }
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  initializeCalendar() async {
+    final googleSignIn = GoogleSignIn(scopes: ['https://www.googleapis.com/auth/calendar']);
+    final googleUser = await googleSignIn.signInSilently();
+    final googleAuth = await googleUser?.authentication;
+    final accessToken = await googleAuth?.accessToken;
+
+    print("ACCESS TOKEN ON TABSCREEN = $accessToken");
+
+    final httpClient = authenticatedClient(
+        Client(),
+        AccessCredentials(
+            AccessToken('Bearer', accessToken!,
+                DateTime.now().add(Duration(hours: 1)).toUtc()),
+            null,
+            []));
+    final calendar = cal.CalendarApi(httpClient);
+
+    final event = cal.Event()
+      ..summary = 'Test Event 2'
+      ..start = (cal.EventDateTime()..dateTime = DateTime.now().add(Duration(minutes: 10)).toUtc())
+      ..end = (cal.EventDateTime()
+        ..dateTime = DateTime.now().add(Duration(hours: 1,minutes: 30)).toUtc());
+
+    try {
+      print("Hello 1");
+      await calendar.events.insert(event, 'primary');
+      print("Hello 2");
+    } catch (e) {
+      print("Error -> $e");
+    };
+  }
+
   @override
   void initState() {
     super.initState();
 
     // final initialLink = Provider.of<DynamicLinkProvider>(context,listen: false).initialLink;
 
+    // initializeCalendar();
     print("initState TABSCREEN");
     Provider.of<ThemeProvider>(
       context,
@@ -122,7 +168,6 @@ class _TabScreenState extends State<TabScreen> {
       },
     ];
 
-
     Future.delayed(Duration.zero, () async {
       final initialLink = DynamicLinkProvider.initialLink;
 
@@ -131,14 +176,16 @@ class _TabScreenState extends State<TabScreen> {
       if (initialLink != null) {
         final Uri deepLink = initialLink.link;
 
-        FacultyServerInformation faculty = await Provider.of<FacultiesProvider>(context,listen: false).getFacultDetails(deepLink.path);
+        FacultyServerInformation faculty =
+            await Provider.of<FacultiesProvider>(context, listen: false)
+                .getFacultDetails(deepLink.path);
         // Example of using the dynamic link to push the user to a different screen
-        DynamicLinkProvider.initialLink =  null;
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FacultyDetailScreen(facultyDetails: faculty)));
-
+        DynamicLinkProvider.initialLink = null;
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                FacultyDetailScreen(facultyDetails: faculty)));
       }
     });
-
   }
 
   void _selectPage(int index) {

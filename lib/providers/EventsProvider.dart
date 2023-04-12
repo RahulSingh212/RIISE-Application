@@ -53,10 +53,13 @@ class EventProvider with ChangeNotifier {
     else if (collectionName == "ResearchShowcases") cnt += 1;
     else if (collectionName == "PanelDiscussion") cnt += 1;
 
+    print("Collection name :- $collectionName");
+
     if (cnt < 1) return;
 
     try {
       List<EventServerInformation> listOfEventTracks = [];
+
       await eventsTracksRef.get().then(
         (ds) async {
           ds.docs.forEach(
@@ -99,30 +102,37 @@ class EventProvider with ChangeNotifier {
               );
 
               listOfEventTracks.add(eventInfo);
+              print(eventInfo.Event_Name);
+
             },
           );
         },
-      );
+      ).then((value){
+        print(listOfEventTracks);
 
-      if (collectionName == "SpeakerTracks") {
-        speakerTracksList = listOfEventTracks;
-      } else if (collectionName == "RNDShowcasesAndDemos") {
-        speakerTracksList = rndShowcasesAndDemosList;
-      } else if (collectionName == "ForwardLookingPanels") {
-        speakerTracksList = forwardLookingPanelsList;
-      } else if (collectionName == "BeyondCollegePanels") {
-        speakerTracksList = beyondCollegePanelsList;
-      } else if (collectionName == "StartUpShowcase") {
-        speakerTracksList = startUpShowcaseList;
-      } else if (collectionName == "DemosAndResearchesHighlights") {
-        speakerTracksList = demosAndResearchesHighlightsList;
-      } else if (collectionName == "ResearchShowcases") {
-        speakerTracksList = researchShowcasesList;
-      } else if (collectionName == "PanelDiscussion") {
-        speakerTracksList = panelDiscussionList;
-      }
 
-      notifyListeners();
+        if (collectionName == "SpeakerTracks") {
+          speakerTracksList = listOfEventTracks;
+        } else if (collectionName == "RNDShowcasesAndDemos") {
+          rndShowcasesAndDemosList = listOfEventTracks;
+        } else if (collectionName == "ForwardLookingPanels") {
+          forwardLookingPanelsList = listOfEventTracks;
+        } else if (collectionName == "BeyondCollegePanels") {
+          beyondCollegePanelsList = listOfEventTracks;
+        } else if (collectionName == "StartUpShowcase") {
+          startUpShowcaseList = listOfEventTracks;
+        } else if (collectionName == "DemosAndResearchesHighlights") {
+          demosAndResearchesHighlightsList = listOfEventTracks;
+        } else if (collectionName == "ResearchShowcases") {
+          researchShowcasesList = listOfEventTracks;
+        } else if (collectionName == "PanelDiscussion") {
+          panelDiscussionList = listOfEventTracks;
+        }
+
+        notifyListeners();
+      });
+
+
     } catch (errorVal) {
       print(errorVal);
     }
@@ -142,6 +152,7 @@ class EventProvider with ChangeNotifier {
           ds.docs.forEach(
             (themeDetails) async {
               final eventMap = themeDetails.data() as Map<String, dynamic>;
+              print(eventMap);
 
               String Event_Unique_Id = eventMap["Event_Unique_Id"].toString();
               String Event_Name = eventMap["Event_Name"].toString();
@@ -178,17 +189,27 @@ class EventProvider with ChangeNotifier {
                 EventSpeakersList: eventSpeakersList,
               );
 
+
+              print("EVENT INFO _>_> ${eventInfo.Event_Name}");
+
               listOfEventTracks.add(eventInfo);
+              print("Inside TRY CATCH -> ) $listOfEventTracks");
             },
           );
         },
-      );
-      notifyListeners();
+      ).then((value){
+        print("Above Return TRY CATCH -> ) $listOfEventTracks");
+        notifyListeners();
+        return listOfEventTracks;
+      });
     } catch (errorVal) {
-      print(errorVal);
+      print("ERROR HERE -> $errorVal");
     }
 
-    return listOfEventTracks;
+
+
+    return [];
+
   }
 
   Future<void> getFullListOfEvents(

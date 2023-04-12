@@ -14,7 +14,9 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../components/NewEventCard.dart';
 import '../../components/SideNavBar.dart';
+import '../../models/EventInfo.dart';
 import '../../providers/EventsProvider.dart';
 
 class RNDShowcaseAndDemoScreen extends StatefulWidget {
@@ -29,21 +31,51 @@ class RNDShowcaseAndDemoScreen extends StatefulWidget {
 class _RNDShowcaseAndDemoScreenState extends State<RNDShowcaseAndDemoScreen> {
 
   loadData() async {
-    await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "RNDShowcasesAndDemos").then((value){
+    await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "RNDShowcasesAndDemos").then((value) async {
       setState(() {
 
+        print("HEllo this is length of RND LIST -> ${Provider
+            .of<EventProvider>(context, listen: false)
+            .rndShowcasesAndDemosList
+            .length}");
+
       });
+
+      // List<EventServerInformation> list = await Provider.of<EventProvider>(context,listen: false).getEventList(context, "RNDShowcasesAndDemos");
+      // print("List ->-> $list");
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // loadData();
+    // Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "RNDShowcasesAndDemos");
+
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    // loadData();
+    // Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "RNDShowcasesAndDemos");
   }
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
     // var screenHeight = MediaQuery.of(context).size.height;
     // var screenWidth = MediaQuery.of(context).size.width;
     // var topInsets = MediaQuery.of(context).viewInsets.top;
     // var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
     // var useableHeight = screenHeight - topInsets - bottomInsets;
+
+    print("HEllo this is length of RND LIST -> ${Provider
+        .of<EventProvider>(context, listen: false)
+        .rndShowcasesAndDemosList
+        .length}");
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -77,40 +109,39 @@ class _RNDShowcaseAndDemoScreenState extends State<RNDShowcaseAndDemoScreen> {
         //   ),
         // ],
       ),
-      body: ListView(
-        children: [
-          // SizedBox(
-          //   height: 20,
-          // ),
-          // Align(
-          //   child: Container(
-          //     padding: EdgeInsets.symmetric(
-          //       horizontal: 54.w,
-          //     ),
-          //     width: 1080.w,
-          //     height: 2106.h,
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //       color: Colors.blue.shade400,
-          //     ),
-          //     child: RichText(
-          //       textAlign: TextAlign.justify,
-          //       text: TextSpan(
-          //         children: const [
-          //           TextSpan(
-          //             text:
-          //                 ".",
-          //           )
-          //         ],
-          //         style: TextStyle(
-          //           fontSize: 70.sp,
-          //           color: Colors.white,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-        ],
+      body: FutureBuilder<List<EventServerInformation>>(
+        future: Provider.of<EventProvider>(context).getEventList(context, "RNDShowcasesAndDemos"),
+        builder: (context, snapshot) {
+          print(snapshot.data);
+          if(snapshot.hasData)
+            {
+
+              return Padding(
+                padding: EdgeInsets.only(top: 220.h),
+                child: ListView.builder(
+                  itemCount: Provider.of<EventProvider>(context).rndShowcasesAndDemosList.length,
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: false,
+                  // physics: NeverScrollableScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
+                  padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
+                  itemBuilder: (context, position) {
+                    return Container(
+                      height: 700.h,
+                      padding: EdgeInsets.only(left: 86.w, top: 80.h),
+                      child: NewEventCard(
+                        eventDetails: Provider.of<EventProvider>(context).rndShowcasesAndDemosList[position],
+                      ),
+                    );
+                  },
+                ),
+              );
+            }
+          else
+            {
+              return Center(child: CircularProgressIndicator(),);
+            }
+        }
       ),
     );
   }

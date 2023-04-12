@@ -18,7 +18,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../components/EventCard2.dart';
 import '../../components/EventCard3.dart';
 import '../../components/SideNavBar.dart';
-import '../../models/EventInfo.dart';
+
 
 import '../../providers/EventsProvider.dart';
 

@@ -9,11 +9,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:googleapis/calendar/v3.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import '../screens/TabScreen.dart';
 import 'FirebaseProvider.dart';
 import 'UserDetailsProvider.dart';
+import 'package:googleapis_auth/googleapis_auth.dart' as auth;
 
 class UserLoginProvider with ChangeNotifier {
   String guestType = "guest";
@@ -25,6 +28,8 @@ class UserLoginProvider with ChangeNotifier {
   late String _patientExpiryDateTime;
   late String _patientUniqueId;
   String errorMessageValue = "";
+  late GoogleSignInAccount? staticGoogleUser;
+
 
   Future<bool> checkIfEmailIdExistsInDatabase(
     String collectionName,
@@ -84,23 +89,38 @@ class UserLoginProvider with ChangeNotifier {
   }
 
   Future<UserCredential> signUpWithGoogle(
-    BuildContext context,
-  ) async {
+      BuildContext context,
+      ) async {
     await GoogleSignIn().signOut();
-    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // TODO - Try Storing this
+    GoogleSignInAccount? googleUser =
+    await GoogleSignIn(scopes: ['https://www.googleapis.com/auth/calendar'])
+        .signIn();
+
+    staticGoogleUser = googleUser;
+    print("Static Google User -> $staticGoogleUser");
+
     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
     AuthCredential authCredential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(
+    UserCredential userCredential =
+    await FirebaseAuth.instance.signInWithCredential(
       authCredential,
     );
 
     loggedInUserCredentials = userCredential;
 
+    // print("ACCESS TOKEN -> ${googleAuth?.accessToken}");
+    // print("ACCESS TOKEN -> ${googleAuth?.idToken}");
     print(userCredential.user?.displayName);
     print(userCredential.user?.email);
+
+    final accessToken = await googleAuth?.accessToken;
+
+    print("ACCESS TOKEN ON TABSCREEN = $accessToken");
 
     return userCredential;
   }
@@ -127,7 +147,7 @@ class UserLoginProvider with ChangeNotifier {
 
   void signOutWithGoogle(BuildContext context) async {
     // GoogleSignInAccount? googleUser = await GoogleSignIn().signOut();
-    // FirebaseAuth.instance.signOut();
+    FirebaseAuth.instance.signOut();
   }
 
   Future<void> signIn(
@@ -182,7 +202,8 @@ class UserLoginProvider with ChangeNotifier {
     String? userRefreshToken = userCredential.user?.refreshToken;
     String? userImageUrl = userCredential.user?.photoURL;
     String? userPhoneNumber = userCredential.user?.phoneNumber;
-    String collectionName = userType == "Guest" ? "GuestsEmailingList" : "FacultiesEmailingList";
+    String collectionName =
+        userType == "Guest" ? "GuestsEmailingList" : "FacultiesEmailingList";
     String givenUserType = userType == "Guest" ? guestType : facultyType;
 
     print("Refresh Token: ");

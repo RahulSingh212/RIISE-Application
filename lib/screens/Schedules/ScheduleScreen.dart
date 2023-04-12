@@ -19,8 +19,8 @@ import '../../components/EventCard.dart';
 import '../../components/EventCard2.dart';
 import '../../components/SideNavBar.dart';
 import '../../components/ThemeCard.dart';
-import '../../models/EventInfo.dart';
 
+import '../../models/EventInfo.dart';
 import '../../providers/EventsProvider.dart';
 
 class ScheduleScreen extends StatefulWidget {

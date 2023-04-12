@@ -62,6 +62,8 @@ dependencies:
   qr_flutter: ^4.0.0
   pretty_qr_code: ^2.0.2
   firebase_dynamic_links: ^5.1.0
+  googleapis: ^10.1.0
+  googleapis_auth: ^1.4.0
 
 dev_dependencies:
   flutter_test:
