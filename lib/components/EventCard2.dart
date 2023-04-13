@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:riise/models/EventInfo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../screens/EventDetailScreen.dart';
+
 
 //ignore: must_be_immutable
 class EventCard2 extends StatefulWidget {
@@ -33,75 +35,90 @@ class _EventCard2State extends State<EventCard2> {
     // double minDimension = min(width, height);
     // double maxDimension = max(width, height);
 
-    return Card(
-      elevation: 16,
-      semanticContainer: false,
-      shape: RoundedRectangleBorder(
-        //TODO - Ask for same shape or different
-        borderRadius: widget.position % 2 == 0 ?BorderRadius.only(topLeft: Radius.circular(35),bottomRight: Radius.circular(35)) : BorderRadius.only(topRight: Radius.circular(35),bottomLeft: Radius.circular(35)),
-      ),
-      // color: Colors.red,
-      child: Container(
-        //BackGround Image
-        decoration: BoxDecoration(
-          
-            image: DecorationImage(
-              //TODO - Change background image
-                image: NetworkImage(backImage,),
-                fit: BoxFit.cover
+    return InkWell(
+      onTap: (){
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => EventDetailScreen(
+              // position: widget.position,
+              eventDetails: widget.eventDetails,
             ),
-          borderRadius: widget.position % 2 == 0 ?BorderRadius.only(topLeft: Radius.circular(35),bottomRight: Radius.circular(35)) : BorderRadius.only(topRight: Radius.circular(35),bottomLeft: Radius.circular(35)),
-        ),
-        child: Container(
-          margin: EdgeInsets.symmetric(
-              horizontal: 54.w, vertical: 23.4.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
+          ),
+        );
+      },
+      child: Container(
+        // margin: EdgeInsets.symmetric(horizontal: 20.w,vertical: 20.h),
+        child: Card(
+          elevation: 16,
+          semanticContainer: false,
+          shape: RoundedRectangleBorder(
+            //TODO - Ask for same shape or different
+            borderRadius: widget.position % 2 == 0 ?BorderRadius.only(topLeft: Radius.circular(35),bottomRight: Radius.circular(35)) : BorderRadius.only(topRight: Radius.circular(35),bottomLeft: Radius.circular(35)),
+          ),
+          // color: Colors.red,
+          child: Container(
+            //BackGround Image
+            decoration: BoxDecoration(
+
+                image: DecorationImage(
+                  //TODO - Change background image
+                    image: NetworkImage(backImage,),
+                    fit: BoxFit.cover
+                ),
+              borderRadius: widget.position % 2 == 0 ?BorderRadius.only(topLeft: Radius.circular(35),bottomRight: Radius.circular(35)) : BorderRadius.only(topRight: Radius.circular(35),bottomLeft: Radius.circular(35)),
+            ),
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                  horizontal: 54.w, vertical: 23.4.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(
-                    child: Text(
-                      widget.eventDetails.Event_Name,
-                      style: TextStyle(fontSize: 40.sp),
-                      softWrap: true,
-                      textAlign: TextAlign.center,
-                      // maxLines: 100,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 46.8.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Icon(
-                    Icons.location_on_outlined,
-                    // size: ,
-                  ),
-                  Flexible(
-                    child: InkWell(
-                      onTap: (){
-                        _launchDirectionsUrl(widget.eventDetails.Event_Latitude, widget.eventDetails.Event_Longitude);
-                      },
-                      child: Text(
-                        widget.eventDetails.Event_Address,
-                        style: TextStyle(fontSize: 40.sp,
-                          color: Colors.blueAccent
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          widget.eventDetails.Event_Name,
+                          style: TextStyle(fontSize: 40.sp),
+                          softWrap: true,
+                          textAlign: TextAlign.center,
+                          // maxLines: 100,
                         ),
-                        softWrap: true,
-                        // textAlign: TextAlign.center,
-                        // maxLines: 100,
-                        // overflow: TextOverflow.ellipsis,
                       ),
-                    ),
+                    ],
+                  ),
+                  SizedBox(height: 46.8.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.location_on_outlined,
+                        // size: ,
+                      ),
+                      Flexible(
+                        child: InkWell(
+                          onTap: (){
+                            _launchDirectionsUrl(widget.eventDetails.Event_Latitude, widget.eventDetails.Event_Longitude);
+                          },
+                          child: Text(
+                            widget.eventDetails.Event_Address,
+                            style: TextStyle(fontSize: 40.sp,
+                              color: Colors.blueAccent
+                            ),
+                            softWrap: true,
+                            // textAlign: TextAlign.center,
+                            // maxLines: 100,
+                            // overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),

@@ -68,7 +68,6 @@ class _SideNavBarState extends State<SideNavBar> {
     "research-showcase": ResearchShowcaseScreen(),
     "guest-faculty-interactions": GuestFacultyInteractionScreen(),
     "pannel-discussion": PannelDiscussionScreen(),
-
   };
 
   @override
@@ -219,13 +218,6 @@ class _SideNavBarState extends State<SideNavBar> {
             "about",
             5,
           ),
-          sideBarTile(
-            context,
-            "Themes",
-            Icons.event_note_rounded,
-            "theme",
-            6,
-          ),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 10,
@@ -240,59 +232,52 @@ class _SideNavBarState extends State<SideNavBar> {
           ),
           sideBarTile(
             context,
-            "Keynote Speakers",
+            "Keynote Address",
             Icons.person_pin_rounded,
             "keynote-speakers",
-            7,
+            6,
           ),
           sideBarTile(
             context,
             "RnD Showcases",
             Icons.apartment_rounded,
             "rnd-showcase-and-demos",
-            8,
+            7,
           ),
           sideBarTile(
             context,
             "Forward Panels",
             Icons.people_alt_rounded,
             "forward-looking-panels",
-            9,
+            8,
           ),
           sideBarTile(
             context,
             "Beyond Panels",
             Icons.people_rounded,
             "beyond-college-panels",
-            10,
+            9,
           ),
           sideBarTile(
             context,
             "Start-Up Showcases",
             Icons.construction_rounded,
             "start-up-showcase",
-            11,
+            10,
           ),
           sideBarTile(
             context,
-            "Demos & Reseaches",
+            "Demos & Researches",
             Icons.find_in_page_rounded,
             "demos-n-research-highlights",
-            12,
+            11,
           ),
           sideBarTile(
             context,
             "Research Showcases",
             Icons.find_replace_rounded,
             "research-showcase",
-            13,
-          ),
-          sideBarTile(
-            context,
-            "Intereactions",
-            Icons.integration_instructions,
-            "guest-faculty-interactions",
-            14,
+            12,
           ),
           // sideBarTile(
           //   context,
@@ -405,11 +390,10 @@ class _SideNavBarState extends State<SideNavBar> {
       onTap: () {
         Provider.of<ScreenControllerProvider>(context, listen: false)
             .selectedPageIndex = pageIndex;
-        Navigator.of(context).pushAndRemoveUntil(
+        Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => screenMapping[screenPushName],
-            ),
-            (route) => false);
+            ));
       },
       child: Container(
         margin: EdgeInsets.only(
@@ -469,11 +453,10 @@ class _SideNavBarState extends State<SideNavBar> {
       onTap: () {
         Provider.of<ScreenControllerProvider>(context, listen: false)
             .selectedPageIndex = pageIndex;
-        Navigator.of(context).pushAndRemoveUntil(
+        Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => screenMapping[screenPushName],
           ),
-          (route) => false,
         );
       },
       child: Container(

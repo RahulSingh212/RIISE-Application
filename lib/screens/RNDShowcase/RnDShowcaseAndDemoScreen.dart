@@ -25,20 +25,21 @@ class RNDShowcaseAndDemoScreen extends StatefulWidget {
   const RNDShowcaseAndDemoScreen({super.key});
 
   @override
-  State<RNDShowcaseAndDemoScreen> createState() => _RNDShowcaseAndDemoScreenState();
+  State<RNDShowcaseAndDemoScreen> createState() =>
+      _RNDShowcaseAndDemoScreenState();
 }
 
 class _RNDShowcaseAndDemoScreenState extends State<RNDShowcaseAndDemoScreen> {
+  bool isLoading = true;
 
   loadData() async {
-    await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "RNDShowcasesAndDemos").then((value) async {
+    await Provider.of<EventProvider>(context, listen: false)
+        .fetchEventTracks(context, "RNDShowcasesAndDemos")
+        .then((value) async {
       setState(() {
-
-        print("HEllo this is length of RND LIST -> ${Provider
-            .of<EventProvider>(context, listen: false)
-            .rndShowcasesAndDemosList
-            .length}");
-
+        isLoading = false;
+        print(
+            "HEllo this is length of RND LIST -> ${Provider.of<EventProvider>(context, listen: false).rndShowcasesAndDemosList.length}");
       });
 
       // List<EventServerInformation> list = await Provider.of<EventProvider>(context,listen: false).getEventList(context, "RNDShowcasesAndDemos");
@@ -48,97 +49,82 @@ class _RNDShowcaseAndDemoScreenState extends State<RNDShowcaseAndDemoScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    print("RND INIT CALLED");
     super.initState();
-    // loadData();
-    // Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "RNDShowcasesAndDemos");
-
-  }
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    // loadData();
+    loadData();
     // Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "RNDShowcasesAndDemos");
   }
 
-
   @override
-  Widget build(BuildContext context)  {
+  Widget build(BuildContext context) {
     // var screenHeight = MediaQuery.of(context).size.height;
     // var screenWidth = MediaQuery.of(context).size.width;
     // var topInsets = MediaQuery.of(context).viewInsets.top;
     // var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
     // var useableHeight = screenHeight - topInsets - bottomInsets;
 
-    print("HEllo this is length of RND LIST -> ${Provider
-        .of<EventProvider>(context, listen: false)
-        .rndShowcasesAndDemosList
-        .length}");
-
-    return Scaffold(
-      backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
-      drawer: SideNavBar(),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          "RnD Showcase",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontSize: 60.sp,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        iconTheme: IconThemeData(
-          color: Colors.blue,
-          size: 80.r,
-        ),
-        actions: [
-          Container(
-              padding: EdgeInsets.only(top: 15.h,bottom: 25.h,right: 20.w),
-              child: Center(child: Image.network("https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",fit: BoxFit.contain,))
-          ),
-        ],
-      ),
-      body: FutureBuilder<List<EventServerInformation>>(
-        future: Provider.of<EventProvider>(context).getEventList(context, "RNDShowcasesAndDemos"),
-        builder: (context, snapshot) {
-          print(snapshot.data);
-          if(snapshot.hasData)
-            {
-
-              return Padding(
-                padding: EdgeInsets.only(top: 220.h),
-                child: ListView.builder(
-                  itemCount: Provider.of<EventProvider>(context).rndShowcasesAndDemosList.length,
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: false,
-                  // physics: NeverScrollableScrollPhysics(),
-                  physics: BouncingScrollPhysics(),
-                  padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
-                  itemBuilder: (context, position) {
-                    return Container(
-                      height: 700.h,
-                      padding: EdgeInsets.only(left: 86.w, top: 80.h),
-                      child: NewEventCard(
-                        eventDetails: Provider.of<EventProvider>(context).rndShowcasesAndDemosList[position],
-                      ),
-                    );
-                  },
+    return isLoading
+        ? Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
+        : Scaffold(
+            backgroundColor: Colors.white,
+            extendBodyBehindAppBar: true,
+            drawer: SideNavBar(),
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
+              title: Text(
+                "RnD Showcase",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 60.sp,
                 ),
-              );
-            }
-          else
-            {
-              return Center(child: CircularProgressIndicator(),);
-            }
-        }
-      ),
-    );
+                textAlign: TextAlign.center,
+              ),
+              iconTheme: IconThemeData(
+                color: Colors.blue,
+                size: 80.r,
+              ),
+              actions: [
+                Container(
+                    padding:
+                        EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
+                    child: Center(
+                        child: Image.network(
+                      "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
+                      fit: BoxFit.contain,
+                    ))),
+              ],
+            ),
+            body: Padding(
+              padding: EdgeInsets.only(top: 220.h),
+              child: ListView.builder(
+                itemCount: Provider.of<EventProvider>(context)
+                    .rndShowcasesAndDemosList
+                    .length,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: false,
+                // physics: NeverScrollableScrollPhysics(),
+                physics: BouncingScrollPhysics(),
+                padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
+                itemBuilder: (context, position) {
+                  return Container(
+                    height: 900.h,
+                    padding: EdgeInsets.only(left: 86.w, top: 80.h),
+                    child: NewEventCard(
+                      eventDetails: Provider.of<EventProvider>(context)
+                          .rndShowcasesAndDemosList[position],
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
   }
 }

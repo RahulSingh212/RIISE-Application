@@ -45,7 +45,7 @@ class _DirectionScreenState extends State<DirectionScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    loadData();
+    // loadData();
   }
 
   // @override

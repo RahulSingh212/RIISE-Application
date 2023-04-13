@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/calendar/v3.dart';
 import 'package:googleapis_auth/auth.dart';
 import 'package:http/http.dart';
@@ -12,9 +13,13 @@ class CalenderAPI extends ChangeNotifier{
 
   addEvent(BuildContext context,String name,DateTime startTime, DateTime endTime, List<EventAttendee> attendeesList, String descp) async {
     // TODO - get access token here
-    // final googleAuth = await UserLoginProvider().staticGoogleUser?.authentication;
-    // final accessToken = await googleAuth?.accessToken;
-    final accessToken = "ya29.a0Ael9sCOC9DN0SckxbhBP1xdo8ba5x5YabKz1XGHOEEWgTRcMM4yuEeq3Z0ci3LlNBBMfvfptn3cgXO1LrO2CUqKwJScv7hX1vo57HkZ-rX00LmbiW9XCCuARoQmEQLCkirzK7TodO_J3ccs4QLTzsxn7KbZ3aCgYKAUcSARESFQF4udJh8W5Vhaax96TQV2FDPATLyg0163";
+    GoogleSignIn? googleUser =
+    await GoogleSignIn(scopes: ['https://www.googleapis.com/auth/calendar']);
+    final GoogleSignInAccount = await googleUser.signInSilently();
+
+    final googleAuth = await GoogleSignInAccount?.authentication;
+    // final accessToken = "ya29.a0Ael9sCNTICz8w49X6vW0a0AU6Wp-iwpgKkenAhKCbc5vCKZRRzorJOfWVHYYv6gurmSlqu6TrDA8SWsspv7cOc83fYuKezNeuVq3twbwWu9iU1c3Q26EfH9rjWf5Q7nGNmia05Y6hl0W3WbF-Xf53fNjWCD4aCgYKAc0SARESFQF4udJhWdFfWnmxoPBKiidqvPkv-g0163";
+    final accessToken = googleAuth?.accessToken;
 
     print("ACCESS TOKEN _> $accessToken");
 

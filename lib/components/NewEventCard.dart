@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:riise/models/EventInfo.dart';
+import 'package:riise/screens/EventDetailScreen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/ThemeInfo.dart';
 import '../screens/Themes/ThemeDetailScreen.dart';
@@ -36,14 +38,14 @@ class _NewEventCardState extends State<NewEventCard> {
 
     return InkWell(
       onTap: (){
-        // Navigator.of(context).push(
-        //   MaterialPageRoute(
-        //     builder: (context) => ThemeDetailScreen(
-        //       // position: widget.position,
-        //       themeDetails: widget.eventDetails,
-        //     ),
-        //   ),
-        // );
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => EventDetailScreen(
+              // position: widget.position,
+              eventDetails: widget.eventDetails,
+            ),
+          ),
+        );
       },
       child: Container(
         margin: EdgeInsets.only(right: 86.w),
@@ -51,19 +53,21 @@ class _NewEventCardState extends State<NewEventCard> {
           elevation: 8,
           // semanticContainer: false,
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 27.w, vertical: 23.h),
+            // color: Colors.redAccent,
+            margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.network(
                   widget.eventDetails.Event_Image_Url,
-                  width: 300.r,
-                  height: 300.r,
+                  width: 400.r,
+                  height: 400.r,
                   fit: BoxFit.cover,
                 ),
                 Flexible(
                   child: Container(
+                    // color: Colors.blueAccent,
                     padding: EdgeInsets.only(top: 23.h),
                     margin: EdgeInsets.only(top: 23.h),
                     width: 500.r,
@@ -81,6 +85,115 @@ class _NewEventCardState extends State<NewEventCard> {
                       ],
                     ),
                   ),
+                ),
+                SizedBox(height: 20.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          // padding: EdgeInsets.zero,
+                          // margin: EdgeInsets.zero,
+                          // color: Colors.red,
+                          child: IconButton(onPressed: (){
+                            _launchDirectionsUrl(widget.eventDetails.Event_Latitude,widget.eventDetails.Event_Longitude);
+                          }, icon: Icon(CupertinoIcons.location_solid,color: Colors.blueAccent,)),
+                        ),
+                        Flexible(
+                          child: InkWell(
+                            onTap: (){
+                              _launchDirectionsUrl(widget.eventDetails.Event_Latitude,widget.eventDetails.Event_Longitude);
+                            },
+                            child: Container(
+                              // color: Colors.blueAccent,
+                              padding: EdgeInsets.only(top: 15.h),
+                              margin: EdgeInsets.only(top: 23.h),
+                              width: 250.r,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      widget.eventDetails.Event_Address,
+                                      style: TextStyle(fontSize:40.sp),
+                                      softWrap: true,
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          // padding: EdgeInsets.zero,
+                          // margin: EdgeInsets.zero,
+                          // color: Colors.red,
+                          child: IconButton(onPressed: (){
+
+                          },
+                              icon: Icon(CupertinoIcons.clock,color: Colors.blueAccent,)),
+                        ),
+                        Flexible(
+                          child: Container(
+                            // color: Colors.blueAccent,
+                            padding: EdgeInsets.only(top: 15.h),
+                            margin: EdgeInsets.only(top: 23.h),
+                            width: 250.r,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    widget.eventDetails.Event_Date.toString(),
+                                    style: TextStyle(fontSize:40.sp),
+                                    softWrap: true,
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // Flexible(
+                    //   child: Container(
+                    //     // color: Colors.blueAccent,
+                    //     padding: EdgeInsets.only(top: 23.h),
+                    //     margin: EdgeInsets.only(top: 23.h),
+                    //     width: 300.r,
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.center,
+                    //       children: [
+                    //         Flexible(
+                    //           child: Text(
+                    //             widget.eventDetails.Event_Date.toString(),
+                    //             style: TextStyle(fontSize:40.sp),
+                    //             softWrap: true,
+                    //             textAlign: TextAlign.center,
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // )
+                  ],
+
                 )
               ],
             ),
@@ -89,4 +202,25 @@ class _NewEventCardState extends State<NewEventCard> {
       ),
     );
   }
+
+
+  Future<void> _launchDirectionsUrl(
+      String coordinateLatitude, String coordinateLongitude) async {
+    Uri url = Uri.parse(
+        'https://www.google.com/maps/dir/?api=1&destination=$coordinateLatitude,$coordinateLongitude&travelmode=walking');
+
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+
+
+
+
+
+
 }

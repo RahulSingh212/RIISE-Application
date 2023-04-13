@@ -47,29 +47,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _auth = FirebaseAuth.instance;
-  String userName = "Rahul Singh";
+  // String userName = "Rahul Singh";
   late TextEditingController searchBarController = TextEditingController();
   final ThemeProvider themeProviderModel = ThemeProvider();
 
    List<EventServerInformation> eventUtil = [];
 
-  Future<void> loadDataUtil() async {
-
-    await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "SpeakerTracks");
-    await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "PosterTracks");
-    await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "PanelDiscussion");
-    eventUtil = [
-    Provider.of<EventProvider>(context, listen: false).posterTracksList,
-    Provider.of<EventProvider>(context, listen: false).speakerTracksList,
-    Provider.of<EventProvider>(context, listen: false).panelDiscussionList
-    ].expand((x) => x).toList();
-  }
-
-  loadData() async {
-    await loadDataUtil().then((value) {
-      setState(() {});
-    });
-  }
+  // Future<void> loadDataUtil() async {
+  //
+  //   await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "SpeakerTracks");
+  //   await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "PosterTracks");
+  //   await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "PanelDiscussion");
+  //
+  // }
+  //
+  // loadData() async {
+  //   await loadDataUtil().then((value) {
+  //     setState(() {});
+  //   });
+  // }
 
   @override
   void initState() {
@@ -81,7 +77,15 @@ class _HomeScreenState extends State<HomeScreen> {
     //   context,
     // );
     super.initState();
-    loadData();
+    eventUtil = [
+      Provider.of<EventProvider>(context, listen: false).startUpShowcaseList,
+      Provider.of<EventProvider>(context, listen: false).researchShowcasesList,
+      Provider.of<EventProvider>(context, listen: false).rndShowcasesAndDemosList,
+      Provider.of<EventProvider>(context, listen: false).demosAndResearchesHighlightsList,
+      Provider.of<EventProvider>(context, listen: false).beyondCollegePanelsList,
+      Provider.of<EventProvider>(context, listen: false).forwardLookingPanelsList,
+    ].expand((x) => x).toList();
+    print("List of ALL EVENTS -> ${eventUtil.length}");
   }
 
   List<dynamic> categoryList = [
@@ -93,33 +97,6 @@ class _HomeScreenState extends State<HomeScreen> {
     ["Demos And Researches","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",DemosAndResearchHighlightScreen()],
     ["Research Showcases","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",ResearchShowcaseScreen()],
   ];
-
-
-
-
-  // @override
-  // void didChangeDependencies() {
-  //   print("did change");
-  //   Provider.of<ThemeProvider>(
-  //     context,
-  //     listen: false,
-  //   ).fetchThemes(
-  //     context,
-  //   );
-  //
-  //   super.didChangeDependencies();
-  //
-  //   // themeUtil.fetchThemes(context);
-  //
-  //   eventUtilTemp.fetchEventTracks(context, "SpeakerTracks");
-  //   eventUtilTemp.fetchEventTracks(context, "PosterTracks");
-  //   eventUtilTemp.fetchEventTracks(context, "PanelDiscussion");
-  //   eventUtil = [
-  //     eventUtilTemp.posterTracksList,
-  //     eventUtilTemp.speakerTracksList,
-  //     eventUtilTemp.panelDiscussionList
-  //   ].expand((x) => x).toList();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -219,37 +196,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              // Container(
-              //   padding: EdgeInsets.only(top: 58.h),
-              //   height: 210.h,
-              //   child: TextField(
-              //     controller: searchBarController,
-              //     decoration: InputDecoration(
-              //       hintText: "Search",
-              //       border: OutlineInputBorder(),
-              //       enabledBorder: OutlineInputBorder(
-              //         borderSide: BorderSide(
-              //           color: Color(0xffebebeb),
-              //         ),
-              //         borderRadius: BorderRadius.circular(12),
-              //       ),
-              //       hintStyle: TextStyle(
-              //         fontFamily: 'Roboto',
-              //         fontWeight: FontWeight.w400,
-              //         fontSize: 45.sp,
-              //         fontStyle: FontStyle.normal,
-              //         color: Color(0xff6c757d),
-              //       ),
-              //       suffixIcon: IconButton(
-              //         icon: Icon(Icons.search),
-              //         onPressed: () {
-              //           print("serchpressed");
-              //         },
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
               Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -35,6 +35,30 @@ class EventProvider with ChangeNotifier {
     "PanelDiscussion",
   ];
 
+  late Map<String, dynamic> firebaseCollectionsMap = {
+    "SpeakerTracks": speakerTracksList,
+    "RNDShowcasesAndDemos": rndShowcasesAndDemosList,
+    "ForwardLookingPanels": forwardLookingPanelsList,
+    "BeyondCollegePanels": beyondCollegePanelsList,
+    "StartUpShowcase": startUpShowcaseList,
+    "DemosAndResearchesHighlights": demosAndResearchesHighlightsList,
+    "ResearchShowcases": researchShowcasesList,
+    "PanelDiscussion": panelDiscussionList,
+  };
+
+  EventProvider() {
+    firebaseCollectionsMap = {
+      "SpeakerTracks": speakerTracksList,
+      "RNDShowcasesAndDemos": rndShowcasesAndDemosList,
+      "ForwardLookingPanels": forwardLookingPanelsList,
+      "BeyondCollegePanels": beyondCollegePanelsList,
+      "StartUpShowcase": startUpShowcaseList,
+      "DemosAndResearchesHighlights": demosAndResearchesHighlightsList,
+      "ResearchShowcases": researchShowcasesList,
+      "PanelDiscussion": panelDiscussionList,
+    };
+  }
+
   Future<void> fetchEventTracks(
     BuildContext context,
     String collectionName,
@@ -44,13 +68,20 @@ class EventProvider with ChangeNotifier {
 
     int cnt = 0;
 
-    if (collectionName == "SpeakerTracks") cnt += 1; 
-    else if (collectionName == "RNDShowcasesAndDemos") cnt += 1; 
-    else if (collectionName == "ForwardLookingPanels") cnt += 1;
-    else if (collectionName == "BeyondCollegePanels") cnt += 1;
-    else if (collectionName == "StartUpShowcase") cnt += 1;
-    else if (collectionName == "DemosAndResearchesHighlights") cnt += 1;
-    else if (collectionName == "ResearchShowcases") cnt += 1;
+    if (collectionName == "SpeakerTracks")
+      cnt += 1;
+    else if (collectionName == "RNDShowcasesAndDemos")
+      cnt += 1;
+    else if (collectionName == "ForwardLookingPanels")
+      cnt += 1;
+    else if (collectionName == "BeyondCollegePanels")
+      cnt += 1;
+    else if (collectionName == "StartUpShowcase")
+      cnt += 1;
+    else if (collectionName == "DemosAndResearchesHighlights")
+      cnt += 1;
+    else if (collectionName == "ResearchShowcases")
+      cnt += 1;
     else if (collectionName == "PanelDiscussion") cnt += 1;
 
     print("Collection name :- $collectionName");
@@ -62,31 +93,28 @@ class EventProvider with ChangeNotifier {
 
       await eventsTracksRef.get().then(
         (ds) async {
-          ds.docs.forEach(
-            (themeDetails) async {
-              final eventMap = themeDetails.data() as Map<String, dynamic>;
+          for (var themeDetails in ds.docs) {
+            final eventMap = themeDetails.data() as Map<String, dynamic>;
 
-              String Event_Unique_Id = eventMap["Event_Unique_Id"].toString();
-              String Event_Name = eventMap["Event_Name"].toString();
-              String Event_Info = eventMap["Event_Info"].toString();
-              String Event_Address = eventMap["Event_Address"].toString();
-              String Event_Image_Url = eventMap["Event_Image_Url"].toString();
-              String Event_Latitude = eventMap["Event_Latitude"].toString();
-              String Event_Longitude = eventMap["Event_Longitude"].toString();
-              DateTime Event_Date =
-                  DateTime.parse(eventMap["Event_Date"].toString());
-              TimeOfDay Event_Start_Time = convertStringToTimeOfDay(
-                  eventMap["Event_Start_Time"].toString());
-              TimeOfDay Event_End_Time = convertStringToTimeOfDay(
-                  eventMap["Event_End_Time"].toString());
+            String Event_Unique_Id = eventMap["Event_Unique_Id"].toString();
+            String Event_Name = eventMap["Event_Name"].toString();
+            String Event_Info = eventMap["Event_Info"].toString();
+            String Event_Address = eventMap["Event_Address"].toString();
+            String Event_Image_Url = eventMap["Event_Image_Url"].toString();
+            String Event_Latitude = eventMap["Event_Latitude"].toString();
+            String Event_Longitude = eventMap["Event_Longitude"].toString();
+            DateTime Event_Date =
+                DateTime.parse(eventMap["Event_Date"].toString());
+            TimeOfDay Event_Start_Time = convertStringToTimeOfDay(
+                eventMap["Event_Start_Time"].toString());
+            TimeOfDay Event_End_Time =
+                convertStringToTimeOfDay(eventMap["Event_End_Time"].toString());
 
-              List<SpeakerServerInformation> eventSpeakersList =
-                  await fetchSpeakers(
-                context,
-                collectionName,
-                Event_Unique_Id,
-              );
-
+            await fetchSpeakers(
+              context,
+              collectionName,
+              Event_Unique_Id,
+            ).then((value) async {
               EventServerInformation eventInfo = EventServerInformation(
                 Event_Unique_Id: Event_Unique_Id,
                 Event_Image_Url: Event_Image_Url,
@@ -98,44 +126,40 @@ class EventProvider with ChangeNotifier {
                 Event_Date: Event_Date,
                 Event_Start_Time: Event_Start_Time,
                 Event_End_Time: Event_End_Time,
-                EventSpeakersList: eventSpeakersList,
+                EventSpeakersList: value,
               );
 
               listOfEventTracks.add(eventInfo);
               print(eventInfo.Event_Name);
+            });
+          }
 
-            },
-          );
+          print("List of Events -> $listOfEventTracks");
+
+          if (collectionName == "SpeakerTracks") {
+            speakerTracksList = listOfEventTracks;
+          } else if (collectionName == "RNDShowcasesAndDemos") {
+            rndShowcasesAndDemosList = listOfEventTracks;
+          } else if (collectionName == "ForwardLookingPanels") {
+            forwardLookingPanelsList = listOfEventTracks;
+          } else if (collectionName == "BeyondCollegePanels") {
+            beyondCollegePanelsList = listOfEventTracks;
+          } else if (collectionName == "StartUpShowcase") {
+            startUpShowcaseList = listOfEventTracks;
+          } else if (collectionName == "DemosAndResearchesHighlights") {
+            demosAndResearchesHighlightsList = listOfEventTracks;
+          } else if (collectionName == "ResearchShowcases") {
+            researchShowcasesList = listOfEventTracks;
+          } else if (collectionName == "PanelDiscussion") {
+            panelDiscussionList = listOfEventTracks;
+          }
         },
-      ).then((value){
-        print(listOfEventTracks);
-
-
-        if (collectionName == "SpeakerTracks") {
-          speakerTracksList = listOfEventTracks;
-        } else if (collectionName == "RNDShowcasesAndDemos") {
-          rndShowcasesAndDemosList = listOfEventTracks;
-        } else if (collectionName == "ForwardLookingPanels") {
-          forwardLookingPanelsList = listOfEventTracks;
-        } else if (collectionName == "BeyondCollegePanels") {
-          beyondCollegePanelsList = listOfEventTracks;
-        } else if (collectionName == "StartUpShowcase") {
-          startUpShowcaseList = listOfEventTracks;
-        } else if (collectionName == "DemosAndResearchesHighlights") {
-          demosAndResearchesHighlightsList = listOfEventTracks;
-        } else if (collectionName == "ResearchShowcases") {
-          researchShowcasesList = listOfEventTracks;
-        } else if (collectionName == "PanelDiscussion") {
-          panelDiscussionList = listOfEventTracks;
-        }
-
-        notifyListeners();
-      });
-
-
+      );
     } catch (errorVal) {
       print(errorVal);
     }
+
+    notifyListeners();
   }
 
   Future<List<EventServerInformation>> getEventList(
@@ -149,32 +173,29 @@ class EventProvider with ChangeNotifier {
     try {
       await eventsTracksRef.get().then(
         (ds) async {
-          ds.docs.forEach(
-            (themeDetails) async {
-              final eventMap = themeDetails.data() as Map<String, dynamic>;
-              print(eventMap);
+          for (var themeDetails in ds.docs) {
+            final eventMap = themeDetails.data() as Map<String, dynamic>;
+            print(eventMap);
 
-              String Event_Unique_Id = eventMap["Event_Unique_Id"].toString();
-              String Event_Name = eventMap["Event_Name"].toString();
-              String Event_Info = eventMap["Event_Info"].toString();
-              String Event_Address = eventMap["Event_Address"].toString();
-              String Event_Image_Url = eventMap["Event_Image_Url"].toString();
-              String Event_Latitude = eventMap["Event_Latitude"].toString();
-              String Event_Longitude = eventMap["Event_Longitude"].toString();
-              DateTime Event_Date =
-                  DateTime.parse(eventMap["Event_Date"].toString());
-              TimeOfDay Event_Start_Time = convertStringToTimeOfDay(
-                  eventMap["Event_Start_Time"].toString());
-              TimeOfDay Event_End_Time = convertStringToTimeOfDay(
-                  eventMap["Event_End_Time"].toString());
+            String Event_Unique_Id = eventMap["Event_Unique_Id"].toString();
+            String Event_Name = eventMap["Event_Name"].toString();
+            String Event_Info = eventMap["Event_Info"].toString();
+            String Event_Address = eventMap["Event_Address"].toString();
+            String Event_Image_Url = eventMap["Event_Image_Url"].toString();
+            String Event_Latitude = eventMap["Event_Latitude"].toString();
+            String Event_Longitude = eventMap["Event_Longitude"].toString();
+            DateTime Event_Date =
+                DateTime.parse(eventMap["Event_Date"].toString());
+            TimeOfDay Event_Start_Time = convertStringToTimeOfDay(
+                eventMap["Event_Start_Time"].toString());
+            TimeOfDay Event_End_Time =
+                convertStringToTimeOfDay(eventMap["Event_End_Time"].toString());
 
-              List<SpeakerServerInformation> eventSpeakersList =
-                  await fetchSpeakers(
-                context,
-                collectionName,
-                Event_Unique_Id,
-              );
-
+            await fetchSpeakers(
+              context,
+              collectionName,
+              Event_Unique_Id,
+            ).then((value) {
               EventServerInformation eventInfo = EventServerInformation(
                 Event_Unique_Id: Event_Unique_Id,
                 Event_Image_Url: Event_Image_Url,
@@ -186,18 +207,14 @@ class EventProvider with ChangeNotifier {
                 Event_Date: Event_Date,
                 Event_Start_Time: Event_Start_Time,
                 Event_End_Time: Event_End_Time,
-                EventSpeakersList: eventSpeakersList,
+                EventSpeakersList: value,
               );
 
-
-              print("EVENT INFO _>_> ${eventInfo.Event_Name}");
-
               listOfEventTracks.add(eventInfo);
-              print("Inside TRY CATCH -> ) $listOfEventTracks");
-            },
-          );
+            });
+          }
         },
-      ).then((value){
+      ).then((value) {
         print("Above Return TRY CATCH -> ) $listOfEventTracks");
         notifyListeners();
         return listOfEventTracks;
@@ -206,10 +223,7 @@ class EventProvider with ChangeNotifier {
       print("ERROR HERE -> $errorVal");
     }
 
-
-
     return [];
-
   }
 
   Future<void> getFullListOfEvents(
@@ -217,14 +231,11 @@ class EventProvider with ChangeNotifier {
   ) async {
     List<EventServerInformation> allEventsList = [];
 
-    firebaseCollectionsList.forEach((collectionName) async {
-      List<EventServerInformation> eventList = await getEventList(
-        context,
-        collectionName,
-      );
-
-      allEventsList = new List.from(allEventsList)..addAll(eventList);
-    });
+    for (var collectionName in firebaseCollectionsList) {
+      await fetchEventTracks(context, collectionName).then((value) {
+        allEventsList.addAll(firebaseCollectionsMap[collectionName]);
+      });
+    }
 
     collectionOfAllEventList = allEventsList;
   }

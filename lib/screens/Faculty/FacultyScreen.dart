@@ -42,6 +42,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
   ];
 
   Map<String, String> facultyDeptMap = {
+    "All" : "All",
     "Computational Biology (CB)": "CB",
     "Electronics & Communications Engineering (ECE)": "ECE",
     "Computer Science and Engineering (CSE)": "CSE",
@@ -51,7 +52,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
   };
 
   // List<String> recentSearch = <String>[];
-  late String dropdownValue = facultyDeptList.first;
+  late String dropDownValue = facultyDeptList.first;
   late String filterValue = "";
 
   // late var facultyProider =
@@ -68,7 +69,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
 
   void initState() {
     super.initState();
-    loadData();
+    // loadData();
   }
 
   // @override
@@ -201,7 +202,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
                       "Select Department",
                       style: TextStyle(fontSize: 10),
                     ),
-                    value: dropdownValue,
+                    value: dropDownValue,
                     icon: Icon(
                       Icons.arrow_downward,
                       color: Colors.grey,
@@ -212,8 +213,8 @@ class _FacultyScreenState extends State<FacultyScreen> {
                     dropdownColor: Colors.white,
                     onChanged: (String? value) {
                       setState(() {
-                        dropdownValue = facultyDeptMap[value]!;
-                        print(dropdownValue);
+                        dropDownValue = value!;
+                        print("DropDownValue -> $dropDownValue");
                       });
                     },
                     items: facultyDeptList.map((String value) {
@@ -245,7 +246,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
                           .facultiesList
                           .length,
                   itemBuilder: (BuildContext context, int index) {
-                    if (isvalidFaculty(filterValue, index, dropdownValue)) {
+                    if (isvalidFaculty(filterValue, index, dropDownValue)) {
                       return FacultyCard(
                         facultyDetails: Provider.of<FacultiesProvider>(context,
                                 listen: false)
@@ -262,25 +263,40 @@ class _FacultyScreenState extends State<FacultyScreen> {
         ));
   }
 
-  bool isvalidFaculty(filterValue, index, dropdownvalue) {
+  bool isvalidFaculty(filterValue, index, dropDownValue) {
     //TODO - use this when Dept is ready
 
-    // List<String> deptList = convertStrToList(
-    //     facultyProider.facultiesList[index].faculty_Department);
+    List<String> deptList = convertStrToList(
+        Provider.of<FacultiesProvider>(context, listen: false).facultiesList[index].faculty_Department);
+    String deptVal = facultyDeptMap[dropDownValue]!.trim();
 
-    //TODO - Check if working
-    // return facultyProider.facultiesList[index].faculty_Name
-    //         .toLowerCase()
-    //         .contains(filterValue.toLowerCase()) &&
-    //     (deptList.contains(dropdownValue.toString()) ||
-    //         dropdownvalue.compareTo("ALL") == 0);
+    print("Dept List -> $deptList");
+    print("DROP DOWN VALUE ->"+facultyDeptMap[dropDownValue].toString());
+    // bool dept = deptList.contains("CSE");
+    // print("DROP DOWN VALUE ->"+"$deptList ->"+dropDownValue);
 
-    return Provider.of<FacultiesProvider>(context, listen: false).facultiesList[index].faculty_Name
-        .toLowerCase()
-        .contains(filterValue.toLowerCase())  ;
+    // //TODO - Check if working
+    bool name = Provider.of<FacultiesProvider>(context, listen: false).facultiesList[index].faculty_Name
+            .toLowerCase()
+            .contains(filterValue.toLowerCase());
+    bool dept = deptList.contains(deptVal);
+    bool deptALL = dropDownValue.compareTo("All") == 0;
+
+
+    return name && (dept||deptALL);
+
+
+
+    // return Provider.of<FacultiesProvider>(context, listen: false).facultiesList[index].faculty_Name
+    //     .toLowerCase()
+    //     .contains(filterValue.toLowerCase());
   }
 
   convertStrToList(String str) {
-    return str.split(',');
+    List<String> temp = str.split(',');
+    for( int i = 0; i < temp.length;i++){
+      temp[i] = temp[i].trim();
+    }
+    return temp;
   }
 }

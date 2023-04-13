@@ -13,7 +13,7 @@ class ThemeProvider with ChangeNotifier {
   int cnt = 0;
   List<ThemeServerInformation> themesList = [];
 
-  void fetchThemes(
+  Future<void> fetchThemes(
     BuildContext context,
   ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;

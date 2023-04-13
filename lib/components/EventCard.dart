@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:riise/models/EventInfo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../screens/EventDetailScreen.dart';
+
 
 //ignore: must_be_immutable
 class EventCard extends StatefulWidget {
@@ -33,74 +35,86 @@ class _EventCardState extends State<EventCard> {
     // double minDimension = min(width, height);
     // double maxDimension = max(width, height);
 
-    return Container(
-      // margin: EdgeInsets.only(right: 0.008 * width),
-      child: Card(
-        elevation: 8,
-        // color: Colors.red,
-        child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: NetworkImage(backImage,),
-                  fit: BoxFit.cover
-              )
+    return InkWell(
+      onTap: (){
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => EventDetailScreen(
+              // position: widget.position,
+              eventDetails: widget.eventDetails,
+            ),
           ),
+        );
+      },
+      child: Container(
+        // margin: EdgeInsets.only(right: 0.008 * width),
+        child: Card(
+          elevation: 8,
+          // color: Colors.red,
           child: Container(
-            margin: EdgeInsets.symmetric(
-                horizontal: 54.w, vertical: 23.h),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(backImage,),
+                    fit: BoxFit.cover
+                )
+            ),
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                  horizontal: 54.w, vertical: 23.h),
 
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        widget.eventDetails.Event_Name,
-                        style: TextStyle(fontSize: 40.sp),
-                        softWrap: true,
-                      ),
-                    ),
-                    Flexible(
-                      child: Text(
-                        //TODO - Ask if endTime is required to Show
-                        widget.eventDetails.Event_Start_Time.format(context),
-                        style: TextStyle(fontSize: 40.sp),
-                        softWrap: true,
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 46.8.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  // crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.location_on_outlined,
-                      // size: ,
-                    ),
-                    Flexible(
-                      child: InkWell(
-                        onTap: (){
-                          _launchDirectionsUrl(widget.eventDetails.Event_Latitude, widget.eventDetails.Event_Longitude);
-                        },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
                         child: Text(
-                          widget.eventDetails.Event_Address,
-                          style: TextStyle(fontSize: 35.sp,
-                            color: Colors.blueAccent
-                          ),
+                          widget.eventDetails.Event_Name,
+                          style: TextStyle(fontSize: 40.sp),
                           softWrap: true,
-                          // maxLines: 100,
-                          // overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      Flexible(
+                        child: Text(
+                          //TODO - Ask if endTime is required to Show
+                          widget.eventDetails.Event_Start_Time.format(context),
+                          style: TextStyle(fontSize: 40.sp),
+                          softWrap: true,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 46.8.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.location_on_outlined,
+                        // size: ,
+                      ),
+                      Flexible(
+                        child: InkWell(
+                          onTap: (){
+                            _launchDirectionsUrl(widget.eventDetails.Event_Latitude, widget.eventDetails.Event_Longitude);
+                          },
+                          child: Text(
+                            widget.eventDetails.Event_Address,
+                            style: TextStyle(fontSize: 35.sp,
+                              color: Colors.blueAccent
+                            ),
+                            softWrap: true,
+                            // maxLines: 100,
+                            // overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
