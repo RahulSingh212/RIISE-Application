@@ -173,7 +173,7 @@ class _SideNavBarState extends State<SideNavBar> {
           ),
           sideTabBarTile(
             context,
-            "Faculties",
+            "Faculty",
             Icons.person_rounded,
             "tab",
             1,

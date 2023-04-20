@@ -42,7 +42,7 @@ class FacultiesProvider with ChangeNotifier {
     // ),
   ];
 
-  Future<FacultyServerInformation> getFacultDetails(
+  Future<FacultyServerInformation> getFacultyDetails(
       String facultyDatabaseUniqueId) async {
     late FacultyServerInformation facultyInfo;
 
@@ -89,6 +89,8 @@ class FacultiesProvider with ChangeNotifier {
     return facultyInfo;
   }
 
+
+
   Future<void> facultyQRCodeNavigator(
     BuildContext context,
     String facultyDatabaseUniqueId,
@@ -134,18 +136,106 @@ class FacultiesProvider with ChangeNotifier {
       );
     });
 
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(
-        builder: (context) => FacultyDetailScreen(
-          facultyDetails: facultyInfo,
-        ),
-      ),
-      (route) => false,
-    );
+    // Navigator.of(context).pushAndRemoveUntil(
+    //   MaterialPageRoute(
+    //     builder: (context) => FacultyDetailScreen(
+    //       facultyDetails: facultyInfo,
+    //     ),
+    //   ),
+    //   (route) => false,
+    // );
   }
 
-  Map<String, String> qrIdentifierMap = {
-    "/subramanyam": "AJy7XCMPL0ZTpCLKT7FVzNsRUli1",
+  Map<String, String> qrIdentifierMap ={
+    "/subramanyam": "subramanyam@iiitd.ac.in",
+    "/aasim": "aasim@iiitd.ac.in",
+    "/abhijit": "abhijit@iiitd.ac.in",
+    "/aman": "aman@iiitd.ac.in",
+    "/anand": "anand@iiitd.ac.in",
+    "/angshul": "angshul@iiitd.ac.in",
+    "/anmol": "anmol@iiitd.ac.in",
+    "/anubha": "anubha@iiitd.ac.in",
+    "/anujg": "anujg@iiitd.ac.in",
+    "/anuradha": "anuradha@iiitd.ac.in",
+    "/arani": "arani@iiitd.ac.in",
+    "/arjun": "arjun@iiitd.ac.in",
+    "/arunb": "arunb@iiitd.ac.in",
+    "/ashishk": "ashishk@iiitd.ac.in",
+    "/bapi": "bapi@iiitd.ac.in",
+    "/chanekar": "chanekar@iiitd.ac.in",
+    "/dbera": "dbera@iiitd.ac.in",
+    "/debarka": "debarka@iiitd.ac.in",
+    "/debika": "debika@iiitd.ac.in",
+    "/dhruv": "dhruv.kumar@iiitd.ac.in",
+    "/diptapriyo": "diptapriyo@iiitd.ac.in",
+    "/donghoon": "donghoon@iiitd.ac.in",
+    "/raghava": "raghava@iiitd.ac.in",
+    "/bagler": "bagler@iiitd.ac.in",
+    "/gauravahuja": "gauravahuja@iiitd.ac.in",
+    "/gaurava": "gauravahuja@iiitd.ac.in",
+    "/gayatri": "gayatri@iiitd.ac.in",
+    "/jainendra": "jainendra@iiitd.ac.in",
+    "/jaspreet": "jaspreet@iiitd.ac.in",
+    "/kaushik": "kaushik@iiitd.ac.in",
+    "/kanjilal": "kanjilal@iiitd.ac.in",
+    "/koteswar": "koteswar@iiitd.ac.in",
+    "/manohark": "manohark@iiitd.ac.in",
+    "/manuj": "manuj@iiitd.ac.in",
+    "/shad": "shad@iiitd.ac.in",
+    "/monika": "monika@iiitd.ac.in",
+    "/mrinmoy": "mrinmoy@iiitd.ac.in",
+    "/mukesh": "mukesh@iiitd.ac.in",
+    "/mukulika": "mukulika@iiitd.ac.in",
+    "/arulmurugan": "arulmurugan@iiitd.ac.in",
+    "/nishad": "nishad@iiitd.ac.in",
+    "/ojaswa": "ojaswa@iiitd.ac.in",
+    "/jalote": "jalote@iiitd.ac.in",
+    "/paro": "paro@iiitd.ac.in",
+    "/piyus": "piyus@iiitd.ac.in",
+    "/praveen": "praveen@iiitd.ac.in",
+    "/praveshb": "praveshb@iiitd.ac.in",
+    "/pushpendra": "pushpendra@iiitd.ac.in",
+    "/rajiv": "rajiv@iiitd.ac.in",
+    "/rajivratn": "rajivratn@iiitd.ac.in",
+    "/rakesh": "rakesh@iiitd.ac.in",
+    "/rkghosh": "rkghosh@iiitd.ac.in",
+    "/bose": "bose@iiitd.ac.in",
+    "/ranjitha": "ranjitha@iiitd.ac.in",
+    "/richagupta": "richagupta@iiitd.ac.in",
+    "/rinku": "rinku@iiitd.ac.in",
+    "/anands": "anands@iiitd.ac.in",
+    "/sambuddho": "sambuddho@iiitd.ac.in",
+    "/samrithram": "samrithram@iiitd.ac.in",
+    "/sanat": "sanat@iiitd.ac.in",
+    "/skkaul": "skkaul@iiitd.ac.in",
+    "/sankha": "sankha@iiitd.ac.in",
+    "/sarthok": "sarthok@iiitd.ac.in",
+    "/satish": "satish@iiitd.ac.in",
+    "/sayak": "sayak@iiitd.ac.in",
+    "/sayan": "sayan@iiitd.ac.in",
+    "/shobha": "shobha@iiitd.ac.in",
+    "/smriti": "smriti@iiitd.ac.in",
+    "/sneh": "sneh@iiitd.ac.in",
+    "/sneha": "sneha@iiitd.ac.in",
+    "/sonia": "sonia@iiitd.ac.in",
+    "/souvik": "souvik@iiitd.ac.in",
+    "/sriram": "sriram@iiitd.ac.in",
+    "/subhabrata": "subhabrata@iiitd.ac.in",
+    "/subhashreem": "subhashreem@iiitd.ac.in",
+    "/sdeb": "sdeb@iiitd.ac.in",
+    "/sumit": "sumit@iiitd.ac.in",
+    "/syamantak": "syamantak@iiitd.ac.in",
+    "/tammam": "tammam@iiitd.ac.in",
+    "/tanmoy": "tanmoy@iiitd.ac.in",
+    "/tarini": "tarini@iiitd.ac.in",
+    "/tavpritesh": "tavpritesh@iiitd.ac.in",
+    "/raghavam": "raghavam@iiitd.ac.in",
+    "/ratan": "ratan@iiitd.ac.in",
+    "/vibhork": "vibhork@iiitd.ac.in",
+    "/vikram": "vikram@iiitd.ac.in",
+    "/vabrol": "vabrol@iiitd.ac.in",
+    "/vivek": "vivek@iiitd.ac.in",
+    "/vivekk": "vivekk@iiitd.ac.in"
   };
 
   Future<void> fetchCollegeFaculties(

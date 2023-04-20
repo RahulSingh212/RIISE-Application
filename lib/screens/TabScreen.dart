@@ -92,7 +92,6 @@ class _TabScreenState extends State<TabScreen> {
 
   List<EventServerInformation> eventUtil = [];
 
-
   load() async {
     // await Provider.of<ThemeProvider>(
     //   context,
@@ -130,12 +129,15 @@ class _TabScreenState extends State<TabScreen> {
                       .fetchLocationList(
                     context,
                   )
-                      .then((value) {
-                    setState(() {
-                      isLoading = false;
-                      print("Hello there loading finished");
-                      print(isLoading);
-
+                      .then((value) async {
+                    await Provider.of<CalenderAPI>(context, listen: false)
+                        .fetchEvent(context)
+                        .then((value) {
+                      setState(() {
+                        isLoading = false;
+                        print("Hello there loading finished");
+                        print(isLoading);
+                      });
                     });
                   });
                 });
@@ -143,8 +145,6 @@ class _TabScreenState extends State<TabScreen> {
             });
           });
         });
-
-
       });
     });
   }
@@ -203,7 +203,7 @@ class _TabScreenState extends State<TabScreen> {
 
         FacultyServerInformation faculty =
             await Provider.of<FacultiesProvider>(context, listen: false)
-                .getFacultDetails(deepLink.path);
+                .getFacultyDetails(deepLink.path);
         // Example of using the dynamic link to push the user to a different screen
         DynamicLinkProvider.initialLink = null;
         Navigator.of(context).push(MaterialPageRoute(
@@ -243,7 +243,6 @@ class _TabScreenState extends State<TabScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final iconItemsInActive = <Widget>[
       Icon(
         Icons.home_outlined,
@@ -301,7 +300,6 @@ class _TabScreenState extends State<TabScreen> {
     ];
 
     print("Loading : $isLoading");
-
 
     return isLoading
         ? Scaffold(

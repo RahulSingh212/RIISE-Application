@@ -14,12 +14,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
+import 'package:riise/providers/FacultiesProvider.dart';
 import 'package:timelines/timelines.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/AppointmentCard.dart';
 import '../../components/EventCard.dart';
 import '../../components/SideNavBar.dart';
+import '../../providers/CalendarAPI.dart';
 
 
 class AppointmentScreen extends StatefulWidget {
@@ -34,7 +36,8 @@ class AppointmentScreen extends StatefulWidget {
 class _AppointmentScreenState extends State<AppointmentScreen> {
   String userName = "Henansh";
   late TextEditingController searchBarController = TextEditingController();
-  AppointmentListUtil appointments = AppointmentListUtil();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +125,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     thickness: 25.r,
                     decoration: BoxDecoration(
                       color: DateTime.now().compareTo(
-                                  appointments.getThemesList()[index].time) <
+                                  Provider.of<CalenderAPI>(context,listen: false).appointmentList[index].starTime) <
                               0
                           ? Colors.green
                           : Colors.red,
@@ -139,10 +142,13 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   ),
                 )),
 
-                // oppositeContentsBuilder: (context, index) => Text(appointments.getThemesList()[index].getTime()),
+                // oppositeContentsBuilder: (context, index) => Text(Provider.of<CalenderAPI>(context,listen: false).appointmentList[index].getTime()),
                 contentsBuilder: (context, index) =>
-                    AppointmentCard(position: index),
-                itemCount: appointments.getThemesList().length,
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.h,horizontal: 20.w),
+                      child: AppointmentCard(appointment: Provider.of<CalenderAPI>(context,listen: false).appointmentList[index],),
+                    ),
+                itemCount: Provider.of<CalenderAPI>(context,listen: false).appointmentList.length,
                 // connectorStyle:
               )),
         ));
