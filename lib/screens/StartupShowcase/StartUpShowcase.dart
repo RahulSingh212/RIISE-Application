@@ -14,6 +14,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../components/NewEventCard.dart';
 import '../../components/SideNavBar.dart';
 import '../../providers/EventsProvider.dart';
 
@@ -27,13 +28,29 @@ class StartUpShowcaseScreen extends StatefulWidget {
 }
 
 class _StartUpShowcaseScreenState extends State<StartUpShowcaseScreen> {
+  bool isLoading = true;
 
   loadData() async {
-    await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "StartUpShowcase").then((value){
+    await Provider.of<EventProvider>(context, listen: false)
+        .fetchEventTracks(context, "StartUpShowcase")
+        .then((value) async {
       setState(() {
-
+        isLoading = false;
+        print(
+            "HEllo this is length of RND LIST -> ${Provider.of<EventProvider>(context, listen: false).startUpShowcaseList.length}");
       });
+
+      // List<EventServerInformation> list = await Provider.of<EventProvider>(context,listen: false).getEventList(context, "RNDShowcasesAndDemos");
+      // print("List ->-> $list");
     });
+  }
+
+  @override
+  void initState() {
+    print("RND INIT CALLED");
+    super.initState();
+    loadData();
+    // Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "RNDShowcasesAndDemos");
   }
 
   @override
@@ -44,69 +61,68 @@ class _StartUpShowcaseScreenState extends State<StartUpShowcaseScreen> {
     // var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
     // var useableHeight = screenHeight - topInsets - bottomInsets;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
-      drawer: SideNavBar(),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          "Start-Up Showcase",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontSize: 60.sp,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        iconTheme: IconThemeData(
-          color: Colors.blue,
-          size: 80.r,
-        ),
-        actions: [
-          Container(
-              padding: EdgeInsets.only(top: 15.h,bottom: 25.h,right: 20.w),
-              child: Center(child: Image.network("https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",fit: BoxFit.contain,))
-          ),
-        ],
-      ),
-      body: ListView(
-        children: [
-          // SizedBox(
-          //   height: 20,
-          // ),
-          // Align(
-          //   child: Container(
-          //     padding: EdgeInsets.symmetric(
-          //       horizontal: 54.w,
-          //     ),
-          //     width: 1080.w,
-          //     height: 2106.h,
-          //     alignment: Alignment.center,
-          //     decoration: BoxDecoration(
-          //       color: Colors.blue.shade400,
-          //     ),
-          //     child: RichText(
-          //       textAlign: TextAlign.justify,
-          //       text: TextSpan(
-          //         children: const [
-          //           TextSpan(
-          //             text:
-          //                 ".",
-          //           )
-          //         ],
-          //         style: TextStyle(
-          //           fontSize: 70.sp,
-          //           color: Colors.white,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-        ],
-      ),
-    );
+    return isLoading
+        ? Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
+        : Scaffold(
+            backgroundColor: Colors.white,
+            extendBodyBehindAppBar: true,
+            drawer: SideNavBar(),
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
+              title: Text(
+                "Start-Up Showcase",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 60.sp,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              iconTheme: IconThemeData(
+                color: Colors.blue,
+                size: 80.r,
+              ),
+              actions: [
+                Container(
+                    padding:
+                        EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
+                    child: Center(
+                        child: Image.network(
+                      "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
+                      fit: BoxFit.contain,
+                    ))),
+              ],
+            ),
+            body: Padding(
+              padding: EdgeInsets.only(top: 220.h),
+              child: ListView.builder(
+                itemCount: Provider.of<EventProvider>(context)
+                    .startUpShowcaseList
+                    .length,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: false,
+                // physics: NeverScrollableScrollPhysics(),
+                physics: BouncingScrollPhysics(),
+                padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
+                itemBuilder: (context, position) {
+                  return Container(
+                    height: 900.h,
+                    padding: EdgeInsets.only(left: 86.w, top: 80.h),
+                    child: NewEventCard(
+                      eventDetails: Provider.of<EventProvider>(context)
+                          .startUpShowcaseList[position],
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
   }
 }

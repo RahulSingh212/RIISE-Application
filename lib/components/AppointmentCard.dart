@@ -3,144 +3,289 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
+import 'package:riise/providers/CalendarAPI.dart';
+
+import '../models/FacultyInfo.dart';
+import '../providers/FacultiesProvider.dart';
 
 //ignore: must_be_immutable
 class AppointmentCard extends StatefulWidget {
-  AppointmentCard({Key? key, required this.position}) : super(key: key);
+  AppointmentCard({Key? key, required this.appointment}) : super(key: key);
 
-  late int position;
+  late AppointmentUtil appointment;
 
   @override
   State<AppointmentCard> createState() => _AppointmentCardState();
 }
 
 class _AppointmentCardState extends State<AppointmentCard> {
-  AppointmentListUtil appointments = AppointmentListUtil();
 
   //Temp Faculty details, need to changed with class
   String facName = "Henansh";
   String facImage = "assets/images/icons/profile.png";
+  String backImage = "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fbackground.jpg?alt=media&token=876903fd-25f4-40b8-9c9b-2ab4bddce3d2";
+  String defaultProfileImage =
+      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fdefault-profile-image.png?alt=media&token=b303ab47-2802-4000-bddc-2a024a6b2d24";
+
+  // Text(
+  //   "${DateFormat("MMMMEEEEd").format(widget.appointment.starTime)}, ${DateFormat("hh:mm a").format(widget.appointment.starTime)} - ${DateFormat("hh:mm a").format(widget.appointment.endTime)}",
+  //   style: TextStyle(fontSize: 30.sp),
+  //   softWrap: true,
+  // ),
+  // SizedBox(height: 20.h,),
+  // Row(
+  //   mainAxisSize: MainAxisSize.min,
+  //   mainAxisAlignment: MainAxisAlignment.start,
+  //   crossAxisAlignment: CrossAxisAlignment.center,
+  //   children: [
+  //     // Icon(
+  //     //   CupertinoIcons.time,
+  //     //   // size: ,
+  //     // ),
+  //     // SizedBox(width: 20.w),
+  //     Flexible(
+  //       child: Text(
+  //         "${DateFormat("MMMMEEEEd").format(widget.appointment.starTime)}, ${DateFormat("hh:mm a").format(widget.appointment.starTime)} - ${DateFormat("hh:mm a").format(widget.appointment.endTime)}",
+  //         style: TextStyle(fontSize: 30.sp),
+  //         softWrap: true,
+  //       ),
+  //     ),
+  //   ],
+  // ),
+
+  // late FacultyServerInformation faculty;
+  // bool isLoading = true;
+
 
   @override
   Widget build(BuildContext context) {
-    // var padding = MediaQuery.of(context).padding;
-    // double width = (MediaQuery.of(context).size.width);
-    // double height =
-    //     (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
-    //
-    // double minDimension = min(width, height);
-    // double maxDimension = max(width, height);
+    return InkWell(
+      onTap: () {
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (context) => FacultyDetailScreen(
+        //       // position: widget.position,
+        //       facultyDetails: widget.facultyDetails,
+        //     ),
+        //   ),
+        // );
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 5.8.w, vertical: 20.h),
+        // height: 700.h,
+        // width: double.infinity,
+        child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.s,
+          // mainAxisSize: MainAxisSize.min,
+          children: [
 
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 54.w, vertical: 46.8.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "${appointments.getThemesList()[widget.position].getTime()}, ${appointments.getThemesList()[widget.position].getDate()}",
-            style: TextStyle(fontSize: 40.sp),
-          ),
-          SizedBox(height: 23.4.h),
-          Card(
-            elevation: 16,
-            // color: Colors.red,
-            child: Container(
-              //BackGround Image
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                        appointments.getThemesList()[widget.position].iconImage,
+
+            Row(
+              // mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Icon(
+                //   CupertinoIcons.time,
+                //   // size: ,
+                // ),
+                // SizedBox(width: 20.w),
+                Flexible(
+                  child: Text(
+                    "${DateFormat("MMMMEEEEd").format(widget.appointment.starTime)}, ${DateFormat("hh:mm a").format(widget.appointment.starTime)} - ${DateFormat("hh:mm a").format(widget.appointment.endTime)}",
+                    style: TextStyle(fontSize: 35.sp),
+                    softWrap: true,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 40.h,),
+            Expanded(
+              child: Card(
+                elevation: 1,
+                // color: Colors.red,
+                child: Container(
+                  //BackGround Image
+                  decoration: BoxDecoration(
+
+                      image: DecorationImage(
+                        //TODO - Change background image
+                          image: NetworkImage(backImage,),
+                          fit: BoxFit.cover
                       ),
-                      fit: BoxFit.cover)),
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(25),bottomRight: Radius.circular(25))
+                  ),
 
-              child: Container(
-                margin: EdgeInsets.symmetric(
-                    horizontal: 43.2.sp, vertical: 30.42.h),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 10.w,
+                      vertical: 30.42.h,
+                    ),
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: 250.r,
-                          width: 250.r,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(facImage),
-                                  fit: BoxFit.cover),
-                              border: Border.all(width: 2),
-                              borderRadius: BorderRadius.circular(12)),
-                        ),
-                        SizedBox(width: 54.w),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              facName,
-                              style: TextStyle(fontSize: 40.sp),
+                            Container(
+                              height: 250.r,
+                              width: 250.r,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      widget.appointment.attendee.faculty_Image_Url == "Temp"?defaultProfileImage:widget.appointment.attendee.faculty_Image_Url
+
+                                  ),
+                                  fit: BoxFit.cover,
+                                  scale: 0.4,
+                                ),
+                                border: Border.all(width: 2),
+                                // borderRadius: BorderRadius.circular(12)
+                              ),
                             ),
-                            SizedBox(height: 51.48.h),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.topic_outlined,
-                                  // size: ,
-                                ),
-                                SizedBox(width: 21.6.w),
-                                Text(
-                                  appointments
-                                      .getThemesList()[widget.position]
-                                      .title,
-                                  style: TextStyle(fontSize: 40.sp),
-                                ),
-                              ],
+                            SizedBox(
+                              width: 54.w,
                             ),
-                            // SizedBox(height: 0.005*height,),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.location_on_outlined,
-                                  // size: ,
-                                ),
-                                SizedBox(width: 21.6.w),
-                                Text(
-                                  appointments
-                                      .getThemesList()[widget.position]
-                                      .location,
-                                  style: TextStyle(fontSize: 40.sp),
-                                ),
-                              ],
+                            SizedBox(
+                              width: 550.w,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      widget.appointment.title,
+                                      style: TextStyle(fontSize: 40.sp),
+                                      softWrap: true,
+                                      // overflow: TextOverflow.fade,
+                                    ),
+                                  ),
+                                  SizedBox(height: 40.h,),
+                                  // Row(
+                                  //   mainAxisSize: MainAxisSize.min,
+                                  //   mainAxisAlignment: MainAxisAlignment.start,
+                                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                                  //   children: [
+                                  //     Icon(
+                                  //       Icons.calendar_month,
+                                  //       // size: ,
+                                  //     ),
+                                  //     SizedBox(width: 20.w),
+                                  //     Flexible(
+                                  //       child: Text(
+                                  //         "${DateFormat("MMMMEEEEd").format(widget.appointment.starTime)}",
+                                  //         style: TextStyle(fontSize: 40.sp),
+                                  //         softWrap: true,
+                                  //       ),
+                                  //     ),
+                                  //   ],
+                                  // ),
+                                  // Row(
+                                  //   mainAxisSize: MainAxisSize.min,
+                                  //   mainAxisAlignment: MainAxisAlignment.start,
+                                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                                  //   children: [
+                                  //     Icon(
+                                  //       CupertinoIcons.time,
+                                  //       // size: ,
+                                  //     ),
+                                  //     SizedBox(width: 20.w),
+                                  //     Flexible(
+                                  //       child: Text(
+                                  //           "${DateFormat("hh:mm a").format(widget.appointment.starTime)} - ${DateFormat("hh:mm a").format(widget.appointment.endTime)}",
+                                  //         style: TextStyle(fontSize: 40.sp),
+                                  //         softWrap: true,
+                                  //       ),
+                                  //     ),
+                                  //   ],
+                                  // ),
+
+                                  widget.appointment.attendee.faculty_Name != "Temp"
+                                      ? Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        CupertinoIcons.person,
+                                        // size: ,
+                                      ),
+                                      SizedBox(width: 20.w),
+                                      Flexible(
+                                        child: Text(
+                                          widget.appointment.attendee.faculty_Name,
+                                          style: TextStyle(fontSize: 40.sp),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                      : Container(),
+
+                                  widget.appointment.location != "Temp"
+                                      ? Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.location_on_outlined,
+                                        // size: ,
+                                      ),
+                                      SizedBox(width: 20.w),
+                                      Flexible(
+                                        child: Text(
+                                          widget.appointment.location,
+                                          style: TextStyle(fontSize: 40.sp),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                      : Container(),
+                                  widget.appointment.description != "Temp"
+                                      ? Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.message,
+                                        // size: ,
+                                      ),
+                                      SizedBox(width: 20.w),
+                                      Flexible(
+                                        child: Text(
+                                          widget.appointment.description,
+                                          style: TextStyle(fontSize: 40.sp),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                      : Container(),
+                                ],
+                              ),
                             ),
-                            // SizedBox(height: 0.010*height,),
-                            // Text(
-                            //   "Location: ${appointments.getThemesList()[widget.position].location}",
-                            //   style: TextStyle(fontSize: 15),
-                            // ),
-                            // SizedBox(height: 0.010*height,),
-                            // Text(
-                            //   appointments.getThemesList()[widget.position].getDate(),
-                            //   style: TextStyle(fontSize: 15),
-                            // ),
                           ],
                         ),
                       ],
                     ),
-                    SizedBox(width: 54.w),
-                    Icon(
-                      CupertinoIcons.right_chevron,
-                      size: 80.r,
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

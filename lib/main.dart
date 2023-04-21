@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import "package:flutter/services.dart";
+import 'package:riise/providers/CalendarAPI.dart';
 import 'package:riise/providers/DynamicLinkProvider.dart';
 import 'package:riise/screens/Faculty/FacultyDetailScreen.dart';
 import 'package:riise/screens/QrCode/QrCodeGenerator.dart';
@@ -104,6 +105,7 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(value: CalenderAPI()),
         ChangeNotifierProvider.value(value: ScreenControllerProvider()),
         ChangeNotifierProvider.value(
           value: FirebaseProvider(),

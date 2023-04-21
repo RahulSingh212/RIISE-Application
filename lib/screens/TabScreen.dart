@@ -25,7 +25,9 @@ import 'package:riise/providers/UserLoginProvider.dart';
 import 'package:riise/screens/Faculty/FacultyDetailScreen.dart';
 import 'package:riise/screens/QrCode/QrCodeGenerator.dart';
 
+import '../models/EventInfo.dart';
 import '../providers/CalendarAPI.dart';
+import '../providers/EventsProvider.dart';
 import '../providers/FacultiesProvider.dart';
 import '../providers/LocationProvider.dart';
 import '../providers/ThemeProvider.dart';
@@ -58,33 +60,94 @@ class _TabScreenState extends State<TabScreen> {
     const AppointmentScreen(),
   ];
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  bool isLoading = true;
 
-    // Provider.of<ThemeProvider>(
-    //   context,
-    //   listen: false,
-    // ).fetchThemes(
-    //   context,
-    // );
-
-    // print("tab screen");
-    // Provider.of<FacultiesProvider>(
-    //   context,
-    //   listen: false,
-    // ).fetchCollegeFaculties(
-    //   context,
-    // );
-    // Provider.of<LocationProvider>(
-    //   context,
-    //   listen: false,
-    // ).fetchLocationList(
-    //   context,
-    // );
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //
+  //   // Provider.of<ThemeProvider>(
+  //   //   context,
+  //   //   listen: false,
+  //   // ).fetchThemes(
+  //   //   context,
+  //   // );
+  //
+  //   // print("tab screen");
+  //   // Provider.of<FacultiesProvider>(
+  //   //   context,
+  //   //   listen: false,
+  //   // ).fetchCollegeFaculties(
+  //   //   context,
+  //   // );
+  //   // Provider.of<LocationProvider>(
+  //   //   context,
+  //   //   listen: false,
+  //   // ).fetchLocationList(
+  //   //   context,
+  //   // );
+  // }
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  List<EventServerInformation> eventUtil = [];
+
+  load() async {
+    // await Provider.of<ThemeProvider>(
+    //   context,
+    //   listen: false,
+    // ).fetchThemes(context);
+
+    print("Hello there loading started");
+    // print("EMAIL -> ${FirebaseAuth.instance.currentUser?.refreshToken}");
+    print(isLoading);
+    // TODO - Add Event Provider fetch
+
+    await Provider.of<EventProvider>(context, listen: false)
+        .fetchEventTracks(context, "StartUpShowcase")
+        .then((value) async {
+      await Provider.of<EventProvider>(context, listen: false)
+          .fetchEventTracks(context, "RNDShowcasesAndDemos")
+          .then((value) async {
+        await Provider.of<EventProvider>(context, listen: false)
+            .fetchEventTracks(context, "ResearchShowcases")
+            .then((Value) async {
+          await Provider.of<EventProvider>(context, listen: false)
+              .fetchEventTracks(context, "ForwardLookingPanels")
+              .then((value) async {
+            await Provider.of<EventProvider>(context, listen: false)
+                .fetchEventTracks(context, "DemosAndResearchesHighlights")
+                .then((value) async {
+              await Provider.of<EventProvider>(context, listen: false)
+                  .fetchEventTracks(context, "BeyondCollegePanels")
+                  .then((value) async {
+                await Provider.of<FacultiesProvider>(context, listen: false)
+                    .fetchCollegeFaculties(context)
+                    .then((value) async {
+                  print("Faculty loading finished");
+                  await Provider.of<LocationProvider>(context, listen: false)
+                      .fetchLocationList(
+                    context,
+                  )
+                      .then((value) async {
+                    await Provider.of<CalenderAPI>(context, listen: false)
+                        .fetchEvent(context)
+                        .then((value) {
+                      setState(() {
+                        isLoading = false;
+                        print("Hello there loading finished");
+                        print(isLoading);
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+  }
 
   @override
   void initState() {
@@ -94,12 +157,6 @@ class _TabScreenState extends State<TabScreen> {
 
     // initializeCalendar();
     print("initState TABSCREEN");
-    Provider.of<ThemeProvider>(
-      context,
-      listen: false,
-    ).fetchThemes(
-      context,
-    );
 
     _pages = [
       {
@@ -146,7 +203,7 @@ class _TabScreenState extends State<TabScreen> {
 
         FacultyServerInformation faculty =
             await Provider.of<FacultiesProvider>(context, listen: false)
-                .getFacultDetails(deepLink.path);
+                .getFacultyDetails(deepLink.path);
         // Example of using the dynamic link to push the user to a different screen
         DynamicLinkProvider.initialLink = null;
         Navigator.of(context).push(MaterialPageRoute(
@@ -154,6 +211,7 @@ class _TabScreenState extends State<TabScreen> {
                 FacultyDetailScreen(facultyDetails: faculty)));
       }
     });
+    load();
   }
 
   void _selectPage(int index) {
@@ -185,12 +243,6 @@ class _TabScreenState extends State<TabScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // var screenHeight = MediaQuery.of(context).size.height;
-    // var screenWidth = MediaQuery.of(context).size.width;
-    // var topInsets = MediaQuery.of(context).viewInsets.top;
-    // var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
-    // var useableHeight = screenHeight - topInsets - bottomInsets;
-
     final iconItemsInActive = <Widget>[
       Icon(
         Icons.home_outlined,
@@ -247,39 +299,48 @@ class _TabScreenState extends State<TabScreen> {
       ),
     ];
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: IndexedStack(
-        index: Provider.of<ScreenControllerProvider>(context, listen: false)
-            .selectedPageIndex,
-        children: _appScreens,
-      ),
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          iconTheme: const IconThemeData(
-            color: Colors.white,
-          ),
-          backgroundColor: const Color(0xff42ccc3),
-        ),
-        child: CurvedNavigationBar(
-          onTap: _selectPage,
-          backgroundColor: Colors.transparent,
-          color: Colors.greenAccent,
-          // buttonBackgroundColor: Theme.of(context).primaryColor,
-          buttonBackgroundColor: Colors.blueGrey,
-          index: Provider.of<ScreenControllerProvider>(
-            context,
-            listen: false,
-          ).selectedPageIndex,
-          height: 163.8.h,
-          animationCurve: Curves.easeInOut,
-          animationDuration: const Duration(
-            milliseconds: 300,
-          ),
-          items: iconItemsActive,
-        ),
-      ),
-    );
+    print("Loading : $isLoading");
+
+    return isLoading
+        ? Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(
+              child: Image.asset("assets/images/Riise.png"),
+            ))
+        : Scaffold(
+            backgroundColor: Colors.white,
+            body: IndexedStack(
+              index:
+                  Provider.of<ScreenControllerProvider>(context, listen: false)
+                      .selectedPageIndex,
+              children: _appScreens,
+            ),
+            bottomNavigationBar: Theme(
+              data: Theme.of(context).copyWith(
+                iconTheme: const IconThemeData(
+                  color: Colors.white,
+                ),
+                backgroundColor: const Color(0xff42ccc3),
+              ),
+              child: CurvedNavigationBar(
+                onTap: _selectPage,
+                backgroundColor: Colors.transparent,
+                color: Colors.greenAccent,
+                // buttonBackgroundColor: Theme.of(context).primaryColor,
+                buttonBackgroundColor: Colors.blueGrey,
+                index: Provider.of<ScreenControllerProvider>(
+                  context,
+                  listen: false,
+                ).selectedPageIndex,
+                height: 163.8.h,
+                animationCurve: Curves.easeInOut,
+                animationDuration: const Duration(
+                  milliseconds: 300,
+                ),
+                items: iconItemsActive,
+              ),
+            ),
+          );
   }
 
   Future<void> _checkForLogout(
