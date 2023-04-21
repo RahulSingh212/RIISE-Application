@@ -17,6 +17,7 @@ import 'package:riise/components/CategoryEventCard.dart';
 import 'package:riise/models/ThemeInfo.dart';
 
 import 'package:riise/providers/ThemeProvider.dart';
+import 'package:riise/providers/UserDetailsProvider.dart';
 import 'package:riise/screens/Profile/ProfileScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -31,10 +32,15 @@ import '../BeyondPannel/BeyondCollegePannelScreen.dart';
 import '../DemosAndResearchs/DemosAndResearchsHighLightScreen.dart';
 import '../ForwardPannel/ForwardLookingPannelScreen.dart';
 import '../Keynote/KeynoteSpeakersScreen.dart';
+import '../Profile/FacultyProfileScreen.dart';
+import '../Profile/GuestProfileScreen.dart';
 import '../RNDShowcase/RnDShowcaseAndDemoScreen.dart';
 import '../ResearchShowcase/ResearchShowcaseScreen.dart';
 import '../StartupShowcase/StartUpShowcase.dart';
 import '../TabScreen.dart';
+
+const FACULTY_USERTYPE = "Faculty";
+const GUEST_USERTYPE = "Guest";
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/rise-home-screen';
@@ -51,28 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
   late TextEditingController searchBarController = TextEditingController();
   final ThemeProvider themeProviderModel = ThemeProvider();
 
-   List<EventServerInformation> eventUtil = [];
+  List<EventServerInformation> eventUtil = [];
 
-<<<<<<< HEAD
-  Future<void> loadDataUtil() async {
-    // Provider.of<FacultiesProvider>(context, listen: false).insertListOfFaculties(context);
-
-    await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "SpeakerTracks");
-    await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "PosterTracks");
-    await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "PanelDiscussion");
-    eventUtil = [
-    Provider.of<EventProvider>(context, listen: false).posterTracksList,
-    Provider.of<EventProvider>(context, listen: false).speakerTracksList,
-    Provider.of<EventProvider>(context, listen: false).panelDiscussionList
-    ].expand((x) => x).toList();
-  }
-
-  loadData() async {
-    await loadDataUtil().then((value) {
-      setState(() {});
-    });
-  }
-=======
   // Future<void> loadDataUtil() async {
   //
   //   await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "SpeakerTracks");
@@ -86,7 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
   //     setState(() {});
   //   });
   // }
->>>>>>> f07f31a56f0278e9560ac56735905c052da564cf
+
+  fetchUserProfile() async {
+    Provider.of<UserDetailsProvider>(context, listen: false).setUserType(context);
+  }
 
   @override
   void initState() {
@@ -97,26 +86,59 @@ class _HomeScreenState extends State<HomeScreen> {
     // ).fetchThemes(
     //   context,
     // );
+    // fetchUserProfile();
     super.initState();
+    // Provider.of<FacultiesProvider>(context, listen: false).insertListOfFaculties(context);
     eventUtil = [
       Provider.of<EventProvider>(context, listen: false).startUpShowcaseList,
       Provider.of<EventProvider>(context, listen: false).researchShowcasesList,
       Provider.of<EventProvider>(context, listen: false).rndShowcasesAndDemosList,
-      Provider.of<EventProvider>(context, listen: false).demosAndResearchesHighlightsList,
-      Provider.of<EventProvider>(context, listen: false).beyondCollegePanelsList,
-      Provider.of<EventProvider>(context, listen: false).forwardLookingPanelsList,
+      Provider.of<EventProvider>(context, listen: false)
+          .demosAndResearchesHighlightsList,
+      Provider.of<EventProvider>(context, listen: false)
+          .beyondCollegePanelsList,
+      Provider.of<EventProvider>(context, listen: false)
+          .forwardLookingPanelsList,
     ].expand((x) => x).toList();
     print("List of ALL EVENTS -> ${eventUtil.length}");
   }
 
   List<dynamic> categoryList = [
-    ["Keynote Address","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",KeynoteSpeakersScreen()],
-    ["RND Showcases","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",RNDShowcaseAndDemoScreen()],
-    ["Forward Panels","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",ForwardLookingPannelScreen()],
-    ["Beyond Panels","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",BeyondCollegePannelScreen()],
-    ["Start-UP Showcases","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",StartUpShowcaseScreen()],
-    ["Demos And Researches","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",DemosAndResearchHighlightScreen()],
-    ["Research Showcases","https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",ResearchShowcaseScreen()],
+    [
+      "Keynote Address",
+      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      KeynoteSpeakersScreen()
+    ],
+    [
+      "RND Showcases",
+      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      RNDShowcaseAndDemoScreen()
+    ],
+    [
+      "Forward Panels",
+      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      ForwardLookingPannelScreen()
+    ],
+    [
+      "Beyond Panels",
+      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      BeyondCollegePannelScreen()
+    ],
+    [
+      "Start-UP Showcases",
+      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      StartUpShowcaseScreen()
+    ],
+    [
+      "Demos And Researches",
+      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      DemosAndResearchHighlightScreen()
+    ],
+    [
+      "Research Showcases",
+      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      ResearchShowcaseScreen()
+    ],
   ];
 
   @override
@@ -149,19 +171,33 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           Container(
-            padding: EdgeInsets.only(top: 15.h,bottom: 25.h),
-            child: Center(child: Image.network("https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",fit: BoxFit.contain,))
+            padding: EdgeInsets.only(top: 15.h, bottom: 25.h),
+            child: Center(
+              child: Image.network(
+                "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
           Container(
             padding: EdgeInsets.only(right: 5),
             child: IconButton(
-              onPressed: () {
-                // _auth.signOut();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => ProfileScreen(),
-                  ),
-                );
+              onPressed: () async {
+                if (Provider.of<UserDetailsProvider>(context, listen: false)
+                        .userType ==
+                    "Guest") {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => GuestProfileScreen(),
+                    ),
+                  );
+                } else {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => FacultyProfileScreen(),
+                    ),
+                  );
+                }
               },
               icon: Icon(
                 Icons.person,
@@ -175,27 +211,22 @@ class _HomeScreenState extends State<HomeScreen> {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         physics: BouncingScrollPhysics(),
         child: Container(
-
-          padding: EdgeInsets.only(top: 280.h,left: 54.w,right: 54.w),
-
-
+          padding: EdgeInsets.only(top: 280.h, left: 54.w, right: 54.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.only(top: 60.h,left: 40.w,right: 40.w),
+                padding: EdgeInsets.only(top: 60.h, left: 40.w, right: 40.w),
                 width: double.infinity,
                 height: 380.h,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2FIllstration.png?alt=media&token=c2319412-6f5b-47fa-a12b-e70029f8fa2e"
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2FIllstration.png?alt=media&token=c2319412-6f5b-47fa-a12b-e70029f8fa2e"),
+                        fit: BoxFit.fill)
+                    // color: Colors.red,
                     ),
-                    fit: BoxFit.fill
-                  )
-                  // color: Colors.red,
-                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -39,7 +39,7 @@ class _SpeakerDetailScreenState extends State<SpeakerDetailScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         extendBodyBehindAppBar: true,
-        drawer: SideNavBar(),
+        // drawer: SideNavBar(),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,

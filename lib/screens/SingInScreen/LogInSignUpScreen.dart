@@ -48,13 +48,13 @@ class _LogInSignUpScreenState extends State<LogInSignUpScreen> {
             SizedBox(
               height: 20,
             ),
-            Text(
-              Provider.of<UserLoginProvider>(context, listen: false).userType ==
-                      "Guest"
-                  ? "Welcome, Guest "
-                  : "Welcome, Faculty",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
+            // Text(
+            //   Provider.of<UserLoginProvider>(context, listen: false).userType ==
+            //           "Guest"
+            //       ? "Welcome, Guest "
+            //       : "Welcome, Faculty",
+            //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            // ),
             // SizedBox(
             //   height: 20,
             // ),
@@ -118,44 +118,44 @@ class _LogInSignUpScreenState extends State<LogInSignUpScreen> {
           SizedBox(
             height: 15,
           ),
-          Align(
-            child: Container(
-              width: screenWidth * 0.9,
-              padding: EdgeInsets.symmetric(
-                vertical: 5,
-              ),
-              child: DropdownButtonFormField(
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.green.shade600,
-                      width: 2,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.green.shade600,
-                      width: 2,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  filled: true,
-                  fillColor: Colors.green.shade200,
-                ),
-                items: userTypeList,
-                dropdownColor: Colors.green.shade200,
-                value: userTypeList[0].value,
-                onChanged: (String? value) {
-                  setState(() {
-                    print(value);
-                    Provider.of<UserLoginProvider>(context, listen: false)
-                        .userType = value!;
-                  });
-                },
-              ),
-            ),
-          ),
+          // Align(
+          //   child: Container(
+          //     width: screenWidth * 0.9,
+          //     padding: EdgeInsets.symmetric(
+          //       vertical: 5,
+          //     ),
+          //     child: DropdownButtonFormField(
+          //       decoration: InputDecoration(
+          //         enabledBorder: OutlineInputBorder(
+          //           borderSide: BorderSide(
+          //             color: Colors.green.shade600,
+          //             width: 2,
+          //           ),
+          //           borderRadius: BorderRadius.circular(10),
+          //         ),
+          //         border: OutlineInputBorder(
+          //           borderSide: BorderSide(
+          //             color: Colors.green.shade600,
+          //             width: 2,
+          //           ),
+          //           borderRadius: BorderRadius.circular(10),
+          //         ),
+          //         filled: true,
+          //         fillColor: Colors.green.shade200,
+          //       ),
+          //       items: userTypeList,
+          //       dropdownColor: Colors.green.shade200,
+          //       value: userTypeList[0].value,
+          //       onChanged: (String? value) {
+          //         setState(() {
+          //           print(value);
+          //           Provider.of<UserLoginProvider>(context, listen: false)
+          //               .userType = value!;
+          //         });
+          //       },
+          //     ),
+          //   ),
+          // ),
             SizedBox(
               height: 40,
             ),

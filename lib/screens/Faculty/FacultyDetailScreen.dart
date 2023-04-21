@@ -50,7 +50,6 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
 
   @override
   Future<void> didChangeDependencies() async {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
 
     if (widget.qrIdentifier != null) {
@@ -61,22 +60,23 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
   }
 
   // late TextEditingController eventTitle = TextEditingController(text: "Guest-Faculty interaction");
-  late TextEditingController eventTitle = TextEditingController(text: "Guest-Faculty interaction");
-  late TextEditingController eventLocation = TextEditingController(text: widget.facultyDetails.faculty_Office_Address);
-  late TextEditingController eventDescription = TextEditingController(text: "Hi, I would like to meet you to discuss your work. \n\n Thanks, \n ${FirebaseAuth.instance.currentUser?.displayName}");
+  late TextEditingController eventTitle =
+      TextEditingController(text: "Guest-Faculty interaction");
+  late TextEditingController eventLocation =
+      TextEditingController(text: widget.facultyDetails.faculty_Office_Address);
+  late TextEditingController eventDescription = TextEditingController(
+      text:
+          "Hi, I would like to meet you to discuss your work. \n\n Thanks, \n ${FirebaseAuth.instance.currentUser?.displayName}");
   late TextEditingController eventGuest =
       TextEditingController(text: widget.facultyDetails.faculty_EmailId);
   late TextEditingController eventStartTime =
       TextEditingController(text: DateFormat("hh:mm a").format(DateTime.now()));
-  late TextEditingController eventEndTime =
-  TextEditingController(text: DateFormat("hh:mm a").format(DateTime.now().add(Duration(minutes: 15))));
+  late TextEditingController eventEndTime = TextEditingController(
+      text: DateFormat("hh:mm a")
+          .format(DateTime.now().add(Duration(minutes: 15))));
 
-  // TODO - Date Should be FIXED
   late TextEditingController eventDate =
-  TextEditingController(text: DateFormat("MMMEd").format(DateTime.now()));
-  //
-  // late TextEditingController eventGuest =
-  // TextEditingController(text: widget.facultyDetails.faculty_EmailId);
+      TextEditingController(text: DateFormat("MMMEd").format(DateTime.now()));
 
   Future showPopUp(BuildContext context) async {
     return await showDialog(
@@ -91,18 +91,19 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                 controller: TextEditingController(text: "Book Appointment"),
                 style: TextStyle(fontSize: 55.sp),
                 decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Title",
-                    suffixIcon: ClipOval(
-                      child: Image.network(
-                        widget.facultyDetails.faculty_Image_Url == ""
-                            ? defaultProfileImage
-                            : widget.facultyDetails.faculty_Image_Url,
-                        width: 25.r,
-                        height: 25.r,
-                        fit: BoxFit.fill,
-                      ),
-                    ),),
+                  border: InputBorder.none,
+                  hintText: "Title",
+                  suffixIcon: ClipOval(
+                    child: Image.network(
+                      widget.facultyDetails.faculty_Image_Url == ""
+                          ? defaultProfileImage
+                          : widget.facultyDetails.faculty_Image_Url,
+                      width: 25.r,
+                      height: 25.r,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
                 enabled: false,
               ),
               titlePadding: EdgeInsets.fromLTRB(60.w, 60.h, 80.w, 0.h),
@@ -113,36 +114,34 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      _presentDatePicker(context, eventDate,date);
+                      _presentDatePicker(context, eventDate, date);
                     });
                   },
-
-                  child: textFieldBuilder(
-                      eventDate, "Date", CupertinoIcons.calendar_badge_plus, true, 1),
+                  child: textFieldBuilder(eventDate, "Date",
+                      CupertinoIcons.calendar_badge_plus, true, 1),
                 ),
                 InkWell(
-                        onTap: () {
-                          setState(() {
-                            print("Before : $startTime");
-                            _presentTimePicker(context, eventStartTime,eventEndTime,startTime,endTime);
-                            print("After : $startTime");
-                            print("After END : $endTime");
-
-                          });
-                        },
-
-                  child: textFieldBuilder(
-                      eventStartTime, "Start Time", CupertinoIcons.clock, true, 1),
+                  onTap: () {
+                    setState(() {
+                      print("Before : $startTime");
+                      _presentTimePicker(context, eventStartTime, eventEndTime,
+                          startTime, endTime);
+                      print("After : $startTime");
+                      print("After END : $endTime");
+                    });
+                  },
+                  child: textFieldBuilder(eventStartTime, "Start Time",
+                      CupertinoIcons.clock, true, 1),
                 ),
                 InkWell(
                   onTap: () {
                     setState(() {
                       print("Before : $endTime");
-                      _presentTimePicker(context, eventEndTime,null,endTime,null);
+                      _presentTimePicker(
+                          context, eventEndTime, null, endTime, null);
                       print("After : $endTime");
                     });
                   },
-
                   child: textFieldBuilder(
                       eventEndTime, "End Time", CupertinoIcons.clock, true, 1),
                 ),
@@ -252,21 +251,39 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                 //   ),
                 // ),
                 textFieldBuilder(eventGuest, "Guest", Icons.messenger, true, 1),
-                textFieldBuilder(eventLocation, "Location", Icons.location_on_outlined, true, 1),
+                textFieldBuilder(eventLocation, "Location",
+                    Icons.location_on_outlined, true, 1),
                 textFieldBuilder(eventDescription, "Description",
                     Icons.messenger, false, 10),
                 Center(
                   child: OutlinedButton(
                     onPressed: () async {
                       print("Submit");
-                      List<cal.EventAttendee> attendeeEmailList = [cal.EventAttendee(email: FirebaseAuth.instance.currentUser?.email.toString()),cal.EventAttendee(email: eventGuest.text)];
+                      List<cal.EventAttendee> attendeeEmailList = [
+                        cal.EventAttendee(
+                            email: FirebaseAuth.instance.currentUser?.email
+                                .toString()),
+                        cal.EventAttendee(email: eventGuest.text)
+                      ];
                       print("Hey its me, calling calendar event function");
-                      DateTime tempDate01 = DateFormat("MMMEd").parse(eventDate.text);
-                      DateTime tempTime01 = DateFormat("hh:mm a").parse(eventStartTime.text);
-                      DateTime tempTime02 = DateFormat("hh:mm a").parse(eventEndTime.text);
-                      DateTime tempStartTime = DateTime(2023,tempDate01.month,tempDate01.day,tempTime01.hour,tempTime01.minute);
-                      DateTime tempEndTime = DateTime(2023,tempDate01.month,tempDate01.day,tempTime02.hour,tempTime02.minute);
-                      await CalenderAPI().addEvent(context,eventTitle.text,tempStartTime,tempEndTime,attendeeEmailList,eventDescription.text,eventLocation.text);
+                      DateTime tempDate01 =
+                          DateFormat("MMMEd").parse(eventDate.text);
+                      DateTime tempTime01 =
+                          DateFormat("hh:mm a").parse(eventStartTime.text);
+                      DateTime tempTime02 =
+                          DateFormat("hh:mm a").parse(eventEndTime.text);
+                      DateTime tempStartTime = DateTime(2023, tempDate01.month,
+                          tempDate01.day, tempTime01.hour, tempTime01.minute);
+                      DateTime tempEndTime = DateTime(2023, tempDate01.month,
+                          tempDate01.day, tempTime02.hour, tempTime02.minute);
+                      await CalenderAPI().addEvent(
+                          context,
+                          eventTitle.text,
+                          tempStartTime,
+                          tempEndTime,
+                          attendeeEmailList,
+                          eventDescription.text,
+                          eventLocation.text);
                       Navigator.of(context).pop();
                       // await CalenderAPI().addEvent(context,"TEST 2",DateTime.now().add(Duration(hours: 3, minutes: 30)),DateTime.now().add(Duration(hours: 4, minutes: 30)));
                       // await CalenderAPI().addEvent(context,"TEST 3",DateTime.now().add(Duration(hours: 5, minutes: 30)),DateTime.now().add(Duration(hours: 6, minutes: 30)));
@@ -340,12 +357,11 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         extendBodyBehindAppBar: true,
-        drawer: SideNavBar(),
+        // drawer: SideNavBar(),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
           centerTitle: true,
-          //TODO - Make it flexible
           title: Text(
             "Faculty",
             style: TextStyle(
@@ -361,8 +377,13 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
           ),
           actions: [
             Container(
-                padding: EdgeInsets.only(top: 15.h,bottom: 25.h,right: 20.w),
-                child: Center(child: Image.network("https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",fit: BoxFit.contain,))
+              padding: EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
+              child: Center(
+                child: Image.network(
+                  "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
+                  fit: BoxFit.contain,
+                ),
+              ),
             ),
           ],
         ),
@@ -425,7 +446,9 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                                 : Flexible(
                                     child: Text(
                                       "${widget.facultyDetails.faculty_Position} (${widget.facultyDetails.faculty_Department})",
-                                      style: TextStyle(fontSize: 40.sp),
+                                      style: TextStyle(
+                                        fontSize: 40.sp,
+                                      ),
                                       softWrap: true,
                                       textAlign: TextAlign.center,
                                       // maxLines: 100,
@@ -435,11 +458,13 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                               height: 60.h,
                             ),
                             ElevatedButton(
-                                onPressed: () async {
-
-                                  showPopUp(context);
-                                },
-                                child: Text("Book Appointment")),
+                              onPressed: () async {
+                                showPopUp(context);
+                              },
+                              child: Text(
+                                "Book Appointment",
+                              ),
+                            ),
                             SizedBox(
                               height: 80.h,
                             ),
@@ -833,9 +858,9 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
               print(value);
             })
           },
-          minLines: label=="Description"?3:1,
+          minLines: label == "Description" ? 3 : 1,
           enabled: !enabled,
-          maxLines: !enabled?null:1,
+          maxLines: !enabled ? null : 1,
           decoration: InputDecoration(
             // contentPadding: EdgeInsets.fromLTRB(0, 12, 0, 0),
             isDense: true,
@@ -885,7 +910,12 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
     );
   }
 
-  void _presentTimePicker(BuildContext context, TextEditingController controller,TextEditingController? controller2, DateTime time, DateTime? time2) async {
+  void _presentTimePicker(
+      BuildContext context,
+      TextEditingController controller,
+      TextEditingController? controller2,
+      DateTime time,
+      DateTime? time2) async {
     FocusScopeNode currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus) {
       currentFocus.unfocus();
@@ -911,32 +941,26 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
       },
     );
     if (temptime != null) {
-
       setState(() {
-
         print("TIME -> $temptime");
-        DateTime tempTime2 = DateTime(0).add(Duration(hours: temptime.hour, minutes: temptime.minute));
+        DateTime tempTime2 = DateTime(0)
+            .add(Duration(hours: temptime.hour, minutes: temptime.minute));
         controller.text = DateFormat("hh:mm a").format(tempTime2);
         print(controller.text);
         time = tempTime2;
         print("Inside : $time");
 
-        if(time2 != null)
-          {
-            time2 = time.add(Duration(minutes: 15));
-            controller2!.text = DateFormat("hh:mm a").format(time2!);
-            print("Inside 2  : $time2");
-          }
-
-
+        if (time2 != null) {
+          time2 = time.add(Duration(minutes: 15));
+          controller2!.text = DateFormat("hh:mm a").format(time2!);
+          print("Inside 2  : $time2");
+        }
       });
-
     }
   }
 
-  void _presentDatePicker(BuildContext context, TextEditingController controller, DateTime date) async {
-
-
+  void _presentDatePicker(BuildContext context,
+      TextEditingController controller, DateTime date) async {
     FocusScopeNode currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus) {
       currentFocus.unfocus();

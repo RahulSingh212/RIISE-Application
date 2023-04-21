@@ -21,6 +21,7 @@ import 'package:provider/provider.dart';
 import 'package:riise/main.dart';
 import 'package:riise/models/FacultyInfo.dart';
 import 'package:riise/providers/DynamicLinkProvider.dart';
+import 'package:riise/providers/UserDetailsProvider.dart';
 import 'package:riise/providers/UserLoginProvider.dart';
 import 'package:riise/screens/Faculty/FacultyDetailScreen.dart';
 import 'package:riise/screens/QrCode/QrCodeGenerator.dart';
@@ -132,12 +133,16 @@ class _TabScreenState extends State<TabScreen> {
                       .then((value) async {
                     await Provider.of<CalenderAPI>(context, listen: false)
                         .fetchEvent(context)
-                        .then((value) {
-                      setState(() {
-                        isLoading = false;
-                        print("Hello there loading finished");
-                        print(isLoading);
-                      });
+                        .then((value) async {
+                          print("User Personal Information");
+                          await Provider.of<UserDetailsProvider>(context, listen: false).setUserType(context).then((value) async {
+                            setState(() {
+                              isLoading = false;
+                              print("Hello there loading finished");
+                              print(isLoading);
+                            });
+                          });
+                      
                     });
                   });
                 });
