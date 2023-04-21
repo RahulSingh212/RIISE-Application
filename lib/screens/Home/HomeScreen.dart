@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
    List<EventServerInformation> eventUtil = [];
 
   Future<void> loadDataUtil() async {
+    // Provider.of<FacultiesProvider>(context, listen: false).insertListOfFaculties(context);
 
     await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "SpeakerTracks");
     await Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "PosterTracks");
