@@ -2943,34 +2943,26 @@ class FacultiesProvider with ChangeNotifier {
         .then((DocumentSnapshot ds) {
       facultyInfo = new FacultyServerInformation(
         faculty_Unique_Id: ds.get('faculty_Unique_Id').toString(),
-        faculty_Authorization:
-            ds.get('faculty_Authorization').toString() == 'true',
-        faculty_Mobile_Messaging_Token_Id:
-            ds.get('faculty_Mobile_Messaging_Token_Id').toString(),
+        faculty_Authorization: ds.get('faculty_Authorization').toString() == 'true',
+        faculty_Mobile_Messaging_Token_Id: ds.get('faculty_Mobile_Messaging_Token_Id').toString(),
         faculty_Name: ds.get('faculty_Name').toString(),
         faculty_Position: ds.get('faculty_Position').toString(),
         faculty_College: ds.get('faculty_College').toString(),
         faculty_Department: ds.get('faculty_Department').toString(),
         faculty_Mobile_Number: ds.get('faculty_Mobile_Number').toString(),
-        faculty_Teaching_Interests:
-            ds.get('faculty_Teaching_Interests').toString(),
-        faculty_Research_Interests:
-            ds.get('faculty_Research_Interests').toString(),
-        faculty_Affiliated_Centers_And_Labs:
-            ds.get('faculty_Affiliated_Centers_And_Labs').toString(),
+        faculty_Teaching_Interests: ds.get('faculty_Teaching_Interests').toString(),
+        faculty_Research_Interests: ds.get('faculty_Research_Interests').toString(),
+        faculty_Affiliated_Centers_And_Labs: ds.get('faculty_Affiliated_Centers_And_Labs').toString(),
         faculty_EmailId: ds.get('faculty_EmailId').toString(),
         faculty_Gender: ds.get('faculty_Gender').toString(),
         faculty_Bio: ds.get('faculty_Bio').toString(),
         faculty_Image_Url: ds.get('faculty_Image_Url').toString(),
         faculty_LinkedIn_Url: ds.get('faculty_LinkedIn_Url').toString(),
         faculty_Website_Url: ds.get('faculty_Website_Url').toString(),
-        faculty_Office_Navigation_Url:
-            ds.get('faculty_Office_Navigation_Url').toString(),
+        faculty_Office_Navigation_Url: ds.get('faculty_Office_Navigation_Url').toString(),
         faculty_Office_Address: ds.get('faculty_Office_Address').toString(),
-        faculty_Office_Longitude:
-            checkIfDouble(ds.get('faculty_Office_Longitude').toString()),
-        faculty_Office_Latitude:
-            checkIfDouble(ds.get('faculty_Office_Latitude').toString()),
+        faculty_Office_Longitude: checkIfDouble(ds.get('faculty_Office_Longitude').toString()),
+        faculty_Office_Latitude: checkIfDouble(ds.get('faculty_Office_Latitude').toString()),
       );
     });
 
@@ -2992,8 +2984,7 @@ class FacultiesProvider with ChangeNotifier {
         .then((DocumentSnapshot ds) {
       facultyInfo = new FacultyServerInformation(
         faculty_Unique_Id: ds.get('faculty_Unique_Id').toString(),
-        faculty_Authorization:
-            ds.get('faculty_Authorization').toString() == 'true',
+        faculty_Authorization: ds.get('faculty_Authorization').toString() == 'true',
         faculty_Mobile_Messaging_Token_Id:
             ds.get('faculty_Mobile_Messaging_Token_Id').toString(),
         faculty_Name: ds.get('faculty_Name').toString(),
@@ -3202,10 +3193,8 @@ class FacultiesProvider with ChangeNotifier {
 
     try {
       dataList.forEach((element) async {
-        qrMapping[element['faculty_Website_Page'].toString()] =
-            element['faculty_EmailId'].toString();
-        value =
-            '"${element['faculty_Website_Page'].toString()}": "${element['faculty_EmailId'].toString()}"';
+        qrMapping[element['faculty_Website_Page'].toString()] = element['faculty_EmailId'].toString();
+        value ='"${element['faculty_Website_Page'].toString()}": "${element['faculty_EmailId'].toString()}"';
         print(value);
         await usersRef.doc(element['faculty_EmailId']).set(
           {
@@ -3215,8 +3204,7 @@ class FacultiesProvider with ChangeNotifier {
             "faculty_Department": element['faculty_Department'],
             "faculty_Position": element['faculty_Position'],
             "faculty_Gender": "",
-            "faculty_Affiliated_Centers_And_Labs":
-                element['faculty_Affiliated_Centers_And_Labs'],
+            "faculty_Affiliated_Centers_And_Labs": element['faculty_Affiliated_Centers_And_Labs'],
             "faculty_Authorization": "true",
             "faculty_Bio": element['faculty_Bio'],
             "faculty_College": element['faculty_College'],

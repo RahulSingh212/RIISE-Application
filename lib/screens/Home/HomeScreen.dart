@@ -93,12 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
       Provider.of<EventProvider>(context, listen: false).startUpShowcaseList,
       Provider.of<EventProvider>(context, listen: false).researchShowcasesList,
       Provider.of<EventProvider>(context, listen: false).rndShowcasesAndDemosList,
-      Provider.of<EventProvider>(context, listen: false)
-          .demosAndResearchesHighlightsList,
-      Provider.of<EventProvider>(context, listen: false)
-          .beyondCollegePanelsList,
-      Provider.of<EventProvider>(context, listen: false)
-          .forwardLookingPanelsList,
+      Provider.of<EventProvider>(context, listen: false).demosAndResearchesHighlightsList,
+      Provider.of<EventProvider>(context, listen: false).beyondCollegePanelsList,
+      Provider.of<EventProvider>(context, listen: false).forwardLookingPanelsList,
     ].expand((x) => x).toList();
     print("List of ALL EVENTS -> ${eventUtil.length}");
   }

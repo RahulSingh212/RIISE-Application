@@ -1,4 +1,7 @@
+// ignore_for_file: unused_import, deprecated_member_use, unnecessary_import
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/calendar/v3.dart';
@@ -10,11 +13,135 @@ import 'package:riise/models/FacultyInfo.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
 import 'package:riise/providers/UserLoginProvider.dart';
 
+import '../models/CalendarSchedule.dart';
 import 'FacultiesProvider.dart';
 
 class CalenderAPI extends ChangeNotifier {
-  // Future<>
-  // static var calendar;
+  List<CalendarScheduleServerInformation> facultyScheduleList = [];
+  List<CalendarScheduleServerInformation> guestScheduleList = [];
+
+  Future<bool> checkIfEmailIdExistsInDatabase(
+    String collectionName,
+    String givenUserType,
+    String enteredEmailId,
+  ) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    CollectionReference collectionRef = db.collection(collectionName);
+
+    bool chk = false;
+    try {
+      await collectionRef.get().then(
+        (ds) async {
+          ds.docs.forEach(
+            (userDetails) async {
+              final facultyMap = userDetails.data() as Map<String, dynamic>;
+
+              String emailId =
+                  facultyMap["$givenUserType${"_"}EmailId"].toString();
+              if (emailId == enteredEmailId) {
+                chk = true;
+              }
+            },
+          );
+        },
+      );
+
+      notifyListeners();
+    } catch (errorVal) {
+      print(errorVal);
+    }
+
+    return chk;
+  }
+
+  Future<void> addNewSchedule(
+    String scheduleUniqueId,
+    String facultyName,
+    String facultyEmailId,
+    String guestEmailId,
+    String guestName,
+    TimeOfDay startTime,
+    TimeOfDay endTime,
+    DateTime date,
+  ) async {
+    const facultyCollectionName = "Faculty-Schedule-List";
+    const guestCollectionName = "Guest-Schedule-List";
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    CollectionReference facultyRef =
+        db.collection('${facultyCollectionName}/${facultyEmailId}');
+    CollectionReference guestRef =
+        db.collection('${guestCollectionName}/${facultyEmailId}');
+
+    try {
+      await facultyRef.doc(scheduleUniqueId).set(
+        {
+          "schedule_Unque_Id": scheduleUniqueId,
+          "schedule_Date": date.toString(),
+          "schedule_Start_Time": startTime.toString(),
+          "schedule_End_Time": endTime.toString(),
+          "User_Email_Id": facultyEmailId,
+          "User_Name": guestName,
+        },
+      );
+
+      await guestRef.doc(scheduleUniqueId).set(
+        {
+          "schedule_Unque_Id": scheduleUniqueId,
+          "schedule_Date": date.toString(),
+          "schedule_Start_Time": startTime.toString(),
+          "schedule_End_Time": endTime.toString(),
+          "User_Email_Id": facultyEmailId,
+          "User_Name": facultyName,
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  Future<void> fetchSchedules(
+    BuildContext context,
+    String userType,
+    String collectionName,
+    String userEmail,
+  ) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    CollectionReference facultyRef = db.collection('${collectionName}/${userEmail}');
+
+    List<CalendarScheduleServerInformation> list = [];
+    try {
+      await facultyRef.get().then(
+        (ds) async {
+          ds.docs.forEach(
+            (scheduleDetails) async {
+              final scheduleMapping = scheduleDetails.data() as Map<String, dynamic>;
+
+              CalendarScheduleServerInformation schedule = new CalendarScheduleServerInformation(
+                schedule_Unque_Id: scheduleMapping['schedule_Unque_Id'],
+                schedule_Date: scheduleMapping['schedule_Date'],
+                schedule_Start_Time: scheduleMapping['schedule_Start_Time'],
+                schedule_End_Time: scheduleMapping['schedule_End_Time'],
+                User_Email_Id: scheduleMapping['User_Email_Id'],
+                User_Name: scheduleMapping['User_Name'],
+              );
+
+              list.add(schedule);
+            },
+          );
+        },
+      );
+
+      if (userType.toLowerCase() == "guest") {
+        guestScheduleList = list;
+      } else {
+        facultyScheduleList = list;
+      }
+
+      notifyListeners();
+    } catch (errorVal) {
+      print(errorVal);
+    }
+  }
 
   List<AppointmentUtil> appointmentList = [];
   List<String> facultyList = [
