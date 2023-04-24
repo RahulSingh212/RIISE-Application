@@ -13,6 +13,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
 import 'package:riise/providers/FacultiesProvider.dart';
+import 'package:riise/providers/UserDetailsProvider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -457,6 +458,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                             SizedBox(
                               height: 60.h,
                             ),
+                            Provider.of<UserDetailsProvider>(context,listen: false).userType != "Faculty"?
                             ElevatedButton(
                               onPressed: () async {
                                 showPopUp(context);
@@ -464,7 +466,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                               child: Text(
                                 "Book Appointment",
                               ),
-                            ),
+                            ):Container(),
                             SizedBox(
                               height: 80.h,
                             ),

@@ -255,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         top: 58.h,
                       ),
                       child: Text(
-                        "Categories",
+                        "Themes",
                         style: TextStyle(fontSize: 70.sp, color: Colors.black),
                       ),
                     ),
@@ -293,7 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         top: 58.h,
                       ),
                       child: Text(
-                        "TimeLine",
+                        "Schedule",
                         style: TextStyle(fontSize: 70.sp, color: Colors.black),
                       ),
                     ),
