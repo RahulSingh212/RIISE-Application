@@ -358,14 +358,6 @@ class _FacultyProfileScreenState extends State<FacultyProfileScreen> {
           ),
           TextFieldContainer(
             context,
-            "Affiliated Centers & Labs",
-            'faculty_Affiliated_Centers_And_Labs',
-            "Enter your Centers and Labs...",
-            userMapping,
-            TextInputType.name,
-          ),
-          TextFieldContainer(
-            context,
             "Bio",
             'faculty_Bio',
             "Enter your bio...",
