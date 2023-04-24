@@ -470,35 +470,22 @@ class _FacultyProfileScreenState extends State<FacultyProfileScreen> {
             userMapping,
             TextInputType.name,
           ),
-
-          // 'faculty_Image_Url': false,
-          // 'faculty_LinkedIn_Url': false,
-          // 'faculty_Website_Url': false,
-          // 'faculty_Mobile_Messaging_Token_Id': false,
-          // 'faculty_Office_Latitude': false,
-          // 'faculty_Office_Longitude': false,
-          // 'faculty_Office_Navigation_Url': false,
-          // 'faculty_Dynamic_Links': false,
-          // 'faculty_Website_Page': false,
-          // 'faculty_QR_Code_Image_Url': false,
-          // "faculty_Google_Auth_Token_Id": false,
-
           SizedBox(
             height: screenHeight * 0.05,
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => QrCodeGenerator(),
-                ),
-              );
-              print("Button Pressed");
-            },
-            child: Text(
-              "Qr Code",
-            ),
-          )
+          // ElevatedButton(
+          //   onPressed: () {
+          //     Navigator.of(context).push(
+          //       MaterialPageRoute(
+          //         builder: (context) => QrCodeGenerator(),
+          //       ),
+          //     );
+          //     print("Button Pressed");
+          //   },
+          //   child: Text(
+          //     "Qr Code",
+          //   ),
+          // )
           // Container(
           //   child: TextButton(
           //     onPressed: !isSaveChangesBtnActive ? null : () {},
