@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>972873247531-9oinrslu8gnj1nt4p7fdko1knttn02nk.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.972873247531-9oinrslu8gnj1nt4p7fdko1knttn02nk</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>972873247531-c5ml9jq1k7q500ofsqs9l35bt677687u.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyByDK7VFJ6ig1TUeQ9zjq89bxBE65B_qWo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>972873247531</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.riise</string>
+	<key>PROJECT_ID</key>
+	<string>riise-application</string>
+	<key>STORAGE_BUCKET</key>
+	<string>riise-application.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:972873247531:ios:413d121aef312bc6e3736e</string>
+	<key>DATABASE_URL</key>
+	<string>https://riise-application-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

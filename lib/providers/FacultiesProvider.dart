@@ -1779,6 +1779,40 @@ class FacultiesProvider with ChangeNotifier {
     {
       'Unnamed: 0': '',
       'faculty_Unique_Id': '',
+      'faculty_Name': 'Henansh Tanwar',
+      'faculty_EmailId': 'henansh20065@iiitd.ac.in',
+      'faculty_Department': 'CSE',
+      'faculty_Position': 'Assistant Professor (ECE)',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': 'True',
+      'faculty_Bio':
+      'Dr. Ranjitha Prasad obtained her Ph.D. from Indian Institute of Science in 2015. Her experience is in the general areas of signal processing, Bayesian statistics, and more recently, machine learning and deep neural networks. She has been a postdoctoral researcher at Nanyang Technological University and National University of Singapore, Singapore, and a scientist at TCS Innovation Labs, Delhi. She is the recipient of the Best Ph.D. thesis award (The Seshagiri Kaikini Medal) for 2014- 2015 from the Council of Indian Institute of Science, and the recipient of the Best Paper in the Communications Track at NCC 2014, held at IIT Kanpur.Her current research interests are: Causal Inference, Survival analysis, and sparsity in Bayesian neural networks.',
+      'faculty_College':
+      '\nPh.D. (2015), Indian Institute of Science, Banglore',
+      'faculty_Image_Url':
+      'https://iiitd.ac.in/sites/default/files/ranjitha.jpg',
+      'faculty_LinkedIn_Url':
+      'https://www.linkedin.com/in/ranjitha-prasad-7ab84b30/',
+      'faculty_Website_Url': 'https://iiitd.ac.in/ranjitha',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '"011-26907357"',
+      'faculty_Office_Address': '\nB-607 (R&D Block)',
+      'faculty_Office_Latitude': '28.5442185740552',
+      'faculty_Office_Longitude': '77.2716830936104',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests':
+      'Causal Inference,Survival analysis, and sparsity in Bayesian neural networks.',
+      'faculty_Teaching_Interests':
+      'Causal Inference,Survival analysis, and sparsity in Bayesian neural networks.',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/ranjitha',
+      'faculty_Website_Page': '/ranjitha',
+      'faculty_QR_Code_Image_Url':
+      'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Franjitha%40iiitd.ac.in%2Franjitha.png?alt=media&token=6f4e7af8-f162-4608-8272-a75d0712a072'
+    },
+    {
+      'Unnamed: 0': '',
+      'faculty_Unique_Id': '',
       'faculty_Name': 'Richa Gupta',
       'faculty_EmailId': 'richa.gupta@iiitd.ac.in',
       'faculty_Department': 'HCD',

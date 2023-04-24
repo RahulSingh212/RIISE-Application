@@ -13,7 +13,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/models/EventInfo.dart';
-// import 'package:riise/components/CategoryEventCard.dart';
 import 'package:riise/models/ThemeInfo.dart';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -52,16 +51,15 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           centerTitle: true,
-
           title: Text(
-            "Theme",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: 60.sp,
-            ),
-            textAlign: TextAlign.center,
+          "Theme",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 60.sp,
           ),
+          textAlign: TextAlign.center,
+        ),
           iconTheme: IconThemeData(
             color: Colors.blue,
             size: 80.r,
