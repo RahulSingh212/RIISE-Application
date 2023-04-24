@@ -12,6 +12,9 @@ import "package:flutter/services.dart";
 import 'package:riise/providers/UserLoginProvider.dart';
 
 import '../providers/ScreenControllerProvider.dart';
+import '../providers/UserDetailsProvider.dart';
+import '../screens/Profile/FacultyProfileScreen.dart';
+import '../screens/Profile/GuestProfileScreen.dart';
 import '../screens/Profile/ProfileScreen.dart';
 import '../screens/SingInScreen/LogInSignUpScreen.dart';
 import '../screens/TabScreen.dart';
@@ -92,35 +95,29 @@ class _SideNavBarState extends State<SideNavBar> {
               backgroundColor: Colors.transparent,
               radius: screenWidth,
               child: CircleAvatar(
-                radius: screenWidth * 0.6,
+                radius: screenWidth * 0.175,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(
                     screenWidth * 0.2,
                   ),
                   child: ClipOval(
                     child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: Image.asset(
-                          "assets/images/icons/profile.png",
-                        )
-                        // _isProfilePicTaken
-                        //     ? Image.file(
-                        //         _profilePicture,
-                        //         fit: BoxFit.cover,
-                        //         width: double.infinity,
-                        //       )
-                        //     : imageNetworkUrl == ""
-                        //         ? Image.asset(
-                        //             "assets/images/surgeon.png",
-                        //           )
-                        //         : Image.network(
-                        //             imageNetworkUrl,
-                        //             fit: BoxFit.cover,
-                        //             width: double.infinity,
-                        //           ),
-                        ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: Provider.of<UserDetailsProvider>(context,listen: false).userType == "Faculty" ?
+                       Provider.of<UserDetailsProvider>(context, listen: false).userMapping['faculty_Image_Url'] == ''
+                          ? Image.asset("assets/images/icons/profile.png")
+                          : Image.network(Provider.of<UserDetailsProvider>(context, listen: false).userMapping['faculty_Image_Url'].toString(),
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                            ) : Provider.of<UserDetailsProvider>(context,listen: false).userMapping['guest_Image_Url'] == ''
+                          ? Image.asset("assets/images/icons/profile.png")
+                          : Image.network(Provider.of<UserDetailsProvider>(context,listen: false).userMapping['guest_Image_Url'].toString(),
+                              fit: BoxFit.fitWidth,
+                              width: screenWidth*0.25,
+                            ),
+                    ),
                   ),
                 ),
               ),
@@ -131,11 +128,26 @@ class _SideNavBarState extends State<SideNavBar> {
           ),
           InkWell(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => ProfileScreen(),
-                ),
-              );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //     builder: (context) => ProfileScreen(),
+              //   ),
+              // );
+              if (Provider.of<UserDetailsProvider>(context, listen: false)
+                      .userType ==
+                  "Guest") {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => GuestProfileScreen(),
+                  ),
+                );
+              } else {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => FacultyProfileScreen(),
+                  ),
+                );
+              }
             },
             child: Container(
               decoration: BoxDecoration(
@@ -390,10 +402,9 @@ class _SideNavBarState extends State<SideNavBar> {
       onTap: () {
         Provider.of<ScreenControllerProvider>(context, listen: false)
             .selectedPageIndex = pageIndex;
-        Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => screenMapping[screenPushName],
-            ));
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => screenMapping[screenPushName],
+        ));
       },
       child: Container(
         margin: EdgeInsets.only(

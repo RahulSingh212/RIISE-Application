@@ -413,15 +413,18 @@ class _FacultyProfileScreenState extends State<FacultyProfileScreen> {
             height: screenHeight * 0.05,
           ),
           ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => QrCodeGenerator(),
-                  ),
-                );
-                print("Button Pressed");
-              },
-              child: Text("Qr Code"))
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => QrCodeGenerator(),
+                ),
+              );
+              print("Button Pressed");
+            },
+            child: Text(
+              "Qr Code",
+            ),
+          )
           // Container(
           //   child: TextButton(
           //     onPressed: !isSaveChangesBtnActive ? null : () {},

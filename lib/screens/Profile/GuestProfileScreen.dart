@@ -335,16 +335,19 @@ class _GuestProfileScreenState extends State<GuestProfileScreen> {
           SizedBox(
             height: screenHeight * 0.05,
           ),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => QrCodeGenerator(),
-                  ),
-                );
-                print("Button Pressed");
-              },
-              child: Text("Qr Code"))
+          // ElevatedButton(
+          //   onPressed: () {
+          //     Navigator.of(context).push(
+          //       MaterialPageRoute(
+          //         builder: (context) => QrCodeGenerator(),
+          //       ),
+          //     );
+          //     print("Button Pressed");
+          //   },
+          //   child: Text(
+          //     "Qr Code",
+          //   ),
+          // )
           // Container(
           //   child: TextButton(
           //     onPressed: !isSaveChangesBtnActive ? null : () {},
