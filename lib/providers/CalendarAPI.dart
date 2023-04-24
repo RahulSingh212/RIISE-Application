@@ -54,9 +54,8 @@ class CalenderAPI extends ChangeNotifier {
     String facultyEmailId,
     String guestEmailId,
     String guestName,
-    TimeOfDay startTime,
-    TimeOfDay endTime,
-    DateTime date,
+    DateTime startTime,
+    DateTime endTime,
   ) async {
     const facultyCollectionName = "Faculty-Schedule-List";
     const guestCollectionName = "Guest-Schedule-List";
