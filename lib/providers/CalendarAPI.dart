@@ -20,38 +20,32 @@ class CalenderAPI extends ChangeNotifier {
   List<CalendarScheduleServerInformation> facultyScheduleList = [];
   List<CalendarScheduleServerInformation> guestScheduleList = [];
 
-  Future<bool> checkIfEmailIdExistsInDatabase(
-    String collectionName,
-    String givenUserType,
-    String enteredEmailId,
+  Future<bool> checkForFecultyScheduleConflicats(
+    BuildContext context,
+    DateTime startTime,
+    DateTime endTime,
   ) async {
-    FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference collectionRef = db.collection(collectionName);
+    for (int i = 0; i < facultyScheduleList.length; i++) {
+      DateTime sst = facultyScheduleList[i].schedule_Start_Time;
+      DateTime set = facultyScheduleList[i].schedule_End_Time;
 
-    bool chk = false;
-    try {
-      await collectionRef.get().then(
-        (ds) async {
-          ds.docs.forEach(
-            (userDetails) async {
-              final facultyMap = userDetails.data() as Map<String, dynamic>;
+      int day = facultyScheduleList[i].schedule_Start_Time.day;
+      int month = facultyScheduleList[i].schedule_Start_Time.month;
+      int year = facultyScheduleList[i].schedule_Start_Time.year;
 
-              String emailId =
-                  facultyMap["$givenUserType${"_"}EmailId"].toString();
-              if (emailId == enteredEmailId) {
-                chk = true;
-              }
-            },
-          );
-        },
-      );
+      int dayGiven = startTime.day;
+      int monthGiven = startTime.month;
+      int yearGiven = startTime.year;
 
-      notifyListeners();
-    } catch (errorVal) {
-      print(errorVal);
+      if (day == dayGiven && month == monthGiven && year == yearGiven) {
+        if ((startTime.isAfter(sst) && startTime.isBefore(set)) ||
+            (endTime.isAfter(sst) && endTime.isBefore(set))) {
+          return false;
+        }
+      }
     }
 
-    return chk;
+    return true;
   }
 
   Future<void> addNewSchedule(
@@ -76,7 +70,6 @@ class CalenderAPI extends ChangeNotifier {
       await facultyRef.doc(scheduleUniqueId).set(
         {
           "schedule_Unque_Id": scheduleUniqueId,
-          "schedule_Date": date.toString(),
           "schedule_Start_Time": startTime.toString(),
           "schedule_End_Time": endTime.toString(),
           "User_Email_Id": facultyEmailId,
@@ -87,7 +80,6 @@ class CalenderAPI extends ChangeNotifier {
       await guestRef.doc(scheduleUniqueId).set(
         {
           "schedule_Unque_Id": scheduleUniqueId,
-          "schedule_Date": date.toString(),
           "schedule_Start_Time": startTime.toString(),
           "schedule_End_Time": endTime.toString(),
           "User_Email_Id": facultyEmailId,
@@ -106,7 +98,8 @@ class CalenderAPI extends ChangeNotifier {
     String userEmail,
   ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference facultyRef = db.collection('${collectionName}/${userEmail}');
+    CollectionReference facultyRef =
+        db.collection('${collectionName}/${userEmail}');
 
     List<CalendarScheduleServerInformation> list = [];
     try {
@@ -114,13 +107,16 @@ class CalenderAPI extends ChangeNotifier {
         (ds) async {
           ds.docs.forEach(
             (scheduleDetails) async {
-              final scheduleMapping = scheduleDetails.data() as Map<String, dynamic>;
+              final scheduleMapping =
+                  scheduleDetails.data() as Map<String, dynamic>;
 
-              CalendarScheduleServerInformation schedule = new CalendarScheduleServerInformation(
+              CalendarScheduleServerInformation schedule =
+                  new CalendarScheduleServerInformation(
                 schedule_Unque_Id: scheduleMapping['schedule_Unque_Id'],
-                schedule_Date: scheduleMapping['schedule_Date'],
-                schedule_Start_Time: scheduleMapping['schedule_Start_Time'],
-                schedule_End_Time: scheduleMapping['schedule_End_Time'],
+                schedule_Start_Time: DateTime.parse(
+                    scheduleMapping['schedule_Start_Time'].toString()),
+                schedule_End_Time: DateTime.parse(
+                    scheduleMapping['schedule_End_Time'].toString()),
                 User_Email_Id: scheduleMapping['User_Email_Id'],
                 User_Name: scheduleMapping['User_Name'],
               );
@@ -158,9 +154,9 @@ class CalenderAPI extends ChangeNotifier {
     "arani@iiitd.ac.in",
     "arjun@iiitd.ac.in",
     "arunb@iiitd.ac.in",
-    "ashishk@iiitd.ac.in",
+    "ashish.pandey@iiitd.ac.in",
     "bapi@iiitd.ac.in",
-    "chanekar@iiitd.ac.in",
+    "prasad@iiitd.ac.in",
     "dbera@iiitd.ac.in",
     "debarka@iiitd.ac.in",
     "debika@iiitd.ac.in",
@@ -169,41 +165,41 @@ class CalenderAPI extends ChangeNotifier {
     "donghoon@iiitd.ac.in",
     "raghava@iiitd.ac.in",
     "bagler@iiitd.ac.in",
-    "gauravahuja@iiitd.ac.in",
-    "gauravahuja@iiitd.ac.in",
+    "gaurav.ahuja@iiitd.ac.in",
+    "gaurav@iiitd.ac.in",
     "gayatri@iiitd.ac.in",
     "jainendra@iiitd.ac.in",
     "jaspreet@iiitd.ac.in",
     "kaushik@iiitd.ac.in",
     "kanjilal@iiitd.ac.in",
     "koteswar@iiitd.ac.in",
-    "manohark@iiitd.ac.in",
+    "manohar.kumar@iiitd.ac.in",
     "manuj@iiitd.ac.in",
-    "shad@iiitd.ac.in",
+    "shad.akhtar@iiitd.ac.in",
     "monika@iiitd.ac.in",
     "mrinmoy@iiitd.ac.in",
     "mukesh@iiitd.ac.in",
     "mukulika@iiitd.ac.in",
-    "arulmurugan@iiitd.ac.in",
+    "arul.murugan@iiitd.ac.in.",
     "nishad@iiitd.ac.in",
     "ojaswa@iiitd.ac.in",
     "jalote@iiitd.ac.in",
-    "paro@iiitd.ac.in",
+    "paro.mishra@iiitd.ac.in",
     "piyus@iiitd.ac.in",
     "praveen@iiitd.ac.in",
     "praveshb@iiitd.ac.in",
-    "pushpendra@iiitd.ac.in",
+    "psingh@iiitd.ac.in",
     "rajiv@iiitd.ac.in",
     "rajivratn@iiitd.ac.in",
     "rakesh@iiitd.ac.in",
     "rkghosh@iiitd.ac.in",
     "bose@iiitd.ac.in",
     "ranjitha@iiitd.ac.in",
-    "richagupta@iiitd.ac.in",
+    "richa.gupta@iiitd.ac.in",
     "rinku@iiitd.ac.in",
     "anands@iiitd.ac.in",
     "sambuddho@iiitd.ac.in",
-    "samrithram@iiitd.ac.in",
+    "samrith@iiitd.ac.in",
     "sanat@iiitd.ac.in",
     "skkaul@iiitd.ac.in",
     "sankha@iiitd.ac.in",
@@ -217,23 +213,23 @@ class CalenderAPI extends ChangeNotifier {
     "sneha@iiitd.ac.in",
     "sonia@iiitd.ac.in",
     "souvik@iiitd.ac.in",
-    "sriram@iiitd.ac.in",
+    "sriramk@iiitd.ac.in",
     "subhabrata@iiitd.ac.in",
-    "subhashreem@iiitd.ac.in",
+    "subhashree@iiitd.ac.in",
     "sdeb@iiitd.ac.in",
     "sumit@iiitd.ac.in",
     "syamantak@iiitd.ac.in",
     "tammam@iiitd.ac.in",
     "tanmoy@iiitd.ac.in",
-    "tarini@iiitd.ac.in",
-    "tavpritesh@iiitd.ac.in",
-    "raghavam@iiitd.ac.in",
-    "ratan@iiitd.ac.in",
-    "vibhork@iiitd.ac.in",
+    "tarini.ghosh@iiitd.ac.in",
+    "tavpriteshsethi@iiitd.ac.in",
+    "raghava.mutharaju@iiitd.ac.in",
+    "ratan.suri@iiitd.ac.in",
+    "vibhor@iiitd.ac.in",
     "vikram@iiitd.ac.in",
-    "vabrol@iiitd.ac.in",
-    "vivek@iiitd.ac.in",
-    "vivekk@iiitd.ac.in"
+    "abrol@iiitd.ac.in",
+    "vivek.b@iiitd.ac.in",
+    "vivekk@iiitd.ac.in",
   ];
 
   addEvent(
