@@ -141,42 +141,45 @@ class _GuestProfileScreenState extends State<GuestProfileScreen> {
                       top: maxDimension * 0.0025,
                     ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
                           height: screenWidth * 0.025,
                         ),
-                        Container(
-                          height: screenWidth * 0.315,
-                          width: screenWidth * 0.315,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.transparent,
-                            radius: screenWidth,
+                        Center(
+                          child: Container(
+                            height: screenWidth * 0.315,
+                            width: screenWidth * 0.315,
                             child: CircleAvatar(
-                              radius: screenWidth * 0.6,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                  screenWidth * 0.2,
-                                ),
-                                child: ClipOval(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(100),
+                              backgroundColor: Colors.transparent,
+                              radius: screenWidth,
+                              child: CircleAvatar(
+                                radius: screenWidth * 0.6,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                    screenWidth * 0.2,
+                                  ),
+                                  child: ClipOval(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(100),
+                                      ),
+                                      child: _isProfilePicTaken
+                                          ? Image.file(
+                                              _profilePicture,
+                                              fit: BoxFit.cover,
+                                              width: double.infinity,
+                                            )
+                                          : imageNetworkUrl == ""
+                                              ? Image.asset(
+                                                  "assets/images/icons/profile.png",
+                                                )
+                                              : Image.network(
+                                                  imageNetworkUrl,
+                                                  fit: BoxFit.cover,
+                                                  width: double.infinity,
+                                                ),
                                     ),
-                                    child: _isProfilePicTaken
-                                        ? Image.file(
-                                            _profilePicture,
-                                            fit: BoxFit.cover,
-                                            width: double.infinity,
-                                          )
-                                        : imageNetworkUrl == ""
-                                            ? Image.asset(
-                                                "assets/images/icons/profile.png",
-                                              )
-                                            : Image.network(
-                                                imageNetworkUrl,
-                                                fit: BoxFit.cover,
-                                                width: double.infinity,
-                                              ),
                                   ),
                                 ),
                               ),
@@ -232,15 +235,10 @@ class _GuestProfileScreenState extends State<GuestProfileScreen> {
                     ),
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    // Navigator.of(context).pushNamed(MySettingsScreen.routeName);
-                  },
-                  iconSize: 30,
-                  icon: const Icon(
-                    Icons.settings,
-                    color: Colors.white,
-                  ),
+                Icon(
+                  Icons.home,
+                  color: Colors.transparent,
+                  size: 30,
                 ),
               ],
             ),

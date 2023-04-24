@@ -10,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +47,9 @@ class _FacultyProfileScreenState extends State<FacultyProfileScreen> {
   String docFileLocation = "";
 
   bool isSaveChangesBtnActive = false;
+
+  String defaultProfileImage =
+      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fdefault-profile-image.png?alt=media&token=b303ab47-2802-4000-bddc-2a024a6b2d24";
 
   Map<String, bool> editBtnMapping = {
     'faculty_Unique_Id': false,
@@ -87,6 +91,75 @@ class _FacultyProfileScreenState extends State<FacultyProfileScreen> {
   @override
   void initState() {
     super.initState();
+  }
+
+  Future showPopUp(BuildContext context) async {
+    return await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StatefulBuilder(builder: (context, setState) {
+            return SimpleDialog(
+              // elevation: 16,
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12))),
+              title: TextField(
+                controller: TextEditingController(text: "QR Code"),
+                style: TextStyle(fontSize: 55.sp),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "OR Code",
+                  suffixIcon: ClipOval(
+                    child: Image.network(
+                      userMapping['faculty_Image_Url']! == ""
+                          ? defaultProfileImage
+                          : userMapping['faculty_Image_Url']!,
+                      width: 25.r,
+                      height: 25.r,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+                enabled: false,
+              ),
+              titlePadding: EdgeInsets.fromLTRB(60.w, 60.h, 80.w, 0.h),
+              contentPadding: EdgeInsets.fromLTRB(70.w, 40.h, 80.w, 60.h),
+              children: [
+                Center(
+                  child: Image.network(userMapping['faculty_QR_Code_Image_Url']!),
+                )
+              ],
+            );
+          });
+        },
+        barrierColor: Colors.black.withOpacity(0.75));
+
+    // async {
+    //   date_time temp = date_time();
+    //   DateTime? selectedDate =
+    //   await temp.selectDate(context);
+    //   TimeOfDay? selectedTime =
+    //   await temp.selectTime(context);
+    //   setState(
+    //         () {
+    //       if (selectedDate == null ||
+    //           selectedTime == null) {
+    //         return;
+    //       }
+    //       Date_Time = DateTime(
+    //         selectedDate.year,
+    //         selectedDate.month,
+    //         selectedDate.day,
+    //         selectedTime.hour,
+    //         selectedTime.minute,
+    //       );
+    //
+    //       _DayDate_Controller.text =
+    //           DateFormat('hh:mm a, MMM dd')
+    //               .format(Date_Time);
+    //       // print(_DayDate_Controller.text);
+    //     },
+    //   );
+    // },
   }
 
   @override
@@ -252,10 +325,11 @@ class _FacultyProfileScreenState extends State<FacultyProfileScreen> {
                 IconButton(
                   onPressed: () {
                     // Navigator.of(context).pushNamed(MySettingsScreen.routeName);
+                    showPopUp(context);
                   },
                   iconSize: 30,
                   icon: const Icon(
-                    Icons.settings,
+                    Icons.qr_code,
                     color: Colors.white,
                   ),
                 ),
