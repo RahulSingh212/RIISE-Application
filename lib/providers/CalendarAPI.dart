@@ -20,7 +20,7 @@ class CalenderAPI extends ChangeNotifier {
   List<CalendarScheduleServerInformation> facultyScheduleList = [];
   List<CalendarScheduleServerInformation> guestScheduleList = [];
 
-  Future<bool> checkForFecultyScheduleConflicats(
+  Future<bool> checkForFacultyScheduleConflicts(
     BuildContext context,
     DateTime startTime,
     DateTime endTime,
