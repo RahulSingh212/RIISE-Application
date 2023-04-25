@@ -60,10 +60,8 @@ class CalenderAPI extends ChangeNotifier {
     const facultyCollectionName = "Faculty-Schedule-List";
     const guestCollectionName = "Guest-Schedule-List";
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference facultyRef =
-        db.collection('${facultyCollectionName}/${facultyEmailId}');
-    CollectionReference guestRef =
-        db.collection('${guestCollectionName}/${facultyEmailId}');
+    CollectionReference facultyRef = db.collection('${facultyCollectionName}/${facultyEmailId}');
+    CollectionReference guestRef = db.collection('${guestCollectionName}/${facultyEmailId}');
 
     try {
       await facultyRef.doc(scheduleUniqueId).set(

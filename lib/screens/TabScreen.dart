@@ -61,7 +61,7 @@ class _TabScreenState extends State<TabScreen> {
     const AppointmentScreen(),
   ];
 
-  bool isLoading = true;
+  bool isLoading = false;
 
   // @override
   // void didChangeDependencies() {
@@ -93,66 +93,68 @@ class _TabScreenState extends State<TabScreen> {
 
   List<EventServerInformation> eventUtil = [];
 
-  load() async {
-    // await Provider.of<ThemeProvider>(
-    //   context,
-    //   listen: false,
-    // ).fetchThemes(context);
+  // load() async {
+  //   // await Provider.of<ThemeProvider>(
+  //   //   context,
+  //   //   listen: false,
+  //   // ).fetchThemes(context);
 
-    print("Hello there loading started");
-    // print("EMAIL -> ${FirebaseAuth.instance.currentUser?.refreshToken}");
-    print(isLoading);
-    // TODO - Add Event Provider fetch
+  //   print("Hello there loading started");
+  //   // print("EMAIL -> ${FirebaseAuth.instance.currentUser?.refreshToken}");
+  //   print(isLoading);
+  //   // TODO - Add Event Provider fetch
 
-    await Provider.of<EventProvider>(context, listen: false)
-        .fetchEventTracks(context, "StartUpShowcase")
-        .then((value) async {
-      await Provider.of<EventProvider>(context, listen: false)
-          .fetchEventTracks(context, "RNDShowcasesAndDemos")
-          .then((value) async {
-        await Provider.of<EventProvider>(context, listen: false)
-            .fetchEventTracks(context, "ResearchShowcases")
-            .then((Value) async {
-          await Provider.of<EventProvider>(context, listen: false)
-              .fetchEventTracks(context, "ForwardLookingPanels")
-              .then((value) async {
-            await Provider.of<EventProvider>(context, listen: false)
-                .fetchEventTracks(context, "DemosAndResearchesHighlights")
-                .then((value) async {
-              await Provider.of<EventProvider>(context, listen: false)
-                  .fetchEventTracks(context, "BeyondCollegePanels")
-                  .then((value) async {
-                await Provider.of<FacultiesProvider>(context, listen: false)
-                    .fetchCollegeFaculties(context)
-                    .then((value) async {
-                  print("Faculty loading finished");
-                  await Provider.of<LocationProvider>(context, listen: false)
-                      .fetchLocationList(
-                    context,
-                  )
-                      .then((value) async {
-                    await Provider.of<CalenderAPI>(context, listen: false)
-                        .fetchEvent(context)
-                        .then((value) async {
-                          print("User Personal Information");
-                          await Provider.of<UserDetailsProvider>(context, listen: false).setUserType(context).then((value) async {
-                            setState(() {
-                              isLoading = false;
-                              print("Hello there loading finished");
-                              print(isLoading);
-                            });
-                          });
-                      
-                    });
-                  });
-                });
-              });
-            });
-          });
-        });
-      });
-    });
-  }
+  //   await Provider.of<EventProvider>(context, listen: false)
+  //       .fetchEventTracks(context, "StartUpShowcase")
+  //       .then((value) async {
+  //     await Provider.of<EventProvider>(context, listen: false)
+  //         .fetchEventTracks(context, "RNDShowcasesAndDemos")
+  //         .then((value) async {
+  //       await Provider.of<EventProvider>(context, listen: false)
+  //           .fetchEventTracks(context, "ResearchShowcases")
+  //           .then((Value) async {
+  //         await Provider.of<EventProvider>(context, listen: false)
+  //             .fetchEventTracks(context, "ForwardLookingPanels")
+  //             .then((value) async {
+  //           await Provider.of<EventProvider>(context, listen: false)
+  //               .fetchEventTracks(context, "DemosAndResearchesHighlights")
+  //               .then((value) async {
+  //             await Provider.of<EventProvider>(context, listen: false)
+  //                 .fetchEventTracks(context, "BeyondCollegePanels")
+  //                 .then((value) async {
+  //               await Provider.of<FacultiesProvider>(context, listen: false)
+  //                   .fetchCollegeFaculties(context)
+  //                   .then((value) async {
+  //                 print("Faculty loading finished");
+  //                 await Provider.of<LocationProvider>(context, listen: false)
+  //                     .fetchLocationList(
+  //                   context,
+  //                 )
+  //                     .then((value) async {
+  //                   await Provider.of<CalenderAPI>(context, listen: false)
+  //                       .fetchEvent(context)
+  //                       .then((value) async {
+  //                     print("User Personal Information");
+  //                     await Provider.of<UserDetailsProvider>(context,
+  //                             listen: false)
+  //                         .setUserType(context)
+  //                         .then((value) async {
+  //                       setState(() {
+  //                         isLoading = false;
+  //                         print("Hello there loading finished");
+  //                         print(isLoading);
+  //                       });
+  //                     });
+  //                   });
+  //                 });
+  //               });
+  //             });
+  //           });
+  //         });
+  //       });
+  //     });
+  //   });
+  // }
 
   @override
   void initState() {
@@ -197,6 +199,7 @@ class _TabScreenState extends State<TabScreen> {
         'title': 'Appointments',
       },
     ];
+    
 
     Future.delayed(Duration.zero, () async {
       final initialLink = DynamicLinkProvider.initialLink;
@@ -206,17 +209,19 @@ class _TabScreenState extends State<TabScreen> {
       if (initialLink != null) {
         final Uri deepLink = initialLink.link;
 
-        FacultyServerInformation faculty =
-            await Provider.of<FacultiesProvider>(context, listen: false)
-                .getFacultyDetails(deepLink.path);
+        FacultyServerInformation faculty = await Provider.of<FacultiesProvider>(context, listen: false).getFacultyDetails(deepLink.path);
         // Example of using the dynamic link to push the user to a different screen
         DynamicLinkProvider.initialLink = null;
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                FacultyDetailScreen(facultyDetails: faculty)));
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => FacultyDetailScreen(
+              facultyDetails: faculty,
+            ),
+          ),
+        );
       }
     });
-    load();
+    // load();
   }
 
   void _selectPage(int index) {
@@ -241,8 +246,7 @@ class _TabScreenState extends State<TabScreen> {
     // });
 
     setState(() {
-      Provider.of<ScreenControllerProvider>(context, listen: false)
-          .selectedPageIndex = index;
+      Provider.of<ScreenControllerProvider>(context, listen: false).selectedPageIndex = index;
     });
   }
 
