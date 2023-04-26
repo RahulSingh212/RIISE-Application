@@ -62,7 +62,6 @@ class _FacultyScreenState extends State<FacultyScreen> {
     await Provider.of<FacultiesProvider>(context, listen: false)
         .fetchCollegeFaculties(context).then((value){
           setState(() {
-
           });
     });
   }

@@ -116,7 +116,7 @@ class UserLoginProvider with ChangeNotifier {
   }
 
   void signOutWithGoogle(BuildContext context) async {
-    // GoogleSignInAccount? googleUser = await GoogleSignIn().signOut();
+    await GoogleSignIn().signOut();
     FirebaseAuth.instance.signOut();
   }
 

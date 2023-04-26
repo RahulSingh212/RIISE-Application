@@ -49,6 +49,16 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
 
   bool isLoading = true;
 
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   load();
+  //   super.initState();
+  //
+  // }
+
+
   @override
   Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
@@ -79,9 +89,130 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
   late TextEditingController eventDate =
       TextEditingController(text: DateFormat("MMMEd").format(DateTime.now()));
 
-  Future showPopUp(BuildContext context) async {
+  // Future loadingPopUp(BuildContext context0) async {
+  //   return showDialog(
+  //       context: context,
+  //       builder: (ctx) => Padding(
+  //         padding: EdgeInsets.fromLTRB(80.w, 80.h, 80.w, 80.h),
+  //         child: AlertDialog(
+  //           shape: const RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.all(Radius.circular(12))),
+  //           contentPadding: EdgeInsets.fromLTRB(70.w, 80.h, 80.w, 0.h),
+  //           content: Text("Next Available Slot has been Updated, Re-submit to book Appointment",style: TextStyle(fontSize: 40.sp),),
+  //         ),
+  //       ),
+  //       barrierColor: Colors.black.withOpacity(0.75)
+  //   );
+  //
+  //   // async {
+  //   //   date_time temp = date_time();
+  //   //   DateTime? selectedDate =
+  //   //   await temp.selectDate(context);
+  //   //   TimeOfDay? selectedTime =
+  //   //   await temp.selectTime(context);
+  //   //   setState(
+  //   //         () {
+  //   //       if (selectedDate == null ||
+  //   //           selectedTime == null) {
+  //   //         return;
+  //   //       }
+  //   //       Date_Time = DateTime(
+  //   //         selectedDate.year,
+  //   //         selectedDate.month,
+  //   //         selectedDate.day,
+  //   //         selectedTime.hour,
+  //   //         selectedTime.minute,
+  //   //       );
+  //   //
+  //   //       _DayDate_Controller.text =
+  //   //           DateFormat('hh:mm a, MMM dd')
+  //   //               .format(Date_Time);
+  //   //       // print(_DayDate_Controller.text);
+  //   //     },
+  //   //   );
+  //   // },
+  // }
+
+
+  Future showTimeConflictPopUp(BuildContext context0) async {
+    return showDialog(
+      context: context,
+      builder: (ctx) => Padding(
+        padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 20.h),
+        child: AlertDialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12))),
+          title: TextField(
+            controller: TextEditingController(text: "Book Appointment"),
+            style: TextStyle(fontSize: 55.sp),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: "Title",
+              suffixIcon: ClipOval(
+                child: Image.network(
+                  widget.facultyDetails.faculty_Image_Url == ""
+                      ? defaultProfileImage
+                      : widget.facultyDetails.faculty_Image_Url,
+                  width: 25.r,
+                  height: 25.r,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+            enabled: false,
+          ),
+          titlePadding: EdgeInsets.fromLTRB(60.w, 60.h, 80.w, 0.h),
+          contentPadding: EdgeInsets.fromLTRB(70.w, 80.h, 80.w, 0.h),
+          content: Text("Next Available Slot has been Updated, Re-submit to book Appointment",style: TextStyle(fontSize: 40.sp),),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+              child: Container(
+                padding: const EdgeInsets.all(14),
+                child: const Text("Okay"),
+              ),
+            ),
+          ],
+        ),
+      ),
+        barrierColor: Colors.black.withOpacity(0.75)
+    );
+
+    // async {
+    //   date_time temp = date_time();
+    //   DateTime? selectedDate =
+    //   await temp.selectDate(context);
+    //   TimeOfDay? selectedTime =
+    //   await temp.selectTime(context);
+    //   setState(
+    //         () {
+    //       if (selectedDate == null ||
+    //           selectedTime == null) {
+    //         return;
+    //       }
+    //       Date_Time = DateTime(
+    //         selectedDate.year,
+    //         selectedDate.month,
+    //         selectedDate.day,
+    //         selectedTime.hour,
+    //         selectedTime.minute,
+    //       );
+    //
+    //       _DayDate_Controller.text =
+    //           DateFormat('hh:mm a, MMM dd')
+    //               .format(Date_Time);
+    //       // print(_DayDate_Controller.text);
+    //     },
+    //   );
+    // },
+  }
+
+
+  Future showPopUp(BuildContext context0) async {
     return await showDialog(
-        context: context,
+        context: context0,
         builder: (BuildContext context) {
           return StatefulBuilder(builder: (context, setState) {
             return SimpleDialog(
@@ -146,7 +277,6 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                   child: textFieldBuilder(
                       eventEndTime, "End Time", CupertinoIcons.clock, true, 1),
                 ),
-
                 // Center(
                 //   child: Container(
                 //     padding: EdgeInsets.only(
@@ -277,15 +407,38 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                           tempDate01.day, tempTime01.hour, tempTime01.minute);
                       DateTime tempEndTime = DateTime(2023, tempDate01.month,
                           tempDate01.day, tempTime02.hour, tempTime02.minute);
-                      await CalenderAPI().addEvent(
-                          context,
-                          eventTitle.text,
-                          tempStartTime,
-                          tempEndTime,
-                          attendeeEmailList,
-                          eventDescription.text,
-                          eventLocation.text);
-                      Navigator.of(context).pop();
+                      await Provider.of<CalenderAPI>(context0, listen: false)
+                          .fetchSchedules(context, "Faculty", "Faculty-Schedule-List", widget.facultyDetails.faculty_EmailId);
+                      if( await Provider.of<CalenderAPI>(context0,listen: false).checkForFacultyScheduleConflicts(context0, tempStartTime, tempEndTime)){
+                        await CalenderAPI().addEvent(
+                            context,
+                            eventTitle.text,
+                            tempStartTime,
+                            tempEndTime,
+                            attendeeEmailList,
+                            eventDescription.text,
+                            eventLocation.text,
+                          widget.facultyDetails.faculty_Name,
+                          Provider.of<UserDetailsProvider>(context0,listen: false).userMapping['guest_Name']!
+                        );
+                        Navigator.of(context).pop();
+                      }
+                      else
+                        {
+                          await Provider.of<CalenderAPI>(context0, listen: false)
+                              .fetchSchedules(context, "Faculty", "Faculty-Schedule-List", widget.facultyDetails.faculty_EmailId);
+                          print("Time Unavailable");
+                          setState(() {
+                            DateTime endtime = Provider.of<CalenderAPI>(context0,listen: false).facultyScheduleList.last.schedule_End_Time.add(Duration(minutes: 5));
+                            eventStartTime.text = DateFormat("hh:mm a").format(endtime);
+                            startTime = endtime;
+                            eventEndTime.text = DateFormat("hh:mm a").format(startTime.add(Duration(minutes: 15)));
+                            startTime = startTime.add(Duration(minutes: 15));
+                          });
+                          showTimeConflictPopUp(context);
+                        }
+
+
                       // await CalenderAPI().addEvent(context,"TEST 2",DateTime.now().add(Duration(hours: 3, minutes: 30)),DateTime.now().add(Duration(hours: 4, minutes: 30)));
                       // await CalenderAPI().addEvent(context,"TEST 3",DateTime.now().add(Duration(hours: 5, minutes: 30)),DateTime.now().add(Duration(hours: 6, minutes: 30)));
                       // final map = await Provider.of<SecureStorage>(context,listen: false).getFromStorage();
