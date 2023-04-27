@@ -2775,6 +2775,39 @@ class FacultiesProvider with ChangeNotifier {
     {
       'Unnamed: 0': '',
       'faculty_Unique_Id': '',
+      'faculty_Name': 'Rahul IIITD',
+      'faculty_EmailId': 'rahul20398@iiitd.ac.in',
+      'faculty_Department': 'SSH',
+      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs':
+      'Center for Design and New Media (Supported by Tata Consultancy Services, a TCS Foundation Initiative)',
+      'faculty_Authorization': 'True',
+      'faculty_Bio':
+      'Ratnadeep Suri (Ratan), Assistant Professor, SSH, IIIT-Delhi, has completed his Post Doctoral research at the Nanyang Technological University, Singapore in 2016. Earlier he earned his PhD from The Indiana Media School, Indiana University in 2013, with a Major in Communication and a Minor in Information Science. He also has an MA from Western Michigan University, Michigan, and an MA from University of Hyderabad, India. His research examines the effects of technology use in knowledge work contexts, health contexts, information seeking, and the cognition of information. He is also interested in the consequences of disrupted access to communication technologies on individuals in disadvantaged communities. Currently he is a Collaborating Investigator for a 100, 000 SG grant from Singapore Ministry of Education. He was the recipient of several awards including the the Indiana University, College of Arts and Sciences Dissertation Fellowship (2010-2011), The Indiana University Future Faculty Fellowship, to teach at Howard University, 2009-2010, The Graduate School Fellowship, Summer 2004, 2005, Indiana University, and The Kellogg Foundation Service Learning Scholarship in Summer 2002. In his free time Ratan pursues his interests in woodworking, traveling and photography.',
+      'faculty_College': 'PhD (2013), Indiana University, Bloomington, Indiana',
+      'faculty_Image_Url':
+      'https://iiitd.ac.in/sites/default/files/ratna-suri.jpg',
+      'faculty_LinkedIn_Url':
+      'https://www.linkedin.com/in/venkata-ratnadeep-suri-6294a118a/',
+      'faculty_Website_Url': 'https://iiitd.ac.in/ratan',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '"011-26907445"',
+      'faculty_Office_Address': '\nB-204 (R&D Block)',
+      'faculty_Office_Latitude': '28.5442185740552',
+      'faculty_Office_Longitude': '77.2716830936104',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests':
+      'ICTs and Society, Information Literacy, Data Literacy, E-Health, M-health, Social media for Health, ICTs and Health behavior, ICTs and Development.',
+      'faculty_Teaching_Interests': 'Social Sciences',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/ratan',
+      'faculty_Website_Page': '/ratan',
+      'faculty_QR_Code_Image_Url':
+      'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fratan.suri%40iiitd.ac.in%2Fratan.png?alt=media&token=b4281104-874a-40bf-a055-998c6557ef26'
+    },
+    {
+      'Unnamed: 0': '',
+      'faculty_Unique_Id': '',
       'faculty_Name': 'Vibhor Kumar',
       'faculty_EmailId': 'vibhor@iiitd.ac.in',
       'faculty_Department': 'CB',
@@ -2938,7 +2971,41 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Website_Page': '/vivekk',
       'faculty_QR_Code_Image_Url':
           'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fvivekk%40iiitd.ac.in%2Fvivekk.png?alt=media&token=5d072cce-4362-4ae3-8035-66e5473821ae'
+    },{
+      'Unnamed: 0': '',
+      'faculty_Unique_Id': '',
+      'faculty_Name': 'Henansh 2',
+      'faculty_EmailId': 'henanshtanwar21@gmail.com',
+      'faculty_Department': 'CSE',
+      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': 'True',
+      'faculty_Bio':
+      'Vivek Kumar works in the area of High Performance Computing. He received his Ph.D. from Australian National University and B.E. from Visvesvaraya Technological University. His Ph.D. research focused on using managed runtime techniques for improving the performance and productivity of parallel programming on multicore architectures. Prior to Ph.D., he has worked for nearly 6 years in research and development positions in HPC areas at technology firms such as CDAC R&D and IBM Systems and Technology Labs. After completing his Ph.D., he worked for nearly 3 years as a Research Scientist at Rice University.',
+      'faculty_College':
+      'PhD (2014), Research School of Computer Science, Australian National University',
+      'faculty_Image_Url':
+      'https://iiitd.ac.in/sites/default/files/images/faculty/vivekk.jpg',
+      'faculty_LinkedIn_Url':
+      'https://www.linkedin.com/in/vivek-kumar-42a4b121/',
+      'faculty_Website_Url': 'https://iiitd.ac.in/vivekk',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '011-26907441',
+      'faculty_Office_Address': 'B-506 (R&D Block)',
+      'faculty_Office_Latitude': '28.5442185740552',
+      'faculty_Office_Longitude': '77.2716830936104',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests':
+      'Parallel programming models and runtime systems.',
+      'faculty_Teaching_Interests':
+      'Parallel programming models and runtime systems.',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/vivekk',
+      'faculty_Website_Page': '/vivekk',
+      'faculty_QR_Code_Image_Url':
+      'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fvivekk%40iiitd.ac.in%2Fvivekk.png?alt=media&token=5d072cce-4362-4ae3-8035-66e5473821ae'
     },
+
   ];
 
   List<FacultyServerInformation> facultiesList = [

@@ -252,27 +252,6 @@ class _AppointmentCardState extends State<AppointmentCard> {
                                     ],
                                   )
                                       : Container(),
-                                  widget.appointment.description != "Temp"
-                                      ? Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.message,
-                                        // size: ,
-                                      ),
-                                      SizedBox(width: 20.w),
-                                      Flexible(
-                                        child: Text(
-                                          widget.appointment.description,
-                                          style: TextStyle(fontSize: 40.sp),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                      : Container(),
                                 ],
                               ),
                             ),

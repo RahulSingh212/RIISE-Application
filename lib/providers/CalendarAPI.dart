@@ -11,6 +11,7 @@ import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/models/FacultyInfo.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
+import 'package:riise/providers/UserDetailsProvider.dart';
 import 'package:riise/providers/UserLoginProvider.dart';
 
 import '../models/CalendarSchedule.dart';
@@ -25,28 +26,57 @@ class CalenderAPI extends ChangeNotifier {
     DateTime startTime,
     DateTime endTime,
   ) async {
+    print("Schedule LIST -> ");
+
     for (int i = 0; i < facultyScheduleList.length; i++) {
-      DateTime sst = facultyScheduleList[i].schedule_Start_Time;
-      DateTime set = facultyScheduleList[i].schedule_End_Time;
+      print("${facultyScheduleList[i].User_Name}" +
+          " - ${facultyScheduleList[i].User_Email_Id}" +
+          "${facultyScheduleList[i].schedule_Start_Time}" +
+          " - ${facultyScheduleList[i].schedule_End_Time}" +
+          "${facultyScheduleList[i].schedule_Unque_Id}");
 
-      int day = facultyScheduleList[i].schedule_Start_Time.day;
-      int month = facultyScheduleList[i].schedule_Start_Time.month;
-      int year = facultyScheduleList[i].schedule_Start_Time.year;
+      DateTime set =
+          facultyScheduleList[i].schedule_End_Time.add(Duration(minutes: 5));
 
-      int dayGiven = startTime.day;
-      int monthGiven = startTime.month;
-      int yearGiven = startTime.year;
-
-      if (day == dayGiven && month == monthGiven && year == yearGiven) {
-        if ((startTime.isAfter(sst) && startTime.isBefore(set)) ||
-            (endTime.isAfter(sst) && endTime.isBefore(set))) {
-          return false;
-        }
+      if (startTime.isBefore(set)) {
+        return false;
       }
     }
 
     return true;
   }
+
+  // Future<bool> checkForFacultyScheduleConflicts(
+  //   BuildContext context,
+  //   DateTime startTime,
+  //   DateTime endTime,
+  // ) async {
+  //
+  //   print("Schedule LIST -> ");
+  //
+  //   for (int i = 0; i < facultyScheduleList.length; i++) {
+  //     print("${facultyScheduleList[i].User_Name}"+" - ${facultyScheduleList[i].User_Email_Id}"+"${facultyScheduleList[i].schedule_Start_Time}"+" - ${facultyScheduleList[i].schedule_End_Time}"+"${facultyScheduleList[i].schedule_Unque_Id}");
+  //     DateTime sst = facultyScheduleList[i].schedule_Start_Time;
+  //     DateTime set = facultyScheduleList[i].schedule_End_Time;
+  //
+  //     int day = facultyScheduleList[i].schedule_Start_Time.day;
+  //     int month = facultyScheduleList[i].schedule_Start_Time.month;
+  //     int year = facultyScheduleList[i].schedule_Start_Time.year;
+  //
+  //     int dayGiven = startTime.day;
+  //     int monthGiven = startTime.month;
+  //     int yearGiven = startTime.year;
+  //
+  //     if (day == dayGiven && month == monthGiven && year == yearGiven) {
+  //       if ((startTime.isAfter(sst) && startTime.isBefore(set)) ||
+  //           (endTime.isAfter(sst) && endTime.isBefore(set))) {
+  //         return false;
+  //       }
+  //     }
+  //   }
+  //
+  //   return true;
+  // }
 
   Future<void> addNewSchedule(
     String scheduleUniqueId,
@@ -60,8 +90,14 @@ class CalenderAPI extends ChangeNotifier {
     const facultyCollectionName = "Faculty-Schedule-List";
     const guestCollectionName = "Guest-Schedule-List";
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference facultyRef = db.collection('${facultyCollectionName}/${facultyEmailId}');
-    CollectionReference guestRef = db.collection('${guestCollectionName}/${facultyEmailId}');
+    CollectionReference facultyRef = db
+        .collection(facultyCollectionName)
+        .doc(facultyEmailId)
+        .collection("Schedule-List");
+    CollectionReference guestRef = db
+        .collection(guestCollectionName)
+        .doc(guestEmailId)
+        .collection("Schedule-List");
 
     try {
       await facultyRef.doc(scheduleUniqueId).set(
@@ -95,8 +131,11 @@ class CalenderAPI extends ChangeNotifier {
     String userEmail,
   ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference facultyRef =
-        db.collection('${collectionName}/${userEmail}');
+    CollectionReference facultyRef = db
+        .collection(collectionName)
+        .doc(userEmail)
+        .collection("Schedule-List");
+    facultyRef.orderBy("schedule_Start_Time");
 
     List<CalendarScheduleServerInformation> list = [];
     try {
@@ -138,6 +177,7 @@ class CalenderAPI extends ChangeNotifier {
 
   List<AppointmentUtil> appointmentList = [];
   List<String> facultyList = [
+    "rahulsinghrs174326@gmail.com",
     "subramanyam@iiitd.ac.in",
     "aasim@iiitd.ac.in",
     "abhijit@iiitd.ac.in",
@@ -236,14 +276,16 @@ class CalenderAPI extends ChangeNotifier {
       DateTime endTime,
       List<EventAttendee> attendeesList,
       String descp,
-      String location) async {
-    // TODO - get access token here
+      String location,
+      String facultyName,
+      String guestName) async {
+    // fetchSchedules(context, "Faculty", "Faculty-Schedule-List", attendeesList[1].email.toString());
+
     GoogleSignIn? googleUser = await GoogleSignIn(
         scopes: ['https://www.googleapis.com/auth/calendar']);
     final GoogleSignInAccount = await googleUser.signInSilently();
 
     final googleAuth = await GoogleSignInAccount?.authentication;
-    // final accessToken = "ya29.a0Ael9sCNTICz8w49X6vW0a0AU6Wp-iwpgKkenAhKCbc5vCKZRRzorJOfWVHYYv6gurmSlqu6TrDA8SWsspv7cOc83fYuKezNeuVq3twbwWu9iU1c3Q26EfH9rjWf5Q7nGNmia05Y6hl0W3WbF-Xf53fNjWCD4aCgYKAc0SARESFQF4udJhWdFfWnmxoPBKiidqvPkv-g0163";
     final accessToken = googleAuth?.accessToken;
 
     print("ACCESS TOKEN _> $accessToken");
@@ -285,9 +327,17 @@ class CalenderAPI extends ChangeNotifier {
 
     try {
       print("Hello 1");
-      await calendar.events.insert(event, 'primary',
+      var tempEvent = await calendar.events.insert(event, 'primary',
           sendNotifications: true, sendUpdates: 'all');
       print("Hello 2");
+      addNewSchedule(
+          tempEvent.id.toString(),
+          facultyName,
+          attendeesList[1].email.toString(),
+          attendeesList[0].email.toString(),
+          guestName,
+          startTime,
+          endTime);
     } catch (e) {
       print("Error -> $e");
     }
@@ -317,6 +367,7 @@ class CalenderAPI extends ChangeNotifier {
     final events = await calendar.events.list(
       "primary",
     );
+
 
     if (events.items != null) {
       List<AppointmentUtil> tempList = [];
