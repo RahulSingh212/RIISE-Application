@@ -122,9 +122,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
         ],
       ),
       body: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection("FacultiesInformationList")
-              .snapshots(),
+          stream: FirebaseFirestore.instance.collection("FacultiesInformationList").snapshots(),
           // initialData: initialData,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) {

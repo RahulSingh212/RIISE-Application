@@ -91,17 +91,12 @@ class _DirectionScreenState extends State<DirectionScreen> {
           ),
         ],
       ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection("CoordinationInformation")
-            .snapshots(),
+      body: StreamBuilder(stream: FirebaseFirestore.instance.collection("CoordinationInformation").snapshots(),
         // initialData: initialData,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           print("Building!!!");
           if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Center(child: CircularProgressIndicator());
           } else {
             print("Direction Screen");
             return ListView.builder(
