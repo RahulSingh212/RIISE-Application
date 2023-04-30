@@ -15,11 +15,59 @@
       },
       "oauth_client": [
         {
+          "client_id": "972873247531-c5ml9jq1k7q500ofsqs9l35bt677687u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.riise",
+            "certificate_hash": "41b4eac10587f8d82506e6a800fed581a70ec8d6"
+          }
+        },
+        {
+          "client_id": "972873247531-f9i6do9ajkif5vtjici1pi70tes7g1i6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.riise",
+            "certificate_hash": "5c4d1543cd0c07f1b90dfb03c87213e03c3fd865"
+          }
+        },
+        {
+          "client_id": "972873247531-i9rbt6p8c34vg7luhhv4aedt8nqt7ung.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.riise",
+            "certificate_hash": "8efed3f131520ca226eec9842fd19d82116c0ef0"
+          }
+        },
+        {
+          "client_id": "972873247531-jah9f1plup6c03mevdnr5vnre13gke7g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.riise",
+            "certificate_hash": "deb2a57f7189c12cbab5a46f8a1c488cac9fe4f5"
+          }
+        },
+        {
+          "client_id": "972873247531-nd5aor196e17h6fs8tanamvd6v5fb76l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.riise",
+            "certificate_hash": "dffdde11219b1b2b175b289d53b1c9df44836ec7"
+          }
+        },
+        {
           "client_id": "972873247531-t75rgvgm5s6a32ui3k97mqf8p8e936hn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.riise",
             "certificate_hash": "7881ad89c0332b5f048498d29505f628f39ee8e4"
+          }
+        },
+        {
+          "client_id": "972873247531-ve0kb7ml5int1ic57ttk7gj761f7ghun.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.riise",
+            "certificate_hash": "b33f63c3ec0d3ea2dac3a43b79c16d97086a24a4"
           }
         },
         {
@@ -38,6 +86,57 @@
             {
               "client_id": "972873247531-j3gsnklu7fm9fq1fiiavc10tdett2qhv.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "972873247531-9oinrslu8gnj1nt4p7fdko1knttn02nk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.riise"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972873247531:android:b8f81e9a99871d8ae3736e",
+        "android_client_info": {
+          "package_name": "com.iiitd.riise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "972873247531-rp67hfb02peb84793hk2ns2690uro4r8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iiitd.riise",
+            "certificate_hash": "5c4d1543cd0c07f1b90dfb03c87213e03c3fd865"
+          }
+        },
+        {
+          "client_id": "972873247531-l1eghgqpgjse5dcp14pkatmij2uq4car.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCQUfxLC-4U8cCjXpt5prvxAdm206I0jY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "972873247531-j3gsnklu7fm9fq1fiiavc10tdett2qhv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "972873247531-9oinrslu8gnj1nt4p7fdko1knttn02nk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.riise"
+              }
             }
           ]
         }

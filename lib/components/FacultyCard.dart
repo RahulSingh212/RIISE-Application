@@ -41,7 +41,7 @@ class _FacultyCardState extends State<FacultyCard> {
         );
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 5.8.w, vertical: 11.7.h),
+        padding: EdgeInsets.symmetric(horizontal: 5.8.w, vertical: 26.h),
         child: Card(
           elevation: 1,
           // color: Colors.red,

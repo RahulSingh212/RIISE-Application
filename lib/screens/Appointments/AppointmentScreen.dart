@@ -37,8 +37,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   String userName = "Henansh";
   late TextEditingController searchBarController = TextEditingController();
 
-
-
   @override
   Widget build(BuildContext context) {
     // var padding = MediaQuery.of(context).padding;

@@ -11,6 +11,7 @@ import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/models/FacultyInfo.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
+import 'package:riise/providers/UserDetailsProvider.dart';
 import 'package:riise/providers/UserLoginProvider.dart';
 
 import '../models/CalendarSchedule.dart';
@@ -20,50 +21,86 @@ class CalenderAPI extends ChangeNotifier {
   List<CalendarScheduleServerInformation> facultyScheduleList = [];
   List<CalendarScheduleServerInformation> guestScheduleList = [];
 
+
+
   Future<bool> checkForFacultyScheduleConflicts(
-    BuildContext context,
-    DateTime startTime,
-    DateTime endTime,
-  ) async {
+      BuildContext context,
+      DateTime startTime,
+      DateTime endTime,
+      ) async {
+    print("Schedule LIST -> ");
+
     for (int i = 0; i < facultyScheduleList.length; i++) {
-      DateTime sst = facultyScheduleList[i].schedule_Start_Time;
-      DateTime set = facultyScheduleList[i].schedule_End_Time;
+      print("${facultyScheduleList[i].User_Name}" +
+          " - ${facultyScheduleList[i].User_Email_Id}" +
+          "${facultyScheduleList[i].schedule_Start_Time}" +
+          " - ${facultyScheduleList[i].schedule_End_Time}" +
+          "${facultyScheduleList[i].schedule_Unque_Id}");
 
-      int day = facultyScheduleList[i].schedule_Start_Time.day;
-      int month = facultyScheduleList[i].schedule_Start_Time.month;
-      int year = facultyScheduleList[i].schedule_Start_Time.year;
+      DateTime set =
+      facultyScheduleList[i].schedule_End_Time.add(Duration(minutes: 5));
 
-      int dayGiven = startTime.day;
-      int monthGiven = startTime.month;
-      int yearGiven = startTime.year;
 
-      if (day == dayGiven && month == monthGiven && year == yearGiven) {
-        if ((startTime.isAfter(sst) && startTime.isBefore(set)) ||
-            (endTime.isAfter(sst) && endTime.isBefore(set))) {
-          return false;
-        }
+      if (startTime.isBefore(set) && startTime.day == set.day && startTime.month == set.month && startTime.year == set.year) {
+        return false;
       }
     }
 
     return true;
   }
 
+
+  DateTime getForFacultyScheduleInterval(
+      BuildContext context) {
+    print("Schedule LIST -> ");
+
+    List<CalendarScheduleServerInformation> tempFacultyScheduleList = facultyScheduleList;
+    tempFacultyScheduleList.sort((a,b)=> a.schedule_Start_Time.compareTo(b.schedule_Start_Time));
+
+    for (int i = 1; i < tempFacultyScheduleList.length; i++) {
+      print("${tempFacultyScheduleList[i].User_Name}" +
+          " - ${tempFacultyScheduleList[i].User_Email_Id}" +
+          "${tempFacultyScheduleList[i].schedule_Start_Time}" +
+          " - ${tempFacultyScheduleList[i].schedule_End_Time}" +
+          "${tempFacultyScheduleList[i].schedule_Unque_Id}");
+
+      DateTime before =
+      tempFacultyScheduleList[i-1].schedule_End_Time.add(Duration(minutes: 5));
+      DateTime after =
+      tempFacultyScheduleList[i].schedule_Start_Time.subtract(Duration(minutes: 5));
+
+      if(after.difference(before).inMinutes >= 20){
+        print("Setting Time to before");
+        print(before);
+        return before;
+      }
+    }
+    print("Setting Time to");
+    print(tempFacultyScheduleList.last.schedule_End_Time.add(Duration(minutes: 5)));
+    return tempFacultyScheduleList.last.schedule_End_Time.add(Duration(minutes: 5));
+
+  }
+
   Future<void> addNewSchedule(
-    String scheduleUniqueId,
-    String facultyName,
-    String facultyEmailId,
-    String guestEmailId,
-    String guestName,
-    DateTime startTime,
-    DateTime endTime,
-  ) async {
+      String scheduleUniqueId,
+      String facultyName,
+      String facultyEmailId,
+      String guestEmailId,
+      String guestName,
+      DateTime startTime,
+      DateTime endTime,
+      ) async {
     const facultyCollectionName = "Faculty-Schedule-List";
     const guestCollectionName = "Guest-Schedule-List";
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference facultyRef =
-        db.collection('${facultyCollectionName}/${facultyEmailId}');
-    CollectionReference guestRef =
-        db.collection('${guestCollectionName}/${facultyEmailId}');
+    CollectionReference facultyRef = db
+        .collection(facultyCollectionName)
+        .doc(facultyEmailId)
+        .collection("Schedule-List");
+    CollectionReference guestRef = db
+        .collection(guestCollectionName)
+        .doc(guestEmailId)
+        .collection("Schedule-List");
 
     try {
       await facultyRef.doc(scheduleUniqueId).set(
@@ -91,40 +128,48 @@ class CalenderAPI extends ChangeNotifier {
   }
 
   Future<void> fetchSchedules(
-    BuildContext context,
-    String userType,
-    String collectionName,
-    String userEmail,
-  ) async {
+      BuildContext context,
+      String userType,
+      String collectionName,
+      String userEmail,
+      ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference facultyRef =
-        db.collection('${collectionName}/${userEmail}');
+    CollectionReference facultyRef = db
+        .collection(collectionName)
+        .doc(userEmail)
+        .collection("Schedule-List");
+    facultyRef.orderBy("schedule_Start_Time",descending: true);
 
     List<CalendarScheduleServerInformation> list = [];
     try {
       await facultyRef.get().then(
-        (ds) async {
-          ds.docs.forEach(
-            (scheduleDetails) async {
-              final scheduleMapping =
-                  scheduleDetails.data() as Map<String, dynamic>;
+            (ds) async {
 
-              CalendarScheduleServerInformation schedule =
-                  new CalendarScheduleServerInformation(
-                schedule_Unque_Id: scheduleMapping['schedule_Unque_Id'],
-                schedule_Start_Time: DateTime.parse(
-                    scheduleMapping['schedule_Start_Time'].toString()),
-                schedule_End_Time: DateTime.parse(
-                    scheduleMapping['schedule_End_Time'].toString()),
-                User_Email_Id: scheduleMapping['User_Email_Id'],
-                User_Name: scheduleMapping['User_Name'],
-              );
+              for( var scheduleDetails in ds.docs){
+                final scheduleMapping =
+                scheduleDetails.data() as Map<String, dynamic>;
 
-              list.add(schedule);
-            },
-          );
+                CalendarScheduleServerInformation schedule =
+                new CalendarScheduleServerInformation(
+                  schedule_Unque_Id: scheduleMapping['schedule_Unque_Id'],
+                  schedule_Start_Time: DateTime.parse(
+                      scheduleMapping['schedule_Start_Time'].toString()),
+                  schedule_End_Time: DateTime.parse(
+                      scheduleMapping['schedule_End_Time'].toString()),
+                  User_Email_Id: scheduleMapping['User_Email_Id'],
+                  User_Name: scheduleMapping['User_Name'],
+                );
+
+                list.add(schedule);
+
+              }
+
+
         },
       );
+
+      print("UserType -> $userType");
+      print(list);
 
       if (userType.toLowerCase() == "guest") {
         guestScheduleList = list;
@@ -140,6 +185,7 @@ class CalenderAPI extends ChangeNotifier {
 
   List<AppointmentUtil> appointmentList = [];
   List<String> facultyList = [
+    "rahulsinghrs174326@gmail.com",
     "subramanyam@iiitd.ac.in",
     "aasim@iiitd.ac.in",
     "abhijit@iiitd.ac.in",
@@ -229,6 +275,7 @@ class CalenderAPI extends ChangeNotifier {
     "abrol@iiitd.ac.in",
     "vivek.b@iiitd.ac.in",
     "vivekk@iiitd.ac.in",
+    "henansh20065@iiitd.ac.in"
   ];
 
   addEvent(
@@ -238,14 +285,16 @@ class CalenderAPI extends ChangeNotifier {
       DateTime endTime,
       List<EventAttendee> attendeesList,
       String descp,
-      String location) async {
-    // TODO - get access token here
+      String location,
+      String facultyName,
+      String guestName) async {
+    // fetchSchedules(context, "Faculty", "Faculty-Schedule-List", attendeesList[1].email.toString());
+
     GoogleSignIn? googleUser = await GoogleSignIn(
         scopes: ['https://www.googleapis.com/auth/calendar']);
     final GoogleSignInAccount = await googleUser.signInSilently();
 
     final googleAuth = await GoogleSignInAccount?.authentication;
-    // final accessToken = "ya29.a0Ael9sCNTICz8w49X6vW0a0AU6Wp-iwpgKkenAhKCbc5vCKZRRzorJOfWVHYYv6gurmSlqu6TrDA8SWsspv7cOc83fYuKezNeuVq3twbwWu9iU1c3Q26EfH9rjWf5Q7nGNmia05Y6hl0W3WbF-Xf53fNjWCD4aCgYKAc0SARESFQF4udJhWdFfWnmxoPBKiidqvPkv-g0163";
     final accessToken = googleAuth?.accessToken;
 
     print("ACCESS TOKEN _> $accessToken");
@@ -258,10 +307,10 @@ class CalenderAPI extends ChangeNotifier {
           accessToken!,
           DateTime.now()
               .add(
-                Duration(
-                  minutes: 5,
-                ),
-              )
+            Duration(
+              minutes: 5,
+            ),
+          )
               .toUtc(),
         ),
         null,
@@ -287,9 +336,17 @@ class CalenderAPI extends ChangeNotifier {
 
     try {
       print("Hello 1");
-      await calendar.events.insert(event, 'primary',
+      var tempEvent = await calendar.events.insert(event, 'primary',
           sendNotifications: true, sendUpdates: 'all');
       print("Hello 2");
+      addNewSchedule(
+          tempEvent.id.toString(),
+          facultyName,
+          attendeesList[1].email.toString(),
+          attendeesList[0].email.toString(),
+          guestName,
+          startTime,
+          endTime);
     } catch (e) {
       print("Error -> $e");
     }
@@ -297,6 +354,9 @@ class CalenderAPI extends ChangeNotifier {
   }
 
   fetchEvent(BuildContext context) async {
+
+    print("Fetching event");
+
     GoogleSignIn? googleUser = await GoogleSignIn(
         scopes: ['https://www.googleapis.com/auth/calendar']);
     final GoogleSignInAccount = await googleUser.signInSilently();
@@ -320,25 +380,23 @@ class CalenderAPI extends ChangeNotifier {
       "primary",
     );
 
+    List<String> eventIds = [];
+
+    await fetchSchedules(context, "guest", "Guest-Schedule-List", "henanshtanwar21@gmail.com");
+    print("GUEST SCHEDULE LIST");
+    print(guestScheduleList);
+    for( int i=0;i<guestScheduleList.length;i++){
+      print(guestScheduleList[i].schedule_Unque_Id);
+      eventIds.add(guestScheduleList[i].schedule_Unque_Id);
+    }
+
     if (events.items != null) {
       List<AppointmentUtil> tempList = [];
       for (int i = 0; i < events.items!.length; i++) {
         final tempEvent = events.items![i];
 
         if (tempEvent.start != null &&
-            (tempEvent.summary.toString().toLowerCase().contains("riise") ||
-                tempEvent.summary
-                    .toString()
-                    .toLowerCase()
-                    .contains("guest-faculty interaction") ||
-                tempEvent.description
-                    .toString()
-                    .toLowerCase()
-                    .contains("riise") ||
-                tempEvent.description
-                    .toString()
-                    .toLowerCase()
-                    .contains("guest-faculty interaction"))) {
+            (eventIds.contains(tempEvent.id))) {
           // print("Hello There");
           // tempList.add(AppointmentUtil(tempEvent.summary.toString(), DateTime.now(), DateTime.now().add(Duration(minutes: 15)), tempEvent.description.toString(),"Temp",tempEvent.location.toString()));
           FacultyServerInformation faculty = FacultyServerInformation(
@@ -364,12 +422,14 @@ class CalenderAPI extends ChangeNotifier {
               faculty_Office_Longitude: 0,
               faculty_Office_Latitude: 0);
 
+          print("Event Details");
+          print(tempEvent.attendees);
+
           if (tempEvent.attendees != null &&
               tempEvent.attendees!.isNotEmpty &&
               facultyList.contains(tempEvent.attendees![0].email.toString())) {
             faculty = await getFacultyDetails(
                 tempEvent.attendees![0].email.toString());
-            // print(tempEvent.summary.toString()+" > "+tempEvent.attendees![0].email.toString());
           }
 
           tempList.add(AppointmentUtil(
@@ -378,7 +438,7 @@ class CalenderAPI extends ChangeNotifier {
               DateTime.now().add(Duration(minutes: 15)),
               tempEvent.description.toString(),
               faculty,
-              "Temp"));
+              ""));
         }
       }
       appointmentList = tempList;
@@ -392,27 +452,27 @@ class CalenderAPI extends ChangeNotifier {
 
     await FirebaseFirestore.instance
         .collection('FacultiesInformationList')
-        // .doc(facultyDatabaseUniqueId)
+    // .doc(facultyDatabaseUniqueId)
         .doc(facultyDatabaseUniqueId)
         .get()
         .then((DocumentSnapshot ds) {
       facultyInfo = new FacultyServerInformation(
         faculty_Unique_Id: ds.get('faculty_Unique_Id').toString(),
         faculty_Authorization:
-            ds.get('faculty_Authorization').toString() == 'true',
+        ds.get('faculty_Authorization').toString() == 'true',
         faculty_Mobile_Messaging_Token_Id:
-            ds.get('faculty_Mobile_Messaging_Token_Id').toString(),
+        ds.get('faculty_Mobile_Messaging_Token_Id').toString(),
         faculty_Name: ds.get('faculty_Name').toString(),
         faculty_Position: ds.get('faculty_Position').toString(),
         faculty_College: ds.get('faculty_College').toString(),
         faculty_Department: ds.get('faculty_Department').toString(),
         faculty_Mobile_Number: ds.get('faculty_Mobile_Number').toString(),
         faculty_Teaching_Interests:
-            ds.get('faculty_Teaching_Interests').toString(),
+        ds.get('faculty_Teaching_Interests').toString(),
         faculty_Research_Interests:
-            ds.get('faculty_Research_Interests').toString(),
+        ds.get('faculty_Research_Interests').toString(),
         faculty_Affiliated_Centers_And_Labs:
-            ds.get('faculty_Affiliated_Centers_And_Labs').toString(),
+        ds.get('faculty_Affiliated_Centers_And_Labs').toString(),
         faculty_EmailId: ds.get('faculty_EmailId').toString(),
         faculty_Gender: ds.get('faculty_Gender').toString(),
         faculty_Bio: ds.get('faculty_Bio').toString(),
@@ -420,12 +480,12 @@ class CalenderAPI extends ChangeNotifier {
         faculty_LinkedIn_Url: ds.get('faculty_LinkedIn_Url').toString(),
         faculty_Website_Url: ds.get('faculty_Website_Url').toString(),
         faculty_Office_Navigation_Url:
-            ds.get('faculty_Office_Navigation_Url').toString(),
+        ds.get('faculty_Office_Navigation_Url').toString(),
         faculty_Office_Address: ds.get('faculty_Office_Address').toString(),
         faculty_Office_Longitude:
-            checkIfDouble(ds.get('faculty_Office_Longitude').toString()),
+        checkIfDouble(ds.get('faculty_Office_Longitude').toString()),
         faculty_Office_Latitude:
-            checkIfDouble(ds.get('faculty_Office_Latitude').toString()),
+        checkIfDouble(ds.get('faculty_Office_Latitude').toString()),
       );
     });
 

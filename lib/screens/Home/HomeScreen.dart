@@ -103,37 +103,37 @@ class _HomeScreenState extends State<HomeScreen> {
   List<dynamic> categoryList = [
     [
       "Keynote Address",
-      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      "https://iiitd.ac.in/riise2023/assets/img/riise2022logo15059.png",
       KeynoteSpeakersScreen()
     ],
     [
       "RND Showcases",
-      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      "https://iiitd.ac.in/riise2023/assets/img/riise2022logo15059.png",
       RNDShowcaseAndDemoScreen()
     ],
     [
       "Forward Panels",
-      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      "https://iiitd.ac.in/riise2023/assets/img/riise2022logo15059.png",
       ForwardLookingPannelScreen()
     ],
     [
       "Beyond Panels",
-      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      "https://iiitd.ac.in/riise2023/assets/img/riise2022logo15059.png",
       BeyondCollegePannelScreen()
     ],
     [
       "Start-UP Showcases",
-      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      "https://iiitd.ac.in/riise2023/assets/img/riise2022logo15059.png",
       StartUpShowcaseScreen()
     ],
     [
       "Demos And Researches",
-      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      "https://iiitd.ac.in/riise2023/assets/img/riise2022logo15059.png",
       DemosAndResearchHighlightScreen()
     ],
     [
       "Research Showcases",
-      "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
+      "https://iiitd.ac.in/riise2023/assets/img/riise2022logo15059.png",
       ResearchShowcaseScreen()
     ],
   ];
@@ -216,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 padding: EdgeInsets.only(top: 60.h, left: 40.w, right: 40.w),
                 width: double.infinity,
-                height: 380.h,
+                height: 340.spMin,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(
@@ -255,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         top: 58.h,
                       ),
                       child: Text(
-                        "Themes",
+                        "Category",
                         style: TextStyle(fontSize: 70.sp, color: Colors.black),
                       ),
                     ),
@@ -268,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       // decoration: BoxDecoration(
                       //   border: Border.all()
                       // ),
-                      height: 520.h,
+                      height: 600.spMin,
                       child: ListView.builder(
                         // itemCount: themes.getThemesList().length,
                         itemCount: categoryList.length,
@@ -276,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         physics: BouncingScrollPhysics(),
                         padding: EdgeInsets.symmetric(
                           vertical: 23.h,
-                          horizontal: 21.w,
+                          horizontal: 0.w,
                         ),
                         itemBuilder: (context, position) {
                           return CategoryEventCard(
@@ -299,7 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Container(
                       // padding: EdgeInsets.only(top: 58.h),
-                      margin: EdgeInsets.only(top: 58.h),
+                      // margin: EdgeInsets.only(top: 58.h),
                       alignment: Alignment.topCenter,
                       // decoration: BoxDecoration(
                       //   border: Border.all()

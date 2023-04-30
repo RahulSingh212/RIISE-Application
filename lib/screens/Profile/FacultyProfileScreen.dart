@@ -187,7 +187,7 @@ class _FacultyProfileScreenState extends State<FacultyProfileScreen> {
             color: Color.fromRGBO(66, 204, 195, 0.84),
             // color: Colors.amber,
             // height: maxDimension * 0.245,
-            height: maxDimension * 0.21,
+            height: 450.spMin,
             margin: EdgeInsets.only(
                 // left: screenWidth * 0.0125,
                 // right: screenWidth * 0.0125,

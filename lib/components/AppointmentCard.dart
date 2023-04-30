@@ -231,7 +231,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                                   )
                                       : Container(),
 
-                                  widget.appointment.location != "Temp"
+                                  widget.appointment.attendee.faculty_Office_Address != "Temp"
                                       ? Row(
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -245,28 +245,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                                       SizedBox(width: 20.w),
                                       Flexible(
                                         child: Text(
-                                          widget.appointment.location,
-                                          style: TextStyle(fontSize: 40.sp),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                      : Container(),
-                                  widget.appointment.description != "Temp"
-                                      ? Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.message,
-                                        // size: ,
-                                      ),
-                                      SizedBox(width: 20.w),
-                                      Flexible(
-                                        child: Text(
-                                          widget.appointment.description,
+                                          widget.appointment.attendee.faculty_Office_Address,
                                           style: TextStyle(fontSize: 40.sp),
                                         ),
                                       ),

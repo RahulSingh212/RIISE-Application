@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
+import '../helper/HexagonClipper.dart';
 import '../models/ThemeInfo.dart';
 import '../screens/Themes/ThemeDetailScreen.dart';
 
@@ -61,15 +62,16 @@ class _CategoryEventCardState extends State<CategoryEventCard> {
                 },
                 child: Image.network(
                   widget.eventDetail[1],
-                  width: 200.r,
-                  height: 200.r,
+                  fit: BoxFit.contain,
+                  width: 250.spMin,
+                  height: 300.spMin,
                 ),
               ),
               Flexible(
                 child: Container(
                   padding: EdgeInsets.only(top: 23.h),
                   margin: EdgeInsets.only(top: 23.h),
-                  width: 300.r,
+                  width: 250.spMin,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -79,6 +81,7 @@ class _CategoryEventCardState extends State<CategoryEventCard> {
                           style: TextStyle(fontSize: 40.sp),
                           softWrap: true,
                           textAlign: TextAlign.center,
+                          // textScaleFactor: ScreenUtil().textScaleFactor,
                         ),
                       ),
                     ],

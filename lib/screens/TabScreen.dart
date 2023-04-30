@@ -50,8 +50,11 @@ class TabScreen extends StatefulWidget {
   State<TabScreen> createState() => _TabScreenState();
 }
 
-class _TabScreenState extends State<TabScreen> {
+class _TabScreenState extends State<TabScreen> with SingleTickerProviderStateMixin {
   late List<Map<String, Object>> _pages;
+
+  late final AnimationController _controller;
+  late final Animation<double> _animation;
 
   final _appScreens = [
     const HomeScreen(),
@@ -142,7 +145,6 @@ class _TabScreenState extends State<TabScreen> {
                               print(isLoading);
                             });
                           });
-                      
                     });
                   });
                 });
@@ -157,6 +159,14 @@ class _TabScreenState extends State<TabScreen> {
   @override
   void initState() {
     super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat();
+    _animation = Tween<double>(
+      begin: 0,
+      end: pi * 2,
+    ).animate(_controller);
 
     // final initialLink = Provider.of<DynamicLinkProvider>(context,listen: false).initialLink;
 
@@ -247,6 +257,12 @@ class _TabScreenState extends State<TabScreen> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final iconItemsInActive = <Widget>[
       Icon(
@@ -310,7 +326,20 @@ class _TabScreenState extends State<TabScreen> {
         ? Scaffold(
             backgroundColor: Colors.white,
             body: Center(
-              child: Image.asset("assets/images/Riise.png"),
+              child:
+              AnimatedBuilder(
+                  animation: _animation,
+                  builder: (context, child) {
+                    return Transform(
+                      alignment: FractionalOffset.center,
+                      transform: Matrix4.identity()
+                        ..setEntry(3, 2, 0.001)
+                        ..rotateY(_animation.value),
+                      child: child,
+                    );
+                  },
+                  child: Image.asset("assets/images/Riise.png"),
+              ),
             ))
         : Scaffold(
             backgroundColor: Colors.white,
