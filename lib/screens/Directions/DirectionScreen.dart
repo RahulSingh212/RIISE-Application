@@ -30,7 +30,6 @@ class DirectionScreen extends StatefulWidget {
 }
 
 class _DirectionScreenState extends State<DirectionScreen> {
-
   loadData() async {
     await Provider.of<LocationProvider>(context, listen: false)
         .fetchLocationList(
@@ -45,7 +44,7 @@ class _DirectionScreenState extends State<DirectionScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // loadData();
+    loadData();
   }
 
   // @override
@@ -82,39 +81,43 @@ class _DirectionScreenState extends State<DirectionScreen> {
         ),
         actions: [
           Container(
-              padding: EdgeInsets.only(top: 15.h,bottom: 25.h,right: 20.w),
-              child: Center(child: Image.network("https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",fit: BoxFit.contain,))
+            padding: EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
+            child: Center(
+              child: Image.network(
+                "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: Provider.of<LocationProvider>(context, listen: false)
-            .coordinateDirectionsList
-            .length,
-        itemBuilder: (ctx, index) {
-          return coordinateDetailInfoWidget(
-            context,
-            Provider.of<LocationProvider>(context, listen: false)
-                .coordinateDirectionsList[index],
-          );
+      body: StreamBuilder(stream: FirebaseFirestore.instance.collection("CoordinationInformation").snapshots(),
+        // initialData: initialData,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          print("Building!!!");
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            print("Direction Screen");
+            return ListView.builder(
+              itemCount: snapshot.data.docs.length,
+              itemBuilder: (ctx, index) {
+                return coordinateDetailInfoWidget(
+                  context,
+                  new CoordinateServerInformation(
+                    coordinate_Unique_Id: snapshot.data!.docs[index].data()['coordinate_Unique_Id'],
+                    coordinate_Longitude: double.parse(snapshot.data!.docs[index].data()['coordinate_Longitude']),
+                    coordinate_Latitude: double.parse(snapshot.data!.docs[index].data()['coordinate_Latitude']),
+                    coordinate_Name: snapshot.data!.docs[index].data()['coordinate_Name'],
+                    coordinate_Address: snapshot.data!.docs[index].data()['coordinate_Address'],
+                    coordinate_Code_Name: snapshot.data!.docs[index].data()['coordinate_Code_Name'],
+                  ),
+                );
+              },
+            );
+          }
         },
       ),
-      // floatingActionButton: SizedBox(
-      //   child: FloatingActionButton.extended(
-      //     onPressed: () {
-      //       Navigator.of(context).push(
-      //         MaterialPageRoute(
-      //           builder: (context) => ListOfListedLocationScreen(),
-      //         ),
-      //       );
-      //     },
-      //     icon: Icon(
-      //       Icons.directions,
-      //     ),
-      //     label: Text("Location List"),
-      //   ),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
