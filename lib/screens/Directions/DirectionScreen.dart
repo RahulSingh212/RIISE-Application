@@ -30,12 +30,11 @@ class DirectionScreen extends StatefulWidget {
 }
 
 class _DirectionScreenState extends State<DirectionScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       drawer: SideNavBar(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -66,7 +65,10 @@ class _DirectionScreenState extends State<DirectionScreen> {
           ),
         ],
       ),
-      body: StreamBuilder(stream: FirebaseFirestore.instance.collection("CoordinationInformation").snapshots(),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection("CoordinationInformation")
+            .snapshots(),
         // initialData: initialData,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
@@ -78,12 +80,23 @@ class _DirectionScreenState extends State<DirectionScreen> {
                 return coordinateDetailInfoWidget(
                   context,
                   new CoordinateServerInformation(
-                    coordinate_Unique_Id: snapshot.data!.docs[index].data()['coordinate_Unique_Id'],
-                    coordinate_Longitude: double.parse(snapshot.data!.docs[index].data()['coordinate_Longitude']),
-                    coordinate_Latitude: double.parse(snapshot.data!.docs[index].data()['coordinate_Latitude']),
-                    coordinate_Name: snapshot.data!.docs[index].data()['coordinate_Name'],
-                    coordinate_Address: snapshot.data!.docs[index].data()['coordinate_Address'],
-                    coordinate_Code_Name: snapshot.data!.docs[index].data()['coordinate_Code_Name'],
+                    coordinate_Unique_Id: snapshot.data!.docs[index]
+                        .data()['coordinate_Unique_Id'],
+                    coordinate_Longitude: double.parse(snapshot
+                        .data!.docs[index]
+                        .data()['coordinate_Longitude']),
+                    coordinate_Latitude: double.parse(snapshot.data!.docs[index]
+                        .data()['coordinate_Latitude']),
+                    coordinate_Name:
+                        snapshot.data!.docs[index].data()['coordinate_Name'],
+                    coordinate_Address:
+                        snapshot.data!.docs[index].data()['coordinate_Address'],
+                    coordinate_Code_Name: snapshot.data!.docs[index]
+                        .data()['coordinate_Code_Name'],
+                    coordinate_Landmark: snapshot.data!.docs[index]
+                        .data()['coordinate_Landmark'],
+                    Images_List:
+                        snapshot.data!.docs[index].data()['Images_List'],
                   ),
                 );
               },
@@ -108,21 +121,17 @@ class _DirectionScreenState extends State<DirectionScreen> {
 
     return InkWell(
       onTap: () {
-        //   Navigator.of(context).push(
-        //     MaterialPageRoute(
-        //       builder: (context) => CoordinationDetailScreen(
-        //         coordinateDetails: coordinateDetails,
-        //       ),
-        //     ),
-        //   );
-        _launchDirectionsUrl(
-          coordinateDetails.coordinate_Latitude,
-          coordinateDetails.coordinate_Longitude,
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => CoordinationDetailScreen(
+              coordinateDetails: coordinateDetails,
+            ),
+          ),
         );
       },
       child: Align(
         child: Card(
-          elevation: 2.5,
+          elevation: 1.5,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.5),
             // side: BorderSide(
@@ -131,8 +140,8 @@ class _DirectionScreenState extends State<DirectionScreen> {
             // ),
           ),
           child: Container(
-            width: screenWidth * 0.95,
-            height: maxDimension * 0.125,
+            width: screenWidth * 0.925,
+            height: maxDimension * 0.175,
             padding: EdgeInsets.symmetric(
               horizontal: minDimension * 0.0125,
               vertical: maxDimension * 0.00625,
@@ -145,49 +154,59 @@ class _DirectionScreenState extends State<DirectionScreen> {
               color: Colors.white70,
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  width: minDimension * 0.2,
+                  width: minDimension * 0.325,
+                  margin: EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(
-                        'assets/images/icons/location-icon.png',
-                      ),
+                      image: NetworkImage(coordinateDetails.Images_List[0]),
+                      fit: BoxFit.fill,
                     ),
-                    // image: doctorDetails.doctor_ProfilePicUrl == ""
-                    //     ? DecorationImage(
-                    //         image: AssetImage(
-                    //           'assets/images/surgeon.png',
-                    //         ),
-                    //         fit: BoxFit.fill,
-                    //       )
-                    //     : DecorationImage(
-                    //         image:
-                    //             NetworkImage(doctorDetails.doctor_ProfilePicUrl),
-                    //         fit: BoxFit.fill,
-                    //       ),
-                    // border: Border.all(
-                    //   color: Color.fromARGB(255, 233, 218, 218),
-                    //   width: 1,
-                    // ),
                     borderRadius: BorderRadius.circular(5),
                   ),
                 ),
                 Container(
+                  width: screenWidth * 0.525,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         child: Text(
                           coordinateDetails.coordinate_Name,
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.italic,
                             fontSize: 20,
                           ),
                         ),
-                      )
+                      ),
+                      Container(
+                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              _launchDirectionsUrl(
+                                coordinateDetails.coordinate_Latitude,
+                                coordinateDetails.coordinate_Longitude,
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(7.5),
+                              decoration: BoxDecoration(
+                                  color: Colors.greenAccent.shade100,
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: Icon(
+                                Icons.location_on_outlined,
+                                size: 35,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
                     ],
                   ),
                 )

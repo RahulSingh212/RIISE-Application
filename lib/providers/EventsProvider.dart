@@ -30,6 +30,7 @@ class EventProvider with ChangeNotifier {
     "ForwardLookingPanels",
     "BeyondCollegePanels",
     "ResearchShowcases",
+    "Extra-Events"
   ];
 
   late Map<String, dynamic> firebaseCollectionsMap = {

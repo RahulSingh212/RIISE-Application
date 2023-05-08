@@ -291,62 +291,62 @@ class _SideNavBarState extends State<SideNavBar> {
             "research-showcase",
             12,
           ),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10,
-            ),
-            margin: EdgeInsets.only(
-              top: 12.5,
-              bottom: 24.5,
-            ),
-            child: Divider(
-              color: Colors.green.shade500,
-            ),
-          ),
-          InkWell(
-            onTap: () async {
-              await GoogleSignIn().signOut();
-              await _auth.signOut();
-              // Navigator.of(context).pushNamedAndRemoveUntil(
-              //   LogInSignUpScreen.routeName,
-              //   (route) => false,
-              // );
-            },
-            child: Container(
-              margin: EdgeInsets.only(
-                left: 5,
-                right: 5,
-                bottom: 2.5,
-              ),
-              padding: EdgeInsets.all(18.5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.green.shade100,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(
-                      right: 20,
-                    ),
-                    child: Icon(Icons.logout_rounded),
-                  ),
-                  Container(
-                    child: Text(
-                      "Logout",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // Container(
+          //   padding: EdgeInsets.symmetric(
+          //     horizontal: 10,
+          //   ),
+          //   margin: EdgeInsets.only(
+          //     top: 12.5,
+          //     bottom: 24.5,
+          //   ),
+          //   child: Divider(
+          //     color: Colors.green.shade500,
+          //   ),
+          // ),
+          // InkWell(
+          //   onTap: () async {
+          //     await GoogleSignIn().signOut();
+          //     await _auth.signOut();
+          //     // Navigator.of(context).pushNamedAndRemoveUntil(
+          //     //   LogInSignUpScreen.routeName,
+          //     //   (route) => false,
+          //     // );
+          //   },
+          //   child: Container(
+          //     margin: EdgeInsets.only(
+          //       left: 5,
+          //       right: 5,
+          //       bottom: 2.5,
+          //     ),
+          //     padding: EdgeInsets.all(18.5),
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(10),
+          //       color: Colors.green.shade100,
+          //     ),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.start,
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       children: [
+          //         Container(
+          //           padding: EdgeInsets.only(
+          //             right: 20,
+          //           ),
+          //           child: Icon(Icons.logout_rounded),
+          //         ),
+          //         Container(
+          //           child: Text(
+          //             "Logout",
+          //             style: TextStyle(
+          //               fontWeight: FontWeight.bold,
+          //               fontStyle: FontStyle.italic,
+          //               fontSize: 15,
+          //             ),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 10,

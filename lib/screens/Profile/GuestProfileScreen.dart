@@ -6,11 +6,13 @@ import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +20,7 @@ import 'package:riise/providers/UserDetailsProvider.dart';
 import 'package:riise/screens/QrCode/QrCodeGenerator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../SingInScreen/LogInSignUpScreen.dart';
 import '../TabScreen.dart';
 
 const FACULTY_USERTYPE = "Faculty";
@@ -59,20 +62,6 @@ class _GuestProfileScreenState extends State<GuestProfileScreen> {
     "guest_Research_Interests": false,
   };
 
-  Map<String, String> userMapping = {};
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    userMapping =
-        Provider.of<UserDetailsProvider>(context, listen: false).userMapping;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -86,303 +75,274 @@ class _GuestProfileScreenState extends State<GuestProfileScreen> {
     bool isImageAvailable = false;
     const defaultImg = 'assets/images/icons/profile.png';
 
-    String imageNetworkUrl = userMapping["guest_Image_Url"] ?? "";
-
-    return Scaffold(
-      // backgroundColor: Color.fromRGBO(66, 204, 195, 0.84),
-      backgroundColor: Colors.white,
-      body: ListView(
-        children: <Widget>[
-          Container(
-            alignment: Alignment.topCenter,
-            color: Color.fromRGBO(66, 204, 195, 0.84),
-            // color: Colors.amber,
-            // height: maxDimension * 0.245,
-            height: 450.spMin,
-            margin: EdgeInsets.only(
-                // left: screenWidth * 0.0125,
-                // right: screenWidth * 0.0125,
-                // top: screenHeight * 0.0275,
-                // top: screenHeight * 0.001,
-                // bottom: screenHeight * 0.005,
+    return StreamBuilder(
+        stream: Provider.of<UserDetailsProvider>(context, listen: false)
+            .getGuestProfileDetails(context)
+            .asStream(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
                 ),
-            padding: EdgeInsets.only(
-              left: screenWidth * 0.015,
-              right: screenWidth * 0.015,
-              top: screenHeight * 0.0075,
-              bottom: screenHeight * 0.001,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                IconButton(
-                  onPressed: () {
-                    // Navigator.of(context).pushReplacementNamed(TabScreen.routeName);
-                    Navigator.of(context).pop(context);
-                  },
-                  iconSize: 30,
-                  icon: Icon(
-                    Icons.arrow_back_rounded,
-                    color: Colors.white,
+                width: screenWidth,
+                height: screenHeight,
+                child: Center(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: screenHeight * 0.35,
+                      ),
+                      Center(child: CircularProgressIndicator()),
+                      Container(
+                          child: Text(
+                        "Loading your profile...",
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                        ),
+                        textAlign: TextAlign.center,
+                      )),
+                    ],
                   ),
                 ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    alignment: Alignment.center,
-                    // color: Colors.grey,
-                    height: screenHeight * 0.3,
-                    width: screenWidth * 0.45,
-                    padding: EdgeInsets.symmetric(
-                      // vertical: screenHeight * 0.005,
-                      horizontal: screenWidth * 0.01,
-                    ),
+              ),
+            );
+          } else {
+            return Scaffold(
+              // backgroundColor: Color.fromRGBO(66, 204, 195, 0.84),
+              backgroundColor: Colors.white,
+              body: ListView(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.topCenter,
+                    color: Color.fromRGBO(66, 204, 195, 0.84),
+                    // color: Colors.amber,
+                    // height: maxDimension * 0.245,
+                    height: 450.spMin,
                     margin: EdgeInsets.only(
-                      top: maxDimension * 0.0025,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: screenWidth * 0.025,
+                        // left: screenWidth * 0.0125,
+                        // right: screenWidth * 0.0125,
+                        // top: screenHeight * 0.0275,
+                        // top: screenHeight * 0.001,
+                        // bottom: screenHeight * 0.005,
                         ),
-                        Center(
+                    padding: EdgeInsets.only(
+                      left: screenWidth * 0.015,
+                      right: screenWidth * 0.015,
+                      top: screenHeight * 0.0075,
+                      bottom: screenHeight * 0.001,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        IconButton(
+                          onPressed: () {
+                            // Navigator.of(context).pushReplacementNamed(TabScreen.routeName);
+                            Navigator.of(context).pop(context);
+                          },
+                          iconSize: 30,
+                          icon: Icon(
+                            Icons.arrow_back_rounded,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topCenter,
                           child: Container(
-                            height: screenWidth * 0.315,
-                            width: screenWidth * 0.315,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.transparent,
-                              radius: screenWidth,
-                              child: CircleAvatar(
-                                radius: screenWidth * 0.6,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(
-                                    screenWidth * 0.2,
-                                  ),
-                                  child: ClipOval(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(100),
+                            alignment: Alignment.center,
+                            // color: Colors.grey,
+                            height: screenHeight * 0.3,
+                            width: screenWidth * 0.45,
+                            padding: EdgeInsets.symmetric(
+                              // vertical: screenHeight * 0.005,
+                              horizontal: screenWidth * 0.01,
+                            ),
+                            margin: EdgeInsets.only(
+                              top: maxDimension * 0.0025,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: screenWidth * 0.025,
+                                ),
+                                Center(
+                                  child: Container(
+                                    height: screenWidth * 0.315,
+                                    width: screenWidth * 0.315,
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.transparent,
+                                      radius: screenWidth,
+                                      child: CircleAvatar(
+                                        radius: screenWidth * 0.6,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                            screenWidth * 0.2,
+                                          ),
+                                          child: ClipOval(
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                              ),
+                                              child: _isProfilePicTaken
+                                                  ? Image.file(
+                                                      _profilePicture,
+                                                      fit: BoxFit.cover,
+                                                      width: double.infinity,
+                                                    )
+                                                  : snapshot.data[
+                                                              "guest_Image_Url"] ==
+                                                          ""
+                                                      ? Image.asset(
+                                                          "assets/images/icons/profile.png",
+                                                        )
+                                                      : Image.network(
+                                                          snapshot.data[
+                                                              "guest_Image_Url"],
+                                                          fit: BoxFit.cover,
+                                                          width:
+                                                              double.infinity,
+                                                        ),
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                      child: _isProfilePicTaken
-                                          ? Image.file(
-                                              _profilePicture,
-                                              fit: BoxFit.cover,
-                                              width: double.infinity,
-                                            )
-                                          : imageNetworkUrl == ""
-                                              ? Image.asset(
-                                                  "assets/images/icons/profile.png",
-                                                )
-                                              : Image.network(
-                                                  imageNetworkUrl,
-                                                  fit: BoxFit.cover,
-                                                  width: double.infinity,
-                                                ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
                         ),
-                        // Container(
-                        //   width: screenWidth * 0.8,
-                        //   // height: screenHeight * 0.05,
-                        //   child: TextButton(
-                        //     style: TextButton.styleFrom(
-                        //       textStyle: const TextStyle(
-                        //         fontSize: 18,
-                        //         color: Color(0xff42ccc3),
-                        //       ),
-                        //     ),
-                        //     onPressed: () {
-                        //       if (_isProfilePicTaken) {
-                        //         // Provider.of<PatientUserDetails>(context,
-                        //         //         listen: false)
-                        //         //     .updatePatientProfilePicture(
-                        //         //         context, _profilePicture);
-                        //         // setState(() {
-                        //         //   _isProfilePicTaken = false;
-                        //         // });
-                        //       } else {
-                        //         _seclectImageUploadingType(
-                        //           context,
-                        //           "Set your Profile Picture",
-                        //           "Image Picker",
-                        //           imageNetworkUrl,
-                        //         );
-                        //       }
-                        //     },
-                        //     child: Text(
-                        //       !_isProfilePicTaken
-                        //           ? isLangEnglish
-                        //               ? 'CHANGE PHOTO'
-                        //               : "तस्वीर चेंज"
-                        //           : isLangEnglish
-                        //               ? "SAVE PHOTO"
-                        //               : "तस्वीर सेट करे",
-                        //       style: TextStyle(
-                        //         fontSize: 15,
-                        //         fontWeight: FontWeight.bold,
-                        //         // color: Color(0xff42ccc3),
-                        //         color: Colors.white,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
+                        Icon(
+                          Icons.home,
+                          color: Colors.transparent,
+                          size: 30,
+                        ),
                       ],
                     ),
                   ),
-                ),
-                Icon(
-                  Icons.home,
-                  color: Colors.transparent,
-                  size: 30,
-                ),
-              ],
-            ),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Container(
-                width: screenWidth,
-                color: Color.fromRGBO(66, 204, 195, 0.84),
-                alignment: Alignment.center,
-                child: Text(
-                  '${userMapping['guest_Name']}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                  Align(
+                    alignment: Alignment.center,
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Container(
+                        width: screenWidth,
+                        color: Color.fromRGBO(66, 204, 195, 0.84),
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${snapshot.data['guest_Name']}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: minDimension * 0.015,
-                ),
-                width: screenWidth,
-                color: Color.fromRGBO(66, 204, 195, 0.84),
-                alignment: Alignment.center,
-                child: Text(
-                  '${userMapping['guest_EmailId']}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 17.5,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                  Align(
+                    alignment: Alignment.center,
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: minDimension * 0.015,
+                        ),
+                        width: screenWidth,
+                        color: Color.fromRGBO(66, 204, 195, 0.84),
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${snapshot.data['guest_EmailId']}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 17.5,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  SizedBox(
+                    height: screenHeight * 0.0065,
+                  ),
+                  TextFieldContainer(
+                    context,
+                    "Name",
+                    'guest_Name',
+                    "Enter your Name...",
+                    snapshot.data,
+                    TextInputType.name,
+                  ),
+                  TextFieldContainer(
+                    context,
+                    "Email",
+                    'guest_EmailId',
+                    "Enter your Email...",
+                    snapshot.data,
+                    TextInputType.name,
+                  ),
+                  TextFieldContainer(
+                    context,
+                    "Mobile Number",
+                    'guest_Mobile_Number',
+                    "Enter your Mobile Number...",
+                    snapshot.data,
+                    TextInputType.number,
+                  ),
+                  TextFieldContainer(
+                    context,
+                    "Bio",
+                    'guest_Bio',
+                    "Enter your bio...",
+                    snapshot.data,
+                    TextInputType.number,
+                  ),
+                  TextFieldContainer(
+                    context,
+                    "Research Interests",
+                    'guest_Research_Interests',
+                    "Enter your research interests...",
+                    snapshot.data,
+                    TextInputType.number,
+                  ),
+                  SizedBox(
+                    height: screenHeight * 0.05,
+                  ),
+                  Align(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15)),
+                      width: screenWidth * 0.9,
+                      child: ElevatedButton.icon(
+                        onPressed: () async {
+                          FirebaseAuth.instance.signOut().then((value) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LogInSignUpScreen(),
+                              ),
+                            );
+                          });
+                        },
+                        icon: Icon(Icons.logout),
+                        label: Text("Log out"),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: screenHeight * 0.025,
+                  ),
+                ],
               ),
-            ),
-          ),
-          SizedBox(
-            height: screenHeight * 0.0065,
-          ),
-          TextFieldContainer(
-            context,
-            "Name",
-            'guest_Name',
-            "Enter your Name...",
-            userMapping,
-            TextInputType.name,
-          ),
-          TextFieldContainer(
-            context,
-            "Email",
-            'guest_EmailId',
-            "Enter your Email...",
-            userMapping,
-            TextInputType.name,
-          ),
-          TextFieldContainer(
-            context,
-            "Mobile Number",
-            'guest_Mobile_Number',
-            "Enter your Mobile Number...",
-            userMapping,
-            TextInputType.number,
-          ),
-          TextFieldContainer(
-            context,
-            "Bio",
-            'guest_Bio',
-            "Enter your bio...",
-            userMapping,
-            TextInputType.number,
-          ),
-          TextFieldContainer(
-            context,
-            "Research Interests",
-            'guest_Research_Interests',
-            "Enter your research interests...",
-            userMapping,
-            TextInputType.number,
-          ),
-
-          SizedBox(
-            height: screenHeight * 0.05,
-          ),
-          // ElevatedButton(
-          //   onPressed: () {
-          //     Navigator.of(context).push(
-          //       MaterialPageRoute(
-          //         builder: (context) => QrCodeGenerator(),
-          //       ),
-          //     );
-          //     print("Button Pressed");
-          //   },
-          //   child: Text(
-          //     "Qr Code",
-          //   ),
-          // )
-          // Container(
-          //   child: TextButton(
-          //     onPressed: !isSaveChangesBtnActive ? null : () {},
-          //     child: Container(
-          //       width: screenWidth * 0.95,
-          //       padding: EdgeInsets.symmetric(
-          //         vertical: screenHeight * 0.025,
-          //         horizontal: screenWidth * 0.01,
-          //       ),
-          //       decoration: BoxDecoration(
-          //         color: !isSaveChangesBtnActive
-          //             ? Color.fromRGBO(220, 229, 228, 1)
-          //             : Color(0xff42CCC3),
-          //         borderRadius: BorderRadius.circular(10),
-          //         border: Border.all(
-          //           width: 2,
-          //           color: Color(0xffCDCDCD),
-          //         ),
-          //       ),
-          //       child: Center(
-          //         child: Text(
-          //           "Save Changes",
-          //           style: TextStyle(
-          //             color: Colors.black,
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // SizedBox(
-          //   height: screenHeight * 0.0125,
-          // ),
-        ],
-      ),
-    );
+            );
+          }
+        });
   }
 
   Widget imageContainer(BuildContext context, String imgUrl) {

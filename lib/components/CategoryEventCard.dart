@@ -51,7 +51,9 @@ class _CategoryEventCardState extends State<CategoryEventCard> {
           elevation: 8,
           // semanticContainer: false,
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 27.w, vertical: 23.h),
+            margin: EdgeInsets.symmetric(
+              horizontal: 27.w,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -59,13 +61,12 @@ class _CategoryEventCardState extends State<CategoryEventCard> {
                 Image.network(
                   widget.eventDetail[1],
                   fit: BoxFit.contain,
-                  width: 250.spMin,
-                  height: 300.spMin,
+                  width: 200.spMin,
+                  height: 200.spMin,
                 ),
                 Flexible(
                   child: Container(
-                    padding: EdgeInsets.only(top: 23.h),
-                    margin: EdgeInsets.only(top: 23.h),
+                    padding: EdgeInsets.only(top: 15.h),
                     width: 300.r,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +74,10 @@ class _CategoryEventCardState extends State<CategoryEventCard> {
                         Flexible(
                           child: Text(
                             widget.eventDetail[0],
-                            style: TextStyle(fontSize: 40.sp),
+                            style: TextStyle(
+                              fontSize: 40.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
                             softWrap: true,
                             textAlign: TextAlign.center,
                           ),

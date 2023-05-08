@@ -50,7 +50,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       drawer: SideNavBar(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -93,7 +93,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               print(snapshot.data);
               print(snapshot.data.length);
               return SingleChildScrollView(
-              padding: EdgeInsets.only(top: 280.8.h),
               child: FixedTimeline.tileBuilder(
                 // mainAxisSize: MainAxisSize.max,
                 theme: TimelineTheme.of(context).copyWith(

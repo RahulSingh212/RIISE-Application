@@ -65,6 +65,10 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
       child: Text("Panel Discussion"),
       value: "PanelDiscussion",
     ),
+    DropdownMenuItem(
+      child: Text("Extra Events"),
+      value: "Extra-Events",
+    ),
   ];
 
   List<SpeakerLocalInformation> speakerList = [];
@@ -198,16 +202,18 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                         titleText,
                         contextText,
                       );
-                    } else if (speakerList.isEmpty) {
-                      String titleText = "No speaker available";
-                      String contextText =
-                          "Select atleast one speaker for the event";
-                      _checkForError(
-                        context,
-                        titleText,
-                        contextText,
-                      );
-                    } else {
+                    } 
+                    // else if (speakerList.isEmpty) {
+                    //   String titleText = "No speaker available";
+                    //   String contextText =
+                    //       "Select atleast one speaker for the event";
+                    //   _checkForError(
+                    //     context,
+                    //     titleText,
+                    //     contextText,
+                    //   );
+                    // }
+                     else {
                       setState(() {
                         _isSaveButtonPressed = true;
                       });

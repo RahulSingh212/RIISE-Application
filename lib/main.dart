@@ -171,7 +171,7 @@ class MyApp extends StatelessWidget {
             if (userSnapShot.hasData) {
               return TabScreen();
             } else {
-              return LogInSignUpScreen();
+              return TabScreen();
             }
           },
         ),

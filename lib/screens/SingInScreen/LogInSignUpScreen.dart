@@ -21,16 +21,6 @@ class LogInSignUpScreen extends StatefulWidget {
 
 class _LogInSignUpScreenState extends State<LogInSignUpScreen> {
   final _formkey = GlobalKey<FormState>();
-  List<DropdownMenuItem<String>> userTypeList = [
-    DropdownMenuItem(
-      child: Text("Guest"),
-      value: "Guest",
-    ),
-    DropdownMenuItem(
-      child: Text("Faculty"),
-      value: "Faculty",
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -39,138 +29,58 @@ class _LogInSignUpScreenState extends State<LogInSignUpScreen> {
     var topInsets = MediaQuery.of(context).viewInsets.top;
     var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
     var useableHeight = screenHeight - topInsets - bottomInsets;
-    return Material(
-      color: Colors.white,
-      child: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          "Login",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 60.sp,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.blue,
+          size: 80.r,
+        ),
+        actions: [
+          Container(
+            padding: EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
+            child: Center(
+              child: Image.network(
+                "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Image.asset("assets/images/logo2.png", fit: BoxFit.cover),
             SizedBox(
-              height: 20,
-            ),
-            // Text(
-            //   Provider.of<UserLoginProvider>(context, listen: false).userType ==
-            //           "Guest"
-            //       ? "Welcome, Guest "
-            //       : "Welcome, Faculty",
-            //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            // ),
-            // SizedBox(
-            //   height: 20,
-            // ),
-            // Padding(
-            //   padding:
-            //       const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20),
-            //   child: Form(
-            //     key: _formkey,
-            //     child: Column(
-            //       children: [
-            //         TextFormField(
-            //           decoration: InputDecoration(
-            //             hintText: "Enter UserName",
-            //             labelText: "UserName",
-            //           ),
-            //           validator: (value) {
-            //             print("username $value");
-            //             if (value!.length < 1) return 'UserName cant be empty';
-            //             return null;
-            //           },
-            //         ),
-            //         SizedBox(
-            //           height: 10,
-            //         ),
-            //         TextFormField(
-            //           obscureText: true,
-            //           decoration: InputDecoration(
-            //             hintText: "Enter Password",
-            //             labelText: "Password",
-            //           ),
-            //           validator: (value) {
-            //             print("password $value");
-            //             if (value!.length < 1) return 'password cant be empty';
-            //             // return null;
-            //             if (value.length < 8)
-            //               return "Password length must be greater than 8";
-            //             return null;
-            //           },
-            //         ),
-            //         SizedBox(
-            //           height: 40,
-            //         ),
-            //         SizedBox(
-            //           width: 140,
-            //           height: 50,
-            //           child: ElevatedButton(
-            //             onPressed: () {},
-            //             child: Text(
-            //               Provider.of<UserLoginProvider>(context, listen: false)
-            //                           .userType ==
-            //                       "SignUp"
-            //                   ? 'Sign Up'
-            //                   : "Log In",
-            //             ),
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
-          SizedBox(
-            height: 15,
-          ),
-          // Align(
-          //   child: Container(
-          //     width: screenWidth * 0.9,
-          //     padding: EdgeInsets.symmetric(
-          //       vertical: 5,
-          //     ),
-          //     child: DropdownButtonFormField(
-          //       decoration: InputDecoration(
-          //         enabledBorder: OutlineInputBorder(
-          //           borderSide: BorderSide(
-          //             color: Colors.green.shade600,
-          //             width: 2,
-          //           ),
-          //           borderRadius: BorderRadius.circular(10),
-          //         ),
-          //         border: OutlineInputBorder(
-          //           borderSide: BorderSide(
-          //             color: Colors.green.shade600,
-          //             width: 2,
-          //           ),
-          //           borderRadius: BorderRadius.circular(10),
-          //         ),
-          //         filled: true,
-          //         fillColor: Colors.green.shade200,
-          //       ),
-          //       items: userTypeList,
-          //       dropdownColor: Colors.green.shade200,
-          //       value: userTypeList[0].value,
-          //       onChanged: (String? value) {
-          //         setState(() {
-          //           print(value);
-          //           Provider.of<UserLoginProvider>(context, listen: false)
-          //               .userType = value!;
-          //         });
-          //       },
-          //     ),
-          //   ),
-          // ),
-            SizedBox(
-              height: 40,
+              height: 75,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: FloatingActionButton.extended(
                 onPressed: () async {
-                  Provider.of<UserLoginProvider>(context, listen: false).checkPointsWhenButtonIsPressed(context);
+                  Provider.of<UserLoginProvider>(context, listen: false)
+                      .checkPointsWhenButtonIsPressed(context);
                 },
                 icon: Image.asset(
                   "assets/images/google_icon.png",
                   height: 32,
                   width: 32,
                 ),
-                label: Text('Google Sign In',
+                label: Text(
+                  'Google Sign In',
                 ),
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black,

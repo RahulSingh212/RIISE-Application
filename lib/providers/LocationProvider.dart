@@ -36,6 +36,8 @@ class LocationProvider with ChangeNotifier {
                 coordinate_Name: coordinateMap['coordinate_Name'],
                 coordinate_Address: coordinateMap['coordinate_Address'],
                 coordinate_Code_Name: coordinateMap['coordinate_Code_Name'],
+                coordinate_Landmark: coordinateMap['coordinate_Landmark'],
+                Images_List: coordinateMap['Images_List'],
               );
 
               listOfCoordinateList.add(coordinateInfo);

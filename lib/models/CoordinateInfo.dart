@@ -18,6 +18,8 @@ class CoordinateServerInformation {
   final String coordinate_Name;
   final String coordinate_Address;
   final String coordinate_Code_Name;
+  final String coordinate_Landmark;
+  final List<dynamic> Images_List;
 
   CoordinateServerInformation({
     required this.coordinate_Unique_Id,
@@ -26,5 +28,7 @@ class CoordinateServerInformation {
     required this.coordinate_Name,
     required this.coordinate_Address,
     required this.coordinate_Code_Name,
+    required this.coordinate_Landmark,
+    required this.Images_List,
   });
 }

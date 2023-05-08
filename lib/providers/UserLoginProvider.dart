@@ -195,10 +195,11 @@ class UserLoginProvider with ChangeNotifier {
 
     // if ((facultyExistance && userType == "Faculty") || (guestExistance && userType == "Guest")) {
     if (facultyExistance || guestExistance) {
-      // Navigator.of(context).pushNamedAndRemoveUntil(
-      //   TabScreen.routeName,
-      //   (route) => false,
-      // );
+      Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => TabScreen(),
+      ),
+    );
     } else {
       uploadInformationOfNewGuest(
         context,

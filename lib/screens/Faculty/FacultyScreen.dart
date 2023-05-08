@@ -64,7 +64,6 @@ class _FacultyScreenState extends State<FacultyScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
       drawer: SideNavBar(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -106,7 +105,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
               print("Faculty Screen");
               print(snapshot.data);
               return Container(
-                padding: EdgeInsets.only(top: 280.h, left: 54.w, right: 54.w),
+                padding: EdgeInsets.only(left: 54.w, right: 54.w),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -20,15 +20,16 @@ import 'package:url_launcher/url_launcher_string.dart';
 import '../../components/SideNavBar.dart';
 import '../../models/FacultyInfo.dart';
 import '../../providers/CalendarAPI.dart';
+import '../SingInScreen/LogInSignUpScreen.dart';
 
 class FacultyDetailScreen extends StatefulWidget {
   static const routeName = '/riise-faculty-detail-screen';
 
   FacultyDetailScreen(
       {Key? key,
-        // required this.position,
-        required this.facultyDetails,
-        this.qrIdentifier})
+      // required this.position,
+      required this.facultyDetails,
+      this.qrIdentifier})
       : super(key: key);
 
   // late int position;
@@ -49,7 +50,6 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
 
   bool isLoading = true;
 
-
   @override
   Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
@@ -63,22 +63,22 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
 
   // late TextEditingController eventTitle = TextEditingController(text: "Guest-Faculty interaction");
   late TextEditingController eventTitle =
-  TextEditingController(text: "Guest-Faculty interaction");
+      TextEditingController(text: "Guest-Faculty interaction");
   late TextEditingController eventLocation =
-  TextEditingController(text: widget.facultyDetails.faculty_Office_Address);
+      TextEditingController(text: widget.facultyDetails.faculty_Office_Address);
   late TextEditingController eventDescription = TextEditingController(
       text:
-      "Hi, I would like to meet you to discuss your work. \n\n Thanks, \n ${FirebaseAuth.instance.currentUser?.displayName}");
+          "Hi, I would like to meet you to discuss your work. \n\n Thanks, \n ${FirebaseAuth.instance.currentUser?.displayName}");
   late TextEditingController eventGuest =
-  TextEditingController(text: widget.facultyDetails.faculty_EmailId);
+      TextEditingController(text: widget.facultyDetails.faculty_EmailId);
   late TextEditingController eventStartTime =
-  TextEditingController(text: DateFormat("hh:mm a").format(DateTime.now()));
+      TextEditingController(text: DateFormat("hh:mm a").format(DateTime.now()));
   late TextEditingController eventEndTime = TextEditingController(
       text: DateFormat("hh:mm a")
           .format(DateTime.now().add(Duration(minutes: 15))));
 
   late TextEditingController eventDate =
-  TextEditingController(text: DateFormat("MMMEd").format(DateTime.now()));
+      TextEditingController(text: DateFormat("MMMEd").format(DateTime.now()));
 
   // Future loadingPopUp(BuildContext context0) async {
   //   return showDialog(
@@ -128,47 +128,49 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
     return showDialog(
         context: context,
         builder: (ctx) => Padding(
-          padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 20.h),
-          child: AlertDialog(
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(12))),
-            title: TextField(
-              controller: TextEditingController(text: "Book Appointment"),
-              style: TextStyle(fontSize: 55.sp),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Title",
-                suffixIcon: ClipOval(
-                  child: Image.network(
-                    widget.facultyDetails.faculty_Image_Url == ""
-                        ? defaultProfileImage
-                        : widget.facultyDetails.faculty_Image_Url,
-                    width: 25.r,
-                    height: 25.r,
-                    fit: BoxFit.fill,
+              padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 20.h),
+              child: AlertDialog(
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12))),
+                title: TextField(
+                  controller: TextEditingController(text: "Book Appointment"),
+                  style: TextStyle(fontSize: 55.sp),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: "Title",
+                    suffixIcon: ClipOval(
+                      child: Image.network(
+                        widget.facultyDetails.faculty_Image_Url == ""
+                            ? defaultProfileImage
+                            : widget.facultyDetails.faculty_Image_Url,
+                        width: 25.r,
+                        height: 25.r,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                   ),
+                  enabled: false,
                 ),
+                titlePadding: EdgeInsets.fromLTRB(60.w, 60.h, 80.w, 0.h),
+                contentPadding: EdgeInsets.fromLTRB(70.w, 80.h, 80.w, 0.h),
+                content: Text(
+                  "Next Available Slot has been Updated, Re-submit to book Appointment",
+                  style: TextStyle(fontSize: 40.sp),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(14),
+                      child: const Text("Okay"),
+                    ),
+                  ),
+                ],
               ),
-              enabled: false,
             ),
-            titlePadding: EdgeInsets.fromLTRB(60.w, 60.h, 80.w, 0.h),
-            contentPadding: EdgeInsets.fromLTRB(70.w, 80.h, 80.w, 0.h),
-            content: Text("Next Available Slot has been Updated, Re-submit to book Appointment",style: TextStyle(fontSize: 40.sp),),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(ctx).pop();
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(14),
-                  child: const Text("Okay"),
-                ),
-              ),
-            ],
-          ),
-        ),
-        barrierColor: Colors.black.withOpacity(0.75)
-    );
+        barrierColor: Colors.black.withOpacity(0.75));
 
     // async {
     //   date_time temp = date_time();
@@ -198,7 +200,6 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
     //   );
     // },
   }
-
 
   Future showPopUp(BuildContext context0) async {
     return await showDialog(
@@ -388,18 +389,25 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                       ];
                       print("Hey its me, calling calendar event function");
                       DateTime tempDate01 =
-                      DateFormat("MMMEd").parse(eventDate.text);
+                          DateFormat("MMMEd").parse(eventDate.text);
                       DateTime tempTime01 =
-                      DateFormat("hh:mm a").parse(eventStartTime.text);
+                          DateFormat("hh:mm a").parse(eventStartTime.text);
                       DateTime tempTime02 =
-                      DateFormat("hh:mm a").parse(eventEndTime.text);
+                          DateFormat("hh:mm a").parse(eventEndTime.text);
                       DateTime tempStartTime = DateTime(2023, tempDate01.month,
                           tempDate01.day, tempTime01.hour, tempTime01.minute);
                       DateTime tempEndTime = DateTime(2023, tempDate01.month,
                           tempDate01.day, tempTime02.hour, tempTime02.minute);
                       await Provider.of<CalenderAPI>(context0, listen: false)
-                          .fetchSchedules(context, "Faculty", "Faculty-Schedule-List", widget.facultyDetails.faculty_EmailId);
-                      if( await Provider.of<CalenderAPI>(context0,listen: false).checkForFacultyScheduleConflicts(context0, tempStartTime, tempEndTime)){
+                          .fetchSchedules(
+                              context,
+                              "Faculty",
+                              "Faculty-Schedule-List",
+                              widget.facultyDetails.faculty_EmailId);
+                      if (await Provider.of<CalenderAPI>(context0,
+                              listen: false)
+                          .checkForFacultyScheduleConflicts(
+                              context0, tempStartTime, tempEndTime)) {
                         await CalenderAPI().addEvent(
                             context,
                             eventTitle.text,
@@ -409,27 +417,33 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                             eventDescription.text,
                             eventLocation.text,
                             widget.facultyDetails.faculty_Name,
-                            Provider.of<UserDetailsProvider>(context0,listen: false).userMapping['guest_Name']!
-                        );
+                            Provider.of<UserDetailsProvider>(context0,
+                                    listen: false)
+                                .userMapping['guest_Name']!);
                         Navigator.of(context).pop();
-                      }
-                      else
-                      {
+                      } else {
                         await Provider.of<CalenderAPI>(context0, listen: false)
-                            .fetchSchedules(context, "Faculty", "Faculty-Schedule-List", widget.facultyDetails.faculty_EmailId);
+                            .fetchSchedules(
+                                context,
+                                "Faculty",
+                                "Faculty-Schedule-List",
+                                widget.facultyDetails.faculty_EmailId);
                         print("Time Unavailable");
-                        DateTime tempTime = Provider.of<CalenderAPI>(context0,listen: false).getForFacultyScheduleInterval(context0);
+                        DateTime tempTime =
+                            Provider.of<CalenderAPI>(context0, listen: false)
+                                .getForFacultyScheduleInterval(context0);
                         print("Time set to - > ${tempTime}");
                         setState(() {
-                          eventStartTime.text = DateFormat("hh:mm a").format(tempTime);
+                          eventStartTime.text =
+                              DateFormat("hh:mm a").format(tempTime);
                           eventDate.text = DateFormat("MMMEd").format(tempTime);
                           startTime = tempTime;
-                          eventEndTime.text = DateFormat("hh:mm a").format(startTime.add(Duration(minutes: 15)));
+                          eventEndTime.text = DateFormat("hh:mm a")
+                              .format(startTime.add(Duration(minutes: 15)));
                           startTime = startTime.add(Duration(minutes: 15));
                         });
                         showTimeConflictPopUp(context);
                       }
-
 
                       // await CalenderAPI().addEvent(context,"TEST 2",DateTime.now().add(Duration(hours: 3, minutes: 30)),DateTime.now().add(Duration(hours: 4, minutes: 30)));
                       // await CalenderAPI().addEvent(context,"TEST 3",DateTime.now().add(Duration(hours: 5, minutes: 30)),DateTime.now().add(Duration(hours: 6, minutes: 30)));
@@ -491,9 +505,9 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
     print("QR IDENTIFIER = ${widget.qrIdentifier}");
 
     List<String> researchInterests =
-    convertStrToList(widget.facultyDetails.faculty_Research_Interests);
+        convertStrToList(widget.facultyDetails.faculty_Research_Interests);
     List<String> teachingInterests =
-    convertStrToList(widget.facultyDetails.faculty_Teaching_Interests);
+        convertStrToList(widget.facultyDetails.faculty_Teaching_Interests);
     List<String> centresLabs = convertStrToList(
         widget.facultyDetails.faculty_Affiliated_Centers_And_Labs);
     // print("RESEARCH INTERESTS -> " +researchInterests.length.toString());
@@ -539,437 +553,481 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
           child: (isLoading && widget.qrIdentifier != null)
               ? Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            keyboardDismissBehavior:
-            ScrollViewKeyboardDismissBehavior.onDrag,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 30.w),
-                  alignment: Alignment.center,
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 3),
-                            borderRadius: BorderRadius.circular(12),
-                            color: Colors.grey),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.network(
-                            widget.facultyDetails.faculty_Image_Url == ""
-                                ? defaultProfileImage
-                                : widget.facultyDetails.faculty_Image_Url,
-                            width: 450.r,
-                            height: 450.r,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Flexible(
-                        child: Text(
-                          widget.facultyDetails.faculty_Name,
-                          style: TextStyle(fontSize: 70.sp),
-                          softWrap: true,
-                          textAlign: TextAlign.center,
-                          // maxLines: 100,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      widget.facultyDetails.faculty_Position == ""
-                          ? Container()
-                          : Flexible(
-                        child: Text(
-                          "${widget.facultyDetails.faculty_Position} (${widget.facultyDetails.faculty_Department})",
-                          style: TextStyle(
-                            fontSize: 40.sp,
-                          ),
-                          softWrap: true,
-                          textAlign: TextAlign.center,
-                          // maxLines: 100,
+                        padding: EdgeInsets.symmetric(horizontal: 30.w),
+                        alignment: Alignment.center,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(width: 3),
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: Colors.grey),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.network(
+                                  widget.facultyDetails.faculty_Image_Url == ""
+                                      ? defaultProfileImage
+                                      : widget.facultyDetails.faculty_Image_Url,
+                                  width: 450.r,
+                                  height: 450.r,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Flexible(
+                              child: Text(
+                                widget.facultyDetails.faculty_Name,
+                                style: TextStyle(fontSize: 70.sp),
+                                softWrap: true,
+                                textAlign: TextAlign.center,
+                                // maxLines: 100,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            widget.facultyDetails.faculty_Position == ""
+                                ? Container()
+                                : Flexible(
+                                    child: Text(
+                                      "${widget.facultyDetails.faculty_Position} (${widget.facultyDetails.faculty_Department})",
+                                      style: TextStyle(
+                                        fontSize: 40.sp,
+                                      ),
+                                      softWrap: true,
+                                      textAlign: TextAlign.center,
+                                      // maxLines: 100,
+                                    ),
+                                  ),
+                            SizedBox(
+                              height: 60.h,
+                            ),
+                            FirebaseAuth.instance.currentUser != null ? Provider.of<UserDetailsProvider>(context, listen: false).userType != "Faculty" ? 
+                            ElevatedButton(onPressed: () async {
+                                          showPopUp(context);
+                                        },
+                                        child: Text(
+                                          "Book Appointment",
+                                        ),
+                                      ) : SizedBox()
+                            : ElevatedButton.icon(
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LogInSignUpScreen(),
+                                            ),
+                                          );
+                                        },
+                                        icon: Icon(
+                                          Icons.login_rounded,
+                                        ),
+                                        label:
+                                            Text("Login to book appointment"),
+                                      ),
+
+                            // Provider.of<UserDetailsProvider>(context,
+                            //                 listen: false)
+                            //             .userType !=
+                            //         "Faculty"
+                            //     ? FirebaseAuth.instance.currentUser != null
+                            //         ? ElevatedButton(
+                            //             onPressed: () async {
+                            //               showPopUp(context);
+                            //             },
+                            //             child: Text(
+                            //               "Book Appointment",
+                            //             ),
+                            //           )
+                            //         : ElevatedButton.icon(
+                            //             onPressed: () {
+                            //               Navigator.of(context).push(
+                            //                 MaterialPageRoute(
+                            //                   builder: (context) =>
+                            //                       LogInSignUpScreen(),
+                            //                 ),
+                            //               );
+                            //             },
+                            //             icon: Icon(
+                            //               Icons.login_rounded,
+                            //             ),
+                            //             label:
+                            //                 Text("Login to book appointment"),
+                            //           )
+                            //     : SizedBox(),
+                            SizedBox(
+                              height: 80.h,
+                            ),
+                            widget.facultyDetails.faculty_College == ""
+                                ? Container()
+                                : Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.cast_for_education,
+                                        // size: ,
+                                      ),
+                                      SizedBox(
+                                        width: 20.h,
+                                      ),
+                                      Flexible(
+                                        child: Text(
+                                          widget.facultyDetails.faculty_College,
+                                          style: TextStyle(fontSize: 40.sp),
+                                          softWrap: true,
+                                          textAlign: TextAlign.center,
+                                          // maxLines: 100,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.email_outlined,
+                                  // size: ,
+                                ),
+                                SizedBox(
+                                  width: 20.w,
+                                ),
+                                Flexible(
+                                  child: InkWell(
+                                    onTap: () {
+                                      launchUrlString(
+                                          'https://calendar.google.com/calendar/u/0/r/eventedit?state=%5Bnull%2Cnull%2Cnull%2Cnull%2C%5B13%5D%5D&tab=wc',
+                                          mode: LaunchMode.externalApplication);
+                                      // https://calendar.google.com/calendar/r
+                                      // print("Hello THERE");
+                                      // launchUrlString(
+                                      //     'https://calendar.google.com/calendar/r',
+                                      //     mode: LaunchMode.externalApplication);
+                                    },
+                                    child: Text(
+                                      widget.facultyDetails.faculty_EmailId,
+                                      style: TextStyle(
+                                          fontSize: 40.sp,
+                                          color: Colors.blueAccent),
+                                      softWrap: true,
+                                      textAlign: TextAlign.center,
+                                      // maxLines: 100,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 120.w,
+                                ),
+                                widget.facultyDetails.faculty_Mobile_Number ==
+                                        ""
+                                    ? Container()
+                                    : Icon(
+                                        Icons.call,
+                                        // size: ,
+                                      ),
+                                SizedBox(
+                                  width: 20.w,
+                                ),
+                                widget.facultyDetails.faculty_Mobile_Number ==
+                                        ""
+                                    ? Container()
+                                    : Flexible(
+                                        child: InkWell(
+                                          onTap: () {
+                                            launchUrlString(
+                                                'tel:${widget.facultyDetails.faculty_Mobile_Number}',
+                                                mode: LaunchMode
+                                                    .externalApplication);
+                                          },
+                                          child: Text(
+                                            widget.facultyDetails
+                                                .faculty_Mobile_Number,
+                                            style: TextStyle(
+                                                fontSize: 40.sp,
+                                                color: Colors.blueAccent),
+                                            softWrap: true,
+                                            textAlign: TextAlign.center,
+                                            // maxLines: 100,
+                                          ),
+                                        ),
+                                      ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                widget.facultyDetails.faculty_Website_Url == ""
+                                    ? Container()
+                                    : Icon(
+                                        CupertinoIcons.globe,
+                                        // size: ,
+                                      ),
+                                widget.facultyDetails.faculty_Website_Url == ""
+                                    ? Container()
+                                    : Flexible(
+                                        child: InkWell(
+                                          onTap: () {
+                                            launchUrlString(
+                                                widget.facultyDetails
+                                                    .faculty_Website_Url,
+                                                mode: LaunchMode
+                                                    .externalApplication);
+                                          },
+                                          child: Text(
+                                            "WebPage",
+                                            style: TextStyle(
+                                                fontSize: 40.sp,
+                                                color: Colors.blueAccent),
+                                            softWrap: true,
+                                            textAlign: TextAlign.center,
+                                            // maxLines: 100,
+                                          ),
+                                        ),
+                                      ),
+                                SizedBox(
+                                  width: 120.w,
+                                ),
+                                widget.facultyDetails.faculty_Office_Latitude ==
+                                        0.0
+                                    ? Container()
+                                    : Icon(
+                                        Icons.location_on_outlined,
+                                        // size: ,
+                                      ),
+                                widget.facultyDetails.faculty_Office_Latitude ==
+                                        0.0
+                                    ? Container()
+                                    : Flexible(
+                                        child: InkWell(
+                                          onTap: () {
+                                            _launchDirectionsUrl(
+                                                widget.facultyDetails
+                                                    .faculty_Office_Latitude
+                                                    .toString(),
+                                                widget.facultyDetails
+                                                    .faculty_Office_Longitude
+                                                    .toString());
+                                          },
+                                          child: Text(
+                                            widget.facultyDetails
+                                                .faculty_Office_Address,
+                                            style: TextStyle(
+                                                fontSize: 40.sp,
+                                                color: Colors.blueAccent),
+                                            softWrap: true,
+                                            textAlign: TextAlign.center,
+                                            // maxLines: 100,
+                                          ),
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
                         height: 60.h,
                       ),
-                      Provider.of<UserDetailsProvider>(context,listen: false).userType != "Faculty"?
-                      ElevatedButton(
-                        onPressed: () async {
-                          showPopUp(context);
-                        },
-                        child: Text(
-                          "Book Appointment",
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          widget.facultyDetails.faculty_Bio == ""
+                              ? Container()
+                              : Text(
+                                  "About",
+                                  style: TextStyle(fontSize: 60.sp),
+                                  softWrap: true,
+                                  textAlign: TextAlign.center,
+                                ),
+                          SizedBox(
+                            height: 40.h,
+                          ),
+                          widget.facultyDetails.faculty_Bio == ""
+                              ? Container()
+                              : Flexible(
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 45.w),
+                                    child: Text(
+                                      widget.facultyDetails.faculty_Bio,
+                                      style: TextStyle(fontSize: 33.sp),
+                                      softWrap: true,
+                                      textAlign: TextAlign.justify,
+                                      // maxLines: 100,
+                                    ),
+                                  ),
+                                ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 60.h,
+                      ),
+                      Container(
+                        alignment: Alignment.topCenter,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            researchInterests.length == 1
+                                ? Container()
+                                : Text(
+                                    "Research Interests",
+                                    style: TextStyle(fontSize: 60.sp),
+                                    softWrap: true,
+                                    textAlign: TextAlign.center,
+                                  ),
+                            researchInterests.length == 1
+                                ? Container()
+                                : ListView.builder(
+                                    shrinkWrap: true,
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 40.h),
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, position) {
+                                      return Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 50.w),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Icon(CupertinoIcons
+                                                .hand_point_right),
+                                            SizedBox(
+                                              width: 50.w,
+                                            ),
+                                            Flexible(
+                                                child: Text(
+                                              researchInterests[position],
+                                              style: TextStyle(fontSize: 40.sp),
+                                              softWrap: true,
+                                            ))
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    itemCount: researchInterests.length,
+                                  ),
+                            teachingInterests.length == 1
+                                ? Container()
+                                : Text(
+                                    "Teaching Interests",
+                                    style: TextStyle(fontSize: 60.sp),
+                                    softWrap: true,
+                                    textAlign: TextAlign.center,
+                                  ),
+                            teachingInterests.length == 1
+                                ? Container()
+                                : ListView.builder(
+                                    shrinkWrap: true,
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 40.h),
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, position) {
+                                      return Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 50.w),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Icon(CupertinoIcons
+                                                .hand_point_right),
+                                            SizedBox(
+                                              width: 50.w,
+                                            ),
+                                            Flexible(
+                                                child: Text(
+                                              teachingInterests[position],
+                                              style: TextStyle(fontSize: 40.sp),
+                                              softWrap: true,
+                                            ))
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    itemCount: teachingInterests.length,
+                                  ),
+                            centresLabs.length == 1
+                                ? Container()
+                                : Text(
+                                    "Affiliated Centres & Labs",
+                                    style: TextStyle(fontSize: 60.sp),
+                                    softWrap: true,
+                                    textAlign: TextAlign.center,
+                                  ),
+                            centresLabs.length == 1
+                                ? Container()
+                                : ListView.builder(
+                                    shrinkWrap: true,
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 40.h),
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, position) {
+                                      return Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 50.w),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Icon(CupertinoIcons
+                                                .hand_point_right),
+                                            SizedBox(
+                                              width: 50.w,
+                                            ),
+                                            Flexible(
+                                                child: Text(
+                                              centresLabs[position],
+                                              style: TextStyle(fontSize: 40.sp),
+                                              softWrap: true,
+                                            ))
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    itemCount: centresLabs.length,
+                                  ),
+                          ],
                         ),
-                      ):Container(),
-                      SizedBox(
-                        height: 80.h,
-                      ),
-                      widget.facultyDetails.faculty_College == ""
-                          ? Container()
-                          : Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment:
-                        CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.cast_for_education,
-                            // size: ,
-                          ),
-                          SizedBox(
-                            width: 20.h,
-                          ),
-                          Flexible(
-                            child: Text(
-                              widget.facultyDetails.faculty_College,
-                              style: TextStyle(fontSize: 40.sp),
-                              softWrap: true,
-                              textAlign: TextAlign.center,
-                              // maxLines: 100,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.email_outlined,
-                            // size: ,
-                          ),
-                          SizedBox(
-                            width: 20.w,
-                          ),
-                          Flexible(
-                            child: InkWell(
-                              onTap: () {
-                                launchUrlString(
-                                    'https://calendar.google.com/calendar/u/0/r/eventedit?state=%5Bnull%2Cnull%2Cnull%2Cnull%2C%5B13%5D%5D&tab=wc',
-                                    mode: LaunchMode.externalApplication);
-                                // https://calendar.google.com/calendar/r
-                                // print("Hello THERE");
-                                // launchUrlString(
-                                //     'https://calendar.google.com/calendar/r',
-                                //     mode: LaunchMode.externalApplication);
-                              },
-                              child: Text(
-                                widget.facultyDetails.faculty_EmailId,
-                                style: TextStyle(
-                                    fontSize: 40.sp,
-                                    color: Colors.blueAccent),
-                                softWrap: true,
-                                textAlign: TextAlign.center,
-                                // maxLines: 100,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 120.w,
-                          ),
-                          widget.facultyDetails.faculty_Mobile_Number ==
-                              ""
-                              ? Container()
-                              : Icon(
-                            Icons.call,
-                            // size: ,
-                          ),
-                          SizedBox(
-                            width: 20.w,
-                          ),
-                          widget.facultyDetails.faculty_Mobile_Number ==
-                              ""
-                              ? Container()
-                              : Flexible(
-                            child: InkWell(
-                              onTap: () {
-                                launchUrlString(
-                                    'tel:${widget.facultyDetails.faculty_Mobile_Number}',
-                                    mode: LaunchMode
-                                        .externalApplication);
-                              },
-                              child: Text(
-                                widget.facultyDetails
-                                    .faculty_Mobile_Number,
-                                style: TextStyle(
-                                    fontSize: 40.sp,
-                                    color: Colors.blueAccent),
-                                softWrap: true,
-                                textAlign: TextAlign.center,
-                                // maxLines: 100,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          widget.facultyDetails.faculty_Website_Url == ""
-                              ? Container()
-                              : Icon(
-                            CupertinoIcons.globe,
-                            // size: ,
-                          ),
-                          widget.facultyDetails.faculty_Website_Url == ""
-                              ? Container()
-                              : Flexible(
-                            child: InkWell(
-                              onTap: () {
-                                launchUrlString(
-                                    widget.facultyDetails
-                                        .faculty_Website_Url,
-                                    mode: LaunchMode
-                                        .externalApplication);
-                              },
-                              child: Text(
-                                "WebPage",
-                                style: TextStyle(
-                                    fontSize: 40.sp,
-                                    color: Colors.blueAccent),
-                                softWrap: true,
-                                textAlign: TextAlign.center,
-                                // maxLines: 100,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 120.w,
-                          ),
-                          widget.facultyDetails.faculty_Office_Latitude ==
-                              0.0
-                              ? Container()
-                              : Icon(
-                            Icons.location_on_outlined,
-                            // size: ,
-                          ),
-                          widget.facultyDetails.faculty_Office_Latitude ==
-                              0.0
-                              ? Container()
-                              : Flexible(
-                            child: InkWell(
-                              onTap: () {
-                                _launchDirectionsUrl(
-                                    widget.facultyDetails
-                                        .faculty_Office_Latitude
-                                        .toString(),
-                                    widget.facultyDetails
-                                        .faculty_Office_Longitude
-                                        .toString());
-                              },
-                              child: Text(
-                                widget.facultyDetails
-                                    .faculty_Office_Address,
-                                style: TextStyle(
-                                    fontSize: 40.sp,
-                                    color: Colors.blueAccent),
-                                softWrap: true,
-                                textAlign: TextAlign.center,
-                                // maxLines: 100,
-                              ),
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 60.h,
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    widget.facultyDetails.faculty_Bio == ""
-                        ? Container()
-                        : Text(
-                      "About",
-                      style: TextStyle(fontSize: 60.sp),
-                      softWrap: true,
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(
-                      height: 40.h,
-                    ),
-                    widget.facultyDetails.faculty_Bio == ""
-                        ? Container()
-                        : Flexible(
-                      child: Padding(
-                        padding:
-                        EdgeInsets.symmetric(horizontal: 45.w),
-                        child: Text(
-                          widget.facultyDetails.faculty_Bio,
-                          style: TextStyle(fontSize: 33.sp),
-                          softWrap: true,
-                          textAlign: TextAlign.justify,
-                          // maxLines: 100,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 60.h,
-                ),
-                Container(
-                  alignment: Alignment.topCenter,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      researchInterests.length == 1
-                          ? Container()
-                          : Text(
-                        "Research Interests",
-                        style: TextStyle(fontSize: 60.sp),
-                        softWrap: true,
-                        textAlign: TextAlign.center,
-                      ),
-                      researchInterests.length == 1
-                          ? Container()
-                          : ListView.builder(
-                        shrinkWrap: true,
-                        padding:
-                        EdgeInsets.symmetric(vertical: 40.h),
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, position) {
-                          return Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50.w),
-                            child: Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.start,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              children: [
-                                Icon(CupertinoIcons
-                                    .hand_point_right),
-                                SizedBox(
-                                  width: 50.w,
-                                ),
-                                Flexible(
-                                    child: Text(
-                                      researchInterests[position],
-                                      style: TextStyle(fontSize: 40.sp),
-                                      softWrap: true,
-                                    ))
-                              ],
-                            ),
-                          );
-                        },
-                        itemCount: researchInterests.length,
-                      ),
-                      teachingInterests.length == 1
-                          ? Container()
-                          : Text(
-                        "Teaching Interests",
-                        style: TextStyle(fontSize: 60.sp),
-                        softWrap: true,
-                        textAlign: TextAlign.center,
-                      ),
-                      teachingInterests.length == 1
-                          ? Container()
-                          : ListView.builder(
-                        shrinkWrap: true,
-                        padding:
-                        EdgeInsets.symmetric(vertical: 40.h),
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, position) {
-                          return Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50.w),
-                            child: Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.start,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              children: [
-                                Icon(CupertinoIcons
-                                    .hand_point_right),
-                                SizedBox(
-                                  width: 50.w,
-                                ),
-                                Flexible(
-                                    child: Text(
-                                      teachingInterests[position],
-                                      style: TextStyle(fontSize: 40.sp),
-                                      softWrap: true,
-                                    ))
-                              ],
-                            ),
-                          );
-                        },
-                        itemCount: teachingInterests.length,
-                      ),
-                      centresLabs.length == 1
-                          ? Container()
-                          : Text(
-                        "Affiliated Centres & Labs",
-                        style: TextStyle(fontSize: 60.sp),
-                        softWrap: true,
-                        textAlign: TextAlign.center,
-                      ),
-                      centresLabs.length == 1
-                          ? Container()
-                          : ListView.builder(
-                        shrinkWrap: true,
-                        padding:
-                        EdgeInsets.symmetric(vertical: 40.h),
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, position) {
-                          return Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50.w),
-                            child: Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.start,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              children: [
-                                Icon(CupertinoIcons
-                                    .hand_point_right),
-                                SizedBox(
-                                  width: 50.w,
-                                ),
-                                Flexible(
-                                    child: Text(
-                                      centresLabs[position],
-                                      style: TextStyle(fontSize: 40.sp),
-                                      softWrap: true,
-                                    ))
-                              ],
-                            ),
-                          );
-                        },
-                        itemCount: centresLabs.length,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
         ));
   }
 
@@ -995,7 +1053,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
     return Center(
       child: Container(
         padding:
-        EdgeInsets.only(left: 20.w, right: 20.w, top: 40.h, bottom: 40.h),
+            EdgeInsets.only(left: 20.w, right: 20.w, top: 40.h, bottom: 40.h),
         width: 920.w,
         child: TextField(
           controller: controller,

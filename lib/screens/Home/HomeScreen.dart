@@ -36,6 +36,7 @@ import '../Profile/FacultyProfileScreen.dart';
 import '../Profile/GuestProfileScreen.dart';
 import '../RNDShowcase/RnDShowcaseAndDemoScreen.dart';
 import '../ResearchShowcase/ResearchShowcaseScreen.dart';
+import '../SingInScreen/LogInSignUpScreen.dart';
 import '../StartupShowcase/StartUpShowcase.dart';
 import '../TabScreen.dart';
 
@@ -52,14 +53,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _auth = FirebaseAuth.instance;
+  // final _auth = FirebaseAuth.instance;
   late TextEditingController searchBarController = TextEditingController();
   final ThemeProvider themeProviderModel = ThemeProvider();
 
   List<EventServerInformation> eventUtil = [];
 
   fetchUserProfile() async {
-    Provider.of<UserDetailsProvider>(context, listen: false).setUserType(context);
+    Provider.of<UserDetailsProvider>(context, listen: false)
+        .setUserType(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (FirebaseAuth.instance.currentUser != null) {
+      fetchUserProfile();
+    }
   }
 
   List<dynamic> categoryList = [
@@ -104,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       drawer: SideNavBar(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -137,18 +148,27 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.only(right: 5),
             child: IconButton(
               onPressed: () async {
-                if (Provider.of<UserDetailsProvider>(context, listen: false)
-                        .userType ==
-                    "Guest") {
+                if (FirebaseAuth.instance.currentUser != null) {
+                  if (Provider.of<UserDetailsProvider>(context, listen: false)
+                          .userType ==
+                      "Guest") {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => GuestProfileScreen(),
+                      ),
+                    );
+                  } else {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => FacultyProfileScreen(),
+                      ),
+                    );
+                  }
+                }
+                else {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => GuestProfileScreen(),
-                    ),
-                  );
-                } else {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => FacultyProfileScreen(),
+                      builder: (context) => LogInSignUpScreen(),
                     ),
                   );
                 }
@@ -165,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         physics: BouncingScrollPhysics(),
         child: Container(
-          padding: EdgeInsets.only(top: 280.h, left: 54.w, right: 54.w),
+          padding: EdgeInsets.only(left: 54.w, right: 54.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,7 +214,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Text(
-                      _auth.currentUser?.displayName as String,
+                      FirebaseAuth.instance.currentUser != null
+                          ? FirebaseAuth.instance.currentUser?.displayName
+                              as String
+                          : "User",
                       style: TextStyle(
                         fontSize: 80.sp,
                         color: Colors.black,
@@ -270,19 +293,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           } else {
                             return Container(
-                              // padding: EdgeInsets.only(top: 58.h),
-                              margin: EdgeInsets.only(top: 58.h),
                               alignment: Alignment.topCenter,
-                              // decoration: BoxDecoration(
-                              //   border: Border.all()
-                              // ),
-                              // height: height*1.5,
                               child: ListView.builder(
                                 itemCount: snapshot.data.length,
                                 // scrollDirection: Axis.horizontal,
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.only(top: 23.h),
+                                padding: EdgeInsets.only(top: 10.h),
                                 itemBuilder: (context, position) {
                                   return EventCard(
                                     eventDetails: snapshot.data[position],
@@ -299,23 +316,22 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-
-      floatingActionButton: SizedBox(
-        child: FloatingActionButton.extended(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => AddSectionScreen(),
-              ),
-            );
-          },
-          icon: Icon(
-            Icons.add,
-          ),
-          label: Text("Add"),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton: SizedBox(
+      //   child: FloatingActionButton.extended(
+      //     onPressed: () {
+      //       Navigator.of(context).push(
+      //         MaterialPageRoute(
+      //           builder: (context) => AddSectionScreen(),
+      //         ),
+      //       );
+      //     },
+      //     icon: Icon(
+      //       Icons.add,
+      //     ),
+      //     label: Text("Add"),
+      //   ),
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
