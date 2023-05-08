@@ -23,6 +23,7 @@ import "./screens/Schedules/ScheduleScreen.dart";
 import "./screens/Directions/DirectionScreen.dart";
 import "./screens/Appointments/AppointmentScreen.dart";
 import './screens/SingInScreen/LogInSignUpScreen.dart';
+import "./screens/ScannerScreen/QRCodeScannerScreen.dart";
 
 import "./providers/FirebaseProvider.dart";
 import "./providers/FacultiesProvider.dart";
@@ -166,7 +167,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         home: StreamBuilder(
-          stream: _auth.authStateChanges(),
+          stream: FirebaseAuth.instance.authStateChanges(),
           builder: (ctx, userSnapShot) {
             if (userSnapShot.hasData) {
               return TabScreen();
@@ -182,6 +183,7 @@ class MyApp extends StatelessWidget {
           ScheduleScreen.routeName: (ctx) => ScheduleScreen(),
           DirectionScreen.routeName: (ctx) => DirectionScreen(),
           AppointmentScreen.routeName: (ctx) => AppointmentScreen(),
+          QRCodeScannerScreen.routeName: (ctx) => QRCodeScannerScreen(),
         },
       ),
     );

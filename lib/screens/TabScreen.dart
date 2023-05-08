@@ -22,6 +22,7 @@ import 'package:riise/providers/UserDetailsProvider.dart';
 import 'package:riise/providers/UserLoginProvider.dart';
 import 'package:riise/screens/Faculty/FacultyDetailScreen.dart';
 import 'package:riise/screens/QrCode/QrCodeGenerator.dart';
+import 'package:riise/screens/ScannerScreen/QRCodeScannerScreen.dart';
 
 import '../models/EventInfo.dart';
 import '../providers/CalendarAPI.dart';
@@ -88,6 +89,10 @@ class _TabScreenState extends State<TabScreen>
       {
         'page': AppointmentScreen(),
         'title': 'Appointments',
+      },
+      {
+        'page': QRCodeScannerScreen(),
+        'title': 'QR Scanner',
       },
     ];
 
@@ -158,6 +163,11 @@ class _TabScreenState extends State<TabScreen>
         color: Colors.green,
         size: 80.r,
       ),
+      Icon(
+        Icons.qr_code_scanner_outlined,
+        color: Colors.green,
+        size: 80.r,
+      ),
     ];
 
     final iconItemsActive = <Widget>[
@@ -183,6 +193,11 @@ class _TabScreenState extends State<TabScreen>
       ),
       Icon(
         Icons.meeting_room_rounded,
+        color: Colors.green,
+        size: 80.r,
+      ),
+      Icon(
+        Icons.qr_code_scanner_rounded,
         color: Colors.green,
         size: 80.r,
       ),

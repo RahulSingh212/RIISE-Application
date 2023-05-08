@@ -322,6 +322,11 @@ class _GuestProfileScreenState extends State<GuestProfileScreen> {
                       child: ElevatedButton.icon(
                         onPressed: () async {
                           FirebaseAuth.instance.signOut().then((value) {
+                            // Navigator.pushNamedAndRemoveUntil(
+                            //   context,
+                            //   TabScreen.routeName,
+                            //   ModalRoute.withName(TabScreen.routeName),
+                            // );
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

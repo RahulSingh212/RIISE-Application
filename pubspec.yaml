@@ -64,6 +64,7 @@ dependencies:
   firebase_dynamic_links: ^5.1.0
   googleapis: ^10.1.0
   googleapis_auth: ^1.4.0
+  flutter_barcode_scanner: ^2.0.0
 
 dev_dependencies:
   flutter_test:
