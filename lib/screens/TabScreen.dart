@@ -11,9 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-// import 'package:googleapis/calendar/v3.dart';
-// import 'package:googleapis/calendar/v3.dart';
-// import 'package:googleapis/calendar/v3.dart';
 import 'package:googleapis_auth/auth.dart';
 import 'package:googleapis_auth/auth_io.dart';
 import 'package:http/http.dart';
@@ -50,7 +47,8 @@ class TabScreen extends StatefulWidget {
   State<TabScreen> createState() => _TabScreenState();
 }
 
-class _TabScreenState extends State<TabScreen> with SingleTickerProviderStateMixin {
+class _TabScreenState extends State<TabScreen>
+    with SingleTickerProviderStateMixin {
   late List<Map<String, Object>> _pages;
 
   late final AnimationController _controller;
@@ -93,7 +91,6 @@ class _TabScreenState extends State<TabScreen> with SingleTickerProviderStateMix
       },
     ];
 
-
     Future.delayed(Duration.zero, () async {
       final initialLink = DynamicLinkProvider.initialLink;
 
@@ -105,17 +102,17 @@ class _TabScreenState extends State<TabScreen> with SingleTickerProviderStateMix
         FacultyServerInformation faculty =
             await Provider.of<FacultiesProvider>(context, listen: false)
                 .getFacultyDetails(deepLink.path);
-        FacultyServerInformation faculty =
-            await Provider.of<FacultiesProvider>(context, listen: false)
-                .getFacultyDetails(deepLink.path);
         // Example of using the dynamic link to push the user to a different screen
         DynamicLinkProvider.initialLink = null;
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                FacultyDetailScreen(facultyDetails: faculty)));
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => FacultyDetailScreen(
+              facultyDetails: faculty,
+            ),
+          ),
+        );
       }
     });
-    load();
   }
 
   void _selectPage(int index) {
@@ -277,71 +274,6 @@ class _TabScreenState extends State<TabScreen> with SingleTickerProviderStateMix
       ),
     );
   }
-
-  // Widget sideMenuBar(BuildContext context) {
-  //   return Padding(
-  //     padding: const EdgeInsets.only(
-  //       left: 10,
-  //     ),
-  //     child: Align(
-  //       alignment: Alignment.centerLeft,
-  //       child: Column(
-  //         mainAxisSize: MainAxisSize.min,
-  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: const [
-  //           Text(
-  //             "Home",
-  //             style: TextStyle(
-  //               color: Colors.white,
-  //               fontSize: 20,
-  //             ),
-  //           ),
-  //           SizedBox(
-  //             height: 10,
-  //           ),
-  //           Text(
-  //             "Faculty",
-  //             style: TextStyle(
-  //               color: Colors.white,
-  //               fontSize: 20,
-  //             ),
-  //           ),
-  //           SizedBox(
-  //             height: 10,
-  //           ),
-  //           Text(
-  //             "Schedule",
-  //             style: TextStyle(
-  //               color: Colors.white,
-  //               fontSize: 20,
-  //             ),
-  //           ),
-  //           SizedBox(
-  //             height: 10,
-  //           ),
-  //           Text(
-  //             "Locations",
-  //             style: TextStyle(
-  //               color: Colors.white,
-  //               fontSize: 20,
-  //             ),
-  //           ),
-  //           SizedBox(
-  //             height: 10,
-  //           ),
-  //           Text(
-  //             "Appointments",
-  //             style: TextStyle(
-  //               color: Colors.white,
-  //               fontSize: 20,
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Future<void> _checkForError(
       BuildContext context, String titleText, String contextText,
