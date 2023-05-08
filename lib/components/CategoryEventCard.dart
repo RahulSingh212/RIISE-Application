@@ -58,8 +58,9 @@ class _CategoryEventCardState extends State<CategoryEventCard> {
               children: [
                 Image.network(
                   widget.eventDetail[1],
-                  width: 200.r,
-                  height: 200.r,
+                  fit: BoxFit.contain,
+                  width: 250.spMin,
+                  height: 300.spMin,
                 ),
                 Flexible(
                   child: Container(

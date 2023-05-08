@@ -50,8 +50,11 @@ class TabScreen extends StatefulWidget {
   State<TabScreen> createState() => _TabScreenState();
 }
 
-class _TabScreenState extends State<TabScreen> {
+class _TabScreenState extends State<TabScreen> with SingleTickerProviderStateMixin {
   late List<Map<String, Object>> _pages;
+
+  late final AnimationController _controller;
+  late final Animation<double> _animation;
 
   final _appScreens = [
     const HomeScreen(),
@@ -90,6 +93,7 @@ class _TabScreenState extends State<TabScreen> {
       },
     ];
 
+
     Future.delayed(Duration.zero, () async {
       final initialLink = DynamicLinkProvider.initialLink;
 
@@ -101,25 +105,32 @@ class _TabScreenState extends State<TabScreen> {
         FacultyServerInformation faculty =
             await Provider.of<FacultiesProvider>(context, listen: false)
                 .getFacultyDetails(deepLink.path);
+        FacultyServerInformation faculty =
+            await Provider.of<FacultiesProvider>(context, listen: false)
+                .getFacultyDetails(deepLink.path);
         // Example of using the dynamic link to push the user to a different screen
         DynamicLinkProvider.initialLink = null;
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => FacultyDetailScreen(
-              facultyDetails: faculty,
-            ),
-          ),
-        );
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                FacultyDetailScreen(facultyDetails: faculty)));
       }
     });
-    // load();
+    load();
   }
 
   void _selectPage(int index) {
     setState(() {
       Provider.of<ScreenControllerProvider>(context, listen: false)
           .selectedPageIndex = index;
+      Provider.of<ScreenControllerProvider>(context, listen: false)
+          .selectedPageIndex = index;
     });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override

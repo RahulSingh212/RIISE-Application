@@ -9,6 +9,7 @@ import 'package:riise/models/EventInfo.dart';
 import 'package:riise/screens/EventDetailScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../helper/HexagonClipper.dart';
 import '../models/ThemeInfo.dart';
 import '../screens/Themes/ThemeDetailScreen.dart';
 
@@ -47,119 +48,94 @@ class _NewEventCardState extends State<NewEventCard> {
           ),
         );
       },
-      child: Container(
-        margin: EdgeInsets.only(right: 86.w),
-        child: Card(
-          elevation: 8,
-          // semanticContainer: false,
-          child: Container(
-            // color: Colors.redAccent,
-            margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.network(
-                  widget.eventDetails.Event_Image_Url,
-                  width: 400.r,
-                  height: 400.r,
-                  fit: BoxFit.cover,
-                ),
-                Flexible(
-                  child: Container(
-                    // color: Colors.blueAccent,
-                    padding: EdgeInsets.only(top: 23.h),
-                    margin: EdgeInsets.only(top: 23.h),
-                    width: 500.r,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            widget.eventDetails.Event_Name,
-                            style: TextStyle(fontSize:50.sp),
-                            softWrap: true,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
-                    ),
+      child: Card(
+        elevation: 8,
+        // semanticContainer: false,
+        child: Container(
+          // color: Colors.redAccent,
+          margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ClipPath(
+                clipper: HexagonClipper(),
+                child: Container(
+                  color: Color(0xff3faea8),
+                  child: Image.network(
+                    widget.eventDetails.Event_Image_Url,
+                    width: 400.r,
+                    height: 500.r,
+                    fit: BoxFit.contain,
                   ),
                 ),
-                SizedBox(height: 20.h,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          // padding: EdgeInsets.zero,
-                          // margin: EdgeInsets.zero,
-                          // color: Colors.red,
-                          child: IconButton(onPressed: (){
+              ),
+              //
+              // Image.network(
+              //   widget.eventDetails.Event_Image_Url,
+              //   width: 400.r,
+              //   height: 400.r,
+              //   fit: BoxFit.cover,
+              // ),
+              Flexible(
+                child: Container(
+                  // color: Colors.blueAccent,
+                  padding: EdgeInsets.symmetric(vertical: 23.h),
+                  margin: EdgeInsets.symmetric(vertical: 23.h),
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          widget.eventDetails.Event_Name,
+                          style: TextStyle(fontSize:50.sp),
+                          softWrap: true,
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          textScaleFactor: 1.0,
+                          maxLines: 2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 5.spMin,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        // padding: EdgeInsets.zero,
+                        // margin: EdgeInsets.zero,
+                        // color: Colors.red,
+                        child: IconButton(onPressed: (){
+                          _launchDirectionsUrl(widget.eventDetails.Event_Latitude,widget.eventDetails.Event_Longitude);
+                        }, icon: Icon(CupertinoIcons.location_solid,color: Colors.blueAccent,)),
+                      ),
+                      Flexible(
+                        child: InkWell(
+                          onTap: (){
                             _launchDirectionsUrl(widget.eventDetails.Event_Latitude,widget.eventDetails.Event_Longitude);
-                          }, icon: Icon(CupertinoIcons.location_solid,color: Colors.blueAccent,)),
-                        ),
-                        Flexible(
-                          child: InkWell(
-                            onTap: (){
-                              _launchDirectionsUrl(widget.eventDetails.Event_Latitude,widget.eventDetails.Event_Longitude);
-                            },
-                            child: Container(
-                              // color: Colors.blueAccent,
-                              padding: EdgeInsets.only(top: 15.h),
-                              margin: EdgeInsets.only(top: 23.h),
-                              width: 250.r,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Flexible(
-                                    child: Text(
-                                      widget.eventDetails.Event_Address,
-                                      style: TextStyle(fontSize:40.sp),
-                                      softWrap: true,
-                                      textAlign: TextAlign.left,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          // padding: EdgeInsets.zero,
-                          // margin: EdgeInsets.zero,
-                          // color: Colors.red,
-                          child: IconButton(onPressed: (){
-
                           },
-                              icon: Icon(CupertinoIcons.clock,color: Colors.blueAccent,)),
-                        ),
-                        Flexible(
                           child: Container(
                             // color: Colors.blueAccent,
-                            padding: EdgeInsets.only(top: 15.h),
-                            margin: EdgeInsets.only(top: 23.h),
-                            width: 250.r,
+                            padding: EdgeInsets.only(top: 0.h),
+                            margin: EdgeInsets.only(top: 0.h),
+                            width: 250.spMin,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Flexible(
                                   child: Text(
-                                    widget.eventDetails.Event_Date.toString(),
+                                    widget.eventDetails.Event_Address,
                                     style: TextStyle(fontSize:40.sp),
                                     softWrap: true,
                                     textAlign: TextAlign.left,
@@ -169,34 +145,73 @@ class _NewEventCardState extends State<NewEventCard> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    // Flexible(
-                    //   child: Container(
-                    //     // color: Colors.blueAccent,
-                    //     padding: EdgeInsets.only(top: 23.h),
-                    //     margin: EdgeInsets.only(top: 23.h),
-                    //     width: 300.r,
-                    //     child: Row(
-                    //       mainAxisAlignment: MainAxisAlignment.center,
-                    //       children: [
-                    //         Flexible(
-                    //           child: Text(
-                    //             widget.eventDetails.Event_Date.toString(),
-                    //             style: TextStyle(fontSize:40.sp),
-                    //             softWrap: true,
-                    //             textAlign: TextAlign.center,
-                    //           ),
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // )
-                  ],
+                      ),
+                    ],
+                  ),
+                  // SizedBox(width: 10.w,),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        // padding: EdgeInsets.zero,
+                        // margin: EdgeInsets.zero,
+                        // color: Colors.red,
+                        child: IconButton(onPressed: (){
 
-                )
-              ],
-            ),
+                        },
+                            icon: Icon(CupertinoIcons.clock,color: Colors.blueAccent,)),
+                      ),
+                      Flexible(
+                        child: Container(
+                          // color: Colors.blueAccent,
+                          padding: EdgeInsets.only(top: 0.h),
+                          margin: EdgeInsets.only(top: 0.h),
+                          width: 250.spMin,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  widget.eventDetails.Event_Date.toString(),
+                                  style: TextStyle(fontSize:40.sp),
+                                  softWrap: true,
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Flexible(
+                  //   child: Container(
+                  //     // color: Colors.blueAccent,
+                  //     padding: EdgeInsets.only(top: 23.h),
+                  //     margin: EdgeInsets.only(top: 23.h),
+                  //     width: 300.r,
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: [
+                  //         Flexible(
+                  //           child: Text(
+                  //             widget.eventDetails.Event_Date.toString(),
+                  //             style: TextStyle(fontSize:40.sp),
+                  //             softWrap: true,
+                  //             textAlign: TextAlign.center,
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // )
+                ],
+
+              )
+            ],
           ),
         ),
       ),

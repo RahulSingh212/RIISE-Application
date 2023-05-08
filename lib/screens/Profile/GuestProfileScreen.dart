@@ -10,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -97,7 +98,7 @@ class _GuestProfileScreenState extends State<GuestProfileScreen> {
             color: Color.fromRGBO(66, 204, 195, 0.84),
             // color: Colors.amber,
             // height: maxDimension * 0.245,
-            height: maxDimension * 0.21,
+            height: 450.spMin,
             margin: EdgeInsets.only(
                 // left: screenWidth * 0.0125,
                 // right: screenWidth * 0.0125,
@@ -131,7 +132,7 @@ class _GuestProfileScreenState extends State<GuestProfileScreen> {
                   child: Container(
                     alignment: Alignment.center,
                     // color: Colors.grey,
-                    height: screenHeight * 0.235,
+                    height: screenHeight * 0.3,
                     width: screenWidth * 0.45,
                     padding: EdgeInsets.symmetric(
                       // vertical: screenHeight * 0.005,

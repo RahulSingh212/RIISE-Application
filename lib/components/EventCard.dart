@@ -47,7 +47,7 @@ class _EventCardState extends State<EventCard> {
         );
       },
       child: Container(
-        // margin: EdgeInsets.only(right: 0.008 * width),
+        margin: EdgeInsets.only(top: 46.h),
         child: Card(
           elevation: 8,
           // color: Colors.red,
@@ -60,7 +60,7 @@ class _EventCardState extends State<EventCard> {
             ),
             child: Container(
               margin: EdgeInsets.symmetric(
-                  horizontal: 54.w, vertical: 23.h),
+                  horizontal: 54.w, vertical: 46.h),
 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

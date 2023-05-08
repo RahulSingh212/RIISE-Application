@@ -1,4 +1,4 @@
-package com.example.riise
+package com.iiitd.riise
 
 import io.flutter.embedding.android.FlutterActivity
 

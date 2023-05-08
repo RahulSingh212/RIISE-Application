@@ -109,14 +109,18 @@ class _RNDShowcaseAndDemoScreenState extends State<RNDShowcaseAndDemoScreen> {
                     .rndShowcasesAndDemosList
                     .length,
                 scrollDirection: Axis.vertical,
-                shrinkWrap: false,
+                shrinkWrap: true,
                 // physics: NeverScrollableScrollPhysics(),
                 physics: BouncingScrollPhysics(),
                 padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
                 itemBuilder: (context, position) {
+                  print("Screen Width 0 ${MediaQuery.of(context).size.width}");
+                  print("Screen Width 1 ${1080.w}");
+                  print("Screen Width 2 ${1.sw}");
                   return Container(
-                    height: 900.h,
-                    padding: EdgeInsets.only(left: 86.w, top: 80.h),
+                    height: 1000.spMin,
+                    // color: MediaQuery.of(context).size.width > 1080.w ? Colors.blue : Colors.orange,
+                    padding: EdgeInsets.only(left: 86.w, right: 86.w, top: 80.h),
                     child: NewEventCard(
                       eventDetails: Provider.of<EventProvider>(context)
                           .rndShowcasesAndDemosList[position],
