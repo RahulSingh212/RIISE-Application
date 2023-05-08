@@ -6,13 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 import '../models/ThemeInfo.dart';
 import '../screens/Themes/ThemeDetailScreen.dart';
 
 //ignore: must_be_immutable
 class CategoryEventCard extends StatefulWidget {
-
   CategoryEventCard({
     Key? key,
     // required this.position,
@@ -39,53 +37,52 @@ class _CategoryEventCardState extends State<CategoryEventCard> {
     // double minDimension = min(width, height);
     // double maxDimension = max(width, height);
 
-    return Container(
-      margin: EdgeInsets.only(right: 86.w),
-      child: Card(
-        elevation: 8,
-        // semanticContainer: false,
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 27.w, vertical: 23.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () {
-                  // print("${widget.position} clicked");
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => widget.eventDetail[2]
-                    ),
-                  );
-                },
-                child: Image.network(
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => widget.eventDetail[2],
+          ),
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 86.w),
+        child: Card(
+          elevation: 8,
+          // semanticContainer: false,
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 27.w, vertical: 23.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.network(
                   widget.eventDetail[1],
                   width: 200.r,
                   height: 200.r,
                 ),
-              ),
-              Flexible(
-                child: Container(
-                  padding: EdgeInsets.only(top: 23.h),
-                  margin: EdgeInsets.only(top: 23.h),
-                  width: 300.r,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          widget.eventDetail[0],
-                          style: TextStyle(fontSize: 40.sp),
-                          softWrap: true,
-                          textAlign: TextAlign.center,
+                Flexible(
+                  child: Container(
+                    padding: EdgeInsets.only(top: 23.h),
+                    margin: EdgeInsets.only(top: 23.h),
+                    width: 300.r,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            widget.eventDetail[0],
+                            style: TextStyle(fontSize: 40.sp),
+                            softWrap: true,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

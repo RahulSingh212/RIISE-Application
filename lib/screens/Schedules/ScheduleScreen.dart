@@ -46,40 +46,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   List<EventServerInformation> scheduleList = [];
   late TextEditingController searchBarController = TextEditingController();
 
-  List<EventServerInformation> eventUtil = [];
-
-  Future<void> loadDataUtil() async {
-    await Provider.of<EventProvider>(context, listen: false)
-        .fetchEventTracks(context, "SpeakerTracks");
-    await Provider.of<EventProvider>(context, listen: false)
-        .fetchEventTracks(context, "PosterTracks");
-    await Provider.of<EventProvider>(context, listen: false)
-        .fetchEventTracks(context, "PanelDiscussion");
-    eventUtil = [
-      Provider.of<EventProvider>(context, listen: false).posterTracksList,
-      Provider.of<EventProvider>(context, listen: false).speakerTracksList,
-      Provider.of<EventProvider>(context, listen: false).panelDiscussionList
-    ].expand((x) => x).toList();
-  }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   eventUtil = [
-  //     Provider.of<EventProvider>(context, listen: false).startUpShowcaseList,
-  //     Provider.of<EventProvider>(context, listen: false).researchShowcasesList,
-  //     Provider.of<EventProvider>(context, listen: false)
-  //         .rndShowcasesAndDemosList,
-  //     Provider.of<EventProvider>(context, listen: false)
-  //         .demosAndResearchesHighlightsList,
-  //     Provider.of<EventProvider>(context, listen: false)
-  //         .beyondCollegePanelsList,
-  //     Provider.of<EventProvider>(context, listen: false)
-  //         .forwardLookingPanelsList,
-  //   ].expand((x) => x).toList();
-  //   print("List of ALL EVENTS -> ${eventUtil.length}");
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,7 +89,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               return Center(child: CircularProgressIndicator());
             }
             else {
-              print(snapshot);
+              print("Snap shot data");
+              print(snapshot.data);
+              print(snapshot.data.length);
               return SingleChildScrollView(
               padding: EdgeInsets.only(top: 280.8.h),
               child: FixedTimeline.tileBuilder(
@@ -139,10 +107,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     child: DecoratedLineConnector(
                       thickness: 21.6.w,
                       decoration: BoxDecoration(
-                        color: TimeOfDay.fromDateTime(DateTime.now()).compareTo(eventUtil[index].Event_Start_Time) <
-                                0
-                            ? Colors.green
-                            : Colors.red,
+                        color: Colors.green,
+                        // color: TimeOfDay.fromDateTime(DateTime.now()).compareTo(snapshot.data[index].Event_Start_Time) < 0
+                        //     ? Colors.green
+                        //     : Colors.red,
                       ),
                     ),
                   ),
@@ -174,7 +142,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     ),
                     child: EventCard2(
                       position: index,
-                      eventDetails: eventUtil[index],
+                      eventDetails: snapshot.data[index],
                     ),
                   ),
                   oppositeContentsBuilder: (context, index) => Container(
@@ -206,13 +174,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                           ),
                         ),
                         child: Text(
-                          "${eventUtil[index].Event_Start_Time.format(context)} - ${eventUtil[index].Event_End_Time.format(context)}",
+                          "${snapshot.data[index].Event_Start_Time.format(context)} - ${snapshot.data[index].Event_End_Time.format(context)}",
                           style: TextStyle(fontSize: 45.sp),
                         ),
                       ),
                     ),
                   ),
-                  itemCount: eventUtil.length,
+                  itemCount: snapshot.data.length,
                   // connectorStyle:
                 ),
               ),

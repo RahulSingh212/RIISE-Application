@@ -55,40 +55,12 @@ class _FacultyScreenState extends State<FacultyScreen> {
   late String dropDownValue = facultyDeptList.first;
   late String filterValue = "";
 
-  // late var facultyProider =
-  //     Provider.of<FacultiesProvider>(context, listen: false);
-
-  // void loadData() async {
-  //   await Provider.of<FacultiesProvider>(context, listen: false)
-  //       .fetchCollegeFaculties(context)
-  //       .then((value) {
-  //     setState(() {});
-  //   });
-  // }
-
-  // void initState() {
-  //   super.initState();
-  //   // loadData();
-  // }
-
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   Provider.of<FacultiesProvider>(context, listen: false)
-  //       .fetchCollegeFaculties(context);
-  // }
-
   @override
   Widget build(BuildContext context) {
     // var padding = MediaQuery.of(context).padding;
     // double width = (MediaQuery.of(context).size.width);
     // double height =
     //     (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
-    //
-    // print("Faculty List");
-    // print(facultyProider.facultiesList);
-    // print(facultyProider.facultiesList.first.faculty_Name);
-    // print(facultyProider.facultiesList.first.faculty_Unique_Id);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -118,18 +90,21 @@ class _FacultyScreenState extends State<FacultyScreen> {
                   child: Image.network(
                 "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
                 fit: BoxFit.contain,
-              ))),
+              ),),),
         ],
       ),
       body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection("FacultiesInformationList").snapshots(),
-          // initialData: initialData,
+          stream: Provider.of<FacultiesProvider>(context, listen: false)
+              .fetchFacultyList(context)
+              .asStream(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) {
               return Center(
                 child: CircularProgressIndicator(),
               );
             } else {
+              print("Faculty Screen");
+              print(snapshot.data);
               return Container(
                 padding: EdgeInsets.only(top: 280.h, left: 54.w, right: 54.w),
                 child: Column(
@@ -144,7 +119,6 @@ class _FacultyScreenState extends State<FacultyScreen> {
                         onChanged: (value) => {
                           setState(() {
                             filterValue = value;
-                            print(filterValue);
                           })
                         },
                         decoration: InputDecoration(
@@ -171,15 +145,7 @@ class _FacultyScreenState extends State<FacultyScreen> {
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(Icons.search),
-                            onPressed: () {
-                              // setState(() {
-                              //   recentSearch.insert(0, searchBarController.text);
-                              //   if (recentSearch.length > 5) {
-                              //     recentSearch.removeLast();
-                              //   }
-                              // });
-                              print("serchpressed");
-                            },
+                            onPressed: () {},
                           ),
                         ),
                       ),
@@ -225,7 +191,6 @@ class _FacultyScreenState extends State<FacultyScreen> {
                           onChanged: (String? value) {
                             setState(() {
                               dropDownValue = value!;
-                              print("DropDownValue -> $dropDownValue");
                             });
                           },
                           items: facultyDeptList.map((String value) {
@@ -252,18 +217,11 @@ class _FacultyScreenState extends State<FacultyScreen> {
                       child: ListView.builder(
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
-                        itemCount: Provider.of<FacultiesProvider>(context,
-                                listen: false)
-                            .facultiesList
-                            .length,
+                        itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                          if (isvalidFaculty(
-                              filterValue, index, dropDownValue)) {
+                          if (isvalidFaculty(filterValue, index, dropDownValue, snapshot.data)) {
                             return FacultyCard(
-                              facultyDetails: Provider.of<FacultiesProvider>(
-                                      context,
-                                      listen: false)
-                                  .facultiesList[index],
+                              facultyDetails: snapshot.data[index],
                             );
                           } else {
                             return Container();
@@ -276,168 +234,15 @@ class _FacultyScreenState extends State<FacultyScreen> {
               );
             }
           }),
-      // Container(
-      //   padding: EdgeInsets.only(top: 280.h, left: 54.w, right: 54.w),
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.start,
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: [
-      //       Container(
-      //         padding: EdgeInsets.only(top: 58.5.h),
-      //         height: 210.6.h,
-      //         child: TextField(
-      //           controller: searchBarController,
-      //           onChanged: (value) => {
-      //             setState(() {
-      //               filterValue = value;
-      //               print(filterValue);
-      //             })
-      //           },
-      //           decoration: InputDecoration(
-      //             hintText: "Search",
-      //             border: OutlineInputBorder(),
-      //             enabledBorder: OutlineInputBorder(
-      //               borderSide: BorderSide(
-      //                 color: Color(0xffebebeb),
-      //               ),
-      //               borderRadius: BorderRadius.circular(12),
-      //             ),
-      //             focusedBorder: OutlineInputBorder(
-      //               borderSide: BorderSide(
-      //                 color: Colors.blue,
-      //               ),
-      //               borderRadius: BorderRadius.circular(12),
-      //             ),
-      //             hintStyle: TextStyle(
-      //               fontFamily: 'Roboto',
-      //               fontWeight: FontWeight.w400,
-      //               fontSize: 45.sp,
-      //               fontStyle: FontStyle.normal,
-      //               color: Color(0xff6c757d),
-      //             ),
-      //             suffixIcon: IconButton(
-      //               icon: Icon(Icons.search),
-      //               onPressed: () {
-      //                 // setState(() {
-      //                 //   recentSearch.insert(0, searchBarController.text);
-      //                 //   if (recentSearch.length > 5) {
-      //                 //     recentSearch.removeLast();
-      //                 //   }
-      //                 // });
-      //                 print("serchpressed");
-      //               },
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //       SizedBox(
-      //         height: 46.8.h,
-      //       ),
-      //       InputDecorator(
-      //         decoration: InputDecoration(
-      //           // label: Text("Select Department",style: TextStyle(fontSize: 10),),
-      //           labelText: "Select Dept",
-      //           enabledBorder: OutlineInputBorder(
-      //             // Border.all(width: 1, color: Color(0xffebebeb)),
-      //             borderRadius: BorderRadius.circular(12),
-      //             borderSide: BorderSide(
-      //               color: Color(0xffebebeb),
-      //             ),
-      //             // gapPadding: 0,
-      //           ),
-      //           contentPadding: EdgeInsets.symmetric(
-      //             horizontal: 43.2.w,
-      //             vertical: 11.7.h,
-      //           ),
-      //         ),
-      //         child: SizedBox(
-      //           width: 1080.w,
-      //           child: DropdownButton(
-      //             alignment: Alignment.center,
-      //             enableFeedback: true,
-      //             hint: Text(
-      //               "Select Department",
-      //               style: TextStyle(fontSize: 10),
-      //             ),
-      //             value: dropDownValue,
-      //             icon: Icon(
-      //               Icons.arrow_downward,
-      //               color: Colors.grey,
-      //             ),
-      //             iconSize: 40.r,
-      //             isExpanded: true,
-      //             underline: Container(),
-      //             dropdownColor: Colors.white,
-      //             onChanged: (String? value) {
-      //               setState(() {
-      //                 dropDownValue = value!;
-      //                 print("DropDownValue -> $dropDownValue");
-      //               });
-      //             },
-      //             items: facultyDeptList.map((String value) {
-      //               return DropdownMenuItem<String>(
-      //                 value: value,
-      //                 child: Text(value),
-      //               );
-      //             }).toList(),
-      //           ),
-      //         ),
-      //       ),
-      //       SizedBox(
-      //         height: 46.8.h,
-      //       ),
-      //       Text(
-      //         "Faculties",
-      //         style: TextStyle(fontSize: 20),
-      //       ),
-      //       SizedBox(
-      //         height: 46.8.h,
-      //       ),
-      //       Expanded(
-      //         // padding: EdgeInsets.zero,
-      //         child: ListView.builder(
-      //           padding: EdgeInsets.zero,
-      //           shrinkWrap: true,
-      //           itemCount:
-      //               Provider.of<FacultiesProvider>(context, listen: false)
-      //                   .facultiesList
-      //                   .length,
-      //           itemBuilder: (BuildContext context, int index) {
-      //             if (isvalidFaculty(filterValue, index, dropDownValue)) {
-      //               return FacultyCard(
-      //                 facultyDetails:
-      //                     Provider.of<FacultiesProvider>(context, listen: false)
-      //                         .facultiesList[index],
-      //               );
-      //             } else {
-      //               return Container();
-      //             }
-      //           },
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
     );
   }
 
-  bool isvalidFaculty(filterValue, index, dropDownValue) {
-    //TODO - use this when Dept is ready
-
+  bool isvalidFaculty(filterValue, index, dropDownValue, List<FacultyServerInformation> facultyList,) {
     List<String> deptList = convertStrToList(
-        Provider.of<FacultiesProvider>(context, listen: false)
-            .facultiesList[index]
-            .faculty_Department);
+        facultyList[index].faculty_Department);
     String deptVal = facultyDeptMap[dropDownValue]!.trim();
 
-    print("Dept List -> $deptList");
-    print("DROP DOWN VALUE ->" + facultyDeptMap[dropDownValue].toString());
-    // bool dept = deptList.contains("CSE");
-    // print("DROP DOWN VALUE ->"+"$deptList ->"+dropDownValue);
-
-    // //TODO - Check if working
-    bool name = Provider.of<FacultiesProvider>(context, listen: false)
-        .facultiesList[index]
+    bool name = facultyList[index]
         .faculty_Name
         .toLowerCase()
         .contains(filterValue.toLowerCase());
@@ -445,10 +250,6 @@ class _FacultyScreenState extends State<FacultyScreen> {
     bool deptALL = dropDownValue.compareTo("All") == 0;
 
     return name && (dept || deptALL);
-
-    // return Provider.of<FacultiesProvider>(context, listen: false).facultiesList[index].faculty_Name
-    //     .toLowerCase()
-    //     .contains(filterValue.toLowerCase());
   }
 
   convertStrToList(String str) {

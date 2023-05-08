@@ -27,13 +27,9 @@ class EventProvider with ChangeNotifier {
 
   List<String> firebaseCollectionsList = [
     "SpeakerTracks",
-    "RNDShowcasesAndDemos",
     "ForwardLookingPanels",
     "BeyondCollegePanels",
-    "StartUpShowcase",
-    "DemosAndResearchesHighlights",
     "ResearchShowcases",
-    "PanelDiscussion",
   ];
 
   late Map<String, dynamic> firebaseCollectionsMap = {
@@ -82,9 +78,12 @@ class EventProvider with ChangeNotifier {
             String Event_Image_Url = eventMap["Event_Image_Url"].toString();
             String Event_Latitude = eventMap["Event_Latitude"].toString();
             String Event_Longitude = eventMap["Event_Longitude"].toString();
-            DateTime Event_Date = DateTime.parse(eventMap["Event_Date"].toString());
-            TimeOfDay Event_Start_Time = convertStringToTimeOfDay(eventMap["Event_Start_Time"].toString());
-            TimeOfDay Event_End_Time = convertStringToTimeOfDay(eventMap["Event_End_Time"].toString());
+            DateTime Event_Date =
+                DateTime.parse(eventMap["Event_Date"].toString());
+            TimeOfDay Event_Start_Time = convertStringToTimeOfDay(
+                eventMap["Event_Start_Time"].toString());
+            TimeOfDay Event_End_Time =
+                convertStringToTimeOfDay(eventMap["Event_End_Time"].toString());
 
             EventServerInformation eventInfo = EventServerInformation(
               Event_Unique_Id: Event_Unique_Id,
@@ -134,8 +133,6 @@ class EventProvider with ChangeNotifier {
       cnt += 1;
     else if (collectionName == "PanelDiscussion") cnt += 1;
 
-    print("Collection name :- $collectionName");
-
     if (cnt < 1) return;
 
     try {
@@ -180,11 +177,8 @@ class EventProvider with ChangeNotifier {
               );
 
               listOfEventTracks.add(eventInfo);
-              print(eventInfo.Event_Name);
             });
           }
-
-          print("List of Events -> $listOfEventTracks");
 
           if (collectionName == "SpeakerTracks") {
             speakerTracksList = listOfEventTracks;
@@ -225,7 +219,6 @@ class EventProvider with ChangeNotifier {
         (ds) async {
           for (var themeDetails in ds.docs) {
             final eventMap = themeDetails.data() as Map<String, dynamic>;
-            print(eventMap);
 
             String Event_Unique_Id = eventMap["Event_Unique_Id"].toString();
             String Event_Name = eventMap["Event_Name"].toString();
@@ -290,21 +283,74 @@ class EventProvider with ChangeNotifier {
     collectionOfAllEventList = allEventsList;
   }
 
+  Future<List<EventServerInformation>> fetchEventListFirestore(
+      BuildContext context, String collectionName) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    CollectionReference eventsTracksRef = db.collection(collectionName);
+
+    List<EventServerInformation> allEventsList = [];
+    try {
+      await eventsTracksRef.get().then((ds) async {
+        for (var themeDetails in ds.docs) {
+          final eventMap = themeDetails.data() as Map<String, dynamic>;
+
+          String Event_Unique_Id = eventMap["Event_Unique_Id"].toString();
+          String Event_Name = eventMap["Event_Name"].toString();
+          String Event_Info = eventMap["Event_Info"].toString();
+          String Event_Address = eventMap["Event_Address"].toString();
+          String Event_Image_Url = eventMap["Event_Image_Url"].toString();
+          String Event_Latitude = eventMap["Event_Latitude"].toString();
+          String Event_Longitude = eventMap["Event_Longitude"].toString();
+          DateTime Event_Date =
+              DateTime.parse(eventMap["Event_Date"].toString());
+          TimeOfDay Event_Start_Time =
+              convertStringToTimeOfDay(eventMap["Event_Start_Time"].toString());
+          TimeOfDay Event_End_Time =
+              convertStringToTimeOfDay(eventMap["Event_End_Time"].toString());
+
+          await fetchSpeakers(
+            context,
+            collectionName,
+            Event_Unique_Id,
+          ).then((value) async {
+            EventServerInformation eventInfo = EventServerInformation(
+              Event_Unique_Id: Event_Unique_Id,
+              Event_Image_Url: Event_Image_Url,
+              Event_Name: Event_Name,
+              Event_Info: Event_Info,
+              Event_Address: Event_Address,
+              Event_Longitude: Event_Longitude,
+              Event_Latitude: Event_Latitude,
+              Event_Date: Event_Date,
+              Event_Start_Time: Event_Start_Time,
+              Event_End_Time: Event_End_Time,
+              EventSpeakersList: value,
+            );
+
+            allEventsList.add(eventInfo);
+          });
+        }
+      });
+    } catch (error) {}
+
+    return allEventsList;
+  }
+
   Future<List<EventServerInformation>> getEntireListOfEvents(
     BuildContext context,
   ) async {
     List<EventServerInformation> allEventsList = [];
 
     for (var collectionName in firebaseCollectionsList) {
-      if (collectionName != "Extra-Events") {
-        await fetchEventTracks(context, collectionName).then((value) {
-          allEventsList.addAll(firebaseCollectionsMap[collectionName]);
-        });
-      } else {
-        await fetchExtraEventTracks(context, collectionName).then((value) {
-          allEventsList.addAll(firebaseCollectionsMap[collectionName]);
-        });
-      }
+      List<EventServerInformation> list = await fetchEventListFirestore(
+        context,
+        collectionName,
+      );
+
+      allEventsList = new List.from(allEventsList)..addAll(list);
+
+      print("listingssss");
+      print(allEventsList);
     }
 
     print("Entire List : " + allEventsList.length.toString());
@@ -325,17 +371,26 @@ class EventProvider with ChangeNotifier {
             (eventDetails) async {
               final speakersMap = eventDetails.data() as Map<String, dynamic>;
 
-              String speaker_Unique_Id = speakersMap["speaker_Unique_Id"].toString();
+              String speaker_Unique_Id =
+                  speakersMap["speaker_Unique_Id"].toString();
               String speaker_Name = speakersMap["speaker_Name"].toString();
-              String speaker_Position = speakersMap["speaker_Position"].toString();
-              String speaker_Talk_Title = speakersMap["speaker_Talk_Title"].toString();
+              String speaker_Position =
+                  speakersMap["speaker_Position"].toString();
+              String speaker_Talk_Title =
+                  speakersMap["speaker_Talk_Title"].toString();
               String speaker_Bio = speakersMap["speaker_Bio"].toString();
-              String speaker_Abstract = speakersMap["speaker_Abstract"].toString();
-              String speaker_Image_Url = speakersMap["speaker_Image_Url"].toString();
-              String speaker_LinkedIn_Url = speakersMap["speaker_LinkedIn_Url"].toString();
-              String speaker_Website_Url = speakersMap["speaker_Website_Url"].toString();
-              TimeOfDay speaker_Start_Time = convertStringToTimeOfDay(speakersMap["speaker_Start_Time"].toString());
-              TimeOfDay speaker_End_Time = convertStringToTimeOfDay(speakersMap["speaker_End_Time"].toString());
+              String speaker_Abstract =
+                  speakersMap["speaker_Abstract"].toString();
+              String speaker_Image_Url =
+                  speakersMap["speaker_Image_Url"].toString();
+              String speaker_LinkedIn_Url =
+                  speakersMap["speaker_LinkedIn_Url"].toString();
+              String speaker_Website_Url =
+                  speakersMap["speaker_Website_Url"].toString();
+              TimeOfDay speaker_Start_Time = convertStringToTimeOfDay(
+                  speakersMap["speaker_Start_Time"].toString());
+              TimeOfDay speaker_End_Time = convertStringToTimeOfDay(
+                  speakersMap["speaker_End_Time"].toString());
 
               SpeakerServerInformation speakerInfo = SpeakerServerInformation(
                 speaker_Unique_Id: speaker_Unique_Id,

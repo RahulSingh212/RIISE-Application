@@ -24,12 +24,11 @@ class BeyondCollegePannelScreen extends StatefulWidget {
   const BeyondCollegePannelScreen({super.key});
 
   @override
-  State<BeyondCollegePannelScreen> createState() => _BeyondCollegePannelScreenState();
+  State<BeyondCollegePannelScreen> createState() =>
+      _BeyondCollegePannelScreenState();
 }
 
 class _BeyondCollegePannelScreenState extends State<BeyondCollegePannelScreen> {
-
-
   bool isLoading = true;
 
   loadData() async {
@@ -65,65 +64,99 @@ class _BeyondCollegePannelScreenState extends State<BeyondCollegePannelScreen> {
 
     return isLoading
         ? Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
-    )
-        : Scaffold(
-      backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
-      drawer: SideNavBar(),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          "Beyond Pannel",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontSize: 60.sp,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        iconTheme: IconThemeData(
-          color: Colors.blue,
-          size: 80.r,
-        ),
-        actions: [
-          Container(
-              padding: EdgeInsets.only(top: 15.h,bottom: 25.h,right: 20.w),
-              child: Center(child: Image.network("https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",fit: BoxFit.contain,))
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: EdgeInsets.only(top: 220.h),
-        child: ListView.builder(
-          itemCount: Provider.of<EventProvider>(context)
-              .beyondCollegePanelsList
-              .length,
-          scrollDirection: Axis.vertical,
-          shrinkWrap: false,
-          // physics: NeverScrollableScrollPhysics(),
-          physics: BouncingScrollPhysics(),
-          padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
-          itemBuilder: (context, position) {
-            return Container(
-              height: 900.h,
-              padding: EdgeInsets.only(left: 86.w, top: 80.h),
-              child: NewEventCard(
-                eventDetails: Provider.of<EventProvider>(context)
-                    .beyondCollegePanelsList[position],
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
+              title: Text(
+                "Beyond Pannel",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 60.sp,
+                ),
+                textAlign: TextAlign.center,
               ),
-            );
-          },
-        ),
-      ),
-    );
+              iconTheme: IconThemeData(
+                color: Colors.blue,
+                size: 80.r,
+              ),
+              actions: [
+                Container(
+                  padding:
+                      EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
+                  child: Center(
+                    child: Image.network(
+                      "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
+        : Scaffold(
+            backgroundColor: Colors.white,
+            extendBodyBehindAppBar: true,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
+              title: Text(
+                "Beyond Pannel",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 60.sp,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              iconTheme: IconThemeData(
+                color: Colors.blue,
+                size: 80.r,
+              ),
+              actions: [
+                Container(
+                  padding:
+                      EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
+                  child: Center(
+                    child: Image.network(
+                      "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            body: Padding(
+              padding: EdgeInsets.only(top: 220.h),
+              child: ListView.builder(
+                itemCount: Provider.of<EventProvider>(context)
+                    .beyondCollegePanelsList
+                    .length,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: false,
+                // physics: NeverScrollableScrollPhysics(),
+                physics: BouncingScrollPhysics(),
+                padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
+                itemBuilder: (context, position) {
+                  return Container(
+                    height: 900.h,
+                    padding: EdgeInsets.only(left: 86.w, top: 80.h),
+                    child: NewEventCard(
+                      eventDetails: Provider.of<EventProvider>(context)
+                          .beyondCollegePanelsList[position],
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
   }
-
 
   // @override
   // Widget build(BuildContext context) {

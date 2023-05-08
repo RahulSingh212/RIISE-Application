@@ -27,13 +27,6 @@ class _EventCard2State extends State<EventCard2> {
 
   @override
   Widget build(BuildContext context) {
-    // var padding = MediaQuery.of(context).padding;
-    // double width = (MediaQuery.of(context).size.width);
-    // double height =
-    //     (MediaQuery.of(context).size.height) - padding.top - padding.bottom;
-    //
-    // double minDimension = min(width, height);
-    // double maxDimension = max(width, height);
 
     return InkWell(
       onTap: (){
@@ -52,7 +45,6 @@ class _EventCard2State extends State<EventCard2> {
           elevation: 16,
           semanticContainer: false,
           shape: RoundedRectangleBorder(
-            //TODO - Ask for same shape or different
             borderRadius: widget.position % 2 == 0 ?BorderRadius.only(topLeft: Radius.circular(35),bottomRight: Radius.circular(35)) : BorderRadius.only(topRight: Radius.circular(35),bottomLeft: Radius.circular(35)),
           ),
           // color: Colors.red,

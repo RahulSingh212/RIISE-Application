@@ -249,13 +249,13 @@ class _SideNavBarState extends State<SideNavBar> {
             "keynote-speakers",
             6,
           ),
-          sideBarTile(
-            context,
-            "RnD Showcases",
-            Icons.apartment_rounded,
-            "rnd-showcase-and-demos",
-            7,
-          ),
+          // sideBarTile(
+          //   context,
+          //   "RnD Showcases",
+          //   Icons.apartment_rounded,
+          //   "rnd-showcase-and-demos",
+          //   7,
+          // ),
           sideBarTile(
             context,
             "Forward Panels",
@@ -270,20 +270,20 @@ class _SideNavBarState extends State<SideNavBar> {
             "beyond-college-panels",
             9,
           ),
-          sideBarTile(
-            context,
-            "Start-Up Showcases",
-            Icons.construction_rounded,
-            "start-up-showcase",
-            10,
-          ),
-          sideBarTile(
-            context,
-            "Demos & Researches",
-            Icons.find_in_page_rounded,
-            "demos-n-research-highlights",
-            11,
-          ),
+          // sideBarTile(
+          //   context,
+          //   "Start-Up Showcases",
+          //   Icons.construction_rounded,
+          //   "start-up-showcase",
+          //   10,
+          // ),
+          // sideBarTile(
+          //   context,
+          //   "Demos & Researches",
+          //   Icons.find_in_page_rounded,
+          //   "demos-n-research-highlights",
+          //   11,
+          // ),
           sideBarTile(
             context,
             "Research Showcases",
@@ -291,27 +291,6 @@ class _SideNavBarState extends State<SideNavBar> {
             "research-showcase",
             12,
           ),
-          // sideBarTile(
-          //   context,
-          //   "Speaker Tracks",
-          //   Icons.multitrack_audio_rounded,
-          //   "speaker-tracks",
-          //   8,
-          // ),
-          // sideBarTile(
-          //   context,
-          //   "Poster Tracks",
-          //   Icons.podcasts_rounded,
-          //   "poster-tracks",
-          //   9,
-          // ),
-          // sideBarTile(
-          //   context,
-          //   "Panel Discussion",
-          //   Icons.people_alt_rounded,
-          //   "pannel-discussion",
-          //   10,
-          // ),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 10,

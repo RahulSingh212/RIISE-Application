@@ -66,14 +66,6 @@ class _ForwardLookingPannelScreenState
     return isLoading
         ? Scaffold(
             backgroundColor: Colors.white,
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          )
-        : Scaffold(
-            backgroundColor: Colors.white,
-            extendBodyBehindAppBar: true,
-            drawer: SideNavBar(),
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -93,13 +85,52 @@ class _ForwardLookingPannelScreenState
               ),
               actions: [
                 Container(
-                    padding:
-                        EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
-                    child: Center(
-                        child: Image.network(
+                  padding:
+                      EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
+                  child: Center(
+                    child: Image.network(
                       "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
                       fit: BoxFit.contain,
-                    ))),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
+        : Scaffold(
+            backgroundColor: Colors.white,
+            extendBodyBehindAppBar: true,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
+              title: Text(
+                "Forward Pannel",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 60.sp,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              iconTheme: IconThemeData(
+                color: Colors.blue,
+                size: 80.r,
+              ),
+              actions: [
+                Container(
+                  padding:
+                      EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
+                  child: Center(
+                    child: Image.network(
+                      "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
               ],
             ),
             body: Padding(

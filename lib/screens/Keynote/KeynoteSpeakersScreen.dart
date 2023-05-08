@@ -64,7 +64,7 @@ class _KeynoteSpeakersScreenState extends State<KeynoteSpeakersScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
-      drawer: SideNavBar(),
+      // drawer: SideNavBar(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,

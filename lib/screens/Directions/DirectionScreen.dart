@@ -30,31 +30,6 @@ class DirectionScreen extends StatefulWidget {
 }
 
 class _DirectionScreenState extends State<DirectionScreen> {
-  loadData() async {
-    await Provider.of<LocationProvider>(context, listen: false)
-        .fetchLocationList(
-      context,
-    )
-        .then((value) {
-      setState(() {});
-    });
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    loadData();
-  }
-
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //
-  //   Provider.of<LocationProvider>(context, listen: false).fetchLocationList(
-  //     context,
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -94,11 +69,9 @@ class _DirectionScreenState extends State<DirectionScreen> {
       body: StreamBuilder(stream: FirebaseFirestore.instance.collection("CoordinationInformation").snapshots(),
         // initialData: initialData,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          print("Building!!!");
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
           } else {
-            print("Direction Screen");
             return ListView.builder(
               itemCount: snapshot.data.docs.length,
               itemBuilder: (ctx, index) {

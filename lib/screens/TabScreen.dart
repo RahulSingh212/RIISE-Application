@@ -61,109 +61,11 @@ class _TabScreenState extends State<TabScreen> {
     const AppointmentScreen(),
   ];
 
-  bool isLoading = false;
-
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //
-  //   // Provider.of<ThemeProvider>(
-  //   //   context,
-  //   //   listen: false,
-  //   // ).fetchThemes(
-  //   //   context,
-  //   // );
-  //
-  //   // print("tab screen");
-  //   // Provider.of<FacultiesProvider>(
-  //   //   context,
-  //   //   listen: false,
-  //   // ).fetchCollegeFaculties(
-  //   //   context,
-  //   // );
-  //   // Provider.of<LocationProvider>(
-  //   //   context,
-  //   //   listen: false,
-  //   // ).fetchLocationList(
-  //   //   context,
-  //   // );
-  // }
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  List<EventServerInformation> eventUtil = [];
-
-  // load() async {
-  //   // await Provider.of<ThemeProvider>(
-  //   //   context,
-  //   //   listen: false,
-  //   // ).fetchThemes(context);
-
-  //   print("Hello there loading started");
-  //   // print("EMAIL -> ${FirebaseAuth.instance.currentUser?.refreshToken}");
-  //   print(isLoading);
-  //   // TODO - Add Event Provider fetch
-
-  //   await Provider.of<EventProvider>(context, listen: false)
-  //       .fetchEventTracks(context, "StartUpShowcase")
-  //       .then((value) async {
-  //     await Provider.of<EventProvider>(context, listen: false)
-  //         .fetchEventTracks(context, "RNDShowcasesAndDemos")
-  //         .then((value) async {
-  //       await Provider.of<EventProvider>(context, listen: false)
-  //           .fetchEventTracks(context, "ResearchShowcases")
-  //           .then((Value) async {
-  //         await Provider.of<EventProvider>(context, listen: false)
-  //             .fetchEventTracks(context, "ForwardLookingPanels")
-  //             .then((value) async {
-  //           await Provider.of<EventProvider>(context, listen: false)
-  //               .fetchEventTracks(context, "DemosAndResearchesHighlights")
-  //               .then((value) async {
-  //             await Provider.of<EventProvider>(context, listen: false)
-  //                 .fetchEventTracks(context, "BeyondCollegePanels")
-  //                 .then((value) async {
-  //               await Provider.of<FacultiesProvider>(context, listen: false)
-  //                   .fetchCollegeFaculties(context)
-  //                   .then((value) async {
-  //                 print("Faculty loading finished");
-  //                 await Provider.of<LocationProvider>(context, listen: false)
-  //                     .fetchLocationList(
-  //                   context,
-  //                 )
-  //                     .then((value) async {
-  //                   await Provider.of<CalenderAPI>(context, listen: false)
-  //                       .fetchEvent(context)
-  //                       .then((value) async {
-  //                     print("User Personal Information");
-  //                     await Provider.of<UserDetailsProvider>(context,
-  //                             listen: false)
-  //                         .setUserType(context)
-  //                         .then((value) async {
-  //                       setState(() {
-  //                         isLoading = false;
-  //                         print("Hello there loading finished");
-  //                         print(isLoading);
-  //                       });
-  //                     });
-  //                   });
-  //                 });
-  //               });
-  //             });
-  //           });
-  //         });
-  //       });
-  //     });
-  //   });
-  // }
 
   @override
   void initState() {
     super.initState();
-
-    // final initialLink = Provider.of<DynamicLinkProvider>(context,listen: false).initialLink;
-
-    // initializeCalendar();
-    print("initState TABSCREEN");
 
     _pages = [
       {
@@ -173,12 +75,6 @@ class _TabScreenState extends State<TabScreen> {
       {
         'page': FacultyScreen(),
         'title': 'Faculties',
-        'fetch': Provider.of<FacultiesProvider>(
-          context,
-          listen: false,
-        ).fetchCollegeFaculties(
-          context,
-        ),
       },
       {
         'page': ScheduleScreen(),
@@ -187,19 +83,12 @@ class _TabScreenState extends State<TabScreen> {
       {
         'page': DirectionScreen(),
         'title': 'Directions',
-        'fetch': Provider.of<FacultiesProvider>(
-          context,
-          listen: false,
-        ).fetchCollegeFaculties(
-          context,
-        ),
       },
       {
         'page': AppointmentScreen(),
         'title': 'Appointments',
       },
     ];
-    
 
     Future.delayed(Duration.zero, () async {
       final initialLink = DynamicLinkProvider.initialLink;
@@ -209,7 +98,9 @@ class _TabScreenState extends State<TabScreen> {
       if (initialLink != null) {
         final Uri deepLink = initialLink.link;
 
-        FacultyServerInformation faculty = await Provider.of<FacultiesProvider>(context, listen: false).getFacultyDetails(deepLink.path);
+        FacultyServerInformation faculty =
+            await Provider.of<FacultiesProvider>(context, listen: false)
+                .getFacultyDetails(deepLink.path);
         // Example of using the dynamic link to push the user to a different screen
         DynamicLinkProvider.initialLink = null;
         Navigator.of(context).push(
@@ -225,28 +116,9 @@ class _TabScreenState extends State<TabScreen> {
   }
 
   void _selectPage(int index) {
-    // setState(() {
-    //   if (index == 0) {
-    //   } else if (index == 1) {
-    //     Provider.of<FacultiesProvider>(
-    //       context,
-    //       listen: false,
-    //     ).fetchCollegeFaculties(
-    //       context,
-    //     );
-    //   } else if (index == 2) {
-    //   } else if (index == 3) {
-    //     Provider.of<LocationProvider>(
-    //       context,
-    //       listen: false,
-    //     ).fetchLocationList(
-    //       context,
-    //     );
-    //   } else if (index == 4) {}
-    // });
-
     setState(() {
-      Provider.of<ScreenControllerProvider>(context, listen: false).selectedPageIndex = index;
+      Provider.of<ScreenControllerProvider>(context, listen: false)
+          .selectedPageIndex = index;
     });
   }
 
@@ -308,48 +180,38 @@ class _TabScreenState extends State<TabScreen> {
       ),
     ];
 
-    print("Loading : $isLoading");
-
-    return isLoading
-        ? Scaffold(
-            backgroundColor: Colors.white,
-            body: Center(
-              child: Image.asset("assets/images/Riise.png"),
-            ))
-        : Scaffold(
-            backgroundColor: Colors.white,
-            body: IndexedStack(
-              index:
-                  Provider.of<ScreenControllerProvider>(context, listen: false)
-                      .selectedPageIndex,
-              children: _appScreens,
-            ),
-            bottomNavigationBar: Theme(
-              data: Theme.of(context).copyWith(
-                iconTheme: const IconThemeData(
-                  color: Colors.white,
-                ),
-                backgroundColor: const Color(0xff42ccc3),
-              ),
-              child: CurvedNavigationBar(
-                onTap: _selectPage,
-                backgroundColor: Colors.transparent,
-                color: Colors.greenAccent,
-                // buttonBackgroundColor: Theme.of(context).primaryColor,
-                buttonBackgroundColor: Colors.blueGrey,
-                index: Provider.of<ScreenControllerProvider>(
-                  context,
-                  listen: false,
-                ).selectedPageIndex,
-                height: 163.8.h,
-                animationCurve: Curves.easeInOut,
-                animationDuration: const Duration(
-                  milliseconds: 300,
-                ),
-                items: iconItemsActive,
-              ),
-            ),
-          );
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: IndexedStack(
+        index: Provider.of<ScreenControllerProvider>(context, listen: false)
+            .selectedPageIndex,
+        children: _appScreens,
+      ),
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+          backgroundColor: const Color(0xff42ccc3),
+        ),
+        child: CurvedNavigationBar(
+          onTap: _selectPage,
+          backgroundColor: Colors.transparent,
+          color: Colors.greenAccent,
+          buttonBackgroundColor: Colors.blueGrey,
+          index: Provider.of<ScreenControllerProvider>(
+            context,
+            listen: false,
+          ).selectedPageIndex,
+          height: 163.8.h,
+          animationCurve: Curves.easeInOut,
+          animationDuration: const Duration(
+            milliseconds: 300,
+          ),
+          items: iconItemsActive,
+        ),
+      ),
+    );
   }
 
   Future<void> _checkForLogout(

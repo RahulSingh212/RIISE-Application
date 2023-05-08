@@ -3284,6 +3284,59 @@ class FacultiesProvider with ChangeNotifier {
     // return listOfFaculties;
   }
 
+  Future<List<FacultyServerInformation>> fetchFacultyList(
+    BuildContext context,
+  ) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    CollectionReference facultiesRef = db.collection("FacultiesInformationList");
+
+    List<FacultyServerInformation> listOfFaculties = [];
+    try {
+      await facultiesRef.get().then(
+        (ds) async {
+          ds.docs.forEach(
+            (facultyDetails) async {
+              final facultyMap = facultyDetails.data() as Map<String, dynamic>;
+
+              if (facultyMap['faculty_Authorization'].toString().toLowerCase() == 'true') {
+                FacultyServerInformation facultyInfo = FacultyServerInformation(
+                  faculty_Unique_Id: facultyMap["faculty_Unique_Id"],
+                  faculty_Name: facultyMap["faculty_Name"],
+                  faculty_EmailId: facultyMap["faculty_EmailId"],
+                  faculty_Position: facultyMap["faculty_Position"],
+                  faculty_Gender: facultyMap["faculty_Gender"],
+                  faculty_Bio: facultyMap["faculty_Bio"],
+                  faculty_Teaching_Interests: facultyMap["faculty_Teaching_Interests"],
+                  faculty_Authorization: facultyMap["faculty_Authorization"] == "true",
+                  faculty_Image_Url: facultyMap["faculty_Image_Url"],
+                  faculty_LinkedIn_Url: facultyMap["faculty_LinkedIn_Url"],
+                  faculty_Website_Url: facultyMap["faculty_Website_Url"],
+                  faculty_Office_Navigation_Url: facultyMap["faculty_Office_Navigation_Url"],
+                  faculty_Office_Address: facultyMap["faculty_Office_Address"],
+                  faculty_Office_Longitude: checkIfDouble(facultyMap["faculty_Office_Longitude"]),
+                  faculty_Office_Latitude: checkIfDouble(facultyMap["faculty_Office_Latitude"]),
+                  faculty_Mobile_Messaging_Token_Id: facultyMap['faculty_Mobile_Messaging_Token_Id'],
+                  faculty_Affiliated_Centers_And_Labs: facultyMap['faculty_Affiliated_Centers_And_Labs'],
+                  faculty_College: facultyMap['faculty_College'],
+                  faculty_Mobile_Number: facultyMap['faculty_Mobile_Number'],
+                  faculty_Research_Interests: facultyMap['faculty_Research_Interests'],
+                  faculty_Department: facultyMap['faculty_Department'],
+                );
+
+                listOfFaculties.add(facultyInfo);
+              }
+            },
+          );
+        },
+      );
+      notifyListeners();
+    } catch (errorVal) {
+      print(errorVal);
+    }
+
+    return listOfFaculties;
+  }
+
   Map<String, String> qrMapping = {};
 
   Future<void> insertListOfFaculties(BuildContext context) async {
