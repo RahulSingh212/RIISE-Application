@@ -288,8 +288,6 @@ class CalenderAPI extends ChangeNotifier {
 
     print("Appointment list : ");
     print(list);
-    print(list[0].schedule_Unque_Id);
-
     print("Fetching event");
 
     GoogleSignIn? googleUser = await GoogleSignIn(

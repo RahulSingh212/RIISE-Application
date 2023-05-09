@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:riise/modules/AppointmentUtil.dart';
 import 'package:riise/providers/FacultiesProvider.dart';
 import 'package:riise/providers/UserDetailsProvider.dart';
+import 'package:riise/screens/TabScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -438,6 +439,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                                     listen: false)
                                 .userMapping['guest_Name']!);
                         Navigator.of(context).pop();
+                        Navigator.of(context0).pushAndRemoveUntil(MaterialPageRoute(builder: (_)=>TabScreen()), (route) => false);
                       } else {
                         await Provider.of<CalenderAPI>(context0, listen: false)
                             .fetchSchedules(
