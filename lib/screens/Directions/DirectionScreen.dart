@@ -121,13 +121,13 @@ class _DirectionScreenState extends State<DirectionScreen> {
 
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => CoordinationDetailScreen(
-              coordinateDetails: coordinateDetails,
-            ),
-          ),
-        );
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (context) => CoordinationDetailScreen(
+        //       coordinateDetails: coordinateDetails,
+        //     ),
+        //   ),
+        // );
       },
       child: Align(
         child: Card(

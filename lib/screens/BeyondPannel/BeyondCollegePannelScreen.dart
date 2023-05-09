@@ -29,31 +29,6 @@ class BeyondCollegePannelScreen extends StatefulWidget {
 }
 
 class _BeyondCollegePannelScreenState extends State<BeyondCollegePannelScreen> {
-  bool isLoading = true;
-
-  loadData() async {
-    await Provider.of<EventProvider>(context, listen: false)
-        .fetchEventTracks(context, "BeyondCollegePanels")
-        .then((value) async {
-      setState(() {
-        isLoading = false;
-        print(
-            "HEllo this is length of RND LIST -> ${Provider.of<EventProvider>(context, listen: false).beyondCollegePanelsList.length}");
-      });
-
-      // List<EventServerInformation> list = await Provider.of<EventProvider>(context,listen: false).getEventList(context, "RNDShowcasesAndDemos");
-      // print("List ->-> $list");
-    });
-  }
-
-  @override
-  void initState() {
-    print("RND INIT CALLED");
-    super.initState();
-    loadData();
-    // Provider.of<EventProvider>(context, listen: false).fetchEventTracks(context, "RNDShowcasesAndDemos");
-  }
-
   @override
   Widget build(BuildContext context) {
     // var screenHeight = MediaQuery.of(context).size.height;
@@ -62,100 +37,74 @@ class _BeyondCollegePannelScreenState extends State<BeyondCollegePannelScreen> {
     // var bottomInsets = MediaQuery.of(context).viewInsets.bottom;
     // var useableHeight = screenHeight - topInsets - bottomInsets;
 
-    return isLoading
-        ? Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              centerTitle: true,
-              title: Text(
-                "Beyond Pannel",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontSize: 60.sp,
-                ),
-                textAlign: TextAlign.center,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          "Beyond Pannel",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 60.sp,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.blue,
+          size: 80.r,
+        ),
+        actions: [
+          Container(
+            padding: EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
+            child: Center(
+              child: Image.network(
+                "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
+                fit: BoxFit.contain,
               ),
-              iconTheme: IconThemeData(
-                color: Colors.blue,
-                size: 80.r,
-              ),
-              actions: [
-                Container(
-                  padding:
-                      EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
-                  child: Center(
-                    child: Image.network(
-                      "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
-              ],
             ),
-            body: Center(
+          ),
+        ],
+      ),
+      body: StreamBuilder(
+        stream: Provider.of<EventProvider>(context, listen: false)
+            .fetchEventListFirestore(
+              context,
+              "BeyondCollegePanels",
+            )
+            .asStream(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
               child: CircularProgressIndicator(),
-            ),
-          )
-        : Scaffold(
-            backgroundColor: Colors.white,
-            extendBodyBehindAppBar: true,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              centerTitle: true,
-              title: Text(
-                "Beyond Pannel",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontSize: 60.sp,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              iconTheme: IconThemeData(
-                color: Colors.blue,
-                size: 80.r,
-              ),
-              actions: [
-                Container(
-                  padding:
-                      EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
-                  child: Center(
-                    child: Image.network(
-                      "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
-                      fit: BoxFit.contain,
-                    ),
+            );
+          } else {
+            print("Beyond Looking Panel Screen");
+            print(snapshot.data);
+
+            return ListView.builder(
+              itemCount: snapshot.data.length,
+              scrollDirection: Axis.vertical,
+              shrinkWrap: false,
+              // physics: NeverScrollableScrollPhysics(),
+              physics: BouncingScrollPhysics(),
+              padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
+              itemBuilder: (context, position) {
+                return Container(
+                  height: 900.h,
+                  padding: EdgeInsets.only(left: 86.w, top: 80.h),
+                  child: NewEventCard(
+                    eventDetails: snapshot.data[position],
                   ),
-                ),
-              ],
-            ),
-            body: Padding(
-              padding: EdgeInsets.only(top: 220.h),
-              child: ListView.builder(
-                itemCount: Provider.of<EventProvider>(context)
-                    .beyondCollegePanelsList
-                    .length,
-                scrollDirection: Axis.vertical,
-                shrinkWrap: false,
-                // physics: NeverScrollableScrollPhysics(),
-                physics: BouncingScrollPhysics(),
-                padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
-                itemBuilder: (context, position) {
-                  return Container(
-                    height: 900.h,
-                    padding: EdgeInsets.only(left: 86.w, top: 80.h),
-                    child: NewEventCard(
-                      eventDetails: Provider.of<EventProvider>(context)
-                          .beyondCollegePanelsList[position],
-                    ),
-                  );
-                },
-              ),
-            ),
-          );
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
   }
 
   // @override

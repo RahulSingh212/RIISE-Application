@@ -71,6 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
     if (FirebaseAuth.instance.currentUser != null) {
       fetchUserProfile();
     }
+
+    // Provider.of<FacultiesProvider>(context, listen: false).insertListOfFaculties(context);
   }
 
   List<dynamic> categoryList = [
@@ -89,16 +91,6 @@ class _HomeScreenState extends State<HomeScreen> {
       "https://iiitd.ac.in/riise2023/assets/img/riise2022logo15059.png",
       BeyondCollegePannelScreen()
     ],
-    // [
-    //   "Start-UP Showcases",
-    //   "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
-    //   StartUpShowcaseScreen()
-    // ],
-    // [
-    //   "Demos And Researches",
-    //   "https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/DefaultImages%2Fartificial-intelligence.png?alt=media&token=bcdabc98-e730-46a4-87d6-f921517e9ae8",
-    //   DemosAndResearchHighlightScreen()
-    // ],
     [
       "Research Showcases",
       "https://iiitd.ac.in/riise2023/assets/img/riise2022logo15059.png",

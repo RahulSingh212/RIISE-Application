@@ -16,6 +16,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:riise/providers/ScreenControllerProvider.dart';
 import 'package:riise/providers/UserDetailsProvider.dart';
 import 'package:riise/screens/QrCode/QrCodeGenerator.dart';
 import 'package:riise/screens/SingInScreen/LogInSignUpScreen.dart';
@@ -37,6 +38,8 @@ class FacultyProfileScreen extends StatefulWidget {
 }
 
 class _FacultyProfileScreenState extends State<FacultyProfileScreen> {
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
   bool isLangEnglish = true;
   File _profilePicture = new File("");
   bool _isProfilePicTaken = false;
@@ -435,10 +438,10 @@ class _FacultyProfileScreenState extends State<FacultyProfileScreen> {
                         onPressed: () async {
                           FirebaseAuth.instance.signOut().then((value) {
                             // Navigator.pushNamedAndRemoveUntil(
-                            //   context,
-                            //   TabScreen.routeName,
-                            //   ModalRoute.withName(TabScreen.routeName),
-                            // );
+                            //     context,
+                            //     TabScreen.routeName,
+                            //     (Route<dynamic> route) => false);
+
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

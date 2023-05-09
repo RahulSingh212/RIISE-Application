@@ -47,11 +47,31 @@ class _CoordinationDetailScreenState extends State<CoordinationDetailScreen> {
               vertical: 15,
               horizontal: 10,
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [],
-            ),
+            // child: ListView.builder(
+            //   // itemCount: themes.getThemesList().length,
+            //   itemCount: widget.coordinateDetails.Images_List.length,
+            //   scrollDirection: Axis.horizontal,
+            //   physics: BouncingScrollPhysics(),
+            //   padding: EdgeInsets.symmetric(
+            //     vertical: 23.h,
+            //     horizontal: 21.w,
+            //   ),
+            //   itemBuilder: (context, position) {
+            //     return Card(
+            //       elevation: 1.5,
+            //       child: Container(
+
+            //         decoration: BoxDecoration(
+            //           image: DecorationImage(
+            //             image: NetworkImage(
+            //               widget.coordinateDetails.Images_List[position],
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     );
+            //   },
+            // ),
           )
         ],
       ),

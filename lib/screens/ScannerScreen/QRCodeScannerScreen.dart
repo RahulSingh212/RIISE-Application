@@ -80,8 +80,10 @@ class _QRCodeScannerScreenState extends State<QRCodeScannerScreen> {
                   child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.document_scanner_outlined,
-                      color: Theme.of(context).primaryColor),
+                  Icon(
+                    Icons.document_scanner_outlined,
+                    color: Theme.of(context).primaryColor,
+                  ),
                   const SizedBox(width: 10),
                   Text(
                     "Scan QR",

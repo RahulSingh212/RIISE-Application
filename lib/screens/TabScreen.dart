@@ -14,6 +14,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis_auth/auth.dart';
 import 'package:googleapis_auth/auth_io.dart';
 import 'package:http/http.dart';
+import 'package:new_version/new_version.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/main.dart';
 import 'package:riise/models/FacultyInfo.dart';
@@ -65,9 +66,20 @@ class _TabScreenState extends State<TabScreen>
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  void _checkVersionOfApplicatoin() {
+    final newVersion = NewVersion(
+      iOSId: "com.example.riise",
+      androidId: "com.iiitd.riise",
+    );
+
+    newVersion.showAlertIfNecessary(context: context);
+  }
+
   @override
   void initState() {
     super.initState();
+
+    _checkVersionOfApplicatoin();
 
     _pages = [
       {
@@ -90,10 +102,10 @@ class _TabScreenState extends State<TabScreen>
         'page': AppointmentScreen(),
         'title': 'Appointments',
       },
-      {
-        'page': QRCodeScannerScreen(),
-        'title': 'QR Scanner',
-      },
+      // {
+      //   'page': QRCodeScannerScreen(),
+      //   'title': 'QR Scanner',
+      // },
     ];
 
     Future.delayed(Duration.zero, () async {
@@ -163,11 +175,11 @@ class _TabScreenState extends State<TabScreen>
         color: Colors.green,
         size: 80.r,
       ),
-      Icon(
-        Icons.qr_code_scanner_outlined,
-        color: Colors.green,
-        size: 80.r,
-      ),
+      // Icon(
+      //   Icons.qr_code_scanner_outlined,
+      //   color: Colors.green,
+      //   size: 80.r,
+      // ),
     ];
 
     final iconItemsActive = <Widget>[
@@ -196,11 +208,11 @@ class _TabScreenState extends State<TabScreen>
         color: Colors.green,
         size: 80.r,
       ),
-      Icon(
-        Icons.qr_code_scanner_rounded,
-        color: Colors.green,
-        size: 80.r,
-      ),
+      // Icon(
+      //   Icons.qr_code_scanner_rounded,
+      //   color: Colors.green,
+      //   size: 80.r,
+      // ),
     ];
 
     return Scaffold(

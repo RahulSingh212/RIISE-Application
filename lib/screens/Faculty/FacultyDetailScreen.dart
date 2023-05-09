@@ -209,7 +209,12 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
             return SimpleDialog(
               // elevation: 16,
               shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12))),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(
+                    12,
+                  ),
+                ),
+              ),
               title: TextField(
                 controller: TextEditingController(text: "Book Appointment"),
                 style: TextStyle(fontSize: 55.sp),
@@ -394,16 +399,27 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                           DateFormat("hh:mm a").parse(eventStartTime.text);
                       DateTime tempTime02 =
                           DateFormat("hh:mm a").parse(eventEndTime.text);
-                      DateTime tempStartTime = DateTime(2023, tempDate01.month,
-                          tempDate01.day, tempTime01.hour, tempTime01.minute);
-                      DateTime tempEndTime = DateTime(2023, tempDate01.month,
-                          tempDate01.day, tempTime02.hour, tempTime02.minute);
+                      DateTime tempStartTime = DateTime(
+                        2023,
+                        tempDate01.month,
+                        tempDate01.day,
+                        tempTime01.hour,
+                        tempTime01.minute,
+                      );
+                      DateTime tempEndTime = DateTime(
+                        2023,
+                        tempDate01.month,
+                        tempDate01.day,
+                        tempTime02.hour,
+                        tempTime02.minute,
+                      );
                       await Provider.of<CalenderAPI>(context0, listen: false)
                           .fetchSchedules(
-                              context,
-                              "Faculty",
-                              "Faculty-Schedule-List",
-                              widget.facultyDetails.faculty_EmailId);
+                        context,
+                        "Faculty",
+                        "Faculty-Schedule-List",
+                        widget.facultyDetails.faculty_EmailId,
+                      );
                       if (await Provider.of<CalenderAPI>(context0,
                               listen: false)
                           .checkForFacultyScheduleConflicts(
@@ -424,10 +440,11 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                       } else {
                         await Provider.of<CalenderAPI>(context0, listen: false)
                             .fetchSchedules(
-                                context,
-                                "Faculty",
-                                "Faculty-Schedule-List",
-                                widget.facultyDetails.faculty_EmailId);
+                          context,
+                          "Faculty",
+                          "Faculty-Schedule-List",
+                          widget.facultyDetails.faculty_EmailId,
+                        );
                         print("Time Unavailable");
                         DateTime tempTime =
                             Provider.of<CalenderAPI>(context0, listen: false)
@@ -617,29 +634,34 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                             SizedBox(
                               height: 60.h,
                             ),
-                            FirebaseAuth.instance.currentUser != null ? Provider.of<UserDetailsProvider>(context, listen: false).userType != "Faculty" ? 
-                            ElevatedButton(onPressed: () async {
+                            FirebaseAuth.instance.currentUser != null
+                                ? Provider.of<UserDetailsProvider>(context,
+                                                listen: false)
+                                            .userType !=
+                                        "Faculty"
+                                    ? ElevatedButton(
+                                        onPressed: () async {
                                           showPopUp(context);
                                         },
                                         child: Text(
                                           "Book Appointment",
                                         ),
-                                      ) : SizedBox()
-                            : ElevatedButton.icon(
-                                        onPressed: () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LogInSignUpScreen(),
-                                            ),
-                                          );
-                                        },
-                                        icon: Icon(
-                                          Icons.login_rounded,
+                                      )
+                                    : SizedBox()
+                                : ElevatedButton.icon(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              LogInSignUpScreen(),
                                         ),
-                                        label:
-                                            Text("Login to book appointment"),
-                                      ),
+                                      );
+                                    },
+                                    icon: Icon(
+                                      Icons.login_rounded,
+                                    ),
+                                    label: Text("Login to book appointment"),
+                                  ),
 
                             // Provider.of<UserDetailsProvider>(context,
                             //                 listen: false)

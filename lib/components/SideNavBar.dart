@@ -105,18 +105,36 @@ class _SideNavBarState extends State<SideNavBar> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      child: Provider.of<UserDetailsProvider>(context,listen: false).userType == "Faculty" ?
-                       Provider.of<UserDetailsProvider>(context, listen: false).userMapping['faculty_Image_Url'] == ''
-                          ? Image.asset("assets/images/icons/profile.png")
-                          : Image.network(Provider.of<UserDetailsProvider>(context, listen: false).userMapping['faculty_Image_Url'].toString(),
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                            ) : Provider.of<UserDetailsProvider>(context,listen: false).userMapping['guest_Image_Url'] == ''
-                          ? Image.asset("assets/images/icons/profile.png")
-                          : Image.network(Provider.of<UserDetailsProvider>(context,listen: false).userMapping['guest_Image_Url'].toString(),
-                              fit: BoxFit.fitWidth,
-                              width: screenWidth*0.25,
-                            ),
+                      child: Provider.of<UserDetailsProvider>(context,
+                                      listen: false)
+                                  .userType ==
+                              "Faculty"
+                          ? Provider.of<UserDetailsProvider>(context,
+                                          listen: false)
+                                      .userMapping['faculty_Image_Url'] ==
+                                  ''
+                              ? Image.asset("assets/images/icons/profile.png")
+                              : Image.network(
+                                  Provider.of<UserDetailsProvider>(context,
+                                          listen: false)
+                                      .userMapping['faculty_Image_Url']
+                                      .toString(),
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                )
+                          : Provider.of<UserDetailsProvider>(context,
+                                          listen: false)
+                                      .userMapping['guest_Image_Url'] ==
+                                  ''
+                              ? Image.asset("assets/images/icons/profile.png")
+                              : Image.network(
+                                  Provider.of<UserDetailsProvider>(context,
+                                          listen: false)
+                                      .userMapping['guest_Image_Url']
+                                      .toString(),
+                                  fit: BoxFit.fitWidth,
+                                  width: screenWidth * 0.25,
+                                ),
                     ),
                   ),
                 ),
@@ -128,23 +146,26 @@ class _SideNavBarState extends State<SideNavBar> {
           ),
           InkWell(
             onTap: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => ProfileScreen(),
-              //   ),
-              // );
-              if (Provider.of<UserDetailsProvider>(context, listen: false)
-                      .userType ==
-                  "Guest") {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => GuestProfileScreen(),
-                  ),
-                );
+              if (FirebaseAuth.instance.currentUser != null) {
+                if (Provider.of<UserDetailsProvider>(context, listen: false)
+                        .userType ==
+                    "Guest") {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => GuestProfileScreen(),
+                    ),
+                  );
+                } else {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => FacultyProfileScreen(),
+                    ),
+                  );
+                }
               } else {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => FacultyProfileScreen(),
+                    builder: (context) => LogInSignUpScreen(),
                   ),
                 );
               }

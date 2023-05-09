@@ -284,8 +284,7 @@ class EventProvider with ChangeNotifier {
     collectionOfAllEventList = allEventsList;
   }
 
-  Future<List<EventServerInformation>> fetchEventListFirestore(
-      BuildContext context, String collectionName) async {
+  Future<List<EventServerInformation>> fetchEventListFirestore(BuildContext context, String collectionName,) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
     CollectionReference eventsTracksRef = db.collection(collectionName);
 
@@ -334,6 +333,8 @@ class EventProvider with ChangeNotifier {
       });
     } catch (error) {}
 
+    allEventsList.sort((a, b) => compareEvent(a, b)*-1);
+
     return allEventsList;
   }
 
@@ -354,8 +355,25 @@ class EventProvider with ChangeNotifier {
       print(allEventsList);
     }
 
-    print("Entire List : " + allEventsList.length.toString());
+    allEventsList.sort((a, b) => compareEvent(a, b)*-1);
+
     return allEventsList;
+  }
+
+  int compareEvent(EventServerInformation event1, EventServerInformation event2) {
+    int d1 = event1.Event_Date.day, m1 = event1.Event_Date.month, y1 = event1.Event_Date.year;
+    int d2 = event1.Event_Date.day, m2 = event1.Event_Date.month, y2 = event1.Event_Date.year;
+    int t1 = (event1.Event_Start_Time.hour*60) + event1.Event_Start_Time.minute;
+    int t2 = (event2.Event_Start_Time.hour*60) + event2.Event_Start_Time.minute;
+
+    if (d1 == d2 && m1 == m2 && y1 == y2) {
+      if (t1 <= t2) return 1;
+      else return -1;
+    }
+    else {
+      if (event1.Event_Date.isBefore(event2.Event_Date)) return 1;
+      else return -1;
+    }
   }
 
   Future<void> fetchKeynoteSpeaker(

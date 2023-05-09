@@ -21,22 +21,17 @@ import "../models/FacultyInfo.dart";
 class FacultiesProvider with ChangeNotifier {
   static const dataList = [
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'A V Subramanyam',
       'faculty_EmailId': 'subramanyam@iiitd.ac.in',
       'faculty_Department': 'ECE, CSE',
-      'faculty_Position': 'Associate Professor (ECE, CSE)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
-      'faculty_Affiliated_Centers_And_Labs':
-          'Infosys Centre for Artificial Intelligence (CAI), Visual Conception Group',
+      'faculty_Affiliated_Centers_And_Labs': 'Infosys Centre for Artificial Intelligence (CAI), Visual Conception Group',
       'faculty_Authorization': 'True',
-      'faculty_Bio':
-          'I completed my Ph.D. at Nanyang Technological University, Singapore and undergraduate studies at Indian School of Mines University, Dhanbad, India. I work in the area of Multimedia and Vision, Image Processing and, Machine Learning. In particular, I am working on problems in fine-grained object recognition with applications to object re-identification and visual tracking, adversarial attacks, and cross modal recognition. I am a recipient of the Early Career Research Award, Department of Science and Technology. Our research group – Visual Conception Group maintains an active collaboration with leading institutes like NUS Singapore, QUT Australia, NII Japan, and UiT Norway.',
-      'faculty_College':
-          'PhD (2012), Nanyang Technological University, Singapore',
-      'faculty_Image_Url':
-          'https://iiitd.ac.in/sites/default/files/images/faculty/subramanyam.jpg',
+      'faculty_Bio': 'I completed my Ph.D. at Nanyang Technological University, Singapore and undergraduate studies at Indian School of Mines University, Dhanbad, India. I work in the area of Multimedia and Vision, Image Processing and, Machine Learning. In particular, I am working on problems in fine-grained object recognition with applications to object re-identification and visual tracking, adversarial attacks, and cross modal recognition. I am a recipient of the Early Career Research Award, Department of Science and Technology. Our research group – Visual Conception Group maintains an active collaboration with leading institutes like NUS Singapore, QUT Australia, NII Japan, and UiT Norway.',
+      'faculty_College': 'PhD (2012), Nanyang Technological University, Singapore',
+      'faculty_Image_Url': 'https://iiitd.ac.in/sites/default/files/images/faculty/subramanyam.jpg',
       'faculty_LinkedIn_Url': '',
       'faculty_Website_Url': 'https://iiitd.ac.in/subramanyam',
       'faculty_Mobile_Messaging_Token_Id': '',
@@ -46,20 +41,18 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Office_Longitude': '77.2716830936104',
       'faculty_Office_Navigation_Url': '',
       'faculty_Research_Interests': 'Multimedia and Vision,Machine Learning',
-      'faculty_Teaching_Interests':
-          'Statistical Machine Learning,Digital Image Processing, Digital Signal Processing, Signals and Systems, Multimedia Security',
+      'faculty_Teaching_Interests': 'Statistical Machine Learning,Digital Image Processing, Digital Signal Processing, Signals and Systems, Multimedia Security',
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/ZCg5',
       'faculty_Website_Page': '/subramanyam',
-      'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsubramanyam%40iiitd.ac.in%2FZCg5.png?alt=media&token=62e9e87a-2b58-40fb-acd8-20b0536ebb50',
+      'faculty_QR_Code_Image_Url': 'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsubramanyam%40iiitd.ac.in%2FZCg5.png?alt=media&token=62e9e87a-2b58-40fb-acd8-20b0536ebb50',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Aasim Khan',
       'faculty_EmailId': 'aasim@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -83,15 +76,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/aasim',
       'faculty_Website_Page': '/aasim',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Faasim%40iiitd.ac.in%2Faasim.png?alt=media&token=92b417fe-265e-4ede-b17d-93770140de86'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Faasim%40iiitd.ac.in%2Faasim.png?alt=media&token=92b417fe-265e-4ede-b17d-93770140de86',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Abhijit Mitra',
       'faculty_EmailId': 'abhijit@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Assistant Professor (ECE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -115,15 +108,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/abhijit',
       'faculty_Website_Page': '/abhijit',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fabhijit%40iiitd.ac.in%2Fabhijit.png?alt=media&token=1459d597-ecee-4d71-9f6d-e8e9bed914d9'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fabhijit%40iiitd.ac.in%2Fabhijit.png?alt=media&token=1459d597-ecee-4d71-9f6d-e8e9bed914d9',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Aman Parnami',
       'faculty_EmailId': 'aman@iiitd.ac.in',
       'faculty_Department': 'HCD',
-      'faculty_Position': 'Assistant Professor (HCD)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Center for Design and New Media (Supported by Tata Consultancy Services, a TCS Foundation Initiative)',
@@ -148,15 +141,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/naxz',
       'faculty_Website_Page': '/aman',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Faman%40iiitd.ac.in%2Fnaxz.png?alt=media&token=1ac1e407-4600-4b2b-83e9-f92895797130'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Faman%40iiitd.ac.in%2Fnaxz.png?alt=media&token=1ac1e407-4600-4b2b-83e9-f92895797130',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Anand Srivastava',
       'faculty_EmailId': 'anand@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Professor (ECE)',
+      'faculty_Position': 'Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -180,15 +173,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/anand',
       'faculty_Website_Page': '/anand',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fanand%40iiitd.ac.in%2Fanand.png?alt=media&token=87454975-267b-4dd4-bb54-288d51a9aac6'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fanand%40iiitd.ac.in%2Fanand.png?alt=media&token=87454975-267b-4dd4-bb54-288d51a9aac6',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Angshul Majumdar',
       'faculty_EmailId': 'angshul@iiitd.ac.in',
       'faculty_Department': 'ECE, CSE',
-      'faculty_Position': 'Assistant Professor (Math)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -211,15 +204,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/angshul',
       'faculty_Website_Page': '/angshul',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fangshul%40iiitd.ac.in%2Fangshul.png?alt=media&token=aea6b0f4-d343-4eeb-b8db-8b3fc53d718f'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fangshul%40iiitd.ac.in%2Fangshul.png?alt=media&token=aea6b0f4-d343-4eeb-b8db-8b3fc53d718f',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Anmol Srivastava',
       'faculty_EmailId': 'anmol@iiitd.ac.in',
       'faculty_Department': 'HCD',
-      'faculty_Position': 'Assistant Professor (HCD)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -242,15 +235,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/anmol',
       'faculty_Website_Page': '/anmol',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fanmol%40iiitd.ac.in%2Fanmol.png?alt=media&token=b91ba378-0036-40a1-a40d-45cc1cd4c16c'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fanmol%40iiitd.ac.in%2Fanmol.png?alt=media&token=b91ba378-0036-40a1-a40d-45cc1cd4c16c',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Anubha Gupta',
       'faculty_EmailId': 'anubha@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Professor (ECE)',
+      'faculty_Position': 'Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Member-Infosys Centre for Artificial Intelligence (CAI),Core Member-Center of Excellence in Healthcare, IIIT-Delhi,SBILab, Deptt. of ECE, IIIT-Delhi',
@@ -275,15 +268,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/anubha',
       'faculty_Website_Page': '/anubha',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fanubha%40iiitd.ac.in%2Fanubha.png?alt=media&token=08a9703a-dc14-4e56-963c-0b075b9de0a6'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fanubha%40iiitd.ac.in%2Fanubha.png?alt=media&token=08a9703a-dc14-4e56-963c-0b075b9de0a6',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Anuj Grover',
       'faculty_EmailId': 'anuj@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Associate Professor (ECE)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -307,15 +300,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/anujg',
       'faculty_Website_Page': '/anujg',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fanuj%40iiitd.ac.in%2Fanujg.png?alt=media&token=dd51e395-0282-4a97-a6e0-7590d6bef4b0'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fanuj%40iiitd.ac.in%2Fanujg.png?alt=media&token=dd51e395-0282-4a97-a6e0-7590d6bef4b0',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Anuradha Sharma',
       'faculty_EmailId': 'anuradha@iiitd.ac.in',
       'faculty_Department': 'Math',
-      'faculty_Position': 'Professor (Math)',
+      'faculty_Position': 'Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -339,15 +332,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/anuradha',
       'faculty_Website_Page': '/anuradha',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fanuradha%40iiitd.ac.in%2Fanuradha.png?alt=media&token=6cf1b965-d0c9-4ac1-ad6b-42c32c1e6f26'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fanuradha%40iiitd.ac.in%2Fanuradha.png?alt=media&token=6cf1b965-d0c9-4ac1-ad6b-42c32c1e6f26',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Arani Bhattacharya',
       'faculty_EmailId': 'arani@iiitd.ac.in',
       'faculty_Department': 'CSE,ECE',
-      'faculty_Position': 'Assistant Professor (CSE, ECE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -372,15 +365,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/arani',
       'faculty_Website_Page': '/arani',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Farani%40iiitd.ac.in%2Farani.png?alt=media&token=4e326126-6a94-4ec6-8cf9-bf3f3d037241'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Farani%40iiitd.ac.in%2Farani.png?alt=media&token=4e326126-6a94-4ec6-8cf9-bf3f3d037241',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Arjun Ray',
       'faculty_EmailId': 'arjun@iiitd.ac.in',
       'faculty_Department': 'CB',
-      'faculty_Position': 'Assistant Professor (CB)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -403,15 +396,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/arjun',
       'faculty_Website_Page': '/arjun',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Farjun%40iiitd.ac.in%2Farjun.png?alt=media&token=ab6d2eeb-4534-4c1f-b0ad-ff40d8ab0096'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Farjun%40iiitd.ac.in%2Farjun.png?alt=media&token=ab6d2eeb-4534-4c1f-b0ad-ff40d8ab0096',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Arun Balaji Buduru',
       'faculty_EmailId': 'arunb@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE, HCD)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -435,15 +428,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/arunb',
       'faculty_Website_Page': '/arunb',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Farunb%40iiitd.ac.in%2Farunb.png?alt=media&token=b4e89627-4f17-49f1-b87f-74985d384943'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Farunb%40iiitd.ac.in%2Farunb.png?alt=media&token=b4e89627-4f17-49f1-b87f-74985d384943',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Ashish Kumar Pandey',
       'faculty_EmailId': 'ashish.pandey@iiitd.ac.in',
       'faculty_Department': 'Math',
-      'faculty_Position': '',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -467,15 +460,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/ashishk',
       'faculty_Website_Page': '/ashishk',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fashish.pandey%40iiitd.ac.in%2Fashishk.png?alt=media&token=271e423c-f5f8-483e-865f-0953629faaaa'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fashish.pandey%40iiitd.ac.in%2Fashishk.png?alt=media&token=271e423c-f5f8-483e-865f-0953629faaaa',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Bapi Chatterjee',
       'faculty_EmailId': 'bapi@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -500,15 +493,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/bapi',
       'faculty_Website_Page': '/bapi',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fbapi%40iiitd.ac.in%2Fbapi.png?alt=media&token=28ee84f6-732d-4129-a9b7-1da031a2e6a2'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fbapi%40iiitd.ac.in%2Fbapi.png?alt=media&token=28ee84f6-732d-4129-a9b7-1da031a2e6a2',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Chanekar Prasad Vilas',
       'faculty_EmailId': 'prasad@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Assistant Professor (ECE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -532,15 +525,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/chanekar',
       'faculty_Website_Page': '/chanekar',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fprasad%40iiitd.ac.in%2Fchanekar.png?alt=media&token=c5442a66-6cdc-4971-abd0-bbb7adb83f84'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fprasad%40iiitd.ac.in%2Fchanekar.png?alt=media&token=c5442a66-6cdc-4971-abd0-bbb7adb83f84',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Debajyoti Bera',
       'faculty_EmailId': 'dbera@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Associate Head (CSE), Associate Professor (CSE)',
+      'faculty_Position': 'Associate Head ,Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -565,15 +558,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/dbera',
       'faculty_Website_Page': '/dbera',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fdbera%40iiitd.ac.in%2Fdbera.png?alt=media&token=ec185481-d813-475d-9625-e68b0d21d7ca'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fdbera%40iiitd.ac.in%2Fdbera.png?alt=media&token=ec185481-d813-475d-9625-e68b0d21d7ca',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Debarka Sengupta',
       'faculty_EmailId': 'debarka@iiitd.ac.in',
       'faculty_Department': 'CSE,CB',
-      'faculty_Position': 'Associate Professor (CSE, CB)',
+      'faculty_Position': 'Associate Professor ',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Infosys Centre for Artificial Intelligence,Centre for Computational Biology',
@@ -599,15 +592,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/debarka',
       'faculty_Website_Page': '/debarka',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fdebarka%40iiitd.ac.in%2Fdebarka.png?alt=media&token=65a060f4-7912-4322-8371-98931e00f763'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fdebarka%40iiitd.ac.in%2Fdebarka.png?alt=media&token=65a060f4-7912-4322-8371-98931e00f763',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Debika Banerjee',
       'faculty_EmailId': 'debika@iiitd.ac.in',
       'faculty_Department': 'Math',
-      'faculty_Position': 'Assistant Professor (Math)',
+      'faculty_Position': 'Assistant Professor ',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -630,15 +623,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/debika',
       'faculty_Website_Page': '/debika',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fdebika%40iiitd.ac.in%2Fdebika.png?alt=media&token=02b99a27-9f98-48b2-b283-c89e69523d55'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fdebika%40iiitd.ac.in%2Fdebika.png?alt=media&token=02b99a27-9f98-48b2-b283-c89e69523d55',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Dhruv Kumar',
       'faculty_EmailId': 'dhruv.kumar@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -662,15 +655,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/dhruv',
       'faculty_Website_Page': '/dhruv',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fdhruv.kumar%40iiitd.ac.in%2Fdhruv.png?alt=media&token=cc0865e5-841f-456a-8505-83be4c2c2732'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fdhruv.kumar%40iiitd.ac.in%2Fdhruv.png?alt=media&token=cc0865e5-841f-456a-8505-83be4c2c2732',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Diptapriyo Majumdar',
       'faculty_EmailId': 'diptapriyo@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -695,15 +688,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/diptapriyo',
       'faculty_Website_Page': '/diptapriyo',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fdiptapriyo%40iiitd.ac.in%2Fdiptapriyo.png?alt=media&token=ac23a964-e4e9-4dfd-b587-eaf12513ff19'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fdiptapriyo%40iiitd.ac.in%2Fdiptapriyo.png?alt=media&token=ac23a964-e4e9-4dfd-b587-eaf12513ff19',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Donghoon Chang',
       'faculty_EmailId': 'donghoon@iiitd.ac.in',
       'faculty_Department': 'CSE,Maths',
-      'faculty_Position': 'Associate Professor (CSE, Maths)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -727,15 +720,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/donghoon',
       'faculty_Website_Page': '/donghoon',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fdonghoon%40iiitd.ac.in%2Fdonghoon.png?alt=media&token=a37cd4a7-24b8-4d4d-abee-596173cd542b'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fdonghoon%40iiitd.ac.in%2Fdonghoon.png?alt=media&token=a37cd4a7-24b8-4d4d-abee-596173cd542b',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'G.P.S. Raghava',
       'faculty_EmailId': 'raghava@iiitd.ac.in',
       'faculty_Department': 'CB',
-      'faculty_Position': 'Head, Professor (CB)',
+      'faculty_Position': 'Head, Professor ',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -759,15 +752,16 @@ class FacultiesProvider with ChangeNotifier {
           'Application of Artificial Intelligence in Biomedical Sciences,Big Data Mining in Healthcare',
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/raghava',
       'faculty_Website_Page': '/raghava',
-      'faculty_QR_Code_Image_Url': ''
+      'faculty_QR_Code_Image_Url':
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fraghava%40iiitd.ac.in%2Fraghava.png?alt=media&token=f5c4ae23-20f0-49e3-bf9d-343706b7165e',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Ganesh Bagler',
       'faculty_EmailId': 'bagler@iiitd.ac.in',
       'faculty_Department': 'CB',
-      'faculty_Position': 'Associate Professor (CB)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Complex Systems Laboratory,Infosys Centre for Artificial Intelligence (CAI)',
@@ -793,15 +787,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/bagler',
       'faculty_Website_Page': '/bagler',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fbagler%40iiitd.ac.in%2Fbagler.png?alt=media&token=3074fe52-8624-4bea-88a4-8c0c8d25f2ba'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fbagler%40iiitd.ac.in%2Fbagler.png?alt=media&token=3074fe52-8624-4bea-88a4-8c0c8d25f2ba',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Gaurav Ahuja',
       'faculty_EmailId': 'gaurav.ahuja@iiitd.ac.in',
       'faculty_Department': 'CB',
-      'faculty_Position': 'Associate Professor (CB)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -826,15 +820,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/gauravahuja',
       'faculty_Website_Page': '/gauravahuja',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fgaurav.ahuja%40iiitd.ac.in%2Fgauravahuja.png?alt=media&token=1af590a9-79dd-41d2-971d-7a8ce326061d'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fgaurav.ahuja%40iiitd.ac.in%2Fgauravahuja.png?alt=media&token=1af590a9-79dd-41d2-971d-7a8ce326061d',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Gaurav Arora',
       'faculty_EmailId': 'gaurav@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -858,15 +852,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/gaurava',
       'faculty_Website_Page': '/gaurava',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fgaurav%40iiitd.ac.in%2Fgaurava.png?alt=media&token=9e5e3b88-76bf-466e-ba8a-0bb8178b3ddc'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fgaurav%40iiitd.ac.in%2Fgaurava.png?alt=media&token=9e5e3b88-76bf-466e-ba8a-0bb8178b3ddc',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Gayatri Nair',
       'faculty_EmailId': 'gayatri@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Position': 'Assistant Professor ',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -890,15 +884,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/gayatri',
       'faculty_Website_Page': '/gayatri',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fgayatri%40iiitd.ac.in%2Fgayatri.png?alt=media&token=128802f4-d938-4695-b628-620c8913e012'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fgayatri%40iiitd.ac.in%2Fgayatri.png?alt=media&token=128802f4-d938-4695-b628-620c8913e012',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Jainendra Shukla',
       'faculty_EmailId': 'jainendra@iiitd.ac.in',
       'faculty_Department': 'CSE,HCD',
-      'faculty_Position': 'Assistant Professor (CSE, HCD)',
+      'faculty_Position': 'Assistant Professor ',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Infosys Centre for Artificial Intelligence (CAI),Center for Design and New Media (Supported by Tata Consultancy Services, a TCS Foundation Initiative),Human-Machine Interaction Lab (HMI)',
@@ -924,15 +918,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/jainendra',
       'faculty_Website_Page': '/jainendra',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fjainendra%40iiitd.ac.in%2Fjainendra.png?alt=media&token=da3fbff3-9636-4c5e-adc4-22755bf0749b'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fjainendra%40iiitd.ac.in%2Fjainendra.png?alt=media&token=da3fbff3-9636-4c5e-adc4-22755bf0749b',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Jaspreet Kaur Dhanjal',
       'faculty_EmailId': 'jaspreet@iiitd.ac.in',
       'faculty_Department': 'CB',
-      'faculty_Position': 'Assistant Professor (CB)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'TRUE\n',
@@ -957,15 +951,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/jaspreet',
       'faculty_Website_Page': '/jaspreet',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fjaspreet%40iiitd.ac.in%2Fjaspreet.png?alt=media&token=fdf489b3-f4ac-49c4-96fa-874b8e508537'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fjaspreet%40iiitd.ac.in%2Fjaspreet.png?alt=media&token=fdf489b3-f4ac-49c4-96fa-874b8e508537',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Kaushik Kalyanaraman',
       'faculty_EmailId': 'kaushik@iiitd.ac.in',
       'faculty_Department': 'Math',
-      'faculty_Position': 'Head, Assistant Professor (Math)',
+      'faculty_Position': 'Head, Assistant Professor ',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -990,15 +984,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/kaushik',
       'faculty_Website_Page': '/kaushik',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fkaushik%40iiitd.ac.in%2Fkaushik.png?alt=media&token=8656b7a1-ee64-421f-bc82-9a435742ce41'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fkaushik%40iiitd.ac.in%2Fkaushik.png?alt=media&token=8656b7a1-ee64-421f-bc82-9a435742ce41',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Kiriti Kanjilal',
       'faculty_EmailId': 'kanjilal@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Head, Assistant Professor (SSH)',
+      'faculty_Position': 'Head, Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1023,15 +1017,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/kanjilal',
       'faculty_Website_Page': '/kanjilal',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fkanjilal%40iiitd.ac.in%2Fkanjilal.png?alt=media&token=85601427-b778-4ac7-aba8-f08c1de36082'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fkanjilal%40iiitd.ac.in%2Fkanjilal.png?alt=media&token=85601427-b778-4ac7-aba8-f08c1de36082',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Koteswar Rao Jerripothula',
       'faculty_EmailId': 'koteswar@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Center for Design and New Media (Supported by Tata Consultancy Services, a TCS Foundation Initiative)',
@@ -1058,15 +1052,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/koteswar',
       'faculty_Website_Page': '/koteswar',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fkoteswar%40iiitd.ac.in%2Fkoteswar.png?alt=media&token=5f8cefb2-f402-4aaa-867f-048e71eba9ac'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fkoteswar%40iiitd.ac.in%2Fkoteswar.png?alt=media&token=5f8cefb2-f402-4aaa-867f-048e71eba9ac',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Manohar Kumar',
       'faculty_EmailId': 'manohar.kumar@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1090,15 +1084,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/manohark',
       'faculty_Website_Page': '/manohark',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fmanohar.kumar%40iiitd.ac.in%2Fmanohark.png?alt=media&token=6746c81d-9c27-4cc6-9e70-16dfcbdea54f'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fmanohar.kumar%40iiitd.ac.in%2Fmanohark.png?alt=media&token=6746c81d-9c27-4cc6-9e70-16dfcbdea54f',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Manuj Mukherjee',
       'faculty_EmailId': 'manuj@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Assistant Professor (ECE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1122,15 +1116,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/manuj',
       'faculty_Website_Page': '/manuj',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fmanuj%40iiitd.ac.in%2Fmanuj.png?alt=media&token=90cd5ca4-4aef-4f0b-8e1c-ee39cc379999'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fmanuj%40iiitd.ac.in%2Fmanuj.png?alt=media&token=90cd5ca4-4aef-4f0b-8e1c-ee39cc379999',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Md. Shad Akhtar',
       'faculty_EmailId': 'shad.akhtar@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1153,15 +1147,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/shad',
       'faculty_Website_Page': '/shad',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fshad.akhtar%40iiitd.ac.in%2Fshad.png?alt=media&token=a26c7976-492f-468f-9efe-59589b074b1e'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fshad.akhtar%40iiitd.ac.in%2Fshad.png?alt=media&token=a26c7976-492f-468f-9efe-59589b074b1e',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Monika Arora',
       'faculty_EmailId': 'monika@iiitd.ac.in',
       'faculty_Department': 'Math',
-      'faculty_Position': 'Assistant Professor (Math)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1183,15 +1177,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/monika',
       'faculty_Website_Page': '/monika',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fmonika%40iiitd.ac.in%2Fmonika.png?alt=media&token=f92d4bb1-c884-4c0f-89a4-cd1192393a12'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fmonika%40iiitd.ac.in%2Fmonika.png?alt=media&token=f92d4bb1-c884-4c0f-89a4-cd1192393a12',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Mrinmoy Chakrabarty',
       'faculty_EmailId': 'mrinmoy@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Center for Design and New Media (Supported by Tata Consultancy Services, a TCS Foundation Initiative)',
@@ -1215,15 +1209,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/mrinmoy',
       'faculty_Website_Page': '/mrinmoy',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fmrinmoy%40iiitd.ac.in%2Fmrinmoy.png?alt=media&token=a4ad4df2-e7cb-43b2-99a8-b7c7bb8bba86'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fmrinmoy%40iiitd.ac.in%2Fmrinmoy.png?alt=media&token=a4ad4df2-e7cb-43b2-99a8-b7c7bb8bba86',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Mukesh Mohania',
       'faculty_EmailId': 'mukesh@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Professor (CSE)',
+      'faculty_Position': 'Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1249,15 +1243,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/mukesh',
       'faculty_Website_Page': '/mukesh',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fmukesh%40iiitd.ac.in%2Fmukesh.png?alt=media&token=cc960f13-5618-4207-8e81-81f8361b4308'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fmukesh%40iiitd.ac.in%2Fmukesh.png?alt=media&token=cc960f13-5618-4207-8e81-81f8361b4308',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Mukulika Maity',
       'faculty_EmailId': 'mukulika@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1282,15 +1276,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/mukulika',
       'faculty_Website_Page': '/mukulika',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fmukulika%40iiitd.ac.in%2Fmukulika.png?alt=media&token=d6b339c0-bdfb-4447-9960-28bb66503c40'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fmukulika%40iiitd.ac.in%2Fmukulika.png?alt=media&token=d6b339c0-bdfb-4447-9960-28bb66503c40',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'N. Arul Murugan',
       'faculty_EmailId': 'arul.murugan@iiitd.ac.in.',
       'faculty_Department': 'CB',
-      'faculty_Position': 'Associate Professor (CB)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1316,15 +1310,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/arulmurugan',
       'faculty_Website_Page': '/arulmurugan',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Farul.murugan%40iiitd.ac.in.%2Farulmurugan.png?alt=media&token=15908d16-70bc-4339-b6cc-97a0c04235a7'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Farul.murugan%40iiitd.ac.in.%2Farulmurugan.png?alt=media&token=15908d16-70bc-4339-b6cc-97a0c04235a7',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Nishad Patnaik',
       'faculty_EmailId': 'nishad@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1347,15 +1341,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/nishad',
       'faculty_Website_Page': '/nishad',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fnishad%40iiitd.ac.in%2Fnishad.png?alt=media&token=9964ddbd-cb22-4a8b-ae97-ff46d9a2d2e3'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fnishad%40iiitd.ac.in%2Fnishad.png?alt=media&token=9964ddbd-cb22-4a8b-ae97-ff46d9a2d2e3',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Ojaswa Sharma',
       'faculty_EmailId': 'ojaswa@iiitd.ac.in',
       'faculty_Department': 'CSE,Maths',
-      'faculty_Position': 'Head, Associate Professor (CSE, Math)',
+      'faculty_Position': 'Head, Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Graphics Research Group (GRG),Center for Design and New Media (Supported by Tata Consultancy Services, a TCS Foundation Initiative)',
@@ -1380,15 +1374,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/ojaswa',
       'faculty_Website_Page': '/ojaswa',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fnishad%40iiitd.ac.in%2Fnishad.png?alt=media&token=9964ddbd-cb22-4a8b-ae97-ff46d9a2d2e3'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fojaswa%40iiitd.ac.in%2Fojaswa.png?alt=media&token=1e7d6d06-3f91-4f52-8929-50dbd02b7149',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Pankaj Jalote',
       'faculty_EmailId': 'jalote@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Distinguished Professor (CSE)',
+      'faculty_Position': 'Distinguished Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1414,15 +1408,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/jalote',
       'faculty_Website_Page': '/jalote',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fjalote%40iiitd.ac.in%2Fjalote.png?alt=media&token=586a5950-eea6-4558-8b26-dd031727aa16'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fjalote%40iiitd.ac.in%2Fjalote.png?alt=media&token=586a5950-eea6-4558-8b26-dd031727aa16',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Paro Mishra',
       'faculty_EmailId': 'paro.mishra@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Center for Design and New Media (Supported by Tata Consultancy Services, a TCS Foundation Initiative)',
@@ -1447,15 +1441,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/paro',
       'faculty_Website_Page': '/paro',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fparo.mishra%40iiitd.ac.in%2Fparo.png?alt=media&token=73185840-7788-418a-ac3e-64e6a4971d68'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fparo.mishra%40iiitd.ac.in%2Fparo.png?alt=media&token=73185840-7788-418a-ac3e-64e6a4971d68',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Piyus Kedia',
       'faculty_EmailId': 'piyus@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1480,15 +1474,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/piyus',
       'faculty_Website_Page': '/piyus',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fpiyus%40iiitd.ac.in%2Fpiyus.png?alt=media&token=7a5a9e65-19d8-4e34-b61b-f4c843667544'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fpiyus%40iiitd.ac.in%2Fpiyus.png?alt=media&token=7a5a9e65-19d8-4e34-b61b-f4c843667544',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Praveen Priyadarshi',
       'faculty_EmailId': 'praveen@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1513,15 +1507,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/praveen',
       'faculty_Website_Page': '/praveen',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fpraveen%40iiitd.ac.in%2Fpraveen.png?alt=media&token=7170f0be-434c-414a-b45f-11b477a58447'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fpraveen%40iiitd.ac.in%2Fpraveen.png?alt=media&token=7170f0be-434c-414a-b45f-11b477a58447',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Pravesh Biyani',
       'faculty_EmailId': 'praveshb@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Associate Professor (ECE)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'TRUE\n',
@@ -1545,15 +1539,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/praveshb',
       'faculty_Website_Page': '/praveshb',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fpraveshb%40iiitd.ac.in%2Fpraveshb.png?alt=media&token=438e2253-2819-4556-ba0f-b1ceec23cedb'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fpraveshb%40iiitd.ac.in%2Fpraveshb.png?alt=media&token=438e2253-2819-4556-ba0f-b1ceec23cedb',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Pushpendra Singh',
       'faculty_EmailId': 'psingh@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Professor (CSE)',
+      'faculty_Position': 'Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1578,15 +1572,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/pushpendra',
       'faculty_Website_Page': '/pushpendra',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fpsingh%40iiitd.ac.in%2Fpushpendra.png?alt=media&token=1463a5c7-7830-466a-86a9-1ca9df6e4315'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fpsingh%40iiitd.ac.in%2Fpushpendra.png?alt=media&token=1463a5c7-7830-466a-86a9-1ca9df6e4315',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Rajiv Raman',
       'faculty_EmailId': 'rajiv@iiitd.ac.in',
       'faculty_Department': 'CSE,Maths',
-      'faculty_Position': 'Associate Professor (CSE, Maths)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1610,15 +1604,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/rajiv',
       'faculty_Website_Page': '/rajiv',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Frajiv%40iiitd.ac.in%2Frajiv.png?alt=media&token=fdcb9ecd-3d65-40f5-9187-ef19d6e2f8dc'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Frajiv%40iiitd.ac.in%2Frajiv.png?alt=media&token=fdcb9ecd-3d65-40f5-9187-ef19d6e2f8dc',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Rajiv Ratn Shah',
       'faculty_EmailId': 'rajivratn@iiitd.ac.in',
       'faculty_Department': 'CSE,HCD',
-      'faculty_Position': 'Head (HCD), Assistant Professor (CSE, HCD)',
+      'faculty_Position': 'Head, Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Center for Design and New Media (Supported by Tata Consultancy Services, a TCS Foundation Initiative)',
@@ -1644,15 +1638,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/rajivratn',
       'faculty_Website_Page': '/rajivratn',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Frajivratn%40iiitd.ac.in%2Frajivratn.png?alt=media&token=f3a62a95-ea43-41ac-9898-6a49bbff893d'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Frajivratn%40iiitd.ac.in%2Frajivratn.png?alt=media&token=f3a62a95-ea43-41ac-9898-6a49bbff893d',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Rakesh Chaturvedi',
       'faculty_EmailId': 'rakesh@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1674,15 +1668,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/rakesh',
       'faculty_Website_Page': '/rakesh',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Frakesh%40iiitd.ac.in%2Frakesh.png?alt=media&token=d980bd99-2b87-4cb7-abaf-d99d5a7928f1'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Frakesh%40iiitd.ac.in%2Frakesh.png?alt=media&token=d980bd99-2b87-4cb7-abaf-d99d5a7928f1',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Ram Krishna Ghosh',
       'faculty_EmailId': 'rkghosh@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Assistant Professor (ECE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1707,15 +1701,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/rkghosh',
       'faculty_Website_Page': '/rkghosh',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Frkghosh%40iiitd.ac.in%2Frkghosh.png?alt=media&token=c7cc3864-6b45-4fb4-ab74-edf72f308073'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Frkghosh%40iiitd.ac.in%2Frkghosh.png?alt=media&token=c7cc3864-6b45-4fb4-ab74-edf72f308073',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Ranjan Bose',
       'faculty_EmailId': 'bose@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Director and Professor (ECE)',
+      'faculty_Position': 'Director and Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1740,15 +1734,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/bose',
       'faculty_Website_Page': '/bose',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fbose%40iiitd.ac.in%2Fbose.png?alt=media&token=f70f5a5a-23b4-4930-ae02-4c9d951843c6'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fbose%40iiitd.ac.in%2Fbose.png?alt=media&token=f70f5a5a-23b4-4930-ae02-4c9d951843c6',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Ranjitha Prasad',
       'faculty_EmailId': 'ranjitha@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Assistant Professor (ECE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1774,49 +1768,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/ranjitha',
       'faculty_Website_Page': '/ranjitha',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Franjitha%40iiitd.ac.in%2Franjitha.png?alt=media&token=6f4e7af8-f162-4608-8272-a75d0712a072'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Franjitha%40iiitd.ac.in%2Franjitha.png?alt=media&token=6f4e7af8-f162-4608-8272-a75d0712a072',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
-      'faculty_Unique_Id': '',
-      'faculty_Name': 'Henansh Tanwar',
-      'faculty_EmailId': 'henansh20065@iiitd.ac.in',
-      'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (ECE)',
-      'faculty_Gender': '',
-      'faculty_Affiliated_Centers_And_Labs': '',
-      'faculty_Authorization': 'True',
-      'faculty_Bio':
-      'Dr. Ranjitha Prasad obtained her Ph.D. from Indian Institute of Science in 2015. Her experience is in the general areas of signal processing, Bayesian statistics, and more recently, machine learning and deep neural networks. She has been a postdoctoral researcher at Nanyang Technological University and National University of Singapore, Singapore, and a scientist at TCS Innovation Labs, Delhi. She is the recipient of the Best Ph.D. thesis award (The Seshagiri Kaikini Medal) for 2014- 2015 from the Council of Indian Institute of Science, and the recipient of the Best Paper in the Communications Track at NCC 2014, held at IIT Kanpur.Her current research interests are: Causal Inference, Survival analysis, and sparsity in Bayesian neural networks.',
-      'faculty_College':
-      '\nPh.D. (2015), Indian Institute of Science, Banglore',
-      'faculty_Image_Url':
-      'https://iiitd.ac.in/sites/default/files/ranjitha.jpg',
-      'faculty_LinkedIn_Url':
-      'https://www.linkedin.com/in/ranjitha-prasad-7ab84b30/',
-      'faculty_Website_Url': 'https://iiitd.ac.in/ranjitha',
-      'faculty_Mobile_Messaging_Token_Id': '',
-      'faculty_Mobile_Number': '"011-26907357"',
-      'faculty_Office_Address': '\nB-607 (R&D Block)',
-      'faculty_Office_Latitude': '28.5442185740552',
-      'faculty_Office_Longitude': '77.2716830936104',
-      'faculty_Office_Navigation_Url': '',
-      'faculty_Research_Interests':
-      'Causal Inference,Survival analysis, and sparsity in Bayesian neural networks.',
-      'faculty_Teaching_Interests':
-      'Causal Inference,Survival analysis, and sparsity in Bayesian neural networks.',
-      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/ranjitha',
-      'faculty_Website_Page': '/ranjitha',
-      'faculty_QR_Code_Image_Url':
-      'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Franjitha%40iiitd.ac.in%2Franjitha.png?alt=media&token=6f4e7af8-f162-4608-8272-a75d0712a072'
-    },
-    {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Richa Gupta',
       'faculty_EmailId': 'richa.gupta@iiitd.ac.in',
       'faculty_Department': 'HCD',
-      'faculty_Position': 'Assistant Professor (HCD)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Center for Design and New Media (Supported by Tata Consultancy Services, a TCS Foundation Initiative)',
@@ -1841,15 +1801,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/richagupta',
       'faculty_Website_Page': '/richagupta',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fricha.gupta%40iiitd.ac.in%2Frichagupta.png?alt=media&token=1491defc-f580-495d-9382-af302bbeeed2'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fricha.gupta%40iiitd.ac.in%2Frichagupta.png?alt=media&token=1491defc-f580-495d-9382-af302bbeeed2',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Rinku Shah',
       'faculty_EmailId': 'rinku@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Associate Professor (CSE, ECE)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1873,15 +1833,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/rinku',
       'faculty_Website_Page': '/rinku',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Frinku%40iiitd.ac.in%2Frinku.png?alt=media&token=58c324fa-9b56-4583-b987-bb43f173534b'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Frinku%40iiitd.ac.in%2Frinku.png?alt=media&token=58c324fa-9b56-4583-b987-bb43f173534b',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Saket Anand',
       'faculty_EmailId': 'anands@iiitd.ac.in',
       'faculty_Department': 'ECE, CSE',
-      'faculty_Position': 'Associate Professor (CSE, ECE)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1906,15 +1866,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/anands',
       'faculty_Website_Page': '/anands',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fanands%40iiitd.ac.in%2Fanands.png?alt=media&token=c179f62b-cc31-4e01-b099-07e29640abe4'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fanands%40iiitd.ac.in%2Fanands.png?alt=media&token=c179f62b-cc31-4e01-b099-07e29640abe4',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Sambuddho Chakravarty',
       'faculty_EmailId': 'sambuddho@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Associate Professor (CSE)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1938,15 +1898,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/sambuddho',
       'faculty_Website_Page': '/sambuddho',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsambuddho%40iiitd.ac.in%2Fsambuddho.png?alt=media&token=fe3f7b70-8010-499d-a575-97632b2aaead'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsambuddho%40iiitd.ac.in%2Fsambuddho.png?alt=media&token=fe3f7b70-8010-499d-a575-97632b2aaead',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Samrith Ram',
       'faculty_EmailId': 'samrith@iiitd.ac.in',
       'faculty_Department': 'Math',
-      'faculty_Position': 'Associate Professor (MATH)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -1968,15 +1928,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/samrithram',
       'faculty_Website_Page': '/samrithram',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsamrith%40iiitd.ac.in%2Fsamrithram.png?alt=media&token=8dc6837d-6ac1-4447-ad68-1ca27128f478'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsamrith%40iiitd.ac.in%2Fsamrithram.png?alt=media&token=8dc6837d-6ac1-4447-ad68-1ca27128f478',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Sanat K Biswas',
       'faculty_EmailId': 'sanat@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Assistant Professor (ECE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2000,15 +1960,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/sanat',
       'faculty_Website_Page': '/sanat',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsanat%40iiitd.ac.in%2Fsanat.png?alt=media&token=548e5578-5097-48a7-8fbd-25c7cc9ea22a'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsanat%40iiitd.ac.in%2Fsanat.png?alt=media&token=548e5578-5097-48a7-8fbd-25c7cc9ea22a',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Sanjit Krishnan Kaul',
       'faculty_EmailId': 'skkaul@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Associate Professor (ECE)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2032,15 +1992,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/skkaul',
       'faculty_Website_Page': '/skkaul',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fskkaul%40iiitd.ac.in%2Fskkaul.png?alt=media&token=ef61b053-abb0-4e24-a384-f00d305575c7'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fskkaul%40iiitd.ac.in%2Fskkaul.png?alt=media&token=ef61b053-abb0-4e24-a384-f00d305575c7',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Sankha S Basu',
       'faculty_EmailId': 'sankha@iiitd.ac.in',
       'faculty_Department': 'Math',
-      'faculty_Position': 'Assistant Professor (Math)',
+      'faculty_Position': 'Assistant Professor ',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2064,15 +2024,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/sankha',
       'faculty_Website_Page': '/sankha',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsankha%40iiitd.ac.in%2Fsankha.png?alt=media&token=ea58c2eb-c359-4674-abd1-b98d86b9d024'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsankha%40iiitd.ac.in%2Fsankha.png?alt=media&token=ea58c2eb-c359-4674-abd1-b98d86b9d024',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Sarthok Sircar',
       'faculty_EmailId': 'sarthok@iiitd.ac.in',
       'faculty_Department': 'Math',
-      'faculty_Position': 'Associate Professor (Math)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2097,15 +2057,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/sarthok',
       'faculty_Website_Page': '/sarthok',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsarthok%40iiitd.ac.in%2Fsarthok.png?alt=media&token=b301b15c-7828-4688-889a-2c73a68b6ec8'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsarthok%40iiitd.ac.in%2Fsarthok.png?alt=media&token=b301b15c-7828-4688-889a-2c73a68b6ec8',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Satish Kumar Pandey',
       'faculty_EmailId': 'satish@iiitd.ac.in',
       'faculty_Department': 'Math',
-      'faculty_Position': 'Assistant Professor (Math)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': 'Center for Quantum Technologies',
       'faculty_Authorization': 'True',
@@ -2128,15 +2088,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/satish',
       'faculty_Website_Page': '/satish',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsatish%40iiitd.ac.in%2Fsatish.png?alt=media&token=3b36a0af-5e62-475d-b138-f509c0476fff'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsatish%40iiitd.ac.in%2Fsatish.png?alt=media&token=3b36a0af-5e62-475d-b138-f509c0476fff',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Sayak Bhattacharya',
       'faculty_EmailId': 'sayak@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Assistant Professor (ECE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2159,15 +2119,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/sayak',
       'faculty_Website_Page': '/sayak',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsayak%40iiitd.ac.in%2Fsayak.png?alt=media&token=b7b1b43d-e27b-4651-9abb-8196d7fe1109'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsayak%40iiitd.ac.in%2Fsayak.png?alt=media&token=b7b1b43d-e27b-4651-9abb-8196d7fe1109',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Sayan Basu Roy',
       'faculty_EmailId': 'sayan@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Assistant Professor (ECE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2191,15 +2151,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/sayan',
       'faculty_Website_Page': '/sayan',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsayan%40iiitd.ac.in%2Fsayan.png?alt=media&token=9678b16b-4cfc-4f7e-8f2e-8cce50fcda8c'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsayan%40iiitd.ac.in%2Fsayan.png?alt=media&token=9678b16b-4cfc-4f7e-8f2e-8cce50fcda8c',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Shobha Sundar Ram',
       'faculty_EmailId': 'shobha@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Associate Professor (ECE)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2223,15 +2183,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/shobha',
       'faculty_Website_Page': '/shobha',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fshobha%40iiitd.ac.in%2Fshobha.png?alt=media&token=0801288d-d8f9-4b59-9dc1-6781a4c87135'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fshobha%40iiitd.ac.in%2Fshobha.png?alt=media&token=0801288d-d8f9-4b59-9dc1-6781a4c87135',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Smriti Singh',
       'faculty_EmailId': 'smriti@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2254,15 +2214,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/smriti',
       'faculty_Website_Page': '/smriti',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsmriti%40iiitd.ac.in%2Fsmriti.png?alt=media&token=6091ee0f-a844-4de0-905f-6fac3737378b'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsmriti%40iiitd.ac.in%2Fsmriti.png?alt=media&token=6091ee0f-a844-4de0-905f-6fac3737378b',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Sneh Saurabh',
       'faculty_EmailId': 'sneh@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Associate Professor (ECE)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2285,15 +2245,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/sneh',
       'faculty_Website_Page': '/sneh',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsneh%40iiitd.ac.in%2Fsneh.png?alt=media&token=35261e64-3167-494f-8ca3-b3802041a3a5'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsneh%40iiitd.ac.in%2Fsneh.png?alt=media&token=35261e64-3167-494f-8ca3-b3802041a3a5',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Sneha Chaubey',
       'faculty_EmailId': 'sneha@iiitd.ac.in',
       'faculty_Department': 'Math',
-      'faculty_Position': 'Assistant Professor (Math)',
+      'faculty_Position': 'Assistant Professor ',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2317,15 +2277,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/sneha',
       'faculty_Website_Page': '/sneha',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsneha%40iiitd.ac.in%2Fsneha.png?alt=media&token=cf5ccfdd-6c2d-4c1f-8190-eaa8d37e7f7b'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsneha%40iiitd.ac.in%2Fsneha.png?alt=media&token=cf5ccfdd-6c2d-4c1f-8190-eaa8d37e7f7b',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Sonia Baloni Ray',
       'faculty_EmailId': 'sonia@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Center for Design and New Media (Supported by Tata Consultancy Services, a TCS Foundation Initiative)',
@@ -2351,15 +2311,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/sonia',
       'faculty_Website_Page': '/sonia',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsonia%40iiitd.ac.in%2Fsonia.png?alt=media&token=137e2adf-9f6f-4263-b84e-8ad227ffa3b9'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsonia%40iiitd.ac.in%2Fsonia.png?alt=media&token=137e2adf-9f6f-4263-b84e-8ad227ffa3b9',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Souvik Dutta',
       'faculty_EmailId': 'souvik@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2383,15 +2343,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/souvik',
       'faculty_Website_Page': '/souvik',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsouvik%40iiitd.ac.in%2Fsouvik.png?alt=media&token=0bc47196-f751-4455-87c3-aa8861745fbb'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsouvik%40iiitd.ac.in%2Fsouvik.png?alt=media&token=0bc47196-f751-4455-87c3-aa8861745fbb',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Sriram K',
       'faculty_EmailId': 'sriramk@iiitd.ac.in',
       'faculty_Department': 'CB',
-      'faculty_Position': 'Associate Professor (CB)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2414,15 +2374,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/sriram',
       'faculty_Website_Page': '/sriram',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsriramk%40iiitd.ac.in%2Fsriram.png?alt=media&token=b2cc3089-13cf-4e7b-9a6d-905055891ebf'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsriramk%40iiitd.ac.in%2Fsriram.png?alt=media&token=b2cc3089-13cf-4e7b-9a6d-905055891ebf',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Subhabrata Samajder',
       'faculty_EmailId': 'subhabrata@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2447,15 +2407,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/subhabrata',
       'faculty_Website_Page': '/subhabrata',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsubhabrata%40iiitd.ac.in%2Fsubhabrata.png?alt=media&token=7ad042b9-c4ec-454e-abd5-ed8eb5cf7585'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsubhabrata%40iiitd.ac.in%2Fsubhabrata.png?alt=media&token=7ad042b9-c4ec-454e-abd5-ed8eb5cf7585',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Subhashree Mohapatra',
       'faculty_EmailId': 'subhashree@iiitd.ac.in',
       'faculty_Department': 'Math',
-      'faculty_Position': 'Assistant Professor (Math)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2479,15 +2439,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/subhashreem',
       'faculty_Website_Page': '/subhashreem',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsubhashree%40iiitd.ac.in%2Fsubhashreem.png?alt=media&token=8d7c174c-297c-43b7-9f15-2c27a535e27e'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsubhashree%40iiitd.ac.in%2Fsubhashreem.png?alt=media&token=8d7c174c-297c-43b7-9f15-2c27a535e27e',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Sujay Deb',
       'faculty_EmailId': 'sdeb@iiitd.ac.in',
       'faculty_Department': 'ECE, CSE',
-      'faculty_Position': 'Professor (ECE, CSE)',
+      'faculty_Position': 'Professor ',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Center for Design and New Media (Supported by Tata Consultancy Services, a TCS Foundation Initiative)',
@@ -2512,15 +2472,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/sdeb',
       'faculty_Website_Page': '/sdeb',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsdeb%40iiitd.ac.in%2Fsdeb.png?alt=media&token=1c84b3f0-a885-45b6-bbd5-4e2d3fe59e2d'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsdeb%40iiitd.ac.in%2Fsdeb.png?alt=media&token=1c84b3f0-a885-45b6-bbd5-4e2d3fe59e2d',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Sumit J Darak',
       'faculty_EmailId': 'sumit@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Associate Professor (ECE)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2544,15 +2504,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/sumit',
       'faculty_Website_Page': '/sumit',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsumit%40iiitd.ac.in%2Fsumit.png?alt=media&token=dcefec4b-d9f5-4d70-aaa6-6c9543ae2c94'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsumit%40iiitd.ac.in%2Fsumit.png?alt=media&token=dcefec4b-d9f5-4d70-aaa6-6c9543ae2c94',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Syamantak Das',
       'faculty_EmailId': 'syamantak@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Position': 'Assistant Professor ',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2577,15 +2537,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/syamantak',
       'faculty_Website_Page': '/syamantak',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsyamantak%40iiitd.ac.in%2Fsyamantak.png?alt=media&token=9cb81d5a-ead0-425c-963d-a0d998eca4d0'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fsyamantak%40iiitd.ac.in%2Fsyamantak.png?alt=media&token=9cb81d5a-ead0-425c-963d-a0d998eca4d0',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Tammam Tillo',
       'faculty_EmailId': 'tammam@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Professor (ECE)',
+      'faculty_Position': 'Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2608,15 +2568,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/tammam',
       'faculty_Website_Page': '/tammam',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Ftammam%40iiitd.ac.in%2Ftammam.png?alt=media&token=d7045962-2adc-4fd0-9736-c5a80f3dc462'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Ftammam%40iiitd.ac.in%2Ftammam.png?alt=media&token=d7045962-2adc-4fd0-9736-c5a80f3dc462',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Tanmoy Chakraborty',
       'faculty_EmailId': 'tanmoy@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Associate Professor (CSE)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Infosys Centre for Artificial Intelligence (CAI)',
@@ -2641,15 +2601,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/tanmoy',
       'faculty_Website_Page': '/tanmoy',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Ftanmoy%40iiitd.ac.in%2Ftanmoy.png?alt=media&token=16cf4c04-743f-4b56-b11f-4fe59f9fde28'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Ftanmoy%40iiitd.ac.in%2Ftanmoy.png?alt=media&token=16cf4c04-743f-4b56-b11f-4fe59f9fde28',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Tarini Shankar Ghosh',
       'faculty_EmailId': 'tarini.ghosh@iiitd.ac.in',
       'faculty_Department': 'CB',
-      'faculty_Position': 'Assistant Professor (CB)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2672,15 +2632,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/tarini',
       'faculty_Website_Page': '/tarini',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Ftarini.ghosh%40iiitd.ac.in%2Ftarini.png?alt=media&token=89dfc097-da99-44f9-991e-203a54a81af3'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Ftarini.ghosh%40iiitd.ac.in%2Ftarini.png?alt=media&token=89dfc097-da99-44f9-991e-203a54a81af3',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Tavpritesh Sethi',
       'faculty_EmailId': 'tavpriteshsethi@iiitd.ac.in',
       'faculty_Department': 'CB',
-      'faculty_Position': 'Associate Professor (CB)',
+      'faculty_Position': 'Associate Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2705,15 +2665,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/tavpritesh',
       'faculty_Website_Page': '/tavpritesh',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Ftavpriteshsethi%40iiitd.ac.in%2Ftavpritesh.png?alt=media&token=720a49ef-1ccc-41dd-8469-b1bcca88f733'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Ftavpriteshsethi%40iiitd.ac.in%2Ftavpritesh.png?alt=media&token=720a49ef-1ccc-41dd-8469-b1bcca88f733',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'V. Raghava Mutharaju',
       'faculty_EmailId': 'raghava.mutharaju@iiitd.ac.in\n',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2737,15 +2697,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/raghavam',
       'faculty_Website_Page': '/raghavam',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fraghava.mutharaju%40iiitd.ac.in%2Fraghavam.png?alt=media&token=189eca9d-8207-4a69-904b-b2689e9b1e5b'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fraghava.mutharaju%40iiitd.ac.in%2Fraghavam.png?alt=media&token=189eca9d-8207-4a69-904b-b2689e9b1e5b',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Venkata Ratnadeep Suri',
       'faculty_EmailId': 'ratan.suri@iiitd.ac.in',
       'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Center for Design and New Media (Supported by Tata Consultancy Services, a TCS Foundation Initiative)',
@@ -2770,48 +2730,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/ratan',
       'faculty_Website_Page': '/ratan',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fratan.suri%40iiitd.ac.in%2Fratan.png?alt=media&token=b4281104-874a-40bf-a055-998c6557ef26'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fratan.suri%40iiitd.ac.in%2Fratan.png?alt=media&token=b4281104-874a-40bf-a055-998c6557ef26',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
-      'faculty_Unique_Id': '',
-      'faculty_Name': 'Rahul IIITD',
-      'faculty_EmailId': 'rahul20398@iiitd.ac.in',
-      'faculty_Department': 'SSH',
-      'faculty_Position': 'Assistant Professor (SSH)',
-      'faculty_Gender': '',
-      'faculty_Affiliated_Centers_And_Labs':
-      'Center for Design and New Media (Supported by Tata Consultancy Services, a TCS Foundation Initiative)',
-      'faculty_Authorization': 'True',
-      'faculty_Bio':
-      'Ratnadeep Suri (Ratan), Assistant Professor, SSH, IIIT-Delhi, has completed his Post Doctoral research at the Nanyang Technological University, Singapore in 2016. Earlier he earned his PhD from The Indiana Media School, Indiana University in 2013, with a Major in Communication and a Minor in Information Science. He also has an MA from Western Michigan University, Michigan, and an MA from University of Hyderabad, India. His research examines the effects of technology use in knowledge work contexts, health contexts, information seeking, and the cognition of information. He is also interested in the consequences of disrupted access to communication technologies on individuals in disadvantaged communities. Currently he is a Collaborating Investigator for a 100, 000 SG grant from Singapore Ministry of Education. He was the recipient of several awards including the the Indiana University, College of Arts and Sciences Dissertation Fellowship (2010-2011), The Indiana University Future Faculty Fellowship, to teach at Howard University, 2009-2010, The Graduate School Fellowship, Summer 2004, 2005, Indiana University, and The Kellogg Foundation Service Learning Scholarship in Summer 2002. In his free time Ratan pursues his interests in woodworking, traveling and photography.',
-      'faculty_College': 'PhD (2013), Indiana University, Bloomington, Indiana',
-      'faculty_Image_Url':
-      'https://iiitd.ac.in/sites/default/files/ratna-suri.jpg',
-      'faculty_LinkedIn_Url':
-      'https://www.linkedin.com/in/venkata-ratnadeep-suri-6294a118a/',
-      'faculty_Website_Url': 'https://iiitd.ac.in/ratan',
-      'faculty_Mobile_Messaging_Token_Id': '',
-      'faculty_Mobile_Number': '"011-26907445"',
-      'faculty_Office_Address': '\nB-204 (R&D Block)',
-      'faculty_Office_Latitude': '28.5442185740552',
-      'faculty_Office_Longitude': '77.2716830936104',
-      'faculty_Office_Navigation_Url': '',
-      'faculty_Research_Interests':
-      'ICTs and Society, Information Literacy, Data Literacy, E-Health, M-health, Social media for Health, ICTs and Health behavior, ICTs and Development.',
-      'faculty_Teaching_Interests': 'Social Sciences',
-      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/ratan',
-      'faculty_Website_Page': '/ratan',
-      'faculty_QR_Code_Image_Url':
-      'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fratan.suri%40iiitd.ac.in%2Fratan.png?alt=media&token=b4281104-874a-40bf-a055-998c6557ef26'
-    },
-    {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Vibhor Kumar',
       'faculty_EmailId': 'vibhor@iiitd.ac.in',
       'faculty_Department': 'CB',
-      'faculty_Position': 'Associate Professor (CB)',
+      'faculty_Position': 'Associate Professo',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2836,15 +2763,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/vibhork',
       'faculty_Website_Page': '/vibhork',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fvibhor%40iiitd.ac.in%2Fvibhork.png?alt=media&token=bab4ab90-4a14-4aa9-ba1e-a8d736d176e9'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fvibhor%40iiitd.ac.in%2Fvibhork.png?alt=media&token=bab4ab90-4a14-4aa9-ba1e-a8d736d176e9',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Vikram Goyal',
       'faculty_EmailId': 'vikram@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Professor (CSE)',
+      'faculty_Position': 'Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2869,15 +2796,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/vikram',
       'faculty_Website_Page': '/vikram',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fvikram%40iiitd.ac.in%2Fvikram.png?alt=media&token=921bc451-328f-41b4-a3b5-6d1886461602'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fvikram%40iiitd.ac.in%2Fvikram.png?alt=media&token=921bc451-328f-41b4-a3b5-6d1886461602',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Vinayak Abrol',
       'faculty_EmailId': 'abrol@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': 'Cross-Caps',
       'faculty_Authorization': 'True',
@@ -2901,15 +2828,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/vabrol',
       'faculty_Website_Page': '/vabrol',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fabrol%40iiitd.ac.in%2Fvabrol.png?alt=media&token=2177255a-4c54-43e4-9c2f-57522044c45e'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fabrol%40iiitd.ac.in%2Fvabrol.png?alt=media&token=2177255a-4c54-43e4-9c2f-57522044c45e',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Vivek Bohara',
       'faculty_EmailId': 'vivek.b@iiitd.ac.in',
       'faculty_Department': 'ECE',
-      'faculty_Position': 'Head, Professor (ECE)',
+      'faculty_Position': 'Head, Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs':
           'Centre of Excellence on Light Fidelity (LiFi),Wirocomm Research Group',
@@ -2936,15 +2863,15 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/vivek',
       'faculty_Website_Page': '/vivek',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fvivek.b%40iiitd.ac.in%2Fvivek.png?alt=media&token=112d17ee-a066-40ea-b63c-c658da33c89f'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fvivek.b%40iiitd.ac.in%2Fvivek.png?alt=media&token=112d17ee-a066-40ea-b63c-c658da33c89f',
+      'faculty_Type': ''
     },
     {
-      'Unnamed: 0': '',
       'faculty_Unique_Id': '',
       'faculty_Name': 'Vivek Kumar',
       'faculty_EmailId': 'vivekk@iiitd.ac.in',
       'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Position': 'Assistant Professor',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
       'faculty_Authorization': 'True',
@@ -2970,42 +2897,374 @@ class FacultiesProvider with ChangeNotifier {
       'faculty_Dynamic_Links': 'https://iiitdriise.page.link/vivekk',
       'faculty_Website_Page': '/vivekk',
       'faculty_QR_Code_Image_Url':
-          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fvivekk%40iiitd.ac.in%2Fvivekk.png?alt=media&token=5d072cce-4362-4ae3-8035-66e5473821ae'
-    },{
-      'Unnamed: 0': '',
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fvivekk%40iiitd.ac.in%2Fvivekk.png?alt=media&token=5d072cce-4362-4ae3-8035-66e5473821ae',
+      'faculty_Type': ''
+    },
+    {
       'faculty_Unique_Id': '',
-      'faculty_Name': 'Henansh 2',
-      'faculty_EmailId': 'henanshtanwar21@gmail.com',
-      'faculty_Department': 'CSE',
-      'faculty_Position': 'Assistant Professor (CSE)',
+      'faculty_Name': 'Aman Samuel',
+      'faculty_EmailId': 'aman.samuel@iiitd.ac.in',
+      'faculty_Department': '',
+      'faculty_Position': '',
       'faculty_Gender': '',
       'faculty_Affiliated_Centers_And_Labs': '',
-      'faculty_Authorization': 'True',
-      'faculty_Bio':
-      'Vivek Kumar works in the area of High Performance Computing. He received his Ph.D. from Australian National University and B.E. from Visvesvaraya Technological University. His Ph.D. research focused on using managed runtime techniques for improving the performance and productivity of parallel programming on multicore architectures. Prior to Ph.D., he has worked for nearly 6 years in research and development positions in HPC areas at technology firms such as CDAC R&D and IBM Systems and Technology Labs. After completing his Ph.D., he worked for nearly 3 years as a Research Scientist at Rice University.',
-      'faculty_College':
-      'PhD (2014), Research School of Computer Science, Australian National University',
-      'faculty_Image_Url':
-      'https://iiitd.ac.in/sites/default/files/images/faculty/vivekk.jpg',
-      'faculty_LinkedIn_Url':
-      'https://www.linkedin.com/in/vivek-kumar-42a4b121/',
-      'faculty_Website_Url': 'https://iiitd.ac.in/vivekk',
+      'faculty_Authorization': '',
+      'faculty_Bio': '',
+      'faculty_College': '',
+      'faculty_Image_Url': '',
+      'faculty_LinkedIn_Url': '',
+      'faculty_Website_Url': '',
       'faculty_Mobile_Messaging_Token_Id': '',
-      'faculty_Mobile_Number': '011-26907441',
-      'faculty_Office_Address': 'B-506 (R&D Block)',
-      'faculty_Office_Latitude': '28.5442185740552',
-      'faculty_Office_Longitude': '77.2716830936104',
+      'faculty_Mobile_Number': '',
+      'faculty_Office_Address': '',
+      'faculty_Office_Latitude': '',
+      'faculty_Office_Longitude': '',
       'faculty_Office_Navigation_Url': '',
-      'faculty_Research_Interests':
-      'Parallel programming models and runtime systems.',
-      'faculty_Teaching_Interests':
-      'Parallel programming models and runtime systems.',
-      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/vivekk',
-      'faculty_Website_Page': '/vivekk',
+      'faculty_Research_Interests': '',
+      'faculty_Teaching_Interests': '',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/Aman',
+      'faculty_Website_Page': '/people/visiting-faculty',
       'faculty_QR_Code_Image_Url':
-      'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2Fvivekk%40iiitd.ac.in%2Fvivekk.png?alt=media&token=5d072cce-4362-4ae3-8035-66e5473821ae'
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2FVisiting%20and%20POP%2Faman.samuel%40iiitd.ac.in%2Faman-samule.jpg?alt=media&token=70444245-9009-4140-bdbe-2c8f73aa61c4',
+      'faculty_Type': 'Visiting Faculty'
     },
-
+    {
+      'faculty_Unique_Id': '',
+      'faculty_Name': 'Amrit Srinivasan',
+      'faculty_EmailId': 'amrit@iiitd.ac.in',
+      'faculty_Department': '',
+      'faculty_Position': '',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': '',
+      'faculty_Bio': '',
+      'faculty_College': '',
+      'faculty_Image_Url': '',
+      'faculty_LinkedIn_Url': '',
+      'faculty_Website_Url': '',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '',
+      'faculty_Office_Address': '',
+      'faculty_Office_Latitude': '',
+      'faculty_Office_Longitude': '',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests': '',
+      'faculty_Teaching_Interests': '',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/AmritSrinivasan',
+      'faculty_Website_Page': '/people/visiting-faculty',
+      'faculty_QR_Code_Image_Url':
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2FVisiting%20and%20POP%2Famrit%40iiitd.ac.in%2FAmritSrinivasan.png?alt=media&token=52371f09-a741-4537-ac49-cd77304a36b9',
+      'faculty_Type': 'Visiting Faculty'
+    },
+    {
+      'faculty_Unique_Id': '',
+      'faculty_Name': 'Anoop Ratn',
+      'faculty_EmailId': 'anoopratn@iiitd.ac.in',
+      'faculty_Department': '',
+      'faculty_Position': '',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': '',
+      'faculty_Bio': '',
+      'faculty_College': '',
+      'faculty_Image_Url': '',
+      'faculty_LinkedIn_Url': '',
+      'faculty_Website_Url': '',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '',
+      'faculty_Office_Address': '',
+      'faculty_Office_Latitude': '',
+      'faculty_Office_Longitude': '',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests': '',
+      'faculty_Teaching_Interests': '',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/AnoopRatn',
+      'faculty_Website_Page': '/people/visiting-faculty',
+      'faculty_QR_Code_Image_Url':
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2FVisiting%20and%20POP%2Fanoopratn%40iiitd.ac.in%2FAnoopRatn%20(1).png?alt=media&token=cd7c5594-6a7b-4237-8f0b-0ad23a162e95',
+      'faculty_Type': 'Visiting Faculty'
+    },
+    {
+      'faculty_Unique_Id': '',
+      'faculty_Name': 'Bijendra Nath Jain',
+      'faculty_EmailId': 'bnjain@iiitd.ac.in',
+      'faculty_Department': '',
+      'faculty_Position': '',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': '',
+      'faculty_Bio': '',
+      'faculty_College': '',
+      'faculty_Image_Url': '',
+      'faculty_LinkedIn_Url': '',
+      'faculty_Website_Url': '',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '',
+      'faculty_Office_Address': '',
+      'faculty_Office_Latitude': '',
+      'faculty_Office_Longitude': '',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests': '',
+      'faculty_Teaching_Interests': '',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/BijendraNathJain',
+      'faculty_Website_Page': '/people/visiting-faculty',
+      'faculty_QR_Code_Image_Url':
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2FVisiting%20and%20POP%2Fbnjain%40iiitd.ac.in%2FBijendra%20Nath%20Jain.png?alt=media&token=569daaca-7276-477f-81dc-e7f606f90721',
+      'faculty_Type': 'Visiting Faculty'
+    },
+    {
+      'faculty_Unique_Id': '',
+      'faculty_Name': 'C. Anantaram',
+      'faculty_EmailId': 'c.anantaram@iiitd.ac.in',
+      'faculty_Department': '',
+      'faculty_Position': '',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': '',
+      'faculty_Bio': '',
+      'faculty_College': '',
+      'faculty_Image_Url': '',
+      'faculty_LinkedIn_Url': '',
+      'faculty_Website_Url': '',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '',
+      'faculty_Office_Address': '',
+      'faculty_Office_Latitude': '',
+      'faculty_Office_Longitude': '',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests': '',
+      'faculty_Teaching_Interests': '',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/CAnantaram',
+      'faculty_Website_Page': '/people/visiting-faculty',
+      'faculty_QR_Code_Image_Url':
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2FVisiting%20and%20POP%2Fc.anantaram%40iiitd.ac.in%2F_CAnantaram.png?alt=media&token=74e5e8e1-9bd6-4b06-919b-ae713b3566a5',
+      'faculty_Type': 'Visiting Faculty'
+    },
+    {
+      'faculty_Unique_Id': '',
+      'faculty_Name': 'D. K. Sharma',
+      'faculty_EmailId': 'sharmadk@iiitd.ac.in',
+      'faculty_Department': '',
+      'faculty_Position': '',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': '',
+      'faculty_Bio': '',
+      'faculty_College': '',
+      'faculty_Image_Url': '',
+      'faculty_LinkedIn_Url': '',
+      'faculty_Website_Url': '',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '',
+      'faculty_Office_Address': '',
+      'faculty_Office_Latitude': '',
+      'faculty_Office_Longitude': '',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests': '',
+      'faculty_Teaching_Interests': '',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/DKSharma',
+      'faculty_Website_Page': '/people/visiting-faculty',
+      'faculty_QR_Code_Image_Url':
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2FVisiting%20and%20POP%2Fsharmadk%40iiitd.ac.in%2FDKSharma%20(1).png?alt=media&token=a03933b1-0df4-4ac8-a94a-8d5373868ff3',
+      'faculty_Type': 'Visiting Faculty'
+    },
+    {
+      'faculty_Unique_Id': '',
+      'faculty_Name': 'Krishanu Roy',
+      'faculty_EmailId': 'krishanu@iiitd.ac.in',
+      'faculty_Department': '',
+      'faculty_Position': '',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': '',
+      'faculty_Bio': '',
+      'faculty_College': '',
+      'faculty_Image_Url': '',
+      'faculty_LinkedIn_Url': '',
+      'faculty_Website_Url': '',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '',
+      'faculty_Office_Address': '',
+      'faculty_Office_Latitude': '',
+      'faculty_Office_Longitude': '',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests': '',
+      'faculty_Teaching_Interests': '',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/KrishanuRoy',
+      'faculty_Website_Page': '/people/visiting-faculty',
+      'faculty_QR_Code_Image_Url':
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2FVisiting%20and%20POP%2Fkrishanu%40iiitd.ac.in%2FKrishanuRoy%20(1).png?alt=media&token=78ce9e36-f2cf-4f4d-a9c1-eb0d3ceab6c3',
+      'faculty_Type': 'Visiting Faculty'
+    },
+    {
+      'faculty_Unique_Id': '',
+      'faculty_Name': 'Payel C Mukherjee',
+      'faculty_EmailId': 'payel@iiitd.ac.in',
+      'faculty_Department': '',
+      'faculty_Position': '',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': '',
+      'faculty_Bio': '',
+      'faculty_College': '',
+      'faculty_Image_Url': '',
+      'faculty_LinkedIn_Url': '',
+      'faculty_Website_Url': '',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '',
+      'faculty_Office_Address': '',
+      'faculty_Office_Latitude': '',
+      'faculty_Office_Longitude': '',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests': '',
+      'faculty_Teaching_Interests': '',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/PayelCMukherjee',
+      'faculty_Website_Page': '/people/visiting-faculty',
+      'faculty_QR_Code_Image_Url':
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2FVisiting%20and%20POP%2Fpayel%40iiitd.ac.in%2FPayelCMukherjee%20(1).png?alt=media&token=395dd798-b8f4-4628-833b-be67b560f0e1',
+      'faculty_Type': 'Visiting Faculty'
+    },
+    {
+      'faculty_Unique_Id': '',
+      'faculty_Name': 'Samaresh Chatterji',
+      'faculty_EmailId': 'samaresh@iiitd.ac.in',
+      'faculty_Department': '',
+      'faculty_Position': '',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': '',
+      'faculty_Bio': '',
+      'faculty_College': '',
+      'faculty_Image_Url': '',
+      'faculty_LinkedIn_Url': '',
+      'faculty_Website_Url': '',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '',
+      'faculty_Office_Address': '',
+      'faculty_Office_Latitude': '',
+      'faculty_Office_Longitude': '',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests': '',
+      'faculty_Teaching_Interests': '',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/SamareshChatterji',
+      'faculty_Website_Page': '/people/visiting-faculty',
+      'faculty_QR_Code_Image_Url':
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2FVisiting%20and%20POP%2Fsamaresh%40iiitd.ac.in%2FSamareshChatterji%20(1).png?alt=media&token=71ca61eb-cffd-451c-88bd-c7f01311ce66',
+      'faculty_Type': 'Visiting Faculty'
+    },
+    {
+      'faculty_Unique_Id': '',
+      'faculty_Name': 'Subhajit Ghosechowdhury',
+      'faculty_EmailId': 'subhajit@iiitd.ac.in',
+      'faculty_Department': '',
+      'faculty_Position': '',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': '',
+      'faculty_Bio': '',
+      'faculty_College': '',
+      'faculty_Image_Url': '',
+      'faculty_LinkedIn_Url': '',
+      'faculty_Website_Url': '',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '',
+      'faculty_Office_Address': '',
+      'faculty_Office_Latitude': '',
+      'faculty_Office_Longitude': '',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests': '',
+      'faculty_Teaching_Interests': '',
+      'faculty_Dynamic_Links':
+          'https://iiitdriise.page.link/SubhajitGhosechowdhury',
+      'faculty_Website_Page': '/people/visiting-faculty',
+      'faculty_QR_Code_Image_Url':
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2FVisiting%20and%20POP%2Fsubhajit%40iiitd.ac.in%2FSubhajitGhosechowdhury.png?alt=media&token=cca0f3d0-9f90-453b-960c-38b9ba42499a',
+      'faculty_Type': 'Visiting Faculty'
+    },
+    {
+      'faculty_Unique_Id': '',
+      'faculty_Name': 'Angshu Das',
+      'faculty_EmailId': 'angshu.das@iiitd.ac.in',
+      'faculty_Department': '',
+      'faculty_Position': '',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': '',
+      'faculty_Bio': '',
+      'faculty_College': '',
+      'faculty_Image_Url': '',
+      'faculty_LinkedIn_Url': '',
+      'faculty_Website_Url': '',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '',
+      'faculty_Office_Address': '',
+      'faculty_Office_Latitude': '',
+      'faculty_Office_Longitude': '',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests': '',
+      'faculty_Teaching_Interests': '',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/AngshuDas',
+      'faculty_Website_Page': '/people/visiting-faculty',
+      'faculty_QR_Code_Image_Url':
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2FVisiting%20and%20POP%2Fangshu.das%40iiitd.ac.in%2FAngshu%20Das.png?alt=media&token=a589265d-7dcc-4213-b40f-149e39d4cd06',
+      'faculty_Type': 'Professor of Practice'
+    },
+    {
+      'faculty_Unique_Id': '',
+      'faculty_Name': 'Dhurjati Majumdar',
+      'faculty_EmailId': 'dhurjati@iiitd.ac.in',
+      'faculty_Department': '',
+      'faculty_Position': '',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': '',
+      'faculty_Bio': '',
+      'faculty_College': '',
+      'faculty_Image_Url': '',
+      'faculty_LinkedIn_Url': '',
+      'faculty_Website_Url': '',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '',
+      'faculty_Office_Address': '',
+      'faculty_Office_Latitude': '',
+      'faculty_Office_Longitude': '',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests': '',
+      'faculty_Teaching_Interests': '',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/DhurjatiMajumdar',
+      'faculty_Website_Page': '/people/visiting-faculty',
+      'faculty_QR_Code_Image_Url':
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2FVisiting%20and%20POP%2Fdhurjati%40iiitd.ac.in%2FDhurjatiMajumdar%20(1).png?alt=media&token=b5a46835-7850-40ef-b2ec-11f60d7f372e',
+      'faculty_Type': 'Professor of Practice'
+    },
+    {
+      'faculty_Unique_Id': '',
+      'faculty_Name': 'Pankaj Vajpayee',
+      'faculty_EmailId': 'pvajpayee@iiitd.ac.in',
+      'faculty_Department': '',
+      'faculty_Position': '',
+      'faculty_Gender': '',
+      'faculty_Affiliated_Centers_And_Labs': '',
+      'faculty_Authorization': '',
+      'faculty_Bio': '',
+      'faculty_College': '',
+      'faculty_Image_Url': '',
+      'faculty_LinkedIn_Url': '',
+      'faculty_Website_Url': '',
+      'faculty_Mobile_Messaging_Token_Id': '',
+      'faculty_Mobile_Number': '',
+      'faculty_Office_Address': '',
+      'faculty_Office_Latitude': '',
+      'faculty_Office_Longitude': '',
+      'faculty_Office_Navigation_Url': '',
+      'faculty_Research_Interests': '',
+      'faculty_Teaching_Interests': '',
+      'faculty_Dynamic_Links': 'https://iiitdriise.page.link/PankajVajpayee',
+      'faculty_Website_Page': '/people/visiting-faculty',
+      'faculty_QR_Code_Image_Url':
+          'https://firebasestorage.googleapis.com/v0/b/riise-application.appspot.com/o/FacultyQRCodeImages%2FVisiting%20and%20POP%2Fpvajpayee%40iiitd.ac.in%2FPankajVajpayee%20(1).png?alt=media&token=de06441c-49c6-4098-9e6e-ade85cd8386f',
+      'faculty_Type': 'Professor of Practice'
+    }
   ];
 
   List<FacultyServerInformation> facultiesList = [
@@ -3085,7 +3344,8 @@ class FacultiesProvider with ChangeNotifier {
         .then((DocumentSnapshot ds) {
       facultyInfo = new FacultyServerInformation(
         faculty_Unique_Id: ds.get('faculty_Unique_Id').toString(),
-        faculty_Authorization: ds.get('faculty_Authorization').toString() == 'true',
+        faculty_Authorization:
+            ds.get('faculty_Authorization').toString() == 'true',
         faculty_Mobile_Messaging_Token_Id:
             ds.get('faculty_Mobile_Messaging_Token_Id').toString(),
         faculty_Name: ds.get('faculty_Name').toString(),
@@ -3288,7 +3548,8 @@ class FacultiesProvider with ChangeNotifier {
     BuildContext context,
   ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference facultiesRef = db.collection("FacultiesInformationList");
+    CollectionReference facultiesRef =
+        db.collection("FacultiesInformationList");
 
     List<FacultyServerInformation> listOfFaculties = [];
     try {
@@ -3298,7 +3559,10 @@ class FacultiesProvider with ChangeNotifier {
             (facultyDetails) async {
               final facultyMap = facultyDetails.data() as Map<String, dynamic>;
 
-              if (facultyMap['faculty_Authorization'].toString().toLowerCase() == 'true') {
+              if (facultyMap['faculty_Authorization']
+                      .toString()
+                      .toLowerCase() ==
+                  'true') {
                 FacultyServerInformation facultyInfo = FacultyServerInformation(
                   faculty_Unique_Id: facultyMap["faculty_Unique_Id"],
                   faculty_Name: facultyMap["faculty_Name"],
@@ -3306,20 +3570,28 @@ class FacultiesProvider with ChangeNotifier {
                   faculty_Position: facultyMap["faculty_Position"],
                   faculty_Gender: facultyMap["faculty_Gender"],
                   faculty_Bio: facultyMap["faculty_Bio"],
-                  faculty_Teaching_Interests: facultyMap["faculty_Teaching_Interests"],
-                  faculty_Authorization: facultyMap["faculty_Authorization"] == "true",
+                  faculty_Teaching_Interests:
+                      facultyMap["faculty_Teaching_Interests"],
+                  faculty_Authorization:
+                      facultyMap["faculty_Authorization"] == "true",
                   faculty_Image_Url: facultyMap["faculty_Image_Url"],
                   faculty_LinkedIn_Url: facultyMap["faculty_LinkedIn_Url"],
                   faculty_Website_Url: facultyMap["faculty_Website_Url"],
-                  faculty_Office_Navigation_Url: facultyMap["faculty_Office_Navigation_Url"],
+                  faculty_Office_Navigation_Url:
+                      facultyMap["faculty_Office_Navigation_Url"],
                   faculty_Office_Address: facultyMap["faculty_Office_Address"],
-                  faculty_Office_Longitude: checkIfDouble(facultyMap["faculty_Office_Longitude"]),
-                  faculty_Office_Latitude: checkIfDouble(facultyMap["faculty_Office_Latitude"]),
-                  faculty_Mobile_Messaging_Token_Id: facultyMap['faculty_Mobile_Messaging_Token_Id'],
-                  faculty_Affiliated_Centers_And_Labs: facultyMap['faculty_Affiliated_Centers_And_Labs'],
+                  faculty_Office_Longitude:
+                      checkIfDouble(facultyMap["faculty_Office_Longitude"]),
+                  faculty_Office_Latitude:
+                      checkIfDouble(facultyMap["faculty_Office_Latitude"]),
+                  faculty_Mobile_Messaging_Token_Id:
+                      facultyMap['faculty_Mobile_Messaging_Token_Id'],
+                  faculty_Affiliated_Centers_And_Labs:
+                      facultyMap['faculty_Affiliated_Centers_And_Labs'],
                   faculty_College: facultyMap['faculty_College'],
                   faculty_Mobile_Number: facultyMap['faculty_Mobile_Number'],
-                  faculty_Research_Interests: facultyMap['faculty_Research_Interests'],
+                  faculty_Research_Interests:
+                      facultyMap['faculty_Research_Interests'],
                   faculty_Department: facultyMap['faculty_Department'],
                 );
 
@@ -3348,8 +3620,9 @@ class FacultiesProvider with ChangeNotifier {
     try {
       dataList.forEach((element) async {
         qrMapping[element['faculty_Website_Page'].toString()] = element['faculty_EmailId'].toString();
-        value ='"${element['faculty_Website_Page'].toString()}": "${element['faculty_EmailId'].toString()}"';
+        value = '"${element['faculty_Website_Page'].toString()}": "${element['faculty_EmailId'].toString()}"';
         print(value);
+
         await usersRef.doc(element['faculty_EmailId']).set(
           {
             "faculty_Unique_Id": "",
@@ -3376,6 +3649,7 @@ class FacultiesProvider with ChangeNotifier {
             "faculty_Website_Page": element['faculty_Website_Page'],
             "faculty_QR_Code_Image_Url": element['faculty_QR_Code_Image_Url'],
             "faculty_Website_Url": element['faculty_Website_Url'],
+            "faculty_Type": element['faculty_Type'],
             "faculty_Google_Auth_Token_Id": "",
           },
         );
@@ -3398,93 +3672,3 @@ class FacultiesProvider with ChangeNotifier {
     }
   }
 }
-
-// "/subramanyam": "subramanyam@iiitd.ac.in",
-// "/aasim": "aasim@iiitd.ac.in",
-// "/abhijit": "abhijit@iiitd.ac.in",
-// "/aman": "aman@iiitd.ac.in",
-// "/anand": "anand@iiitd.ac.in",
-// "/angshul": "angshul@iiitd.ac.in",
-// "/anmol": "anmol@iiitd.ac.in",
-// "/anubha": "anubha@iiitd.ac.in",
-// "/anujg": "anuj@iiitd.ac.in",
-// "/anuradha": "anuradha@iiitd.ac.in",
-// "/arani": "arani@iiitd.ac.in",
-// "/arjun": "arjun@iiitd.ac.in",
-// "/arunb": "arunb@iiitd.ac.in",
-// "/ashishk": "ashish.pandey@iiitd.ac.in",
-// "/bapi": "bapi@iiitd.ac.in",
-// "/chanekar": "prasad@iiitd.ac.in",
-// "/dbera": "dbera@iiitd.ac.in",
-// "/debarka": "debarka@iiitd.ac.in",
-// "/debika": "debika@iiitd.ac.in",
-// "/dhruv": "dhruv.kumar@iiitd.ac.in",
-// "/diptapriyo": "diptapriyo@iiitd.ac.in",
-// "/donghoon": "donghoon@iiitd.ac.in",
-// "/raghava": "raghava@iiitd.ac.in",
-// "/bagler": "bagler@iiitd.ac.in",
-// "/gauravahuja": "gaurav.ahuja@iiitd.ac.in",
-// "/gaurava": "gaurav@iiitd.ac.in",
-// "/gayatri": "gayatri@iiitd.ac.in",
-// "/jainendra": "jainendra@iiitd.ac.in",
-// "/jaspreet": "jaspreet@iiitd.ac.in",
-// "/kaushik": "kaushik@iiitd.ac.in",
-// "/kanjilal": "kanjilal@iiitd.ac.in",
-// "/koteswar": "koteswar@iiitd.ac.in",
-// "/manohark": "manohar.kumar@iiitd.ac.in",
-// "/manuj": "manuj@iiitd.ac.in",
-// "/shad": "shad.akhtar@iiitd.ac.in",
-// "/monika": "monika@iiitd.ac.in",
-// "/mrinmoy": "mrinmoy@iiitd.ac.in",
-// "/mukesh": "mukesh@iiitd.ac.in",
-// "/mukulika": "mukulika@iiitd.ac.in",
-// "/arulmurugan": "arul.murugan@iiitd.ac.in.",
-// "/nishad": "nishad@iiitd.ac.in",
-// "/ojaswa": "ojaswa@iiitd.ac.in",
-// "/jalote": "jalote@iiitd.ac.in",
-// "/paro": "paro.mishra@iiitd.ac.in",
-// "/piyus": "piyus@iiitd.ac.in",
-// "/praveen": "praveen@iiitd.ac.in",
-// "/praveshb": "praveshb@iiitd.ac.in",
-// "/pushpendra": "psingh@iiitd.ac.in",
-// "/rajiv": "rajiv@iiitd.ac.in",
-// "/rajivratn": "rajivratn@iiitd.ac.in",
-// "/rakesh": "rakesh@iiitd.ac.in",
-// "/rkghosh": "rkghosh@iiitd.ac.in",
-// "/bose": "bose@iiitd.ac.in",
-// "/ranjitha": "ranjitha@iiitd.ac.in",
-// "/richagupta": "richa.gupta@iiitd.ac.in",
-// "/rinku": "rinku@iiitd.ac.in",
-// "/anands": "anands@iiitd.ac.in",
-// "/sambuddho": "sambuddho@iiitd.ac.in",
-// "/samrithram": "samrith@iiitd.ac.in",
-// "/sanat": "sanat@iiitd.ac.in",
-// "/skkaul": "skkaul@iiitd.ac.in",
-// "/sankha": "sankha@iiitd.ac.in",
-// "/sarthok": "sarthok@iiitd.ac.in",
-// "/satish": "satish@iiitd.ac.in",
-// "/sayak": "sayak@iiitd.ac.in",
-// "/sayan": "sayan@iiitd.ac.in",
-// "/shobha": "shobha@iiitd.ac.in",
-// "/smriti": "smriti@iiitd.ac.in",
-// "/sneh": "sneh@iiitd.ac.in",
-// "/sneha": "sneha@iiitd.ac.in",
-// "/sonia": "sonia@iiitd.ac.in",
-// "/souvik": "souvik@iiitd.ac.in",
-// "/sriram": "sriramk@iiitd.ac.in",
-// "/subhabrata": "subhabrata@iiitd.ac.in",
-// "/subhashreem": "subhashree@iiitd.ac.in",
-// "/sdeb": "sdeb@iiitd.ac.in",
-// "/sumit": "sumit@iiitd.ac.in",
-// "/syamantak": "syamantak@iiitd.ac.in",
-// "/tammam": "tammam@iiitd.ac.in",
-// "/tanmoy": "tanmoy@iiitd.ac.in",
-// "/tarini": "tarini.ghosh@iiitd.ac.in",
-// "/tavpritesh": "tavpriteshsethi@iiitd.ac.in",
-// "/raghavam": "raghava.mutharaju@iiitd.ac.in",
-// "/ratan": "ratan.suri@iiitd.ac.in",
-// "/vibhork": "vibhor@iiitd.ac.in",
-// "/vikram": "vikram@iiitd.ac.in",
-// "/vabrol": "abrol@iiitd.ac.in",
-// "/vivek": "vivek.b@iiitd.ac.in",
-// "/vivekk": "vivekk@iiitd.ac.in",
