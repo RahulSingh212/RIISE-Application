@@ -35,6 +35,7 @@ class _EventCardState extends State<EventCard> {
     // double minDimension = min(width, height);
     // double maxDimension = max(width, height);
 
+
     return InkWell(
       onTap: (){
         Navigator.of(context).push(

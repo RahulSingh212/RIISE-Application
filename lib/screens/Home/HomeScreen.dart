@@ -280,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         top: 58.h,
                       ),
                       child: Text(
-                        "Upcoming Events",
+                        "Schedule",
                         style: TextStyle(fontSize: 70.sp, color: Colors.black),
                       ),
                     ),
