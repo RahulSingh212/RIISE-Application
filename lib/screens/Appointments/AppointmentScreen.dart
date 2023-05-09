@@ -89,7 +89,15 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   print(snapshot.data);
 
                   return Center(
-                    child: CircularProgressIndicator(),
+                    child: Text(
+                      "No Appointment\nAvailable",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.greenAccent.shade700,
+                        fontSize: 80.sp,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   );
 
                 } else {
@@ -107,12 +115,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                             SizedBox(child: DecoratedLineConnector(
                             thickness: 25.r,
                             decoration: BoxDecoration(
-                              color: DateTime.now().compareTo(
-                                  snapshot.data[index]
-                                              .starTime) <
-                                      0
-                                  ? Colors.green
-                                  : Colors.red,
+                              color: Colors.greenAccent.shade100,
                             ),
                           ),
                         ),
@@ -123,7 +126,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                             child: Icon(
                               Icons.schedule,
                               size: 80.r,
-                              color: Colors.grey,
+                              color: Colors.greenAccent.shade100,
                             ),
                           ),
                         ),
