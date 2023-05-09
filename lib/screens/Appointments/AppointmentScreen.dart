@@ -125,21 +125,21 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                         contentsAlign: ContentsAlign.basic,
                         connectorBuilder: (context, index, lineConnector) =>
                             SizedBox(child: DecoratedLineConnector(
-                            thickness: 25.r,
-                            decoration: BoxDecoration(
-                              color: Colors.greenAccent.shade100,
-                            ),
+                            // thickness: 25.r,
+                            // decoration: BoxDecoration(
+                            //   color: Colors.greenAccent.shade100,
+                            // ),
                           ),
                         ),
                         indicatorBuilder: (context, index) =>
                             ContainerIndicator(
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 46.8.h),
-                            child: Icon(
-                              Icons.schedule,
-                              size: 80.r,
-                              color: Colors.greenAccent.shade100,
-                            ),
+                            // padding: EdgeInsets.symmetric(vertical: 46.8.h),
+                            // child: Icon(
+                            //   Icons.schedule,
+                            //   size: 80.r,
+                            //   color: Colors.greenAccent.shade100,
+                            // ),
                           ),
                         ),
                         contentsBuilder: (context, index) => Padding(
