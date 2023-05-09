@@ -10,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,10 @@ import 'package:riise/providers/ThemeProvider.dart';
 import 'package:riise/providers/UserDetailsProvider.dart';
 import 'package:riise/screens/Profile/ProfileScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+// import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+// import 'package:qrscan/qrscan.dart' as scanner;
+
+import '../../components/SideNavBar.dart';
 
 class QRCodeScannerScreen extends StatefulWidget {
   static const routeName = '/qr-code-scanner-screen';
@@ -35,81 +39,51 @@ class _QRCodeScannerScreenState extends State<QRCodeScannerScreen> {
   final TextEditingController textQr = TextEditingController();
   String textQrCodeScan = "";
 
-  Future<void> scanQrCode() async {
-    try {
-      final qrCod = await FlutterBarcodeScanner.scanBarcode(
-          "#ff6666", "Cancel", true, ScanMode.QR);
-      if (qrCod.isNotEmpty) {
-        print("QR Code Information: $qrCod");
-        textQrCodeScan = qrCod;
-        setState(() {});
-      }
-    } catch (error) {
-      print("exception");
-      print(error);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      drawer: SideNavBar(),
       appBar: AppBar(
-        title: const Text("QR Code Scanner"),
-        backgroundColor: Colors.teal[300],
-        centerTitle: true,
+        backgroundColor: Colors.transparent,
         elevation: 0,
-      ),
-      body: ListView(
-        children: [
-          TextField(
-            keyboardType: TextInputType.text,
-            controller: textQr,
-            cursorColor: Theme.of(context).primaryColor,
+        centerTitle: true,
+        title: Text(
+          "QR Scanner",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 60.sp,
           ),
-          GestureDetector(
-            onTap: () => scanQrCode(),
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).primaryColor,
-                  width: 1,
-                ),
+          textAlign: TextAlign.center,
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.blue,
+          size: 80.r,
+        ),
+        actions: [
+          Container(
+            padding: EdgeInsets.only(top: 15.h, bottom: 25.h, right: 20.w),
+            child: Center(
+              child: Image.network(
+                "https://www.iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.jpg",
+                fit: BoxFit.contain,
               ),
-              child: Center(
-                  child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.document_scanner_outlined,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  const SizedBox(width: 10),
-                  Text(
-                    "Scan QR",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ],
-              )),
             ),
           ),
-          const SizedBox(height: 20),
-          if (textQrCodeScan.isNotEmpty)
-            Center(
-              child: Text(
-                textQrCodeScan,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.blue,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            )
         ],
       ),
+      body: ListView(
+        children: [],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(Icons.camera_alt),
+        onPressed: () {
+          // _scanQR(); // calling a function when user click on button
+        },
+        label: Text("Scan"),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

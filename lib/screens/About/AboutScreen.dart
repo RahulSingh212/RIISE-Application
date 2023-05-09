@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +37,6 @@ class _AboutScreenState extends State<AboutScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
       drawer: SideNavBar(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -68,19 +68,17 @@ class _AboutScreenState extends State<AboutScreen> {
       ),
       body: ListView(
         children: [
-          // SizedBox(
-          //   height: 20,
-          // ),
           Align(
             child: Container(
               padding: EdgeInsets.symmetric(
-                horizontal: 54.w,
+                horizontal: 60.w,
+                vertical: 80.h,
               ),
-              width: 1080.w,
-              height: 2106.h,
+              // width: 1080.w,
+              // height: 2106.h,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: Colors.blue.shade400,
+                color: Colors.green.shade300,
               ),
               child: RichText(
                 textAlign: TextAlign.justify,
@@ -88,12 +86,13 @@ class _AboutScreenState extends State<AboutScreen> {
                   children: const [
                     TextSpan(
                       text:
-                          "Research Innovation and Incubation Showcase aims to bring together the stakeholders from government agencies, industry and academia. There will be five parallel sessions on the eight topical themes of AI, Core Research, Cyber Physical System, Design, Healthcare, Lab to market + Start-ups, Sustainability, Technology as a public Good. RIISE will also feature keynotes and panels to discuss the state-of-the-art technology, the way forward, and opportunities for future collaboration along with poster sessions.",
+                          "We are excited to announce Research and Innovation Incubation Showcase 2023 featuring a panel discussion and research poster presentations on below eight themes. The event will be a platform for discussing cutting-edge technologies and research opportunities. It will feature experts and thought leaders from academia and industry. The discussion aims to provide insights into these technologies and their potential impact on society. The poster presentations will showcase the latest research findings, technological advancements, and future opportunities.The event will also provide networking and knowledge-sharing opportunities among the attendees. Participants can connect with experts and peers, exchange ideas, and explore potential collaborations. The event is open to students, researchers, academicians, and industry professionals interested in the latest trends and opportunities. It is an excellent opportunity to stay updated on these fields' latest research and technological advancements and these eight themes' latest trends and opportunities. We look forward to your participation in this exciting event and hope to see you there!",
                     )
                   ],
                   style: TextStyle(
-                    fontSize: 70.sp,
+                    fontSize: 65.sp,
                     color: Colors.white,
+                    fontStyle: FontStyle.italic,
                   ),
                 ),
               ),

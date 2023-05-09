@@ -157,7 +157,7 @@ class _DirectionScreenState extends State<DirectionScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  width: minDimension * 0.325,
+                  width: minDimension * 0.35,
                   margin: EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
                     image: DecorationImage(

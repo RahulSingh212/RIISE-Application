@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:new_version/new_version.dart';
 import 'package:provider/provider.dart';
 import 'package:riise/components/CategoryEventCard.dart';
 import 'package:riise/models/ThemeInfo.dart';
@@ -64,6 +65,15 @@ class _HomeScreenState extends State<HomeScreen> {
         .setUserType(context);
   }
 
+  // void _checkVersionOfApplicatoin() {
+  //   final newVersion = NewVersion(
+  //     iOSId: "com.example.riise",
+  //     androidId: "com.iiitd.riise",
+  //   );
+
+  //   newVersion.showAlertIfNecessary(context: context);
+  // }
+
   @override
   void initState() {
     super.initState();
@@ -71,6 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (FirebaseAuth.instance.currentUser != null) {
       fetchUserProfile();
     }
+    // _checkVersionOfApplicatoin();
 
     // Provider.of<FacultiesProvider>(context, listen: false).insertListOfFaculties(context);
   }
