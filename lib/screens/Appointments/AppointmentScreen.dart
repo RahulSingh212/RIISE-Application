@@ -89,14 +89,26 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   print(snapshot.data);
 
                   return Center(
-                    child: Text(
-                      "No Appointment\nAvailable",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.greenAccent.shade700,
-                        fontSize: 80.sp,
-                      ),
-                      textAlign: TextAlign.center,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.network(
+                          "https://iiitd.ac.in/riise2023/assets/img/riise2022logo15059.png",
+                          fit: BoxFit.contain,
+                          width: 400.spMin,
+                          height: 400.spMin,
+                        ),
+                        Text(
+                          "No Appointment\nAvailable",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.greenAccent.shade700,
+                            fontSize: 80.sp,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
                   );
 
@@ -133,6 +145,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                         contentsBuilder: (context, index) => Padding(
                           padding: EdgeInsets.symmetric(
                               vertical: 20.h, horizontal: 20.w),
+
                           child: AppointmentCard(
                             appointment:
                             snapshot.data[index],

@@ -361,10 +361,14 @@ class CalenderAPI extends ChangeNotifier {
                 tempEvent.attendees![0].email.toString());
           }
 
+
+          print("Timermimriemieirm");
+          // print()
+
           tempList.add(AppointmentUtil(
               tempEvent.summary.toString(),
-              DateTime.now(),
-              DateTime.now().add(Duration(minutes: 15)),
+              tempEvent.start?.dateTime as DateTime,
+              tempEvent.end?.dateTime as DateTime,
               tempEvent.description.toString(),
               faculty,
               ""));

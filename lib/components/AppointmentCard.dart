@@ -62,7 +62,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return widget.appointment.starTime.isAfter(DateTime.now().subtract(Duration(minutes: 5)))?InkWell(
       onTap: () {
         // Navigator.of(context).push(
         //   MaterialPageRoute(
@@ -266,6 +266,6 @@ class _AppointmentCardState extends State<AppointmentCard> {
           ],
         ),
       ),
-    );
+    ):Container();
   }
 }
