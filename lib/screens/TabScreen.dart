@@ -62,7 +62,7 @@ class _TabScreenState extends State<TabScreen>
     const ScheduleScreen(),
     const DirectionScreen(),
     const AppointmentScreen(),
-    const QRCodeScannerScreen(),
+    // const QRCodeScannerScreen(),
   ];
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -94,10 +94,10 @@ class _TabScreenState extends State<TabScreen>
         'page': AppointmentScreen(),
         'title': 'Appointments',
       },
-      {
-        'page': QRCodeScannerScreen(),
-        'title': 'QR Scanner',
-      },
+      // {
+      //   'page': QRCodeScannerScreen(),
+      //   'title': 'QR Scanner',
+      // },
     ];
 
     Future.delayed(Duration.zero, () async {
@@ -167,11 +167,11 @@ class _TabScreenState extends State<TabScreen>
         color: Colors.green,
         size: 80.r,
       ),
-      Icon(
-        Icons.qr_code_scanner_outlined,
-        color: Colors.green,
-        size: 80.r,
-      ),
+      // Icon(
+      //   Icons.qr_code_scanner_outlined,
+      //   color: Colors.green,
+      //   size: 80.r,
+      // ),
     ];
 
     final iconItemsActive = <Widget>[
@@ -200,11 +200,11 @@ class _TabScreenState extends State<TabScreen>
         color: Colors.green,
         size: 80.r,
       ),
-      Icon(
-        Icons.qr_code_scanner_rounded,
-        color: Colors.green,
-        size: 80.r,
-      ),
+      // Icon(
+      //   Icons.qr_code_scanner_rounded,
+      //   color: Colors.green,
+      //   size: 80.r,
+      // ),
     ];
 
     return Scaffold(

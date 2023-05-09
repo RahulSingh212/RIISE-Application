@@ -330,7 +330,7 @@ class _GuestProfileScreenState extends State<GuestProfileScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => LogInSignUpScreen(),
+                                builder: (context) => TabScreen(),
                               ),
                             );
                           });

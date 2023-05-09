@@ -445,7 +445,7 @@ class _FacultyProfileScreenState extends State<FacultyProfileScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => LogInSignUpScreen(),
+                                builder: (context) => TabScreen(),
                               ),
                             );
                           });

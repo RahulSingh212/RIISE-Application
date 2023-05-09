@@ -115,7 +115,7 @@ class CalenderAPI extends ChangeNotifier {
           "schedule_Unque_Id": scheduleUniqueId,
           "schedule_Start_Time": startTime.toString(),
           "schedule_End_Time": endTime.toString(),
-          "User_Email_Id": facultyEmailId,
+          "User_Email_Id": guestEmailId,
           "User_Name": guestName,
         },
       );
@@ -256,19 +256,182 @@ class CalenderAPI extends ChangeNotifier {
     return scheduleList;
   }
 
-  Future<List<CalendarScheduleServerInformation>> fetchListOfSchedules(
+  Future<List<AppointmentUtil>> fetchListOfSchedules(
     BuildContext context,
   ) async {
     List<CalendarScheduleServerInformation> list = [];
-    if (Provider.of<UserDetailsProvider>(context, listen: false).userType == "Guest") {
-      list = await fetchGuestSchedules(context);
-    }
-    else {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    var facultyRef = await db.collection("FacultiesInformationList").doc(FirebaseAuth.instance.currentUser?.email).get();
+    var guestRef = await db.collection("GuestsInformationList").doc(FirebaseAuth.instance.currentUser?.email).get();
+    bool facultyExistance = facultyRef.exists;
+    bool guestExistance = guestRef.exists;
+    List<AppointmentUtil> retList = [];
+
+    if(facultyExistance){
       list = await fetchFacultySchedules(context);
     }
+    else if(guestExistance){
+      list = await fetchGuestSchedules(context);
+    }
 
-    return list;
+    // if (Provider.of<UserDetailsProvider>(context, listen: false).userType == "Guest") {
+    //   if(guestExistance){
+    //     list = await fetchGuestSchedules(context);
+    //   }
+    // }
+    // else {
+    //   if(facultyExistance){
+    //     list = await fetchFacultySchedules(context);
+    //   }
+    // }
+
+
+    print("Appointment list : ");
+    print(list);
+    print(list[0].schedule_Unque_Id);
+
+    print("Fetching event");
+
+    GoogleSignIn? googleUser = await GoogleSignIn(
+        scopes: ['https://www.googleapis.com/auth/calendar']);
+    final GoogleSignInAccount = await googleUser.signInSilently();
+
+    final googleAuth = await GoogleSignInAccount?.authentication;
+    // final accessToken = "ya29.a0Ael9sCNTICz8w49X6vW0a0AU6Wp-iwpgKkenAhKCbc5vCKZRRzorJOfWVHYYv6gurmSlqu6TrDA8SWsspv7cOc83fYuKezNeuVq3twbwWu9iU1c3Q26EfH9rjWf5Q7nGNmia05Y6hl0W3WbF-Xf53fNjWCD4aCgYKAc0SARESFQF4udJhWdFfWnmxoPBKiidqvPkv-g0163";
+    final accessToken = googleAuth?.accessToken;
+
+    print("ACCESS TOKEN _> $accessToken");
+
+    final httpClient = authenticatedClient(
+        Client(),
+        AccessCredentials(
+            AccessToken('Bearer', accessToken!,
+                DateTime.now().add(Duration(minutes: 5)).toUtc()),
+            null,
+            []));
+    final calendar = CalendarApi(httpClient);
+
+    final events = await calendar.events.list(
+      "primary",
+    );
+
+    List<String> eventIds = [];
+
+    for (int i = 0; i < list.length; i++) {
+      print(list[i].schedule_Unque_Id);
+      eventIds.add(list[i].schedule_Unque_Id);
+    }
+
+    if (events.items != null) {
+      List<AppointmentUtil> tempList = [];
+      for (int i = 0; i < events.items!.length; i++) {
+        final tempEvent = events.items![i];
+
+        if (tempEvent.start != null && (eventIds.contains(tempEvent.id))) {
+          // print("Hello There");
+          // tempList.add(AppointmentUtil(tempEvent.summary.toString(), DateTime.now(), DateTime.now().add(Duration(minutes: 15)), tempEvent.description.toString(),"Temp",tempEvent.location.toString()));
+          FacultyServerInformation faculty = FacultyServerInformation(
+              faculty_Unique_Id: "Temp",
+              faculty_Authorization: true,
+              faculty_Mobile_Messaging_Token_Id: "Temp",
+              faculty_Name: "Temp",
+              faculty_Position: "Temp",
+              faculty_College: "Temp",
+              faculty_Department: "Temp",
+              faculty_Mobile_Number: "Temp",
+              faculty_Teaching_Interests: "Temp",
+              faculty_Research_Interests: "Temp",
+              faculty_Affiliated_Centers_And_Labs: "Temp",
+              faculty_EmailId: "Temp",
+              faculty_Gender: "Temp",
+              faculty_Bio: "Temp",
+              faculty_Image_Url: "Temp",
+              faculty_LinkedIn_Url: "Temp",
+              faculty_Website_Url: "Temp",
+              faculty_Office_Navigation_Url: "Temp",
+              faculty_Office_Address: "Temp",
+              faculty_Office_Longitude: 0,
+              faculty_Office_Latitude: 0);
+
+          print("Event Details");
+          print(tempEvent.attendees);
+
+          if (tempEvent.attendees != null &&
+              tempEvent.attendees!.isNotEmpty &&
+              facultyList.contains(tempEvent.attendees![0].email.toString())) {
+            faculty = await getFacultyDetails(
+                tempEvent.attendees![0].email.toString());
+          }
+
+          tempList.add(AppointmentUtil(
+              tempEvent.summary.toString(),
+              DateTime.now(),
+              DateTime.now().add(Duration(minutes: 15)),
+              tempEvent.description.toString(),
+              faculty,
+              ""));
+        }
+      }
+      retList = tempList;
+    }
+    print("Return List");
+    print(retList[0].title);
+    return retList;
   }
+
+  //
+  // Future<List<AppointmentUtil>> fetchListOfSchedules(
+  //     BuildContext context,
+  //     ) async {
+  //   List<CalendarScheduleServerInformation> list = [];
+  //   List<AppointmentUtil> retList = [];
+  //   if (Provider.of<UserDetailsProvider>(context, listen: false).userType == "Guest") {
+  //     list = await fetchGuestSchedules(context);
+  //   }
+  //   else {
+  //     list = await fetchFacultySchedules(context);
+  //   }
+  //
+  //
+  //   print("Appointment list : ");
+  //   print(list);
+  //   print(list[0].schedule_Unque_Id);
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //   // list.add(CalendarScheduleServerInformation(schedule_Unque_Id: "123", schedule_Start_Time: DateTime.now(), schedule_End_Time: DateTime.now().add(Duration(minutes: 50)), User_Email_Id: "henansh20065@iiitd.ac.in", User_Name: "Hello"));
+  //
+  //
+  //
+  //   // List<AppointmentUtil> list2 = [AppointmentUtil("Testing Appointment", DateTime.now(), DateTime.now().add(Duration(minutes: 50)), "Hello", FacultyServerInformation(
+  //   //     faculty_Unique_Id: "null",
+  //   //     faculty_Authorization: false,
+  //   //     faculty_Mobile_Messaging_Token_Id: "null",
+  //   //     faculty_Name: "null",
+  //   //     faculty_Position: "null",
+  //   //     faculty_College: "null",
+  //   //     faculty_Department: "null",
+  //   //     faculty_Mobile_Number: "null",
+  //   //     faculty_Teaching_Interests: "null",
+  //   //     faculty_Research_Interests: "null",
+  //   //     faculty_Affiliated_Centers_And_Labs: "null",
+  //   //     faculty_EmailId: "null",
+  //   //     faculty_Gender: "null",
+  //   //     faculty_Bio: "null",
+  //   //     faculty_Image_Url: "null",
+  //   //     faculty_LinkedIn_Url: "null",
+  //   //     faculty_Website_Url: "null",
+  //   //     faculty_Office_Navigation_Url: "null",
+  //   //     faculty_Office_Address: "null",
+  //   //     faculty_Office_Longitude: 0,
+  //   //     faculty_Office_Latitude: 0), "Temp")];
+  //   return retList;
+  // }
+
 
 
 

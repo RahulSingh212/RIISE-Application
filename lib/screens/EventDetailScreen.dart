@@ -20,6 +20,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../components/SideNavBar.dart';
 import '../../components/SpeakerCard.dart';
 import '../../models/SpeakerInfo.dart';
+import '../helper/HexagonClipper.dart';
 
 
 class EventDetailScreen extends StatefulWidget {
@@ -95,14 +96,15 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
+                      ClipPath(
+                        clipper: HexagonClipper(),
+                        child: Container(
+                          color: Color(0xff3faea8),
                           child: Image.network(
                             widget.eventDetails.Event_Image_Url,
-                            width: 450.r,
-                            height: 450.r,
-                            fit: BoxFit.fill,
+                            width: 400.r,
+                            height: 500.r,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),

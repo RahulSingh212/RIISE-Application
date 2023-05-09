@@ -91,8 +91,9 @@ class _ResearchShowcaseScreenState extends State<ResearchShowcaseScreen> {
               padding: EdgeInsets.symmetric(vertical: 83.h, horizontal: 20.w),
               itemBuilder: (context, position) {
                 return Container(
-                  height: 900.h,
-                  padding: EdgeInsets.only(left: 86.w, top: 80.h),
+                  height: 1000.spMin,
+                  // color: MediaQuery.of(context).size.width > 1080.w ? Colors.blue : Colors.orange,
+                  padding: EdgeInsets.only(left: 86.w, right: 86.w, top: 80.h,),
                   child: NewEventCard(
                     eventDetails: snapshot.data[position],
                   ),

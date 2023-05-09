@@ -20,7 +20,7 @@ const FACULTY_COLLECTION_NAME = "FacultiesInformationList";
 const GUEST_COLLECTION_NAME = "GuestsInformationList";
 
 class UserDetailsProvider with ChangeNotifier {
-  String userType = "Faculty";
+  String userType = "Guest";
 
   Map<String, String> userMapping = {
     'faculty_Unique_Id': '',

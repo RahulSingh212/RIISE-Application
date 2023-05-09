@@ -93,12 +93,12 @@ class _HomeScreenState extends State<HomeScreen> {
       KeynoteSpeakersScreen()
     ],
     [
-      "Forward Panels",
+      "Morning Panels",
       "https://iiitd.ac.in/riise2023/assets/img/riise2022logo15059.png",
       ForwardLookingPannelScreen()
     ],
     [
-      "Beyond Panels",
+      "Afternoon Panels",
       "https://iiitd.ac.in/riise2023/assets/img/riise2022logo15059.png",
       BeyondCollegePannelScreen()
     ],
@@ -220,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       FirebaseAuth.instance.currentUser != null
                           ? FirebaseAuth.instance.currentUser?.displayName
                               as String
-                          : "User",
+                          : "Guest User",
                       style: TextStyle(
                         fontSize: 80.sp,
                         color: Colors.black,
@@ -291,8 +291,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .asStream(),
                         builder: (BuildContext ctx, AsyncSnapshot snapshot) {
                           if (!snapshot.hasData) {
-                            return Center(
-                              child: CircularProgressIndicator(),
+                            return Container(
+                              height: 750.spMin,
+                              alignment: Alignment.center,
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
                             );
                           } else {
                             return Container(

@@ -3,6 +3,7 @@
 import 'dart:ffi';
 import 'dart:math';
 import 'dart:ui' as ui;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -634,20 +635,30 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                             SizedBox(
                               height: 60.h,
                             ),
+
                             FirebaseAuth.instance.currentUser != null
-                                ? Provider.of<UserDetailsProvider>(context,
-                                                listen: false)
-                                            .userType !=
-                                        "Faculty"
-                                    ? ElevatedButton(
-                                        onPressed: () async {
-                                          showPopUp(context);
-                                        },
-                                        child: Text(
-                                          "Book Appointment",
-                                        ),
-                                      )
-                                    : SizedBox()
+                                ? StreamBuilder(
+                                    stream: checkUserType().asStream(),
+                                    builder: (BuildContext ctx,
+                                        AsyncSnapshot snapshot) {
+                                      if (!snapshot.hasData) {
+                                        return Center(child: CircularProgressIndicator());
+                                      } else {
+                                        if(snapshot.data){
+                                          return ElevatedButton(
+                                            onPressed: () async {
+                                              showPopUp(context);
+                                            },
+                                            child: Text(
+                                              "Book Appointment",
+                                            ),
+                                          );
+                                        }
+                                        else{
+                                          return SizedBox();
+                                        }
+                                      }
+                                    })
                                 : ElevatedButton.icon(
                                     onPressed: () {
                                       Navigator.of(context).push(
@@ -1208,5 +1219,21 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
         });
       }
     });
+  }
+
+  Future<bool> checkUserType() async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    var facultyRef = await db
+        .collection("FacultiesInformationList")
+        .doc(FirebaseAuth.instance.currentUser?.email)
+        .get();
+    var guestRef = await db
+        .collection("GuestsInformationList")
+        .doc(FirebaseAuth.instance.currentUser?.email)
+        .get();
+    bool facultyExistance = facultyRef.exists;
+    bool guestExistance = guestRef.exists;
+
+    return guestExistance;
   }
 }

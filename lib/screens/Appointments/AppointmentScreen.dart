@@ -84,11 +84,16 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   .asStream(),
               builder: (BuildContext ctx, AsyncSnapshot snapshot) {
                 if (!snapshot.hasData) {
+
+                  print("Schedule List 001");
+                  print(snapshot.data);
+
                   return Center(
                     child: CircularProgressIndicator(),
                   );
+
                 } else {
-                  print("Schedule List");
+                  print("Schedule List 000");
                   print(snapshot.data);
                   return SingleChildScrollView(
                     child: FixedTimeline.tileBuilder(
@@ -103,9 +108,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                             thickness: 25.r,
                             decoration: BoxDecoration(
                               color: DateTime.now().compareTo(
-                                          Provider.of<CalenderAPI>(context,
-                                                  listen: false)
-                                              .appointmentList[index]
+                                  snapshot.data[index]
                                               .starTime) <
                                       0
                                   ? Colors.green
@@ -129,14 +132,11 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                               vertical: 20.h, horizontal: 20.w),
                           child: AppointmentCard(
                             appointment:
-                                Provider.of<CalenderAPI>(context, listen: false)
-                                    .appointmentList[index],
+                            snapshot.data[index],
                           ),
                         ),
                         itemCount:
-                            Provider.of<CalenderAPI>(context, listen: false)
-                                .appointmentList
-                                .length,
+                        snapshot.data.length,
                         // connectorStyle:
                       ),
                     ),

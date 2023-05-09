@@ -279,14 +279,14 @@ class _SideNavBarState extends State<SideNavBar> {
           // ),
           sideBarTile(
             context,
-            "Forward Panels",
+            "Morning Panels",
             Icons.people_alt_rounded,
             "forward-looking-panels",
             8,
           ),
           sideBarTile(
             context,
-            "Beyond Panels",
+            "Afternoon Panels",
             Icons.people_rounded,
             "beyond-college-panels",
             9,

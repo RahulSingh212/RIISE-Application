@@ -30,7 +30,8 @@ class EventProvider with ChangeNotifier {
     "ForwardLookingPanels",
     "BeyondCollegePanels",
     "ResearchShowcases",
-    "Extra-Events"
+    "Extra-Events",
+
   ];
 
   late Map<String, dynamic> firebaseCollectionsMap = {
@@ -276,6 +277,7 @@ class EventProvider with ChangeNotifier {
     List<EventServerInformation> allEventsList = [];
 
     for (var collectionName in firebaseCollectionsList) {
+
       await fetchEventTracks(context, collectionName).then((value) {
         allEventsList.addAll(firebaseCollectionsMap[collectionName]);
       });
@@ -287,6 +289,16 @@ class EventProvider with ChangeNotifier {
   Future<List<EventServerInformation>> fetchEventListFirestore(BuildContext context, String collectionName,) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
     CollectionReference eventsTracksRef = db.collection(collectionName);
+
+
+
+    if(collectionName == "Extra-Events"){
+      var temp = db.collection(collectionName).get();
+      print("hgfdvzcxvbhjlk.mn,bmvc0000");
+      print("kjhgfxdcgvhjkl;kjhg");
+    }
+
+
 
     List<EventServerInformation> allEventsList = [];
     try {
@@ -301,12 +313,13 @@ class EventProvider with ChangeNotifier {
           String Event_Image_Url = eventMap["Event_Image_Url"].toString();
           String Event_Latitude = eventMap["Event_Latitude"].toString();
           String Event_Longitude = eventMap["Event_Longitude"].toString();
-          DateTime Event_Date =
-              DateTime.parse(eventMap["Event_Date"].toString());
-          TimeOfDay Event_Start_Time =
-              convertStringToTimeOfDay(eventMap["Event_Start_Time"].toString());
-          TimeOfDay Event_End_Time =
-              convertStringToTimeOfDay(eventMap["Event_End_Time"].toString());
+
+          DateTime Event_Date = DateTime.parse(eventMap["Event_Date"].toString());
+
+          TimeOfDay Event_Start_Time = convertStringToTimeOfDay(eventMap["Event_Start_Time"].toString());
+
+          TimeOfDay Event_End_Time = convertStringToTimeOfDay(eventMap["Event_End_Time"].toString());
+
 
           await fetchSpeakers(
             context,
@@ -329,6 +342,13 @@ class EventProvider with ChangeNotifier {
 
             allEventsList.add(eventInfo);
           });
+
+
+          // if(collectionName != "Extra-Events"){
+          //
+          // }
+
+
         }
       });
     } catch (error) {}
@@ -344,10 +364,17 @@ class EventProvider with ChangeNotifier {
     List<EventServerInformation> allEventsList = [];
 
     for (var collectionName in firebaseCollectionsList) {
+
       List<EventServerInformation> list = await fetchEventListFirestore(
         context,
         collectionName,
       );
+      if(collectionName == "Extra-Events")
+      {
+        print(";klghjfgdzcxvhjkl;kjgfdxgchjklo;pkljfbvx");
+        print(list);
+        print(list[0].Event_Name);
+      }
 
       allEventsList = new List.from(allEventsList)..addAll(list);
 
