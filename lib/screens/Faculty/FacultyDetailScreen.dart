@@ -642,7 +642,7 @@ class _FacultyDetailScreenState extends State<FacultyDetailScreen> {
                                     builder: (BuildContext ctx,
                                         AsyncSnapshot snapshot) {
                                       if (!snapshot.hasData) {
-                                        return Center(child: CircularProgressIndicator());
+                                        return CircularProgressIndicator();
                                       } else {
                                         if(snapshot.data){
                                           return ElevatedButton(

@@ -73,6 +73,15 @@ class _TabScreenState extends State<TabScreen>
   void initState() {
     super.initState();
 
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat();
+    _animation = Tween<double>(
+      begin: 0,
+      end: pi * 2,
+    ).animate(_controller);
+
     _pages = [
       {
         'page': HomeScreen(),

@@ -121,13 +121,10 @@ class _DirectionScreenState extends State<DirectionScreen> {
 
     return InkWell(
       onTap: () {
-        // Navigator.of(context).push(
-        //   MaterialPageRoute(
-        //     builder: (context) => CoordinationDetailScreen(
-        //       coordinateDetails: coordinateDetails,
-        //     ),
-        //   ),
-        // );
+        _launchDirectionsUrl(
+          coordinateDetails.coordinate_Latitude,
+          coordinateDetails.coordinate_Longitude,
+        );
       },
       child: Align(
         child: Card(
@@ -157,8 +154,9 @@ class _DirectionScreenState extends State<DirectionScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  width: minDimension * 0.35,
-                  margin: EdgeInsets.only(right: 10),
+                  width: minDimension * 0.50,
+                  height: minDimension * 0.35,
+                  margin: EdgeInsets.only(right: 20),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(coordinateDetails.Images_List[0]),
@@ -168,10 +166,10 @@ class _DirectionScreenState extends State<DirectionScreen> {
                   ),
                 ),
                 Container(
-                  width: screenWidth * 0.525,
+                  width: screenWidth * 0.325,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         child: Text(
@@ -183,30 +181,34 @@ class _DirectionScreenState extends State<DirectionScreen> {
                           ),
                         ),
                       ),
-                      Container(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              _launchDirectionsUrl(
-                                coordinateDetails.coordinate_Latitude,
-                                coordinateDetails.coordinate_Longitude,
-                              );
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(7.5),
-                              decoration: BoxDecoration(
-                                  color: Colors.greenAccent.shade100,
-                                  borderRadius: BorderRadius.circular(50)),
-                              child: Icon(
-                                Icons.location_on_outlined,
-                                size: 35,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
+            Icon(
+                        Icons.location_on_outlined,
+                        color: Colors.blue,
+                        size: 35,
+                      ),
+
+                      // Container(
+                      //     child: Row(
+                      //   mainAxisAlignment: MainAxisAlignment.end,
+                      //   children: [
+                      //     InkWell(
+                      //       onTap: () {
+                      //
+                      //       },
+                      //       child: Container(
+                      //         padding: EdgeInsets.all(7.5),
+                      //         decoration: BoxDecoration(
+                      //             // color: Colors.greenAccent.shade100,
+                      //             borderRadius: BorderRadius.circular(50)),
+                      //         child: Icon(
+                      //           Icons.location_on_outlined,
+                      //           color: Colors.blue,
+                      //           size: 50,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // )),
                     ],
                   ),
                 )
