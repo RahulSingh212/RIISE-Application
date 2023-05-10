@@ -20,6 +20,7 @@ import 'package:riise/models/ThemeInfo.dart';
 import 'package:riise/providers/ThemeProvider.dart';
 import 'package:riise/providers/UserDetailsProvider.dart';
 import 'package:riise/screens/Profile/ProfileScreen.dart';
+import 'package:riise/screens/Schedules/ScheduleScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/EventCard.dart';
@@ -167,8 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   }
-                }
-                else {
+                } else {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => LogInSignUpScreen(),

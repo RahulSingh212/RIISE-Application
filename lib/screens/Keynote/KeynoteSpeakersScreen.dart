@@ -20,6 +20,7 @@ import '../../components/FacultyCard.dart';
 import '../../components/SideNavBar.dart';
 
 import '../../providers/FacultiesProvider.dart';
+import '../SpeakerDetailScreen.dart';
 
 class KeynoteSpeakersScreen extends StatefulWidget {
   static const routeName = '/rise-keynote-speakers-screen';
@@ -38,9 +39,13 @@ class _KeynoteSpeakersScreenState extends State<KeynoteSpeakersScreen> {
   // late EventProvider eventUtil;
 
   loadData() async {
-    await Provider.of<EventProvider>(context, listen: false).fetchKeynoteSpeaker(context).then((value) {setState(() {
-
-    });});
+    await Provider.of<EventProvider>(context, listen: false).fetchKeynoteSpeaker(context).then((value) {
+      Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => SpeakerDetailScreen(speakerDetails: Provider.of<EventProvider>(context, listen: false).keynoteSpeakersList[0],
+        ),
+      ),
+    );});
   }
 
   @override
@@ -48,6 +53,7 @@ class _KeynoteSpeakersScreenState extends State<KeynoteSpeakersScreen> {
     // TODO: implement initState
     super.initState();
     loadData();
+
   }
 
 
@@ -61,6 +67,9 @@ class _KeynoteSpeakersScreenState extends State<KeynoteSpeakersScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,

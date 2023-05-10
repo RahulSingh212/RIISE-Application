@@ -5,6 +5,7 @@ import "dart:collection";
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
+import "package:riise/screens/Schedules/ScheduleScreen.dart";
 
 import "../models/EventInfo.dart";
 import "../models/SpeakerInfo.dart";
@@ -369,6 +370,36 @@ class EventProvider with ChangeNotifier {
     allEventsList.sort((a, b) => compareEvent(a, b));
 
     return allEventsList;
+  }
+
+  Future<List<EventServerInformation>> getEntireListOfEvents2(
+      BuildContext context,
+      ) async {
+    List<EventServerInformation> allEventsList = [];
+
+    for (var collectionName in firebaseCollectionsList) {
+      List<EventServerInformation> list = await fetchEventListFirestore(
+        context,
+        collectionName,
+      );
+      if (collectionName == "Extra-Events") {
+        print(";klghjfgdzcxvhjkl;kjgfdxgchjklo;pkljfbvx");
+        print(list);
+        print(list[0].Event_Name);
+      }
+
+      allEventsList = new List.from(allEventsList)..addAll(list);
+
+      print("listingssss");
+      print(allEventsList);
+    }
+
+    allEventsList.sort((a, b) => compareEvent(a, b));
+
+    List<EventServerInformation> retList = allEventsList.where((element) => element.Event_End_Time.compareTo(TimeOfDay.fromDateTime(DateTime.now()))>0).toList();
+
+
+    return retList;
   }
 
   int compareEvent(
