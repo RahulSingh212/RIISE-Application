@@ -396,7 +396,12 @@ class EventProvider with ChangeNotifier {
 
     allEventsList.sort((a, b) => compareEvent(a, b));
 
-    List<EventServerInformation> retList = allEventsList.where((element) => element.Event_End_Time.compareTo(TimeOfDay.fromDateTime(DateTime.now()))>0).toList();
+    List<EventServerInformation> retList = allEventsList.where((element) =>
+
+    element.Event_Date.isAtSameMomentAs(DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,)) == 0?
+
+    element.Event_End_Time.compareTo(TimeOfDay.fromDateTime(DateTime.now().subtract(Duration(minutes: 5))))>0 : true )
+        .toList();
 
 
     return retList;
