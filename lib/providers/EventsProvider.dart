@@ -31,7 +31,6 @@ class EventProvider with ChangeNotifier {
     "BeyondCollegePanels",
     "ResearchShowcases",
     "Extra-Events",
-
   ];
 
   late Map<String, dynamic> firebaseCollectionsMap = {
@@ -277,7 +276,6 @@ class EventProvider with ChangeNotifier {
     List<EventServerInformation> allEventsList = [];
 
     for (var collectionName in firebaseCollectionsList) {
-
       await fetchEventTracks(context, collectionName).then((value) {
         allEventsList.addAll(firebaseCollectionsMap[collectionName]);
       });
@@ -286,19 +284,12 @@ class EventProvider with ChangeNotifier {
     collectionOfAllEventList = allEventsList;
   }
 
-  Future<List<EventServerInformation>> fetchEventListFirestore(BuildContext context, String collectionName,) async {
+  Future<List<EventServerInformation>> fetchEventListFirestore(
+    BuildContext context,
+    String collectionName,
+  ) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
     CollectionReference eventsTracksRef = db.collection(collectionName);
-
-
-
-    if(collectionName == "Extra-Events"){
-      var temp = db.collection(collectionName).get();
-      print("hgfdvzcxvbhjlk.mn,bmvc0000");
-      print("kjhgfxdcgvhjkl;kjhg");
-    }
-
-
 
     List<EventServerInformation> allEventsList = [];
     try {
@@ -314,12 +305,14 @@ class EventProvider with ChangeNotifier {
           String Event_Latitude = eventMap["Event_Latitude"].toString();
           String Event_Longitude = eventMap["Event_Longitude"].toString();
 
-          DateTime Event_Date = DateTime.parse(eventMap["Event_Date"].toString());
+          DateTime Event_Date =
+              DateTime.parse(eventMap["Event_Date"].toString());
 
-          TimeOfDay Event_Start_Time = convertStringToTimeOfDay(eventMap["Event_Start_Time"].toString());
+          TimeOfDay Event_Start_Time =
+              convertStringToTimeOfDay(eventMap["Event_Start_Time"].toString());
 
-          TimeOfDay Event_End_Time = convertStringToTimeOfDay(eventMap["Event_End_Time"].toString());
-
+          TimeOfDay Event_End_Time =
+              convertStringToTimeOfDay(eventMap["Event_End_Time"].toString());
 
           await fetchSpeakers(
             context,
@@ -342,18 +335,11 @@ class EventProvider with ChangeNotifier {
 
             allEventsList.add(eventInfo);
           });
-
-
-          // if(collectionName != "Extra-Events"){
-          //
-          // }
-
-
         }
       });
     } catch (error) {}
 
-    allEventsList.sort((a, b) => compareEvent(a, b)*-1);
+    allEventsList.sort((a, b) => compareEvent(a, b) * -1);
 
     return allEventsList;
   }
@@ -364,13 +350,11 @@ class EventProvider with ChangeNotifier {
     List<EventServerInformation> allEventsList = [];
 
     for (var collectionName in firebaseCollectionsList) {
-
       List<EventServerInformation> list = await fetchEventListFirestore(
         context,
         collectionName,
       );
-      if(collectionName == "Extra-Events")
-      {
+      if (collectionName == "Extra-Events") {
         print(";klghjfgdzcxvhjkl;kjgfdxgchjklo;pkljfbvx");
         print(list);
         print(list[0].Event_Name);
@@ -382,24 +366,34 @@ class EventProvider with ChangeNotifier {
       print(allEventsList);
     }
 
-    allEventsList.sort((a, b) => compareEvent(a, b)*-1);
+    allEventsList.sort((a, b) => compareEvent(a, b));
 
     return allEventsList;
   }
 
-  int compareEvent(EventServerInformation event1, EventServerInformation event2) {
-    int d1 = event1.Event_Date.day, m1 = event1.Event_Date.month, y1 = event1.Event_Date.year;
-    int d2 = event1.Event_Date.day, m2 = event1.Event_Date.month, y2 = event1.Event_Date.year;
-    int t1 = (event1.Event_Start_Time.hour*60) + event1.Event_Start_Time.minute;
-    int t2 = (event2.Event_Start_Time.hour*60) + event2.Event_Start_Time.minute;
+  int compareEvent(
+      EventServerInformation event1, EventServerInformation event2) {
+    int d1 = event1.Event_Date.day,
+        m1 = event1.Event_Date.month,
+        y1 = event1.Event_Date.year;
+    int d2 = event2.Event_Date.day,
+        m2 = event2.Event_Date.month,
+        y2 = event2.Event_Date.year;
+    int t1 =
+        (event1.Event_Start_Time.hour * 60) + event1.Event_Start_Time.minute;
+    int t2 =
+        (event2.Event_Start_Time.hour * 60) + event2.Event_Start_Time.minute;
 
     if (d1 == d2 && m1 == m2 && y1 == y2) {
-      if (t1 <= t2) return 1;
-      else return -1;
-    }
-    else {
-      if (event1.Event_Date.isBefore(event2.Event_Date)) return 1;
-      else return -1;
+      if (t1 <= t2)
+        return -1;
+      else
+        return 1;
+    } else {
+      if (event1.Event_Date.isBefore(event2.Event_Date))
+        return -1;
+      else
+        return 1;
     }
   }
 

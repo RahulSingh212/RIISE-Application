@@ -341,4 +341,25 @@ class _HomeScreenState extends State<HomeScreen> {
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
+
+  bool checkEventInterval(EventServerInformation event1) {
+    int d = DateTime.now().day,
+        m = DateTime.now().month,
+        y = DateTime.now().year;
+    int d1 = event1.Event_Date.day,
+        m1 = event1.Event_Date.month,
+        y1 = event1.Event_Date.year;
+    int ts = TimeOfDay.now().hour * 60 + TimeOfDay.now().minute;
+    int t1s =
+        event1.Event_Start_Time.hour * 60 + event1.Event_Start_Time.minute;
+    int t1e = event1.Event_End_Time.hour * 60 + event1.Event_End_Time.minute;
+
+    if (d == d1 && m == m1 && y == y1) {
+      if (ts >= t1s && ts <= t1e)
+        return true;
+      else
+        return false;
+    } else
+      return false;
+  }
 }
