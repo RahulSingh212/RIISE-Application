@@ -432,7 +432,10 @@ class _FacultyProfileScreenState extends State<FacultyProfileScreen> {
                   Align(
                     child: Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15)),
+                        borderRadius: BorderRadius.circular(
+                          15,
+                        ),
+                      ),
                       width: screenWidth * 0.9,
                       child: ElevatedButton.icon(
                         onPressed: () async {
