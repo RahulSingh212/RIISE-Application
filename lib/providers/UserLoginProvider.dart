@@ -189,11 +189,13 @@ class UserLoginProvider with ChangeNotifier {
     bool facultyExistance = facultyRef.exists;
     bool guestExistance = guestRef.exists;
 
-    // print("User Type: $userType");
-    // print("Collection Name: $collectionName");
-    // print("Given User Name: $givenUserType");
+    if (facultyExistance) {
+      Provider.of<UserDetailsProvider>(context, listen: false).userType = "Faculty";
+    }
+    else {
+      Provider.of<UserDetailsProvider>(context, listen: false).userType = "Guest";
+    }
 
-    // if ((facultyExistance && userType == "Faculty") || (guestExistance && userType == "Guest")) {
     if (facultyExistance || guestExistance) {
       Navigator.of(context).pushReplacement(
       MaterialPageRoute(

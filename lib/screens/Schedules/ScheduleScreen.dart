@@ -82,17 +82,18 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         ],
       ),
       body: StreamBuilder(
-          stream: Provider.of<EventProvider>(context, listen: false).getEntireListOfEvents(context).asStream(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            print("Inside");
-            if (!snapshot.hasData) {
-              return Center(child: CircularProgressIndicator());
-            }
-            else {
-              print("Snap shot data");
-              print(snapshot.data);
-              print(snapshot.data.length);
-              return SingleChildScrollView(
+        stream: Provider.of<EventProvider>(context, listen: false)
+            .getEntireListOfEvents(context)
+            .asStream(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          print("Inside");
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            print("Snap shot data");
+            print(snapshot.data);
+            print(snapshot.data.length);
+            return SingleChildScrollView(
               child: FixedTimeline.tileBuilder(
                 // mainAxisSize: MainAxisSize.max,
                 theme: TimelineTheme.of(context).copyWith(
@@ -147,15 +148,16 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   oppositeContentsBuilder: (context, index) => Container(
                     padding: EdgeInsets.symmetric(
                       vertical: 163.8.h,
-                      horizontal: 25.w,
+                      horizontal: 15.w,
                     ),
                     // decoration: ,
                     child: Card(
                       elevation: 16,
                       child: Container(
+                        alignment: Alignment.center,
                         padding: EdgeInsets.symmetric(
                           vertical: 46.8.h,
-                          horizontal: 32.4,
+                          horizontal: 25,
                         ),
                         decoration: BoxDecoration(
                           border: Border(
@@ -164,7 +166,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                     color: Colors.greenAccent,
                                     width: 5,
                                   )
-                                : BorderSide(color: Colors.transparent),right: index % 2 != 0
+                                : BorderSide(color: Colors.transparent),
+                            right: index % 2 != 0
                                 ? BorderSide(
                                     color: Colors.greenAccent,
                                     width: 5,
@@ -172,9 +175,38 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                 : BorderSide(color: Colors.transparent),
                           ),
                         ),
-                        child: Text(
-                          "${snapshot.data[index].Event_Start_Time.format(context)} - ${snapshot.data[index].Event_End_Time.format(context)}",
-                          style: TextStyle(fontSize: 45.sp),
+                        child: Column(
+                          children: [
+                            Container(
+                              child: Text(
+                                "${snapshot.data[index].Event_Start_Time.format(context)} - ${snapshot.data[index].Event_End_Time.format(context)}",
+                                style: TextStyle(
+                                  fontSize: 45.sp,
+                                ),
+                              ),
+                            ),
+                            checkEventInterval(snapshot.data[index])
+                                ? Container(
+                                    margin: EdgeInsets.only(
+                                      top: 5,
+                                    ),
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "On-Going",
+                                      style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        color: Colors.green.shade400,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 40.sp,
+                                        // decoration: TextDecoration.underline,
+                                      ),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  )
+                                : SizedBox(
+                                    height: 0,
+                                  ),
+                          ],
                         ),
                       ),
                     ),
@@ -184,238 +216,30 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 ),
               ),
             );
-            }
-          }),
-      // StreamBuilder(
-      //   stream: FirebaseFirestore.instance.collection("KeynoteSpeakers").snapshots(),
-      //   builder: (context1, snapshot1) {
-      //     if (!snapshot1.hasData) {
-      //       return Center(child: CircularProgressIndicator());
-      //     } else {
-      //       // print("Direction Screen");
-      //       // return ListView.builder(
-      //       //   itemCount: snapshot.data.docs.length,
-      //       //   itemBuilder: (ctx, index) {
-      //       //     return coordinateDetailInfoWidget(
-      //       //       context,
-      //       //       new CoordinateServerInformation(
-      //       //         coordinate_Unique_Id: snapshot.data!.docs[index].data()['coordinate_Unique_Id'],
-      //       //         coordinate_Longitude: double.parse(snapshot.data!.docs[index].data()['coordinate_Longitude']),
-      //       //         coordinate_Latitude: double.parse(snapshot.data!.docs[index].data()['coordinate_Latitude']),
-      //       //         coordinate_Name: snapshot.data!.docs[index].data()['coordinate_Name'],
-      //       //         coordinate_Address: snapshot.data!.docs[index].data()['coordinate_Address'],
-      //       //         coordinate_Code_Name: snapshot.data!.docs[index].data()['coordinate_Code_Name'],
-      //       //       ),
-      //       //     );
-      //       //   },
-      //       // );
-      //       // snapshot.data!.docs[index].data()['coordinate_Unique_Id']
-      //       return StreamBuilder(stream: FirebaseFirestore.instance.collection("RNDShowcasesAndDemos").snapshots(),
-      //         builder: (context2, snapshot2) {
-      //           if (!snapshot2.hasData) {
-      //             return Center(child: CircularProgressIndicator());
-      //           } else {
-      //             return StreamBuilder(stream: FirebaseFirestore.instance.collection("ForwardLookingPanels").snapshots(),
-      //               builder: (context3, snapshot3) {
-      //                 if (!snapshot3.hasData) {
-      //                   return Center(child: CircularProgressIndicator());
-      //                 } else {
-      //                   return StreamBuilder(stream: FirebaseFirestore.instance.collection("BeyondCollegePanels").snapshots(),
-      //                       builder: (context4, snapshot4) {
-      //                         if (!snapshot4.hasData) {
-      //                           return Center(child: CircularProgressIndicator());
-      //                         } else {
-      //                           return StreamBuilder(stream: FirebaseFirestore.instance.collection("StartUpShowcase").snapshots(),
-      //                               builder: (context5, snapshot5) {
-      //                                 if (!snapshot4.hasData) {
-      //                                   return Center(child: CircularProgressIndicator());
-      //                                 } else {
-      //                                   return StreamBuilder(stream: FirebaseFirestore.instance.collection("ResearchShowcases").snapshots(),
-      //                                       builder: (context6, snapshot6) {
-      //                                         if (!snapshot4.hasData) {
-      //                                           return Center(child:CircularProgressIndicator());
-      //                                         } else {
-      //                                           return SingleChildScrollView(padding: EdgeInsets.only(top: 280.8.h),
-      //                                             child: FixedTimeline.tileBuilder(theme: TimelineTheme.of(context).copyWith(nodePosition:0.5),
-      //                                               builder: TimelineTileBuilder.connected(contentsAlign:ContentsAlign.alternating,
-      //                                                 connectorBuilder: (context, index, lineConnector) => SizedBox(child:
-      //                                                       DecoratedLineConnector(
-      //                                                     thickness: 21.6.w,
-      //                                                     decoration: BoxDecoration(
-      //                                                       color: TimeOfDay.fromDateTime(DateTime.now()).compareTo(eventUtil[index].Event_Start_Time) < 0
-      //                                                           ? Colors.green
-      //                                                           : Colors.red,
-      //                                                     ),
-      //                                                   ),
-      //                                                 ),
-      //                                                 indicatorBuilder: (context, index) => ContainerIndicator(
-      //                                                   child: Container(
-      //                                                     padding: EdgeInsets.symmetric(vertical: 46.8.h),
-      //                                                     child: index % 2 == 0
-      //                                                         ? Icon(Icons.label_important_outline_rounded,
-      //                                                             size: 100.r,
-      //                                                             color: Colors.grey,
-      //                                                           )
-      //                                                         : Transform.rotate(angle: pi, child: Icon(Icons.label_important_outline_rounded, size: 100.r, color: Colors.grey)),
-      //                                                   ),
-      //                                                 ),
-
-      //                                                 // oppositeContentsBuilder: (context, index) => Text(appointments.getThemesList()[index].getTime()),
-      //                                                 contentsBuilder: (context, index) => Padding(padding: EdgeInsets.symmetric(vertical: 58.5.h, horizontal: 21.6.w),
-      //                                                   child: EventCard2(position: index, eventDetails: eventUtil[index]),
-      //                                                 ),
-      //                                                 oppositeContentsBuilder: (context, index) => Container(padding: EdgeInsets.symmetric(vertical: 163.8.h, horizontal: 25.w),
-      //                                                   // decoration: ,
-      //                                                   child: Card(
-      //                                                     elevation: 16,
-      //                                                     child: Container(padding: EdgeInsets.symmetric(vertical: 46.8.h, horizontal: 32.4),
-      //                                                       decoration: BoxDecoration(border: Border(
-      //                                                           left: index % 2 == 0
-      //                                                               ? BorderSide(color:Colors.greenAccent, width: 5)
-      //                                                               : BorderSide(color:Colors.transparent),
-      //                                                           right: index % 2 != 0
-      //                                                               ? BorderSide(color: Colors.greenAccent, width: 5)
-      //                                                               : BorderSide(color:Colors.transparent),
-      //                                                         ),
-      //                                                       ),
-      //                                                       child: Text(
-      //                                                         "${eventUtil[index].Event_Start_Time.format(context)} - ${eventUtil[index].Event_End_Time.format(context)}",
-      //                                                         style: TextStyle(fontSize: 45.sp,),
-      //                                                       ),
-      //                                                     ),
-      //                                                   ),
-      //                                                 ),
-      //                                                 itemCount:
-      //                                                     eventUtil.length,
-      //                                                 // connectorStyle:
-      //                                               ),
-      //                                             ),
-      //                                           );
-      //                                         }
-      //                                       });
-      //                                 }
-      //                               });
-      //                         }
-      //                       });
-      //                 }
-      //               },
-      //             );
-      //           }
-      //         },
-      //       );
-      //     }
-      //   },
-      // )
-
-      // StreamBuilder(
-      //   stream: FirebaseFirestore.instance
-      //       .collection("FacultiesInformationList")
-      //       .snapshots(),
-      //   // initialData: initialData,
-      //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-      //     if (!snapshot.hasData) {
-      //       return Center(
-      //         child: CircularProgressIndicator(),
-      //       );
-      //     } else {
-      //       return SingleChildScrollView(
-      //         padding: EdgeInsets.only(top: 280.8.h),
-      //         child: FixedTimeline.tileBuilder(
-      //           // mainAxisSize: MainAxisSize.max,
-      //           theme: TimelineTheme.of(context).copyWith(
-      //             nodePosition: 0.5, //50% from Left
-      //           ),
-      //           builder: TimelineTileBuilder.connected(
-      //             contentsAlign: ContentsAlign.alternating,
-
-      //             connectorBuilder: (context, index, lineConnector) => SizedBox(
-      //               // height: 20.0,
-      //               child: DecoratedLineConnector(
-      //                 thickness: 21.6.w,
-      //                 decoration: BoxDecoration(
-      //                   color: TimeOfDay.fromDateTime(DateTime.now()).compareTo(
-      //                               eventUtil[index].Event_Start_Time) <
-      //                           0
-      //                       ? Colors.green
-      //                       : Colors.red,
-      //                 ),
-      //               ),
-      //             ),
-      //             indicatorBuilder: (context, index) => ContainerIndicator(
-      //               child: Container(
-      //                 padding: EdgeInsets.symmetric(vertical: 46.8.h),
-      //                 child: index % 2 == 0
-      //                     ? Icon(
-      //                         Icons.label_important_outline_rounded,
-      //                         size: 100.r,
-      //                         color: Colors.grey,
-      //                       )
-      //                     : Transform.rotate(
-      //                         angle: pi,
-      //                         child: Icon(
-      //                           Icons.label_important_outline_rounded,
-      //                           size: 100.r,
-      //                           color: Colors.grey,
-      //                         ),
-      //                       ),
-      //               ),
-      //             ),
-
-      //             // oppositeContentsBuilder: (context, index) => Text(appointments.getThemesList()[index].getTime()),
-      //             contentsBuilder: (context, index) => Padding(
-      //               padding: EdgeInsets.symmetric(
-      //                 vertical: 58.5.h,
-      //                 horizontal: 21.6.w,
-      //               ),
-      //               child: EventCard2(
-      //                 position: index,
-      //                 eventDetails: eventUtil[index],
-      //               ),
-      //             ),
-      //             oppositeContentsBuilder: (context, index) => Container(
-      //               padding: EdgeInsets.symmetric(
-      //                 vertical: 163.8.h,
-      //                 horizontal: 25.w,
-      //               ),
-      //               // decoration: ,
-      //               child: Card(
-      //                 elevation: 16,
-      //                 child: Container(
-      //                   padding: EdgeInsets.symmetric(
-      //                     vertical: 46.8.h,
-      //                     horizontal: 32.4,
-      //                   ),
-      //                   decoration: BoxDecoration(
-      //                     border: Border(
-      //                       left: index % 2 == 0
-      //                           ? BorderSide(
-      //                               color: Colors.greenAccent,
-      //                               width: 5,
-      //                             )
-      //                           : BorderSide(color: Colors.transparent),
-      //                       right: index % 2 != 0
-      //                           ? BorderSide(
-      //                               color: Colors.greenAccent,
-      //                               width: 5,
-      //                             )
-      //                           : BorderSide(color: Colors.transparent),
-      //                     ),
-      //                   ),
-      //                   child: Text(
-      //                     "${eventUtil[index].Event_Start_Time.format(context)} - ${eventUtil[index].Event_End_Time.format(context)}",
-      //                     style: TextStyle(fontSize: 45.sp),
-      //                   ),
-      //                 ),
-      //               ),
-      //             ),
-      //             itemCount: eventUtil.length,
-      //             // connectorStyle:
-      //           ),
-      //         ),
-      //       );
-      //     }
-      //   },
-      // ),
+          }
+        },
+      ),
     );
+  }
+
+  bool checkEventInterval(EventServerInformation event1) {
+    int d = DateTime.now().day,
+        m = DateTime.now().month,
+        y = DateTime.now().year;
+    int d1 = event1.Event_Date.day,
+        m1 = event1.Event_Date.month,
+        y1 = event1.Event_Date.year;
+    int ts = TimeOfDay.now().hour * 60 + TimeOfDay.now().minute;
+    int t1s =
+        event1.Event_Start_Time.hour * 60 + event1.Event_Start_Time.minute;
+    int t1e = event1.Event_End_Time.hour * 60 + event1.Event_End_Time.minute;
+
+    if (d == d1 && m == m1 && y == y1) {
+      if (ts >= t1s && ts <= t1e)
+        return true;
+      else
+        return false;
+    } else
+      return false;
   }
 }

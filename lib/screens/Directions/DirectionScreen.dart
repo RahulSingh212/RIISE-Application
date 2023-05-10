@@ -154,7 +154,7 @@ class _DirectionScreenState extends State<DirectionScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  width: minDimension * 0.50,
+                  width: minDimension * 0.45,
                   height: minDimension * 0.35,
                   margin: EdgeInsets.only(right: 20),
                   decoration: BoxDecoration(
@@ -166,10 +166,10 @@ class _DirectionScreenState extends State<DirectionScreen> {
                   ),
                 ),
                 Container(
-                  width: screenWidth * 0.325,
+                  width: screenWidth * 0.375,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Container(
                         child: Text(
@@ -179,12 +179,20 @@ class _DirectionScreenState extends State<DirectionScreen> {
                             fontStyle: FontStyle.italic,
                             fontSize: 20,
                           ),
+                          textAlign: TextAlign.right,
                         ),
                       ),
-            Icon(
-                        Icons.location_on_outlined,
-                        color: Colors.blue,
-                        size: 35,
+                      Container(
+                        padding: EdgeInsets.all(7.5),
+                        decoration: BoxDecoration(
+                          // color: Colors.greenAccent.shade100,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: Icon(
+                          Icons.location_on_outlined,
+                          color: Colors.blue,
+                          size: 35,
+                        ),
                       ),
 
                       // Container(
