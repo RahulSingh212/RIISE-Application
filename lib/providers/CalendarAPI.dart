@@ -39,10 +39,12 @@ class CalenderAPI extends ChangeNotifier {
           " - ${facultyScheduleList[i].schedule_End_Time}" +
           "${facultyScheduleList[i].schedule_Unque_Id}");
 
+      DateTime sst =
+      facultyScheduleList[i].schedule_Start_Time;
       DateTime set =
           facultyScheduleList[i].schedule_End_Time.add(Duration(minutes: 5));
 
-      if (startTime.isBefore(set) &&
+      if (((startTime.isAfter(sst) && startTime.isBefore(set))||(endTime.isAfter(sst) && endTime.isBefore(set))) &&
           startTime.day == set.day &&
           startTime.month == set.month &&
           startTime.year == set.year) {
@@ -75,7 +77,7 @@ class CalenderAPI extends ChangeNotifier {
           .schedule_Start_Time
           .subtract(Duration(minutes: 5));
 
-      if (after.difference(before).inMinutes >= 20) {
+      if (after.difference(before).inMinutes >= 20 && before.isAfter(DateTime.now().add(Duration(minutes: 5)))) {
         print("Setting Time to before");
         print(before);
         return before;
@@ -363,21 +365,31 @@ class CalenderAPI extends ChangeNotifier {
 
 
           print("Timermimriemieirm");
-          // print()
+          print(tempEvent.summary.toString());
+          print(tempEvent.start?.dateTime?.toLocal().toString());
+          print(tempEvent.start?.dateTime);
+          print(tempEvent.end?.dateTime);
 
-          tempList.add(AppointmentUtil(
-              tempEvent.summary.toString(),
-              tempEvent.start?.dateTime as DateTime,
-              tempEvent.end?.dateTime as DateTime,
-              tempEvent.description.toString(),
-              faculty,
-              ""));
+
+          if(tempEvent.start?.dateTime?.toLocal().isAfter(DateTime.now().subtract(Duration(minutes: 5))) == true){
+            tempList.add(AppointmentUtil(
+                tempEvent.summary.toString(),
+                tempEvent.start?.dateTime?.toLocal() as DateTime,
+                tempEvent.end?.dateTime?.toLocal() as DateTime,
+                tempEvent.description.toString(),
+                faculty,
+                ""));
+          }
+
         }
       }
       retList = tempList;
     }
     print("Return List");
     print(retList[0].title);
+
+    retList.sort((a, b) => a.starTime.compareTo(b.starTime));
+
     return retList;
   }
 
