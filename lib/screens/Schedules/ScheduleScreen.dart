@@ -147,7 +147,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   oppositeContentsBuilder: (context, index) => Container(
                     padding: EdgeInsets.symmetric(
                       vertical: 163.8.h,
-                      horizontal: 25.w,
+                      horizontal: 15.w,
                     ),
                     // decoration: ,
                     child: Card(
@@ -155,7 +155,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                       child: Container(
                         padding: EdgeInsets.symmetric(
                           vertical: 46.8.h,
-                          horizontal: 32.4,
+                          horizontal: 20.0,
                         ),
                         decoration: BoxDecoration(
                           border: Border(
