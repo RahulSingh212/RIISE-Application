@@ -44,7 +44,7 @@ class _BeyondCollegePannelScreenState extends State<BeyondCollegePannelScreen> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          "Beyond Pannel",
+          "Afternoon Panels",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,

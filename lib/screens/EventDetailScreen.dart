@@ -53,7 +53,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
           elevation: 0,
           centerTitle: true,
           title: Text(
-          "Theme",
+          "Event Details",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -157,6 +157,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                 SizedBox(
                   height: 60.h,
                 ),
+                widget.eventDetails.EventSpeakersList.isNotEmpty?
                 Container(
                   alignment: Alignment.topCenter,
                   child: Column(
@@ -181,7 +182,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                       ),
                     ],
                   ),
-                ),
+                ):Container(),
               ],
             ),
           ),

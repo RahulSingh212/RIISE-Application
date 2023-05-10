@@ -371,15 +371,13 @@ class CalenderAPI extends ChangeNotifier {
           print(tempEvent.end?.dateTime);
 
 
-          if(tempEvent.start?.dateTime?.toLocal().isAfter(DateTime.now().subtract(Duration(minutes: 5))) == true){
-            tempList.add(AppointmentUtil(
-                tempEvent.summary.toString(),
-                tempEvent.start?.dateTime?.toLocal() as DateTime,
-                tempEvent.end?.dateTime?.toLocal() as DateTime,
-                tempEvent.description.toString(),
-                faculty,
-                ""));
-          }
+          tempList.add(AppointmentUtil(
+              tempEvent.summary.toString(),
+              tempEvent.start?.dateTime?.toLocal() as DateTime,
+              tempEvent.end?.dateTime?.toLocal() as DateTime,
+              tempEvent.description.toString(),
+              faculty,
+              ""));
 
         }
       }

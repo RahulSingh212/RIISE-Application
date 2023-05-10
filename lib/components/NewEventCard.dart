@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:riise/models/EventInfo.dart';
 import 'package:riise/screens/EventDetailScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -136,7 +137,7 @@ class _NewEventCardState extends State<NewEventCard> {
                                 Flexible(
                                   child: Text(
                                     widget.eventDetails.Event_Address,
-                                    style: TextStyle(fontSize:40.sp),
+                                    style: TextStyle(fontSize:35.sp),
                                     softWrap: true,
                                     textAlign: TextAlign.left,
                                   ),
@@ -175,8 +176,9 @@ class _NewEventCardState extends State<NewEventCard> {
                             children: [
                               Flexible(
                                 child: Text(
-                                  widget.eventDetails.Event_Date.toString(),
-                                  style: TextStyle(fontSize:40.sp),
+                                  "${DateFormat("MMMMEEEEd").format(widget.eventDetails.Event_Date)}, ${widget.eventDetails.Event_Start_Time.format(context)} - ${widget.eventDetails.Event_End_Time.format(context)}",
+                                  // widget.eventDetails.Event_Date.toString(),
+                                  style: TextStyle(fontSize:35.sp),
                                   softWrap: true,
                                   textAlign: TextAlign.left,
                                 ),

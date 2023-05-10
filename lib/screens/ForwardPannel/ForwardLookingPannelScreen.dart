@@ -70,7 +70,7 @@ class _ForwardLookingPannelScreenState
         elevation: 0,
         centerTitle: true,
         title: Text(
-          "Forward Pannel",
+          "Morning Panels",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
