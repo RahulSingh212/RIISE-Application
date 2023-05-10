@@ -37,7 +37,7 @@ class _AboutScreenState extends State<AboutScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: SideNavBar(),
+      // drawer: SideNavBar(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
